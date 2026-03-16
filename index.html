@@ -18,13 +18,75 @@
             background: #0c0b14;
             color: #f0eef7;
             line-height: 1.5;
-            padding: 2rem 1.5rem;
             direction: ltr;
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+
+        /* HIDE BLOGGER NAVIGATION BAR */
+        #navbar, 
+        #navbar-iframe, 
+        .blogger-iframe, 
+        .navbar, 
+        .blogger-navbar,
+        #b-navbar,
+        .b-navbar,
+        #navbar-wrapper,
+        .navbar-wrapper,
+        #attribution,
+        .attribution,
+        .blogger-attribution,
+        iframe[src*="blogger"], 
+        iframe[src*="blogspot"], 
+        iframe[id*="navbar"],
+        iframe[class*="navbar"],
+        body > iframe,
+        body > .navbar,
+        body > .navbar-wrapper,
+        div[class*="navbar"],
+        div[id*="navbar"],
+        div[class*="search"],
+        div[id*="search"],
+        #footer-attribution,
+        .footer-attribution,
+        .blogger-footer,
+        .copyright,
+        .footer-credit,
+        .navbar.section,
+        .navbar-wrapper,
+        .navbar-inner,
+        .navbar-content,
+        .blogger-navbar-wrap,
+        .Blog1,
+        #Blog1 {
+            display: none !important;
+            height: 0 !important;
+            min-height: 0 !important;
+            max-height: 0 !important;
+            visibility: hidden !important;
+            opacity: 0 !important;
+            position: absolute !important;
+            top: -9999px !important;
+            left: -9999px !important;
+            z-index: -9999 !important;
+            pointer-events: none !important;
+            overflow: hidden !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            border: 0 !important;
+        }
+
+        body {
+            margin-top: 0 !important;
+            padding-top: 0 !important;
         }
 
         .container {
             max-width: 1400px;
             margin: 0 auto;
+            padding: 2rem 1.5rem;
+            position: relative;
+            z-index: 1;
         }
 
         /* header */
@@ -69,6 +131,7 @@
             font-weight: 500;
             display: flex;
             gap: 10px;
+            cursor: pointer;
         }
 
         .section-title {
@@ -101,7 +164,7 @@
         /* movies grid */
         .movies-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             gap: 2rem;
             margin: 2rem 0;
         }
@@ -126,9 +189,10 @@
             height: 180px;
             background: #0c0b14;
             position: relative;
+            overflow: hidden;
         }
 
-        .video-thumbnail video {
+        .video-thumbnail img {
             width: 100%;
             height: 100%;
             object-fit: cover;
@@ -212,9 +276,9 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(0,0,0,0.95);
-            z-index: 1000;
-            padding: 2rem;
+            background: rgba(0,0,0,0.98);
+            z-index: 9999;
+            padding: 1rem;
         }
 
         .modal.active {
@@ -228,15 +292,17 @@
             align-items: center;
             margin-bottom: 1rem;
             color: white;
+            padding: 0.5rem 1rem;
         }
 
         .close-modal {
             background: none;
             border: none;
             color: white;
-            font-size: 2rem;
+            font-size: 2.5rem;
             cursor: pointer;
-            padding: 0.5rem 1rem;
+            padding: 0.5rem 1.5rem;
+            line-height: 1;
         }
 
         .close-modal:hover {
@@ -249,12 +315,37 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            background: #000;
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
         }
 
-        .video-container video {
-            max-width: 100%;
-            max-height: 100%;
-            border-radius: 12px;
+        .video-container video,
+        .video-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        #modalVideo {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+        }
+
+        #embedIframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            display: none;
         }
 
         /* filter tabs */
@@ -275,14 +366,28 @@
             flex-wrap: wrap;
         }
 
-        #modalVideo {
-            width: 100%;
-            height: auto;
-            max-height: 80vh;
-        }
-        
-        .video-thumbnail video {
-            pointer-events: none;
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .badini-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .movies-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .modal {
+                padding: 0.5rem;
+            }
+            
+            .video-container {
+                height: calc(100vh - 80px);
+            }
         }
     </style>
 </head>
@@ -294,15 +399,15 @@
             <i class="fas fa-film logo-icon"></i>
             <div class="badini-title">Badini<span>Movies</span></div>
         </div>
-        <div class="lang-tag">
+        <div class="lang-tag" onclick="toggleLanguage()">
             <i class="fas fa-globe"></i>
-            <span>EN</span> <span style="color:#b9b3d6;">|</span> <span style="font-family:Tahoma;">عربي</span>
+            <span id="langDisplay">EN | عربي</span>
         </div>
     </div>
 
     <!-- movies library section -->
     <div class="section-title">
-        <i class="fas fa-film"></i> Movie Library / مكتبة الأفلام
+        <i class="fas fa-film"></i> <span id="libraryTitle">Movie Library / مكتبة الأفلام</span>
     </div>
 
     <!-- filter tabs -->
@@ -324,35 +429,38 @@
             <button class="close-modal" id="closeModal">&times;</button>
         </div>
         <div class="video-container" id="videoContainer">
-            <video id="modalVideo" controls controlsList="nodownload">
+            <video id="modalVideo" controls controlsList="nodownload" style="display: none;">
                 <source src="" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
+            <!-- Iframe for embeds will be inserted here -->
         </div>
     </div>
 </div>
 
 <script>
     (function() {
-        // Movie database
+        // Movie database with proper EMBED URLs
         let movies = [
             {
                 id: '1',
                 titleEn: 'The Aftermath 2019',
-                titleAr: ' The Afterman 2024',
+                titleAr: 'ما بعد الأحداث ٢٠١٩',
                 year: '2024',
                 lang: 'both',
-                videoUrl: 'https://eg27g2dffdvwerwe432vxcvxcvbcx321scvxv45cdsw1dfdsfsd.visitmycityfor365days.online/v/03/00094/kikgiwpj8kkj_n/[Cimawbas].Aftermath.2024.mp4?t=5tUmYYr5PjeHLcWkcbZ7lQ9oVd-akuAj8VF6eBrx-zw&s=1773260986&e=43200&f=474636&sp=150&i=0.0',
-                posterUrl: 'https://observer.com/wp-content/uploads/sites/2/2019/03/aftermath-dom-ta_03670_rgb-1.jpg'
+                videoUrl: 'https://www.vidspeeds.com/embed-1yjmv1iiev42.html',
+                posterUrl: 'https://observer.com/wp-content/uploads/sites/2/2019/03/aftermath-dom-ta_03670_rgb-1.jpg',
+                videoType: 'embed'
             },
             {
                 id: '2',
-                titleEn: 'The Afterman 2024',
-                titleAr: 'مشاهدة',
+                titleEn: 'The Aftermath 2024',
+                titleAr: 'الرجل التالي ٢٠٢٤',
                 year: '2022',
                 lang: 'both',
-                videoUrl: ' https://eg27g2dffdvwerwe432vxcvxcvbcx321scvxv45cdsw1dfdsfsd.visitmycityfor365days.online/v/03/00094/kikgiwpj8kkj_n/[Cimawbas].Aftermath.2024.mp4?t=5tUmYYr5PjeHLcWkcbZ7lQ9oVd-akuAj8VF6eBrx-zw&s=1773260986&e=43200&f=474636&sp=150&i=0.0',
-                posterUrl: 'https://upload.wikimedia.org/wikipedia/en/1/13/Aftermath2024.jpg'
+                videoUrl: 'https://1vid.xyz/embed-da6da2wutmc9.html',
+                posterUrl: 'https://upload.wikimedia.org/wikipedia/en/1/13/Aftermath2024.jpg',
+                videoType: 'embed'
             },
             {
                 id: '3',
@@ -360,31 +468,40 @@
                 titleAr: 'مشاهدة فلم ٥جي',
                 year: '2023',
                 lang: 'both',
-                videoUrl: 'https://egyy41dffdvwerwe432vxcvxcvbcx321scvxv45cdsw1dfdsfsd.visitmycityfor365days.online/v/01/00100/bimqqg0h2rmi_n/[Cimawbas]7G.2024.2024.Tamil..mp4?t=bVXLuxGJSlfv2c3BeU_7ddFvzcjzg4Gvz2znb90oVsE&s=1773261523&e=43200&f=504604&sp=150&i=0.0',
-                posterUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgJ_PpLsEjZRoNh86YY9mlAl3AjJtoN_FwLmzCAZyNKA&s=10'
+                videoUrl: 'https://vk.com/video_ext.php?oid=745497736&id=456242418&hash=48fcf213e4fa140d',
+                posterUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgJ_PpLsEjZRoNh86YY9mlAl3AjJtoN_FwLmzCAZyNKA&s=10',
+                videoType: 'embed'
             },
             {
                 id: '4',
-                titleEn: 'Terrifier 2017 ',
-                titleAr:'الموت',
+                titleEn: 'Terrifier 2017',
+                titleAr: 'الموت المرعب',
                 year: '2023',
                 lang: 'both',
-                videoUrl: 'https://vsped-fs11-u3z.cdnz.quest/v/01/00193/xezpn5cajs17_n/Terrifier.2017.1080p.WEB-DL.mp4?t=InG9c3I86DJP1qClzzvEJkrslC98GxkDC8b_aXftWcI&s=1773261947&e=43200&v=1373865&sp=10240&i=0.0',
-                posterUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlHm-l8u9zAAO6KaeKey1Ivy7L-C5H7ksmTvmYUIByjw&s=10'
+                videoUrl: 'https://www.vidspeeds.com/embed-xezpn5cajs17.html',
+                posterUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlHm-l8u9zAAO6KaeKey1Ivy7L-C5H7ksmTvmYUIByjw&s=10',
+                videoType: 'embed'
             },
-
-{
+            {
                 id: '5',
-                titleEn: 'Fear Farm 2 2022',
-                titleAr:'الموت',
+                titleEn: 'Fear Farm 2022',
+                titleAr: 'مزرعة الرعب',
                 year: '2023',
                 lang: 'both',
-                videoUrl: 'https://vsped-fs11-u3z.cdnz.quest/v/04/00175/05fd96u1n2mi_n/Fear.Pharm.2.2022.mp4?t=csfjMQMGgd5n4hYM48uTEUE0z02wPdFFmfBmpDUrHd4&s=1773265309&e=43200&v=1690365&sp=10240&i=0.0',
-                posterUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQIWWgz8DbkZO0q0DnBNOnT8Nrfl3Iu1v8ffMw1IBK21A&s=10'
+                videoUrl: 'https://uqload.net/embed-yi9l18v525t2.html',
+                posterUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQIWWgz8DbkZO0q0DnBNOnT8Nrfl3Iu1v8ffMw1IBK21A&s=10',
+                videoType: 'embed'
+            },
+            {
+                id: '6',
+                titleEn: 'The Farm 2',
+                titleAr: 'المزرعة ٢',
+                year: '2023',
+                lang: 'both',
+                videoUrl: 'https://www.vidspeeds.com:2053/embed-w5z4zj4uierg.html',
+                posterUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZmJeEAwshSOGtgXa5ffL_nylq63WNw0RpcP496IkdRQ&s=10',
+                videoType: 'embed'
             }
-
-
-
         ];
 
         // DOM elements
@@ -394,8 +511,24 @@
         const modalVideo = document.getElementById('modalVideo');
         const modalMovieTitle = document.getElementById('modalMovieTitle');
         const filterBtns = document.querySelectorAll('.filter-btn');
+        const videoContainer = document.getElementById('videoContainer');
 
         let currentFilter = 'all';
+        let currentLanguage = 'en';
+
+        // Create iframe element (the embed player)
+        let embedIframe = document.createElement('iframe');
+        embedIframe.id = 'embedIframe';
+        embedIframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+        embedIframe.allowFullscreen = true;
+        embedIframe.style.display = 'none';
+        embedIframe.setAttribute('frameborder', '0');
+        embedIframe.setAttribute('loading', 'lazy');
+        embedIframe.setAttribute('referrerpolicy', 'strict-origin-when-cross-origin');
+        embedIframe.setAttribute('scrolling', 'no');
+        embedIframe.setAttribute('webkitallowfullscreen', 'true');
+        embedIframe.setAttribute('mozallowfullscreen', 'true');
+        videoContainer.appendChild(embedIframe);
 
         // Render movies grid
         function renderMovies() {
@@ -407,18 +540,13 @@
             });
 
             moviesGrid.innerHTML = filteredMovies.map(movie => {
-                const displayTitle = currentFilter === 'ar' ? movie.titleAr : movie.titleEn;
+                const displayTitle = currentLanguage === 'ar' ? movie.titleAr : movie.titleEn;
                 const langClass = movie.lang === 'ar' ? 'ar' : (movie.lang === 'both' ? 'both' : 'en');
                 
                 return `
                     <div class="movie-card" onclick="playMovie('${movie.id}')">
                         <div class="video-thumbnail">
-                            ${movie.videoUrl ? 
-                                `<video src="${movie.videoUrl}" ${movie.posterUrl ? `poster="${movie.posterUrl}"` : ''}></video>` : 
-                                `<div style="width:100%; height:100%; background: linear-gradient(45deg, #2f2b45, #1a1728); display: flex; align-items: center; justify-content: center;">
-                                    <i class="fas fa-film" style="font-size: 3rem; color: #4b446b;"></i>
-                                </div>`
-                            }
+                            <img src="${movie.posterUrl}" alt="${displayTitle}" onerror="this.src='https://via.placeholder.com/300x180?text=No+Poster'">
                             <div class="play-overlay">
                                 <i class="fas fa-play-circle"></i>
                             </div>
@@ -432,7 +560,7 @@
                                 <span class="lang-badge ${langClass}">
                                     ${movie.lang === 'en' ? 'EN' : movie.lang === 'ar' ? 'AR' : 'EN/AR'}
                                 </span>
-                                ${movie.videoUrl ? '<i class="fas fa-video" style="color:#4CAF50;" title="video available"></i>' : '<i class="fas fa-video" style="color:#666;" title="video coming soon"></i>'}
+                                <i class="fas fa-video" style="color:#4CAF50;" title="video available"></i>
                             </div>
                         </div>
                     </div>
@@ -440,7 +568,7 @@
             }).join('');
         }
 
-        // Play movie function (make it global)
+        // Play movie function – uses the embed iframe
         window.playMovie = function(movieId) {
             const movie = movies.find(m => m.id === movieId);
             if (!movie || !movie.videoUrl) {
@@ -449,17 +577,39 @@
             }
 
             modal.classList.add('active');
-            modalMovieTitle.textContent = currentFilter === 'ar' ? movie.titleAr : movie.titleEn;
-            modalVideo.src = movie.videoUrl;
-            modalVideo.load();
-            modalVideo.play();
+            modalMovieTitle.textContent = currentLanguage === 'ar' ? movie.titleAr : movie.titleEn;
+            
+            // Hide native video element, show iframe
+            modalVideo.style.display = 'none';
+            modalVideo.pause();
+            modalVideo.src = '';
+            
+            // Set the embed iframe src to the videoUrl
+            embedIframe.style.display = 'block';
+            embedIframe.src = movie.videoUrl;
+            
+            // For ID 6, ensure all attributes are properly set
+            if (movie.id === '6') {
+                embedIframe.setAttribute('scrolling', 'no');
+                embedIframe.setAttribute('frameborder', '0');
+                embedIframe.setAttribute('allowfullscreen', 'true');
+                embedIframe.setAttribute('webkitallowfullscreen', 'true');
+                embedIframe.setAttribute('mozallowfullscreen', 'true');
+            }
         };
 
         // Close modal
         closeModal.addEventListener('click', () => {
             modal.classList.remove('active');
+            
+            // Stop video
             modalVideo.pause();
             modalVideo.src = '';
+            modalVideo.style.display = 'none';
+            
+            // Clear iframe
+            embedIframe.src = '';
+            embedIframe.style.display = 'none';
         });
 
         // Click outside to close
@@ -477,6 +627,21 @@
                 currentFilter = btn.dataset.filter;
                 renderMovies();
             });
+        });
+
+        // Language toggle function
+        window.toggleLanguage = function() {
+            currentLanguage = currentLanguage === 'en' ? 'ar' : 'en';
+            document.getElementById('langDisplay').textContent = currentLanguage === 'en' ? 'EN | عربي' : 'عربي | EN';
+            document.getElementById('libraryTitle').textContent = currentLanguage === 'en' ? 'Movie Library / مكتبة الأفلام' : 'مكتبة الأفلام / Movie Library';
+            renderMovies();
+        };
+
+        // Escape key to close modal
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modal.classList.contains('active')) {
+                closeModal.click();
+            }
         });
 
         // Initial render

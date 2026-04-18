@@ -31,42 +31,7 @@
             padding: 0 !important;
         }
 
-        /* HIDE BLOGGER NAVIGATION BAR */
-        #navbar, 
-        #navbar-iframe, 
-        .blogger-iframe, 
-        .navbar, 
-        .blogger-navbar,
-        #b-navbar,
-        .b-navbar,
-        #navbar-wrapper,
-        .navbar-wrapper,
-        #attribution,
-        .attribution,
-        .blogger-attribution,
-        iframe[src*="blogger"], 
-        iframe[src*="blogspot"], 
-        iframe[id*="navbar"],
-        iframe[class*="navbar"],
-        body > iframe,
-        body > .navbar,
-        body > .navbar-wrapper,
-        div[class*="navbar"],
-        div[id*="navbar"],
-        div[class*="search"],
-        div[id*="search"],
-        #footer-attribution,
-        .footer-attribution,
-        .blogger-footer,
-        .copyright,
-        .footer-credit,
-        .navbar.section,
-        .navbar-wrapper,
-        .navbar-inner,
-        .navbar-content,
-        .blogger-navbar-wrap,
-        .Blog1,
-        #Blog1 {
+        {
             display: none !important;
             height: 0 !important;
             min-height: 0 !important;
@@ -167,6 +132,71 @@
         .btn-secondary:hover {
             border-color: #e4b363;
             color: #e4b363;
+        }
+
+        /* SEARCH BAR STYLES */
+        .search-container {
+            margin-bottom: 2rem;
+            position: relative;
+            max-width: 500px;
+        }
+
+        .search-wrapper {
+            display: flex;
+            align-items: center;
+            background: #1a1728;
+            border: 2px solid #332e48;
+            border-radius: 60px;
+            padding: 0.3rem 0.3rem 0.3rem 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .search-wrapper:focus-within {
+            border-color: #e4b363;
+            box-shadow: 0 0 0 2px rgba(228, 179, 99, 0.2);
+        }
+
+        .search-icon {
+            color: #a29cc0;
+            font-size: 1.2rem;
+            margin-right: 0.8rem;
+        }
+
+        #searchInput {
+            background: transparent;
+            border: none;
+            padding: 0.9rem 0;
+            font-size: 1rem;
+            color: #f0eef7;
+            width: 100%;
+            outline: none;
+        }
+
+        #searchInput::placeholder {
+            color: #5e577a;
+            font-weight: 400;
+        }
+
+        .clear-search {
+            background: none;
+            border: none;
+            color: #a29cc0;
+            cursor: pointer;
+            padding: 0 1rem;
+            font-size: 1.3rem;
+            display: none;
+            transition: color 0.2s;
+        }
+
+        .clear-search:hover {
+            color: #e4b363;
+        }
+
+        .search-stats {
+            margin-top: 0.6rem;
+            font-size: 0.85rem;
+            color: #a29cc0;
+            padding-left: 0.5rem;
         }
 
         /* movies grid */
@@ -274,6 +304,23 @@
 
         .lang-badge.both {
             background: #9b87e0;
+        }
+
+        /* no results message */
+        .no-results {
+            text-align: center;
+            padding: 3rem;
+            background: #1a1728;
+            border-radius: 32px;
+            margin: 2rem 0;
+            color: #b9b3d6;
+        }
+
+        .no-results i {
+            font-size: 3rem;
+            color: #e4b363;
+            margin-bottom: 1rem;
+            opacity: 0.7;
         }
 
         /* video player modal */
@@ -396,6 +443,10 @@
             .video-container {
                 height: calc(100vh - 80px);
             }
+
+            .search-container {
+                max-width: 100%;
+            }
         }
     </style>
 </head>
@@ -416,6 +467,18 @@
     <!-- movies library section -->
     <div class="section-title">
         <i class="fas fa-film"></i> <span id="libraryTitle">Movie Library / مكتبة الأفلام</span>
+    </div>
+
+    <!-- NEW SEARCH BAR -->
+    <div class="search-container">
+        <div class="search-wrapper">
+            <i class="fas fa-search search-icon"></i>
+            <input type="text" id="searchInput" placeholder="Search by film name... / ابحث باسم الفيلم...">
+            <button class="clear-search" id="clearSearchBtn" aria-label="Clear search">
+                <i class="fas fa-times-circle"></i>
+            </button>
+        </div>
+        <div class="search-stats" id="searchStats"></div>
     </div>
 
     <!-- filter tabs -->
@@ -850,9 +913,15 @@
         const modalMovieTitle = document.getElementById('modalMovieTitle');
         const filterBtns = document.querySelectorAll('.filter-btn');
         const videoContainer = document.getElementById('videoContainer');
+        
+        // Search elements
+        const searchInput = document.getElementById('searchInput');
+        const clearSearchBtn = document.getElementById('clearSearchBtn');
+        const searchStats = document.getElementById('searchStats');
 
         let currentFilter = 'all';
         let currentLanguage = 'en';
+        let currentSearchQuery = '';
 
         // Create iframe element (the embed player)
         let embedIframe = document.createElement('iframe');
@@ -868,15 +937,82 @@
         embedIframe.setAttribute('mozallowfullscreen', 'true');
         videoContainer.appendChild(embedIframe);
 
-        // Render movies grid
-        function renderMovies() {
-            const filteredMovies = movies.filter(movie => {
+        // Helper: Filter movies by search + language/filter
+        function getFilteredMovies() {
+            // First apply language/filter
+            let filtered = movies.filter(movie => {
                 if (currentFilter === 'all') return true;
                 if (currentFilter === 'en') return movie.lang === 'en' || movie.lang === 'both';
                 if (currentFilter === 'ar') return movie.lang === 'ar' || movie.lang === 'both';
                 return true;
             });
+            
+            // Then apply search query (case-insensitive, matches English title OR Arabic title)
+            if (currentSearchQuery.trim() !== '') {
+                const query = currentSearchQuery.trim().toLowerCase();
+                filtered = filtered.filter(movie => {
+                    const enMatch = movie.titleEn.toLowerCase().includes(query);
+                    const arMatch = movie.titleAr.toLowerCase().includes(query);
+                    return enMatch || arMatch;
+                });
+            }
+            return filtered;
+        }
 
+        // Update search stats UI
+        function updateSearchStats(visibleCount, totalBeforeSearch) {
+            if (currentSearchQuery.trim() === '') {
+                searchStats.innerHTML = '';
+                return;
+            }
+            const resultText = currentLanguage === 'en' 
+                ? `Found ${visibleCount} movie${visibleCount !== 1 ? 's' : ''} matching "${escapeHtml(currentSearchQuery)}"`
+                : `تم العثور على ${visibleCount} فيلماً تطابق "${escapeHtml(currentSearchQuery)}"`;
+            searchStats.innerHTML = resultText;
+        }
+
+        // simple escape for safety
+        function escapeHtml(str) {
+            return str.replace(/[&<>]/g, function(m) {
+                if (m === '&') return '&amp;';
+                if (m === '<') return '&lt;';
+                if (m === '>') return '&gt;';
+                return m;
+            });
+        }
+
+        // Render movies grid based on current filters + search
+        function renderMovies() {
+            const filteredMovies = getFilteredMovies();
+            
+            if (filteredMovies.length === 0) {
+                moviesGrid.innerHTML = `
+                    <div class="no-results">
+                        <i class="fas fa-film-slash"></i>
+                        <h3>${currentLanguage === 'en' ? 'No movies found' : 'لا توجد أفلام'}</h3>
+                        <p>${currentLanguage === 'en' ? 'Try adjusting your search or filter.' : 'حاول تعديل البحث أو التصفية.'}</p>
+                    </div>
+                `;
+                // update stats for zero results
+                if (currentSearchQuery.trim() !== '') {
+                    searchStats.innerHTML = currentLanguage === 'en' 
+                        ? `No movies found for "${escapeHtml(currentSearchQuery)}"`
+                        : `لم يتم العثور على أفلام لـ "${escapeHtml(currentSearchQuery)}"`;
+                } else {
+                    searchStats.innerHTML = '';
+                }
+                return;
+            }
+
+            // For stats: total before search (just filter)
+            const beforeSearchFiltered = movies.filter(movie => {
+                if (currentFilter === 'all') return true;
+                if (currentFilter === 'en') return movie.lang === 'en' || movie.lang === 'both';
+                if (currentFilter === 'ar') return movie.lang === 'ar' || movie.lang === 'both';
+                return true;
+            });
+            updateSearchStats(filteredMovies.length, beforeSearchFiltered.length);
+            
             moviesGrid.innerHTML = filteredMovies.map(movie => {
                 const displayTitle = currentLanguage === 'ar' ? movie.titleAr : movie.titleEn;
                 const langClass = movie.lang === 'ar' ? 'ar' : (movie.lang === 'both' ? 'both' : 'en');
@@ -906,7 +1042,7 @@
             }).join('');
         }
 
-        // Play movie function – uses the embed iframe
+        // Play movie function
         window.playMovie = function(movieId) {
             const movie = movies.find(m => m.id === movieId);
             if (!movie || !movie.videoUrl) {
@@ -922,11 +1058,9 @@
             modalVideo.pause();
             modalVideo.src = '';
             
-            // Set the embed iframe src to the videoUrl
             embedIframe.style.display = 'block';
             embedIframe.src = movie.videoUrl;
             
-            // For ID 6, ensure all attributes are properly set
             if (movie.id === '6') {
                 embedIframe.setAttribute('scrolling', 'no');
                 embedIframe.setAttribute('frameborder', '0');
@@ -939,22 +1073,15 @@
         // Close modal
         closeModal.addEventListener('click', () => {
             modal.classList.remove('active');
-            
-            // Stop video
             modalVideo.pause();
             modalVideo.src = '';
             modalVideo.style.display = 'none';
-            
-            // Clear iframe
             embedIframe.src = '';
             embedIframe.style.display = 'none';
         });
 
-        // Click outside to close
         modal.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                closeModal.click();
-            }
+            if (e.target === modal) closeModal.click();
         });
 
         // Filter functionality
@@ -967,7 +1094,7 @@
             });
         });
 
-        // Language toggle function
+        // Language toggle
         window.toggleLanguage = function() {
             currentLanguage = currentLanguage === 'en' ? 'ar' : 'en';
             document.getElementById('langDisplay').textContent = currentLanguage === 'en' ? 'EN | عربي' : 'عربي | EN';
@@ -975,11 +1102,34 @@
             renderMovies();
         };
 
-        // Escape key to close modal
+        // Search handlers
+        function handleSearchInput() {
+            currentSearchQuery = searchInput.value;
+            if (currentSearchQuery.length > 0) {
+                clearSearchBtn.style.display = 'block';
+            } else {
+                clearSearchBtn.style.display = 'none';
+            }
+            renderMovies();
+        }
+        
+        function clearSearch() {
+            searchInput.value = '';
+            currentSearchQuery = '';
+            clearSearchBtn.style.display = 'none';
+            renderMovies();
+            searchInput.focus();
+        }
+        
+        searchInput.addEventListener('input', handleSearchInput);
+        clearSearchBtn.addEventListener('click', clearSearch);
+        
+        // Escape key to clear search optionally? but we just close modal too.
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape' && modal.classList.contains('active')) {
                 closeModal.click();
             }
+            // optional: if user presses Escape on search, we could blur but not needed
         });
 
         // Initial render

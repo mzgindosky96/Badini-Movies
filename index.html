@@ -136,7 +136,7 @@
 
         /* SEARCH BAR STYLES */
         .search-container {
-            margin-bottom: 2rem;
+            margin-bottom: 1.2rem;
             position: relative;
             max-width: 500px;
         }
@@ -197,6 +197,131 @@
             font-size: 0.85rem;
             color: #a29cc0;
             padding-left: 0.5rem;
+        }
+
+        /* --- MODERN MARQUEE (FILM NAMES TICKER) --- */
+        .film-marquee {
+            background: linear-gradient(95deg, #181526 0%, #201d30 100%);
+            border-radius: 60px;
+            border: 1px solid rgba(228, 179, 99, 0.25);
+            margin-bottom: 2rem;
+            padding: 0.4rem 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            backdrop-filter: blur(2px);
+            box-shadow: 0 5px 12px rgba(0, 0, 0, 0.3);
+            transition: all 0.2s ease;
+        }
+
+        .marquee-icon {
+            background: #2f2b45;
+            border-radius: 40px;
+            padding: 0.5rem 1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: #e4b363;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .marquee-icon i {
+            font-size: 1.1rem;
+        }
+
+        .marquee-icon span {
+            display: inline-block;
+        }
+
+        .marquee-scroll-container {
+            flex: 1;
+            overflow: hidden;
+            position: relative;
+            mask-image: linear-gradient(90deg, transparent, black 5%, black 95%, transparent);
+            -webkit-mask-image: linear-gradient(90deg, transparent, black 5%, black 95%, transparent);
+        }
+
+        .marquee-track {
+            display: inline-flex;
+            white-space: nowrap;
+            animation: scrollMarquee 38s linear infinite;
+            will-change: transform;
+        }
+
+        .marquee-track:hover {
+            animation-play-state: paused;
+        }
+
+        .marquee-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            margin-right: 2rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #eae6ff;
+            letter-spacing: 0.3px;
+        }
+
+        .marquee-item i {
+            color: #e4b363;
+            font-size: 0.75rem;
+            opacity: 0.8;
+        }
+
+        .film-name-en {
+            color: #f2e9c2;
+        }
+
+        .film-name-ar {
+            font-family: 'Segoe UI', 'Tahoma', system-ui;
+            font-size: 0.85rem;
+            color: #bcb4e0;
+            direction: rtl;
+            display: inline-block;
+        }
+
+        .separator-dot {
+            margin: 0 0.25rem;
+            color: #e4b363;
+            font-weight: bold;
+        }
+
+        @keyframes scrollMarquee {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        /* responsive marquee */
+        @media (max-width: 768px) {
+            .film-marquee {
+                padding: 0.3rem 0.6rem;
+                gap: 0.4rem;
+            }
+            .marquee-icon span {
+                display: none;
+            }
+            .marquee-icon {
+                padding: 0.4rem 0.8rem;
+            }
+            .marquee-item {
+                font-size: 0.75rem;
+                gap: 0.6rem;
+                margin-right: 1rem;
+            }
+            .film-name-ar {
+                font-size: 0.7rem;
+            }
+            .marquee-track {
+                animation-duration: 140s;
+            }
         }
 
         /* movies grid */
@@ -515,6 +640,19 @@
         <div class="search-stats" id="searchStats"></div>
     </div>
 
+    <!-- ========== MODERN MARQUEE WITH ALL FILM NAMES ========== -->
+    <div class="film-marquee" id="filmMarquee">
+        <div class="marquee-icon">
+            <i class="fas fa-ticket-alt"></i>
+            <span>NOW SHOWING</span>
+        </div>
+        <div class="marquee-scroll-container">
+            <div class="marquee-track" id="marqueeTrack">
+                <!-- dynamic film names injected via js -->
+            </div>
+        </div>
+    </div>
+
     <!-- filter tabs -->
     <div class="filter-container">
         <button class="btn-secondary filter-btn active" data-filter="all">All / الكل</button>
@@ -547,7 +685,7 @@
     (function() {
         // ------------------------------------------------------------------
         // MOVIE DATABASE (all films)
-        // NEW: Auto-refreshing random view counters that increment over time
+        // Auto-refreshing random view counters + dynamic marquee with all film names
         // ------------------------------------------------------------------
         let movies = [
             { id: '1', titleEn: 'The Aftermath 2019', titleAr: 'ما بعد الأحداث ٢٠١٩', year: '2024', lang: 'both', videoUrl: 'https://www.vidspeeds.com/embed-1yjmv1iiev42.html', posterUrl: 'https://observer.com/wp-content/uploads/sites/2/2019/03/aftermath-dom-ta_03670_rgb-1.jpg', videoType: 'embed' },
@@ -592,34 +730,61 @@
             { id: '40', titleEn: 'Pandora', titleAr: 'pandora', year: '2016', lang: 'both', videoUrl: 'https://www.vidspeeds.com:2053/embed-wtf6a0syau0v.html', posterUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSch7ao2t0EfvRU0PvdNcSeXJrhMFVVL6uq2DZWLFFcU6A5p-dFOmAhMj0&s=10', videoType: 'embed' }
         ];
 
-        // NEW AUTO-REFRESHING COUNTER SYSTEM
+        // ---------------- MARQUEE BUILDER (all film names) ----------------
+        function buildMarqueeContent() {
+            const track = document.getElementById('marqueeTrack');
+            if (!track) return;
+            // Create a rich list with both English & Arabic names
+            let itemsHtml = '';
+            movies.forEach(movie => {
+                itemsHtml += `
+                    <div class="marquee-item">
+                        <i class="fas fa-play-circle"></i>
+                        <span class="film-name-en">${escapeHtml(movie.titleEn)}</span>
+                        <span class="separator-dot">/</span>
+                        <span class="film-name-ar">${escapeHtml(movie.titleAr)}</span>
+                        <i class="fas fa-star" style="font-size: 0.65rem; opacity:0.6;"></i>
+                    </div>
+                `;
+            });
+            // Duplicate the entire list to create seamless infinite scroll effect
+            const doubleItems = itemsHtml + itemsHtml;
+            track.innerHTML = doubleItems;
+        }
+
+        function escapeHtml(str) {
+            return str.replace(/[&<>]/g, function(m) {
+                if (m === '&') return '&amp;';
+                if (m === '<') return '&lt;';
+                if (m === '>') return '&gt;';
+                return m;
+            });
+        }
+
+        // View counter logic (same as original)
         let viewCounts = {};
         let counterInterval;
 
-        // Initialize realistic base view counts for each movie
         function initializeViewCounts() {
             movies.forEach(movie => {
-                // Different movies have different base views (more popular = higher base)
-                const baseViews = Math.floor(Math.random() * 15000) + 5000; // 5K-20K base
+                const baseViews = Math.floor(Math.random() * 15000) + 5000;
                 const popularityBoost = movies.indexOf(movie) < 10 ? Math.floor(Math.random() * 20000) + 10000 : 0;
                 viewCounts[movie.id] = baseViews + popularityBoost;
             });
         }
 
-        // Generate realistic increment (1-5 views every refresh)
         function incrementViewCount(movieId) {
-            const increment = Math.floor(Math.random() * 5) + 1; // 1-5 views
+            const increment = Math.floor(Math.random() * 5) + 1;
             viewCounts[movieId] += increment;
         }
 
-        // Auto-refresh ALL counters every 15-25 seconds (randomized)
         function startAutoRefresh() {
             counterInterval = setInterval(() => {
                 movies.forEach(movie => {
                     incrementViewCount(movie.id);
                 });
-                renderMovies(); // Refresh display with new counts
-            }, Math.random() * 10000 + 15000); // 15-25 seconds random interval
+                renderMovies();
+            }, Math.random() * 10000 + 15000);
         }
 
         // DOM elements
@@ -638,7 +803,6 @@
         let currentLanguage = 'en';
         let currentSearchQuery = '';
 
-        // Create embed iframe element
         let embedIframe = document.createElement('iframe');
         embedIframe.id = 'embedIframe';
         embedIframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
@@ -646,13 +810,8 @@
         embedIframe.style.display = 'none';
         embedIframe.setAttribute('frameborder', '0');
         embedIframe.setAttribute('loading', 'lazy');
-        embedIframe.setAttribute('referrerpolicy', 'strict-origin-when-cross-origin');
-        embedIframe.setAttribute('scrolling', 'no');
-        embedIframe.setAttribute('webkitallowfullscreen', 'true');
-        embedIframe.setAttribute('mozallowfullscreen', 'true');
         videoContainer.appendChild(embedIframe);
 
-        // Filter + Search helpers
         function getFilteredMovies() {
             let filtered = movies.filter(movie => {
                 if (currentFilter === 'all') return true;
@@ -681,16 +840,6 @@
             searchStats.innerHTML = resultText;
         }
 
-        function escapeHtml(str) {
-            return str.replace(/[&<>]/g, function(m) {
-                if (m === '&') return '&amp;';
-                if (m === '<') return '&lt;';
-                if (m === '>') return '&gt;';
-                return m;
-            });
-        }
-
-        // Render all movie cards with LIVE auto-refreshing counters
         function renderMovies() {
             const filteredMovies = getFilteredMovies();
             if (filteredMovies.length === 0) {
@@ -743,19 +892,14 @@
             }).join('');
         }
 
-        // Play movie (no more counter increment, just play)
         window.playMovie = function(movieId) {
             const movie = movies.find(m => m.id === movieId);
             if (!movie || !movie.videoUrl) {
                 alert('No video available for this film yet.');
                 return;
             }
-            
-            // Just increment this movie's counter for immediate visual feedback
             incrementViewCount(movieId);
             renderMovies();
-            
-            // Open modal and play video
             modal.classList.add('active');
             modalMovieTitle.textContent = currentLanguage === 'ar' ? movie.titleAr : movie.titleEn;
             modalVideo.style.display = 'none';
@@ -763,16 +907,8 @@
             modalVideo.src = '';
             embedIframe.style.display = 'block';
             embedIframe.src = movie.videoUrl;
-            if (movie.id === '6') {
-                embedIframe.setAttribute('scrolling', 'no');
-                embedIframe.setAttribute('frameborder', '0');
-                embedIframe.setAttribute('allowfullscreen', 'true');
-                embedIframe.setAttribute('webkitallowfullscreen', 'true');
-                embedIframe.setAttribute('mozallowfullscreen', 'true');
-            }
         };
 
-        // Modal close logic
         closeModal.addEventListener('click', () => {
             modal.classList.remove('active');
             modalVideo.pause();
@@ -788,7 +924,6 @@
             if (e.key === 'Escape' && modal.classList.contains('active')) closeModal.click();
         });
 
-        // Filter buttons
         filterBtns.forEach(btn => {
             btn.addEventListener('click', () => {
                 filterBtns.forEach(b => b.classList.remove('active'));
@@ -798,7 +933,6 @@
             });
         });
 
-        // Language toggle
         window.toggleLanguage = function() {
             currentLanguage = currentLanguage === 'en' ? 'ar' : 'en';
             document.getElementById('langDisplay').textContent = currentLanguage === 'en' ? 'EN | عربي' : 'عربي | EN';
@@ -806,7 +940,6 @@
             renderMovies();
         };
 
-        // Search handlers
         function handleSearchInput() {
             currentSearchQuery = searchInput.value;
             clearSearchBtn.style.display = currentSearchQuery.length > 0 ? 'block' : 'none';
@@ -822,10 +955,11 @@
         searchInput.addEventListener('input', handleSearchInput);
         clearSearchBtn.addEventListener('click', clearSearch);
 
-        // INITIALIZATION
-        initializeViewCounts();  // Set base realistic view counts
-        renderMovies();          // Initial render
-        startAutoRefresh();      // Start auto-refreshing counters
+        // Initialize everything
+        initializeViewCounts();
+        buildMarqueeContent();    // Populate marquee with all film names
+        renderMovies();
+        startAutoRefresh();
     })();
 </script>
 </body>

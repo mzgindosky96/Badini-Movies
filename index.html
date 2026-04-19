@@ -312,17 +312,32 @@
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            background: #2f2b45;
+            background: linear-gradient(135deg, #2f2b45 0%, #3a3552 100%);
             padding: 0.2rem 0.7rem;
             border-radius: 30px;
             font-size: 0.8rem;
             font-weight: 500;
             color: #dbd4f5;
+            border: 1px solid rgba(228, 179, 99, 0.2);
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+        
+        .watch-counter:hover {
+            background: linear-gradient(135deg, #e4b363 0%, #d4a247 100%);
+            color: #12101c;
+            transform: scale(1.05);
         }
         
         .watch-counter i {
             font-size: 0.75rem;
             color: #e4b363;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
         }
 
         /* no results message */
@@ -440,12 +455,6 @@
             flex-wrap: wrap;
         }
 
-        /* loading overlay for counters */
-        .view-loading {
-            opacity: 0.7;
-            font-style: italic;
-        }
-
         /* Responsive */
         @media (max-width: 768px) {
             .container {
@@ -537,9 +546,8 @@
 <script>
     (function() {
         // ------------------------------------------------------------------
-        // MOVIE DATABASE (all films with unique IDs)
-        // Each film now includes a GLOBAL VIEW COUNTER via CountAPI
-        // All visitors see the same viewer counts, synced across the world
+        // MOVIE DATABASE (all films)
+        // NEW: Auto-refreshing random view counters that increment over time
         // ------------------------------------------------------------------
         let movies = [
             { id: '1', titleEn: 'The Aftermath 2019', titleAr: 'ما بعد الأحداث ٢٠١٩', year: '2024', lang: 'both', videoUrl: 'https://www.vidspeeds.com/embed-1yjmv1iiev42.html', posterUrl: 'https://observer.com/wp-content/uploads/sites/2/2019/03/aftermath-dom-ta_03670_rgb-1.jpg', videoType: 'embed' },
@@ -584,62 +592,34 @@
             { id: '40', titleEn: 'Pandora', titleAr: 'pandora', year: '2016', lang: 'both', videoUrl: 'https://www.vidspeeds.com:2053/embed-wtf6a0syau0v.html', posterUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSch7ao2t0EfvRU0PvdNcSeXJrhMFVVL6uq2DZWLFFcU6A5p-dFOmAhMj0&s=10', videoType: 'embed' }
         ];
 
-        // ---------- GLOBAL VIEW COUNTER (shared across all visitors) using CountAPI ----------
-        const API_NAMESPACE = 'badini_mv';   // unique namespace for Badini movies
+        // NEW AUTO-REFRESHING COUNTER SYSTEM
+        let viewCounts = {};
+        let counterInterval;
 
-        // Helper: fetch current view count for a movie ID from global API
-        async function fetchGlobalCount(movieId) {
-            try {
-                const res = await fetch(`https://api.countapi.xyz/get/${API_NAMESPACE}/${movieId}`);
-                if (!res.ok) throw new Error(`HTTP ${res.status}`);
-                const data = await res.json();
-                return data.value;   // number of views
-            } catch (err) {
-                console.warn(`Failed to fetch count for ${movieId}:`, err);
-                return null;
-            }
-        }
-
-        // Helper: increment global counter for a movie ID, returns new count
-        async function incrementGlobalCount(movieId) {
-            try {
-                const res = await fetch(`https://api.countapi.xyz/hit/${API_NAMESPACE}/${movieId}`);
-                if (!res.ok) throw new Error(`HTTP ${res.status}`);
-                const data = await res.json();
-                return data.value;
-            } catch (err) {
-                console.warn(`Failed to increment count for ${movieId}:`, err);
-                return null;
-            }
-        }
-
-        // Load all global counters into movies array (async)
-        async function loadAllGlobalCounters() {
-            const promises = movies.map(movie => fetchGlobalCount(movie.id));
-            const results = await Promise.allSettled(promises);
-            results.forEach((result, idx) => {
-                if (result.status === 'fulfilled' && result.value !== null) {
-                    movies[idx].views = result.value;
-                } else {
-                    movies[idx].views = 0;   // fallback to 0 if API fails
-                }
+        // Initialize realistic base view counts for each movie
+        function initializeViewCounts() {
+            movies.forEach(movie => {
+                // Different movies have different base views (more popular = higher base)
+                const baseViews = Math.floor(Math.random() * 15000) + 5000; // 5K-20K base
+                const popularityBoost = movies.indexOf(movie) < 10 ? Math.floor(Math.random() * 20000) + 10000 : 0;
+                viewCounts[movie.id] = baseViews + popularityBoost;
             });
-            renderMovies();  // final render with real global counts
         }
 
-        // Increment view for specific movie (global + local sync)
-        async function incrementAndUpdateCounter(movieId) {
-            const movie = movies.find(m => m.id === movieId);
-            if (!movie) return false;
-            const newGlobalCount = await incrementGlobalCount(movieId);
-            if (newGlobalCount !== null) {
-                movie.views = newGlobalCount;
-            } else {
-                // fallback: local increment only if API fails (but keep eventual consistency)
-                movie.views = (movie.views || 0) + 1;
-            }
-            renderMovies();   // refresh UI with updated count
-            return true;
+        // Generate realistic increment (1-5 views every refresh)
+        function incrementViewCount(movieId) {
+            const increment = Math.floor(Math.random() * 5) + 1; // 1-5 views
+            viewCounts[movieId] += increment;
+        }
+
+        // Auto-refresh ALL counters every 15-25 seconds (randomized)
+        function startAutoRefresh() {
+            counterInterval = setInterval(() => {
+                movies.forEach(movie => {
+                    incrementViewCount(movie.id);
+                });
+                renderMovies(); // Refresh display with new counts
+            }, Math.random() * 10000 + 15000); // 15-25 seconds random interval
         }
 
         // DOM elements
@@ -710,7 +690,7 @@
             });
         }
 
-        // Render all movie cards with GLOBAL viewer counter
+        // Render all movie cards with LIVE auto-refreshing counters
         function renderMovies() {
             const filteredMovies = getFilteredMovies();
             if (filteredMovies.length === 0) {
@@ -734,7 +714,7 @@
             moviesGrid.innerHTML = filteredMovies.map(movie => {
                 const displayTitle = currentLanguage === 'ar' ? movie.titleAr : movie.titleEn;
                 const langClass = movie.lang === 'ar' ? 'ar' : (movie.lang === 'both' ? 'both' : 'en');
-                const views = movie.views !== undefined ? movie.views : 0;
+                const views = viewCounts[movie.id] || 0;
                 return `
                     <div class="movie-card" onclick="playMovie('${movie.id}')">
                         <div class="video-thumbnail">
@@ -752,7 +732,7 @@
                                 <span class="lang-badge ${langClass}">
                                     ${movie.lang === 'en' ? 'EN' : movie.lang === 'ar' ? 'AR' : 'EN/AR'}
                                 </span>
-                                <span class="watch-counter">
+                                <span class="watch-counter" data-movie-id="${movie.id}">
                                     <i class="fas fa-eye"></i> ${views.toLocaleString()}
                                 </span>
                                 <i class="fas fa-video" style="color:#4CAF50;" title="video available"></i>
@@ -763,15 +743,17 @@
             }).join('');
         }
 
-        // Play movie: increments global counter first, then plays content
-        window.playMovie = async function(movieId) {
+        // Play movie (no more counter increment, just play)
+        window.playMovie = function(movieId) {
             const movie = movies.find(m => m.id === movieId);
             if (!movie || !movie.videoUrl) {
                 alert('No video available for this film yet.');
                 return;
             }
-            // INCREMENT GLOBAL VIEW COUNT (sync across all users)
-            await incrementAndUpdateCounter(movieId);
+            
+            // Just increment this movie's counter for immediate visual feedback
+            incrementViewCount(movieId);
+            renderMovies();
             
             // Open modal and play video
             modal.classList.add('active');
@@ -840,11 +822,10 @@
         searchInput.addEventListener('input', handleSearchInput);
         clearSearchBtn.addEventListener('click', clearSearch);
 
-        // INITIALIZATION: show zero counts then load real global counters from API
-        // set temporary zero views for all movies while loading
-        for (let m of movies) m.views = 0;
-        renderMovies();   // first render with "0" views
-        loadAllGlobalCounters(); // fetch real global counters and re-render when done
+        // INITIALIZATION
+        initializeViewCounts();  // Set base realistic view counts
+        renderMovies();          // Initial render
+        startAutoRefresh();      // Start auto-refreshing counters
     })();
 </script>
 </body>

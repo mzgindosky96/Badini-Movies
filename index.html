@@ -283,10 +283,12 @@
 
         .movie-meta {
             display: flex;
+            align-items: center;
             gap: 1rem;
             margin: 0.8rem 0;
             color: #a29cc0;
             font-size: 0.9rem;
+            flex-wrap: wrap;
         }
 
         .lang-badge {
@@ -304,6 +306,23 @@
 
         .lang-badge.both {
             background: #9b87e0;
+        }
+        
+        .watch-counter {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: #2f2b45;
+            padding: 0.2rem 0.7rem;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: #dbd4f5;
+        }
+        
+        .watch-counter i {
+            font-size: 0.75rem;
+            color: #e4b363;
         }
 
         /* no results message */
@@ -469,7 +488,7 @@
         <i class="fas fa-film"></i> <span id="libraryTitle">Movie Library / مكتبة الأفلام</span>
     </div>
 
-    <!-- NEW SEARCH BAR -->
+    <!-- SEARCH BAR -->
     <div class="search-container">
         <div class="search-wrapper">
             <i class="fas fa-search search-icon"></i>
@@ -513,397 +532,90 @@
     (function() {
         // Movie database with proper EMBED URLs
         let movies = [
-            {
-                id: '1',
-                titleEn: 'The Aftermath 2019',
-                titleAr: 'ما بعد الأحداث ٢٠١٩',
-                year: '2024',
-                lang: 'both',
-                videoUrl: 'https://www.vidspeeds.com/embed-1yjmv1iiev42.html',
-                posterUrl: 'https://observer.com/wp-content/uploads/sites/2/2019/03/aftermath-dom-ta_03670_rgb-1.jpg',
-                videoType: 'embed'
-            },
-            {
-                id: '2',
-                titleEn: 'The Aftermath 2024',
-                titleAr: 'الرجل التالي ٢٠٢٤',
-                year: '2022',
-                lang: 'both',
-                videoUrl: 'https://1vid.xyz/embed-da6da2wutmc9.html',
-                posterUrl: 'https://upload.wikimedia.org/wikipedia/en/1/13/Aftermath2024.jpg',
-                videoType: 'embed'
-            },
-            {
-                id: '3',
-                titleEn: '7G 2024',
-                titleAr: 'مشاهدة فلم ٥جي',
-                year: '2023',
-                lang: 'both',
-                videoUrl: 'https://vk.com/video_ext.php?oid=745497736&id=456242418&hash=48fcf213e4fa140d',
-                posterUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgJ_PpLsEjZRoNh86YY9mlAl3AjJtoN_FwLmzCAZyNKA&s=10',
-                videoType: 'embed'
-            },
-            {
-                id: '4',
-                titleEn: 'Terrifier 2017',
-                titleAr: 'الموت المرعب',
-                year: '2023',
-                lang: 'both',
-                videoUrl: 'https://www.vidspeeds.com/embed-xezpn5cajs17.html',
-                posterUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlHm-l8u9zAAO6KaeKey1Ivy7L-C5H7ksmTvmYUIByjw&s=10',
-                videoType: 'embed'
-            },
-            {
-                id: '5',
-                titleEn: 'Fear Farm 2022',
-                titleAr: 'مزرعة الرعب',
-                year: '2023',
-                lang: 'both',
-                videoUrl: 'https://uqload.net/embed-yi9l18v525t2.html',
-                posterUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQIWWgz8DbkZO0q0DnBNOnT8Nrfl3Iu1v8ffMw1IBK21A&s=10',
-                videoType: 'embed'
-            },
-            {
-                id: '6',
-                titleEn: 'The Farm 2',
-                titleAr: 'المزرعة ٢',
-                year: '2023',
-                lang: 'both',
-                videoUrl: 'https://www.vidspeeds.com:2053/embed-w5z4zj4uierg.html',
-                posterUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZmJeEAwshSOGtgXa5ffL_nylq63WNw0RpcP496IkdRQ&s=10',
-                videoType: 'embed'
-            },
-            {
-                id: '7',
-                titleEn: 'Wrong Turn 2',
-                titleAr: 'اwrong turn 2',
-                year: '2007',
-                lang: 'both',
-                videoUrl: 'https://vidspeed.org/embed-wv56vclm9ofb.html',
-                posterUrl: 'https://i.ytimg.com/vi/uHhO3z4Cw7A/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLCKrKhTDf-Uw4gEyNdYrQATV1TuvQ',
-                videoType: 'embed'
-            },
-            {
-                id: '8',
-                titleEn: 'Wrong Turn 1',
-                titleAr: 'اwrong turn 1',
-                year: '2003',
-                lang: 'both',
-                videoUrl: 'https://vidspeed.org/embed-zqjlljw9twxl.html',
-                posterUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQAMKY5WhjWrB_C3x6QDricgG-DOU_3eEPP_A&s',
-                videoType: 'embed'
-            },
-            {
-                id: '9',
-                titleEn: 'Wrong Turn 3',
-                titleAr: 'اwrong turn 3',
-                year: '2009',
-                lang: 'both',
-                videoUrl: 'https://www.vidspeeds.com:2096/embed-monjpwuamt28.html',
-                posterUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRN2hmSTr9sG-_WsN6O6uoDVGfP_2ojwowenA&s',
-                videoType: 'embed'
-            },
-            {
-                id: '10',
-                titleEn: 'Wrong Turn 5',
-                titleAr: 'اwrong turn 5',
-                year: '2012',
-                lang: 'both',
-                videoUrl: 'https://www.vidspeeds.com/embed-8m4njt9wesmn.html',
-                posterUrl: 'https://static0.srcdn.com/wordpress/wp-content/uploads/2020/01/Wrong-Turn-5-Bloodlines-Borislav-Iliev.jpg',
-                videoType: 'embed'
-            },
-            {
-                id: '11',
-                titleEn: 'Wrong Turn 4',
-                titleAr: 'اwrong turn 4',
-                year: '2011',
-                lang: 'both',
-                videoUrl: 'https://www.vidspeeds.com/embed-8nmzicw74unq.html',
-                posterUrl: 'https://static0.moviewebimages.com/wordpress/wp-content/uploads/photo/lb8mOLS8SpuquyTQdZUAGg8DBZXcFd.jpg',
-                videoType: 'embed'
-            },
-            {
-                id: '12',
-                titleEn: 'Wrong Turn 6',
-                titleAr: 'اwrong turn 6',
-                year: '2014',
-                lang: 'both',
-                videoUrl: 'https://www.vidspeeds.com/embed-f44xlupx7k7c.html',
-                posterUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQqMD7hsLw8uQL7xii6h-uASbVpcjLh7RaPeQ&s',
-                videoType: 'embed'
-            },
-            {
-                id: '13',
-                titleEn: 'Dont Breathe 1',
-                titleAr: 'اDont Breathe 1',
-                year: '2016',
-                lang: 'both',
-                videoUrl: 'https://www.vidroba.com:2053/embed-cl7yuevr3fxt.html',
-                posterUrl: 'https://vid.mycima.cc/uploads/thumbs/835d46567-1.jpg',
-                videoType: 'embed'
-            },
-            {
-                id: '14',
-                titleEn: 'Swallow 2019',
-                titleAr: 'اSwallow 2019',
-                year: '2019',
-                lang: 'both',
-                videoUrl: 'https://www.vidspeeds.com/embed-8yw1rdmk00la.html',
-                posterUrl: 'https://wecima.ahwaktv.net/uploads/thumbs/cd86f36fc-1.jpg',
-                videoType: 'embed'
-            },
-            {
-                id: '15',
-                titleEn: 'The Church 2018',
-                titleAr: 'اThe Church 2018',
-                year: '2018',
-                lang: 'both',
-                videoUrl: 'https://ok.ru/videoembed/1980799388369',
-                posterUrl: 'https://m.media-amazon.com/images/M/MV5BZWY3ZTViMDUtNzhiYy00MGZiLWIzZDgtOWJlZGRmMTA3MmQ1XkEyXkFqcGc@._V1_.jpg',
-                videoType: 'embed'
-            },
-            {
-                id: '16',
-                titleEn: 'The Cell 2016',
-                titleAr: 'اThe Cell 2016',
-                year: '2016',
-                lang: 'both',
-                videoUrl: 'https://www.vidspeeds.com/embed-iu544n3bv96x.html',
-                posterUrl: 'https://wecima.ahwaktv.net/uploads/thumbs/2fe22bb8d-1.jpg',
-                videoType: 'embed'
-            },
-            {
-                id: '17',
-                titleEn: 'Wrong Turn 7',
-                titleAr: 'wrong turn 7',
-                year: '2021',
-                lang: 'both',
-                videoUrl: 'https://www.yourupload.com/embed/7u1j55y84ND1',
-                posterUrl: 'https://s1.dmcdn.net/v/YpVWu1eZMI81iEX_m/x720',
-                videoType: 'embed'
-            },
-            {
-                id: '18',
-                titleEn: 'Wij 2018',
-                titleAr: 'wij 2018',
-                year: '2018',
-                lang: 'both',
-                videoUrl: 'https://f75s.com/d/c23b7zb8ihm1',
-                posterUrl: 'https://horrornews.net/wp-content/uploads/2020/02/We-Wij-movie-2018-Rene-Eller-9-550x330.jpg',
-                videoType: 'embed'
-            },
-            {
-                id: '19',
-                titleEn: 'Tale Of Tales 2015',
-                titleAr: 'tale of tales 2015',
-                year: '2015',
-                lang: 'both',
-                videoUrl: 'https://www.vidspeeds.com/embed-f1cyojqniqke.html',
-                posterUrl: 'https://wecima.ahwaktv.net/uploads/thumbs/2254c5a17-1.jpg',
-                videoType: 'embed'
-            },
-            {
-                id: '20',
-                titleEn: 'Dolly',
-                titleAr: 'dolly',
-                year: '2015',
-                lang: 'both',
-                videoUrl: 'https://wwa.liiivideo.com/embed-23728r5ffeys.html',
-                posterUrl: 'https://m.qfilm.tv/uploads/thumbs/41a8d1c28-1.jpg',
-                videoType: 'embed'
-            },
-            {
-                id: '21',
-                titleEn: 'Matriarch 2022',
-                titleAr: 'matriarch 2022',
-                year: '2022',
-                lang: 'both',
-                videoUrl: 'https://mp4plus.org/embed-m42acnjmauzk.html',
-                posterUrl: 'https://c.ifushaar.com/wp-content/uploads/2022/10/Matriarch-2022-640x360.jpg',
-                videoType: 'embed'
-            },
-            {
-                id: '22',
-                titleEn: 'Project Power',
-                titleAr: 'project power',
-                year: '2022',
-                lang: 'both',
-                videoUrl: 'https://www.vidspeeds.com:2053/embed-ynpeomgoimd0.html',
-                posterUrl: 'https://cimalina.live/wp-content/uploads/2020/07/Ashampoo_Snap_2020.07.22_14h26m25s_004_.png',
-                videoType: 'embed'
-            },
-            {
-                id: '23',
-                titleEn: 'The Bluff',
-                titleAr: 'the bluff',
-                year: '2026',
-                lang: 'both',
-                videoUrl: 'https://akhbarworld.online?mycimafsd=aHR0cHM6Ly9mYXN0dmlwLnNwYWNlL2UvMThkNmh2NGdiZnd4',
-                posterUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTsfyDblS3C8hIFOAncOScvVvbSocwx6LBMrYlUHR-vOUrS6BgoXI6dce0-&s=10',
-                videoType: 'embed'
-            },
-            {
-                id: '24',
-                titleEn: 'Battelship',
-                titleAr: 'battelship',
-                year: '2012',
-                lang: 'both',
-                videoUrl: 'https://www.vidspeeds.com:2053/embed-npc2a7wsxlxe.html',
-                posterUrl: 'https://i.ebayimg.com/images/g/X38AAMXQOT5Q9sJg/s-l1200.jpg',
-                videoType: 'embed'
-            },
-            {
-                id: '25',
-                titleEn: 'The Tit and The Moon',
-                titleAr: 'the tit and the moon',
-                year: '1994',
-                lang: 'both',
-                videoUrl: 'https://1vid.xyz/embed-22j2p3yqh9jp.html',
-                posterUrl: 'https://qfilm.tv/uploads/thumbs/06ac5dc0d-1.jpg',
-                videoType: 'embed'
-            },
-            {
-                id: '26',
-                titleEn: 'furioza 1',
-                titleAr: 'furioza 1',
-                year: '2021',
-                lang: 'both',
-                videoUrl: 'https://filemoon.sx/e/k6vmiyxvixrm',
-                posterUrl: 'https://tv.halabieh.com/uploads/thumbs/3ee27f2b5-1.jpg',
-                videoType: 'embed'
-            },
-            {
-                id: '27',
-                titleEn: 'Furioza 2',
-                titleAr: 'Furioza 2',
-                year: '2025',
-                lang: 'both',
-                videoUrl: 'https:\/\/egybestvid.com\/embed-7e1at1fsj28e.html',
-                posterUrl: 'https:\/\/image.tmdb.org\/t\/p\/original\/yOLnV1lM3NuMsgYwIhz454fQRgt.jpg',
-                videoType: 'embed'
-            },
-            {
-                id: '28',
-                titleEn: 'The Forever Purge',
-                titleAr: 'the forever purge',
-                year: '2021',
-                lang: 'both',
-                videoUrl: 'https://krdline.shafilm.vip/ShaSorani/Movie/The.Forever.Purge.2021.1080p.Webrip.Sorani.mp4',
-                posterUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSNEH6BvUrpwWAcMDOHqTqulLxHKC6nYfAGVx1Tq10aE9qZA0x_l2MZdwei&s=10',
-                videoType: 'embed'
-            },
-            {
-                id: '29',
-                titleEn: 'Evil Dead 2023',
-                titleAr: 'evil dead 2023',
-                year: '2023',
-                lang: 'both',
-                videoUrl: 'https://uqload.net/embed-uvc954a1ktz9.html',
-                posterUrl: 'https://wecima.ahwaktv.net/uploads/thumbs/a945469f0-1.jpg',
-                videoType: 'embed'
-            },
-            {
-                id: '30',
-                titleEn: 'Evil Dead 2013',
-                titleAr: 'evil dead 2013',
-                year: '2013',
-                lang: 'both',
-                videoUrl: 'https://uqload.net/embed-th7phxs8urvh.html',
-                posterUrl: 'https://tye.ahwaktv.net/uploads/thumbs/5b1918b02-1.jpg',
-                videoType: 'embed'
-            },
-            {
-                id: '31',
-                titleEn: 'Evil Dead 1986',
-                titleAr: 'evil dead 1986',
-                year: '1986',
-                lang: 'both',
-                videoUrl: 'https://uqload.net/embed-1afxc1464avr.html',
-                posterUrl: 'https://tye.ahwaktv.net/uploads/thumbs/067ebc930-1.jpg',
-                videoType: 'embed'
-            },
-            {
-                id: '32',
-                titleEn: 'Evil Dead 1981',
-                titleAr: 'evil dead 1981',
-                year: '1981',
-                lang: 'both',
-                videoUrl: 'https://uqload.net/embed-af95js8wixyz.html',
-                posterUrl: 'https://tye.ahwaktv.net/uploads/thumbs/520de226f-1.jpg',
-                videoType: 'embed'
-            },
-            {
-                id: '33',
-                titleEn: 'Maniac 2012',
-                titleAr: 'maniac 2012',
-                year: '2012',
-                lang: 'both',
-                videoUrl: 'https://www.vidspeeds.com:2096/embed-crhuszg4fmzs.html',
-                posterUrl: 'https://yam.ahwaktv.net/uploads/thumbs/bcdc73f20-1.jpg',
-                videoType: 'embed'
-            },
-            {
-                id: '34',
-                titleEn: 'i Saw The Devil',
-                titleAr: 'i saw the devil',
-                year: '2010',
-                lang: 'both',
-                videoUrl: 'https://www.vidspeeds.com/embed-zoiqylr8wg1x.html',
-                posterUrl: 'https://wecima.ahwaktv.net/uploads/thumbs/8f641f3b9-1.jpg',
-                videoType: 'embed'
-            },
-            {
-                id: '35',
-                titleEn: 'into The Blue 2005',
-                titleAr: 'into the blue 2005',
-                year: '2005',
-                lang: 'both',
-                videoUrl: 'https://www.vidspeeds.com:2096/embed-drvc3rgtoxr9.html',
-                posterUrl: 'https://pic.bstarstatic.com/ugc/106fde4135d761ac359d2ae41b57125c.jpg',
-                videoType: 'embed'
-            },
-            {
-                id: '36',
-                titleEn: 'Cabin Fever 2002',
-                titleAr: 'cabin fever 2002',
-                year: '2002',
-                lang: 'both',
-                videoUrl: 'https://www.vidspeeds.com:2096/embed-osgs8kofrnpt.html',
-                posterUrl: 'https://dal.ahwaktv.net/uploads/thumbs/af65ba1b6-1.jpg',
-                videoType: 'embed'
-            },
-            {
-                id: '37',
-                titleEn: 'Cabin Fever 2009',
-                titleAr: 'cabin fever 2009',
-                year: '2009',
-                lang: 'both',
-                videoUrl: 'https://www.vidspeeds.com:2096/embed-g7jrvzd1qn45.html',
-                posterUrl: 'https://wecima.ahwaktv.net/uploads/thumbs/a7d1dbfb0-1.jpg',
-                videoType: 'embed'
-            },
-            {
-                id: '38',
-                titleEn: 'Cabin Fever 2014',
-                titleAr: 'cabin fever 2014',
-                year: '2014',
-                lang: 'both',
-                videoUrl: 'https://www.vidspeeds.com:2096/embed-ch892oecfihh.html',
-                posterUrl: 'https://yam.ahwaktv.net/uploads/thumbs/36f2fe49c-1.jpg',
-                videoType: 'embed'
-            },
-            {
-                id: '39',
-                titleEn: 'Cabin Fever 2016',
-                titleAr: 'cabin fever 2016',
-                year: '2016',
-                lang: 'both',
-                videoUrl: 'https://www.vidspeeds.com:2096/embed-ch892oecfihh.html',
-                posterUrl: 'https://yam.ahwaktv.net/uploads/thumbs/d676d09e4-1.jpg',
-                videoType: 'embed'
-            }
+            { id: '1', titleEn: 'The Aftermath 2019', titleAr: 'ما بعد الأحداث ٢٠١٩', year: '2024', lang: 'both', videoUrl: 'https://www.vidspeeds.com/embed-1yjmv1iiev42.html', posterUrl: 'https://observer.com/wp-content/uploads/sites/2/2019/03/aftermath-dom-ta_03670_rgb-1.jpg', videoType: 'embed' },
+            { id: '2', titleEn: 'The Aftermath 2024', titleAr: 'الرجل التالي ٢٠٢٤', year: '2022', lang: 'both', videoUrl: 'https://1vid.xyz/embed-da6da2wutmc9.html', posterUrl: 'https://upload.wikimedia.org/wikipedia/en/1/13/Aftermath2024.jpg', videoType: 'embed' },
+            { id: '3', titleEn: '7G 2024', titleAr: 'مشاهدة فلم ٥جي', year: '2023', lang: 'both', videoUrl: 'https://vk.com/video_ext.php?oid=745497736&id=456242418&hash=48fcf213e4fa140d', posterUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgJ_PpLsEjZRoNh86YY9mlAl3AjJtoN_FwLmzCAZyNKA&s=10', videoType: 'embed' },
+            { id: '4', titleEn: 'Terrifier 2017', titleAr: 'الموت المرعب', year: '2023', lang: 'both', videoUrl: 'https://www.vidspeeds.com/embed-xezpn5cajs17.html', posterUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlHm-l8u9zAAO6KaeKey1Ivy7L-C5H7ksmTvmYUIByjw&s=10', videoType: 'embed' },
+            { id: '5', titleEn: 'Fear Farm 2022', titleAr: 'مزرعة الرعب', year: '2023', lang: 'both', videoUrl: 'https://uqload.net/embed-yi9l18v525t2.html', posterUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQIWWgz8DbkZO0q0DnBNOnT8Nrfl3Iu1v8ffMw1IBK21A&s=10', videoType: 'embed' },
+            { id: '6', titleEn: 'The Farm 2', titleAr: 'المزرعة ٢', year: '2023', lang: 'both', videoUrl: 'https://www.vidspeeds.com:2053/embed-w5z4zj4uierg.html', posterUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZmJeEAwshSOGtgXa5ffL_nylq63WNw0RpcP496IkdRQ&s=10', videoType: 'embed' },
+            { id: '7', titleEn: 'Wrong Turn 2', titleAr: 'اwrong turn 2', year: '2007', lang: 'both', videoUrl: 'https://vidspeed.org/embed-wv56vclm9ofb.html', posterUrl: 'https://i.ytimg.com/vi/uHhO3z4Cw7A/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLCKrKhTDf-Uw4gEyNdYrQATV1TuvQ', videoType: 'embed' },
+            { id: '8', titleEn: 'Wrong Turn 1', titleAr: 'اwrong turn 1', year: '2003', lang: 'both', videoUrl: 'https://vidspeed.org/embed-zqjlljw9twxl.html', posterUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQAMKY5WhjWrB_C3x6QDricgG-DOU_3eEPP_A&s', videoType: 'embed' },
+            { id: '9', titleEn: 'Wrong Turn 3', titleAr: 'اwrong turn 3', year: '2009', lang: 'both', videoUrl: 'https://www.vidspeeds.com:2096/embed-monjpwuamt28.html', posterUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRN2hmSTr9sG-_WsN6O6uoDVGfP_2ojwowenA&s', videoType: 'embed' },
+            { id: '10', titleEn: 'Wrong Turn 5', titleAr: 'اwrong turn 5', year: '2012', lang: 'both', videoUrl: 'https://www.vidspeeds.com/embed-8m4njt9wesmn.html', posterUrl: 'https://static0.srcdn.com/wordpress/wp-content/uploads/2020/01/Wrong-Turn-5-Bloodlines-Borislav-Iliev.jpg', videoType: 'embed' },
+            { id: '11', titleEn: 'Wrong Turn 4', titleAr: 'اwrong turn 4', year: '2011', lang: 'both', videoUrl: 'https://www.vidspeeds.com/embed-8nmzicw74unq.html', posterUrl: 'https://static0.moviewebimages.com/wordpress/wp-content/uploads/photo/lb8mOLS8SpuquyTQdZUAGg8DBZXcFd.jpg', videoType: 'embed' },
+            { id: '12', titleEn: 'Wrong Turn 6', titleAr: 'اwrong turn 6', year: '2014', lang: 'both', videoUrl: 'https://www.vidspeeds.com/embed-f44xlupx7k7c.html', posterUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQqMD7hsLw8uQL7xii6h-uASbVpcjLh7RaPeQ&s', videoType: 'embed' },
+            { id: '13', titleEn: 'Dont Breathe 1', titleAr: 'اDont Breathe 1', year: '2016', lang: 'both', videoUrl: 'https://www.vidroba.com:2053/embed-cl7yuevr3fxt.html', posterUrl: 'https://vid.mycima.cc/uploads/thumbs/835d46567-1.jpg', videoType: 'embed' },
+            { id: '14', titleEn: 'Swallow 2019', titleAr: 'اSwallow 2019', year: '2019', lang: 'both', videoUrl: 'https://www.vidspeeds.com/embed-8yw1rdmk00la.html', posterUrl: 'https://wecima.ahwaktv.net/uploads/thumbs/cd86f36fc-1.jpg', videoType: 'embed' },
+            { id: '15', titleEn: 'The Church 2018', titleAr: 'اThe Church 2018', year: '2018', lang: 'both', videoUrl: 'https://ok.ru/videoembed/1980799388369', posterUrl: 'https://m.media-amazon.com/images/M/MV5BZWY3ZTViMDUtNzhiYy00MGZiLWIzZDgtOWJlZGRmMTA3MmQ1XkEyXkFqcGc@._V1_.jpg', videoType: 'embed' },
+            { id: '16', titleEn: 'The Cell 2016', titleAr: 'اThe Cell 2016', year: '2016', lang: 'both', videoUrl: 'https://www.vidspeeds.com/embed-iu544n3bv96x.html', posterUrl: 'https://wecima.ahwaktv.net/uploads/thumbs/2fe22bb8d-1.jpg', videoType: 'embed' },
+            { id: '17', titleEn: 'Wrong Turn 7', titleAr: 'wrong turn 7', year: '2021', lang: 'both', videoUrl: 'https://www.yourupload.com/embed/7u1j55y84ND1', posterUrl: 'https://s1.dmcdn.net/v/YpVWu1eZMI81iEX_m/x720', videoType: 'embed' },
+            { id: '18', titleEn: 'Wij 2018', titleAr: 'wij 2018', year: '2018', lang: 'both', videoUrl: 'https://f75s.com/d/c23b7zb8ihm1', posterUrl: 'https://horrornews.net/wp-content/uploads/2020/02/We-Wij-movie-2018-Rene-Eller-9-550x330.jpg', videoType: 'embed' },
+            { id: '19', titleEn: 'Tale Of Tales 2015', titleAr: 'tale of tales 2015', year: '2015', lang: 'both', videoUrl: 'https://www.vidspeeds.com/embed-f1cyojqniqke.html', posterUrl: 'https://wecima.ahwaktv.net/uploads/thumbs/2254c5a17-1.jpg', videoType: 'embed' },
+            { id: '20', titleEn: 'Dolly', titleAr: 'dolly', year: '2015', lang: 'both', videoUrl: 'https://wwa.liiivideo.com/embed-23728r5ffeys.html', posterUrl: 'https://m.qfilm.tv/uploads/thumbs/41a8d1c28-1.jpg', videoType: 'embed' },
+            { id: '21', titleEn: 'Matriarch 2022', titleAr: 'matriarch 2022', year: '2022', lang: 'both', videoUrl: 'https://mp4plus.org/embed-m42acnjmauzk.html', posterUrl: 'https://c.ifushaar.com/wp-content/uploads/2022/10/Matriarch-2022-640x360.jpg', videoType: 'embed' },
+            { id: '22', titleEn: 'Project Power', titleAr: 'project power', year: '2022', lang: 'both', videoUrl: 'https://www.vidspeeds.com:2053/embed-ynpeomgoimd0.html', posterUrl: 'https://cimalina.live/wp-content/uploads/2020/07/Ashampoo_Snap_2020.07.22_14h26m25s_004_.png', videoType: 'embed' },
+            { id: '23', titleEn: 'The Bluff', titleAr: 'the bluff', year: '2026', lang: 'both', videoUrl: 'https://akhbarworld.online?mycimafsd=aHR0cHM6Ly9mYXN0dmlwLnNwYWNlL2UvMThkNmh2NGdiZnd4', posterUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTsfyDblS3C8hIFOAncOScvVvbSocwx6LBMrYlUHR-vOUrS6BgoXI6dce0-&s=10', videoType: 'embed' },
+            { id: '24', titleEn: 'Battelship', titleAr: 'battelship', year: '2012', lang: 'both', videoUrl: 'https://www.vidspeeds.com:2053/embed-npc2a7wsxlxe.html', posterUrl: 'https://i.ebayimg.com/images/g/X38AAMXQOT5Q9sJg/s-l1200.jpg', videoType: 'embed' },
+            { id: '25', titleEn: 'The Tit and The Moon', titleAr: 'the tit and the moon', year: '1994', lang: 'both', videoUrl: 'https://1vid.xyz/embed-22j2p3yqh9jp.html', posterUrl: 'https://qfilm.tv/uploads/thumbs/06ac5dc0d-1.jpg', videoType: 'embed' },
+            { id: '26', titleEn: 'furioza 1', titleAr: 'furioza 1', year: '2021', lang: 'both', videoUrl: 'https://filemoon.sx/e/k6vmiyxvixrm', posterUrl: 'https://tv.halabieh.com/uploads/thumbs/3ee27f2b5-1.jpg', videoType: 'embed' },
+            { id: '27', titleEn: 'Furioza 2', titleAr: 'Furioza 2', year: '2025', lang: 'both', videoUrl: 'https:\/\/egybestvid.com\/embed-7e1at1fsj28e.html', posterUrl: 'https:\/\/image.tmdb.org\/t\/p\/original\/yOLnV1lM3NuMsgYwIhz454fQRgt.jpg', videoType: 'embed' },
+            { id: '28', titleEn: 'The Forever Purge', titleAr: 'the forever purge', year: '2021', lang: 'both', videoUrl: 'https://krdline.shafilm.vip/ShaSorani/Movie/The.Forever.Purge.2021.1080p.Webrip.Sorani.mp4', posterUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSNEH6BvUrpwWAcMDOHqTqulLxHKC6nYfAGVx1Tq10aE9qZA0x_l2MZdwei&s=10', videoType: 'embed' },
+            { id: '29', titleEn: 'Evil Dead 2023', titleAr: 'evil dead 2023', year: '2023', lang: 'both', videoUrl: 'https://uqload.net/embed-uvc954a1ktz9.html', posterUrl: 'https://wecima.ahwaktv.net/uploads/thumbs/a945469f0-1.jpg', videoType: 'embed' },
+            { id: '30', titleEn: 'Evil Dead 2013', titleAr: 'evil dead 2013', year: '2013', lang: 'both', videoUrl: 'https://uqload.net/embed-th7phxs8urvh.html', posterUrl: 'https://tye.ahwaktv.net/uploads/thumbs/5b1918b02-1.jpg', videoType: 'embed' },
+            { id: '31', titleEn: 'Evil Dead 1986', titleAr: 'evil dead 1986', year: '1986', lang: 'both', videoUrl: 'https://uqload.net/embed-1afxc1464avr.html', posterUrl: 'https://tye.ahwaktv.net/uploads/thumbs/067ebc930-1.jpg', videoType: 'embed' },
+            { id: '32', titleEn: 'Evil Dead 1981', titleAr: 'evil dead 1981', year: '1981', lang: 'both', videoUrl: 'https://uqload.net/embed-af95js8wixyz.html', posterUrl: 'https://tye.ahwaktv.net/uploads/thumbs/520de226f-1.jpg', videoType: 'embed' },
+            { id: '33', titleEn: 'Maniac 2012', titleAr: 'maniac 2012', year: '2012', lang: 'both', videoUrl: 'https://www.vidspeeds.com:2096/embed-crhuszg4fmzs.html', posterUrl: 'https://yam.ahwaktv.net/uploads/thumbs/bcdc73f20-1.jpg', videoType: 'embed' },
+            { id: '34', titleEn: 'i Saw The Devil', titleAr: 'i saw the devil', year: '2010', lang: 'both', videoUrl: 'https://www.vidspeeds.com/embed-zoiqylr8wg1x.html', posterUrl: 'https://wecima.ahwaktv.net/uploads/thumbs/8f641f3b9-1.jpg', videoType: 'embed' },
+            { id: '35', titleEn: 'into The Blue 2005', titleAr: 'into the blue 2005', year: '2005', lang: 'both', videoUrl: 'https://www.vidspeeds.com:2096/embed-drvc3rgtoxr9.html', posterUrl: 'https://pic.bstarstatic.com/ugc/106fde4135d761ac359d2ae41b57125c.jpg', videoType: 'embed' },
+            { id: '36', titleEn: 'Cabin Fever 2002', titleAr: 'cabin fever 2002', year: '2002', lang: 'both', videoUrl: 'https://www.vidspeeds.com:2096/embed-osgs8kofrnpt.html', posterUrl: 'https://dal.ahwaktv.net/uploads/thumbs/af65ba1b6-1.jpg', videoType: 'embed' },
+            { id: '37', titleEn: 'Cabin Fever 2009', titleAr: 'cabin fever 2009', year: '2009', lang: 'both', videoUrl: 'https://www.vidspeeds.com:2096/embed-g7jrvzd1qn45.html', posterUrl: 'https://wecima.ahwaktv.net/uploads/thumbs/a7d1dbfb0-1.jpg', videoType: 'embed' },
+            { id: '38', titleEn: 'Cabin Fever 2014', titleAr: 'cabin fever 2014', year: '2014', lang: 'both', videoUrl: 'https://www.vidspeeds.com:2096/embed-ch892oecfihh.html', posterUrl: 'https://yam.ahwaktv.net/uploads/thumbs/36f2fe49c-1.jpg', videoType: 'embed' },
+            { id: '39', titleEn: 'Cabin Fever 2016', titleAr: 'cabin fever 2016', year: '2016', lang: 'both', videoUrl: 'https://www.vidspeeds.com:2096/embed-ch892oecfihh.html', posterUrl: 'https://yam.ahwaktv.net/uploads/thumbs/d676d09e4-1.jpg', videoType: 'embed' }
         ];
+
+        // ----- WATCH COUNTER (VIEWS) PERSISTENCE -----
+        // Load saved views from localStorage, keyed by movie id
+        function loadStoredViews() {
+            const stored = localStorage.getItem('badini_movie_views');
+            if (stored) {
+                try {
+                    const viewsMap = JSON.parse(stored);
+                    for (let movie of movies) {
+                        if (viewsMap[movie.id] !== undefined) {
+                            movie.views = viewsMap[movie.id];
+                        } else {
+                            movie.views = 0;
+                        }
+                    }
+                } catch(e) { console.warn(e); }
+            } else {
+                // Initialize all movies with 0 views
+                for (let movie of movies) movie.views = 0;
+            }
+        }
+        
+        // Save current views to localStorage
+        function persistViews() {
+            const viewsMap = {};
+            for (let movie of movies) {
+                viewsMap[movie.id] = movie.views;
+            }
+            localStorage.setItem('badini_movie_views', JSON.stringify(viewsMap));
+        }
+        
+        // Increment watch count for a specific movie and update storage
+        function incrementWatchCount(movieId) {
+            const movie = movies.find(m => m.id === movieId);
+            if (movie) {
+                movie.views = (movie.views || 0) + 1;
+                persistViews();
+                return true;
+            }
+            return false;
+        }
+        
+        // Call this after modifying any movie views (to keep UI in sync)
+        // We'll also use it on initial load
 
         // DOM elements
         const moviesGrid = document.getElementById('moviesGrid');
@@ -939,7 +651,6 @@
 
         // Helper: Filter movies by search + language/filter
         function getFilteredMovies() {
-            // First apply language/filter
             let filtered = movies.filter(movie => {
                 if (currentFilter === 'all') return true;
                 if (currentFilter === 'en') return movie.lang === 'en' || movie.lang === 'both';
@@ -947,7 +658,6 @@
                 return true;
             });
             
-            // Then apply search query (case-insensitive, matches English title OR Arabic title)
             if (currentSearchQuery.trim() !== '') {
                 const query = currentSearchQuery.trim().toLowerCase();
                 filtered = filtered.filter(movie => {
@@ -959,8 +669,7 @@
             return filtered;
         }
 
-        // Update search stats UI
-        function updateSearchStats(visibleCount, totalBeforeSearch) {
+        function updateSearchStats(visibleCount) {
             if (currentSearchQuery.trim() === '') {
                 searchStats.innerHTML = '';
                 return;
@@ -971,7 +680,6 @@
             searchStats.innerHTML = resultText;
         }
 
-        // simple escape for safety
         function escapeHtml(str) {
             return str.replace(/[&<>]/g, function(m) {
                 if (m === '&') return '&amp;';
@@ -981,7 +689,7 @@
             });
         }
 
-        // Render movies grid based on current filters + search
+        // Render movies grid with view counters
         function renderMovies() {
             const filteredMovies = getFilteredMovies();
             
@@ -993,7 +701,6 @@
                         <p>${currentLanguage === 'en' ? 'Try adjusting your search or filter.' : 'حاول تعديل البحث أو التصفية.'}</p>
                     </div>
                 `;
-                // update stats for zero results
                 if (currentSearchQuery.trim() !== '') {
                     searchStats.innerHTML = currentLanguage === 'en' 
                         ? `No movies found for "${escapeHtml(currentSearchQuery)}"`
@@ -1004,18 +711,12 @@
                 return;
             }
 
-            // For stats: total before search (just filter)
-            const beforeSearchFiltered = movies.filter(movie => {
-                if (currentFilter === 'all') return true;
-                if (currentFilter === 'en') return movie.lang === 'en' || movie.lang === 'both';
-                if (currentFilter === 'ar') return movie.lang === 'ar' || movie.lang === 'both';
-                return true;
-            });
-            updateSearchStats(filteredMovies.length, beforeSearchFiltered.length);
+            updateSearchStats(filteredMovies.length);
             
             moviesGrid.innerHTML = filteredMovies.map(movie => {
                 const displayTitle = currentLanguage === 'ar' ? movie.titleAr : movie.titleEn;
                 const langClass = movie.lang === 'ar' ? 'ar' : (movie.lang === 'both' ? 'both' : 'en');
+                const views = movie.views || 0;
                 
                 return `
                     <div class="movie-card" onclick="playMovie('${movie.id}')">
@@ -1034,6 +735,9 @@
                                 <span class="lang-badge ${langClass}">
                                     ${movie.lang === 'en' ? 'EN' : movie.lang === 'ar' ? 'AR' : 'EN/AR'}
                                 </span>
+                                <span class="watch-counter">
+                                    <i class="fas fa-eye"></i> ${views}
+                                </span>
                                 <i class="fas fa-video" style="color:#4CAF50;" title="video available"></i>
                             </div>
                         </div>
@@ -1042,18 +746,23 @@
             }).join('');
         }
 
-        // Play movie function
+        // Play movie function with watch count increment
         window.playMovie = function(movieId) {
             const movie = movies.find(m => m.id === movieId);
             if (!movie || !movie.videoUrl) {
                 alert('No video available for this film yet.');
                 return;
             }
-
+            
+            // --- INCREMENT WATCH COUNTER ---
+            incrementWatchCount(movieId);
+            // Immediately re-render to reflect updated count
+            renderMovies();
+            
+            // Open modal and play
             modal.classList.add('active');
             modalMovieTitle.textContent = currentLanguage === 'ar' ? movie.titleAr : movie.titleEn;
             
-            // Hide native video element, show iframe
             modalVideo.style.display = 'none';
             modalVideo.pause();
             modalVideo.src = '';
@@ -1124,15 +833,14 @@
         searchInput.addEventListener('input', handleSearchInput);
         clearSearchBtn.addEventListener('click', clearSearch);
         
-        // Escape key to clear search optionally? but we just close modal too.
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape' && modal.classList.contains('active')) {
                 closeModal.click();
             }
-            // optional: if user presses Escape on search, we could blur but not needed
         });
 
-        // Initial render
+        // --- INITIALIZE VIEWS FROM STORAGE AND RENDER ---
+        loadStoredViews();
         renderMovies();
     })();
 </script>

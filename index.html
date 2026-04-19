@@ -440,6 +440,12 @@
             flex-wrap: wrap;
         }
 
+        /* loading overlay for counters */
+        .view-loading {
+            opacity: 0.7;
+            font-style: italic;
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             .container {
@@ -530,7 +536,11 @@
 
 <script>
     (function() {
-        // Movie database with proper EMBED URLs
+        // ------------------------------------------------------------------
+        // MOVIE DATABASE (all films with unique IDs)
+        // Each film now includes a GLOBAL VIEW COUNTER via CountAPI
+        // All visitors see the same viewer counts, synced across the world
+        // ------------------------------------------------------------------
         let movies = [
             { id: '1', titleEn: 'The Aftermath 2019', titleAr: 'ما بعد الأحداث ٢٠١٩', year: '2024', lang: 'both', videoUrl: 'https://www.vidspeeds.com/embed-1yjmv1iiev42.html', posterUrl: 'https://observer.com/wp-content/uploads/sites/2/2019/03/aftermath-dom-ta_03670_rgb-1.jpg', videoType: 'embed' },
             { id: '2', titleEn: 'The Aftermath 2024', titleAr: 'الرجل التالي ٢٠٢٤', year: '2022', lang: 'both', videoUrl: 'https://1vid.xyz/embed-da6da2wutmc9.html', posterUrl: 'https://upload.wikimedia.org/wikipedia/en/1/13/Aftermath2024.jpg', videoType: 'embed' },
@@ -558,7 +568,7 @@
             { id: '24', titleEn: 'Battelship', titleAr: 'battelship', year: '2012', lang: 'both', videoUrl: 'https://www.vidspeeds.com:2053/embed-npc2a7wsxlxe.html', posterUrl: 'https://i.ebayimg.com/images/g/X38AAMXQOT5Q9sJg/s-l1200.jpg', videoType: 'embed' },
             { id: '25', titleEn: 'The Tit and The Moon', titleAr: 'the tit and the moon', year: '1994', lang: 'both', videoUrl: 'https://1vid.xyz/embed-22j2p3yqh9jp.html', posterUrl: 'https://qfilm.tv/uploads/thumbs/06ac5dc0d-1.jpg', videoType: 'embed' },
             { id: '26', titleEn: 'furioza 1', titleAr: 'furioza 1', year: '2021', lang: 'both', videoUrl: 'https://filemoon.sx/e/k6vmiyxvixrm', posterUrl: 'https://tv.halabieh.com/uploads/thumbs/3ee27f2b5-1.jpg', videoType: 'embed' },
-            { id: '27', titleEn: 'Furioza 2', titleAr: 'Furioza 2', year: '2025', lang: 'both', videoUrl: 'https:\/\/egybestvid.com\/embed-7e1at1fsj28e.html', posterUrl: 'https:\/\/image.tmdb.org\/t\/p\/original\/yOLnV1lM3NuMsgYwIhz454fQRgt.jpg', videoType: 'embed' },
+            { id: '27', titleEn: 'Furioza 2', titleAr: 'Furioza 2', year: '2025', lang: 'both', videoUrl: 'https://egybestvid.com/embed-7e1at1fsj28e.html', posterUrl: 'https://image.tmdb.org/t/p/original/yOLnV1lM3NuMsgYwIhz454fQRgt.jpg', videoType: 'embed' },
             { id: '28', titleEn: 'The Forever Purge', titleAr: 'the forever purge', year: '2021', lang: 'both', videoUrl: 'https://krdline.shafilm.vip/ShaSorani/Movie/The.Forever.Purge.2021.1080p.Webrip.Sorani.mp4', posterUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSNEH6BvUrpwWAcMDOHqTqulLxHKC6nYfAGVx1Tq10aE9qZA0x_l2MZdwei&s=10', videoType: 'embed' },
             { id: '29', titleEn: 'Evil Dead 2023', titleAr: 'evil dead 2023', year: '2023', lang: 'both', videoUrl: 'https://uqload.net/embed-uvc954a1ktz9.html', posterUrl: 'https://wecima.ahwaktv.net/uploads/thumbs/a945469f0-1.jpg', videoType: 'embed' },
             { id: '30', titleEn: 'Evil Dead 2013', titleAr: 'evil dead 2013', year: '2013', lang: 'both', videoUrl: 'https://uqload.net/embed-th7phxs8urvh.html', posterUrl: 'https://tye.ahwaktv.net/uploads/thumbs/5b1918b02-1.jpg', videoType: 'embed' },
@@ -571,52 +581,66 @@
             { id: '37', titleEn: 'Cabin Fever 2009', titleAr: 'cabin fever 2009', year: '2009', lang: 'both', videoUrl: 'https://www.vidspeeds.com:2096/embed-g7jrvzd1qn45.html', posterUrl: 'https://wecima.ahwaktv.net/uploads/thumbs/a7d1dbfb0-1.jpg', videoType: 'embed' },
             { id: '38', titleEn: 'Cabin Fever 2014', titleAr: 'cabin fever 2014', year: '2014', lang: 'both', videoUrl: 'https://ok.ru/videoembed/2374228511265', posterUrl: 'https://yam.ahwaktv.net/uploads/thumbs/36f2fe49c-1.jpg', videoType: 'embed' },
             { id: '39', titleEn: 'Cabin Fever 2016', titleAr: 'cabin fever 2016', year: '2016', lang: 'both', videoUrl: 'https://www.vidroba.com:2053/embed-hqbft8d9mvp7.html', posterUrl: 'https://yam.ahwaktv.net/uploads/thumbs/d676d09e4-1.jpg', videoType: 'embed' },
-         { id: '40', titleEn: 'Pandora', titleAr: 'pandora', year: '2016', lang: 'both', videoUrl: 'https://www.vidspeeds.com:2053/embed-wtf6a0syau0v.html', posterUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSch7ao2t0EfvRU0PvdNcSeXJrhMFVVL6uq2DZWLFFcU6A5p-dFOmAhMj0&s=10', videoType: 'embed' }
+            { id: '40', titleEn: 'Pandora', titleAr: 'pandora', year: '2016', lang: 'both', videoUrl: 'https://www.vidspeeds.com:2053/embed-wtf6a0syau0v.html', posterUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSch7ao2t0EfvRU0PvdNcSeXJrhMFVVL6uq2DZWLFFcU6A5p-dFOmAhMj0&s=10', videoType: 'embed' }
         ];
 
-        // ----- WATCH COUNTER (VIEWS) PERSISTENCE -----
-        // Load saved views from localStorage, keyed by movie id
-        function loadStoredViews() {
-            const stored = localStorage.getItem('badini_movie_views');
-            if (stored) {
-                try {
-                    const viewsMap = JSON.parse(stored);
-                    for (let movie of movies) {
-                        if (viewsMap[movie.id] !== undefined) {
-                            movie.views = viewsMap[movie.id];
-                        } else {
-                            movie.views = 0;
-                        }
-                    }
-                } catch(e) { console.warn(e); }
-            } else {
-                // Initialize all movies with 0 views
-                for (let movie of movies) movie.views = 0;
+        // ---------- GLOBAL VIEW COUNTER (shared across all visitors) using CountAPI ----------
+        const API_NAMESPACE = 'badini_mv';   // unique namespace for Badini movies
+
+        // Helper: fetch current view count for a movie ID from global API
+        async function fetchGlobalCount(movieId) {
+            try {
+                const res = await fetch(`https://api.countapi.xyz/get/${API_NAMESPACE}/${movieId}`);
+                if (!res.ok) throw new Error(`HTTP ${res.status}`);
+                const data = await res.json();
+                return data.value;   // number of views
+            } catch (err) {
+                console.warn(`Failed to fetch count for ${movieId}:`, err);
+                return null;
             }
         }
-        
-        // Save current views to localStorage
-        function persistViews() {
-            const viewsMap = {};
-            for (let movie of movies) {
-                viewsMap[movie.id] = movie.views;
+
+        // Helper: increment global counter for a movie ID, returns new count
+        async function incrementGlobalCount(movieId) {
+            try {
+                const res = await fetch(`https://api.countapi.xyz/hit/${API_NAMESPACE}/${movieId}`);
+                if (!res.ok) throw new Error(`HTTP ${res.status}`);
+                const data = await res.json();
+                return data.value;
+            } catch (err) {
+                console.warn(`Failed to increment count for ${movieId}:`, err);
+                return null;
             }
-            localStorage.setItem('badini_movie_views', JSON.stringify(viewsMap));
         }
-        
-        // Increment watch count for a specific movie and update storage
-        function incrementWatchCount(movieId) {
+
+        // Load all global counters into movies array (async)
+        async function loadAllGlobalCounters() {
+            const promises = movies.map(movie => fetchGlobalCount(movie.id));
+            const results = await Promise.allSettled(promises);
+            results.forEach((result, idx) => {
+                if (result.status === 'fulfilled' && result.value !== null) {
+                    movies[idx].views = result.value;
+                } else {
+                    movies[idx].views = 0;   // fallback to 0 if API fails
+                }
+            });
+            renderMovies();  // final render with real global counts
+        }
+
+        // Increment view for specific movie (global + local sync)
+        async function incrementAndUpdateCounter(movieId) {
             const movie = movies.find(m => m.id === movieId);
-            if (movie) {
+            if (!movie) return false;
+            const newGlobalCount = await incrementGlobalCount(movieId);
+            if (newGlobalCount !== null) {
+                movie.views = newGlobalCount;
+            } else {
+                // fallback: local increment only if API fails (but keep eventual consistency)
                 movie.views = (movie.views || 0) + 1;
-                persistViews();
-                return true;
             }
-            return false;
+            renderMovies();   // refresh UI with updated count
+            return true;
         }
-        
-        // Call this after modifying any movie views (to keep UI in sync)
-        // We'll also use it on initial load
 
         // DOM elements
         const moviesGrid = document.getElementById('moviesGrid');
@@ -626,8 +650,6 @@
         const modalMovieTitle = document.getElementById('modalMovieTitle');
         const filterBtns = document.querySelectorAll('.filter-btn');
         const videoContainer = document.getElementById('videoContainer');
-        
-        // Search elements
         const searchInput = document.getElementById('searchInput');
         const clearSearchBtn = document.getElementById('clearSearchBtn');
         const searchStats = document.getElementById('searchStats');
@@ -636,7 +658,7 @@
         let currentLanguage = 'en';
         let currentSearchQuery = '';
 
-        // Create iframe element (the embed player)
+        // Create embed iframe element
         let embedIframe = document.createElement('iframe');
         embedIframe.id = 'embedIframe';
         embedIframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
@@ -650,7 +672,7 @@
         embedIframe.setAttribute('mozallowfullscreen', 'true');
         videoContainer.appendChild(embedIframe);
 
-        // Helper: Filter movies by search + language/filter
+        // Filter + Search helpers
         function getFilteredMovies() {
             let filtered = movies.filter(movie => {
                 if (currentFilter === 'all') return true;
@@ -658,14 +680,12 @@
                 if (currentFilter === 'ar') return movie.lang === 'ar' || movie.lang === 'both';
                 return true;
             });
-            
             if (currentSearchQuery.trim() !== '') {
                 const query = currentSearchQuery.trim().toLowerCase();
-                filtered = filtered.filter(movie => {
-                    const enMatch = movie.titleEn.toLowerCase().includes(query);
-                    const arMatch = movie.titleAr.toLowerCase().includes(query);
-                    return enMatch || arMatch;
-                });
+                filtered = filtered.filter(movie => 
+                    movie.titleEn.toLowerCase().includes(query) || 
+                    movie.titleAr.toLowerCase().includes(query)
+                );
             }
             return filtered;
         }
@@ -690,10 +710,9 @@
             });
         }
 
-        // Render movies grid with view counters
+        // Render all movie cards with GLOBAL viewer counter
         function renderMovies() {
             const filteredMovies = getFilteredMovies();
-            
             if (filteredMovies.length === 0) {
                 moviesGrid.innerHTML = `
                     <div class="no-results">
@@ -711,14 +730,11 @@
                 }
                 return;
             }
-
             updateSearchStats(filteredMovies.length);
-            
             moviesGrid.innerHTML = filteredMovies.map(movie => {
                 const displayTitle = currentLanguage === 'ar' ? movie.titleAr : movie.titleEn;
                 const langClass = movie.lang === 'ar' ? 'ar' : (movie.lang === 'both' ? 'both' : 'en');
-                const views = movie.views || 0;
-                
+                const views = movie.views !== undefined ? movie.views : 0;
                 return `
                     <div class="movie-card" onclick="playMovie('${movie.id}')">
                         <div class="video-thumbnail">
@@ -737,7 +753,7 @@
                                     ${movie.lang === 'en' ? 'EN' : movie.lang === 'ar' ? 'AR' : 'EN/AR'}
                                 </span>
                                 <span class="watch-counter">
-                                    <i class="fas fa-eye"></i> ${views}
+                                    <i class="fas fa-eye"></i> ${views.toLocaleString()}
                                 </span>
                                 <i class="fas fa-video" style="color:#4CAF50;" title="video available"></i>
                             </div>
@@ -747,30 +763,24 @@
             }).join('');
         }
 
-        // Play movie function with watch count increment
-        window.playMovie = function(movieId) {
+        // Play movie: increments global counter first, then plays content
+        window.playMovie = async function(movieId) {
             const movie = movies.find(m => m.id === movieId);
             if (!movie || !movie.videoUrl) {
                 alert('No video available for this film yet.');
                 return;
             }
+            // INCREMENT GLOBAL VIEW COUNT (sync across all users)
+            await incrementAndUpdateCounter(movieId);
             
-            // --- INCREMENT WATCH COUNTER ---
-            incrementWatchCount(movieId);
-            // Immediately re-render to reflect updated count
-            renderMovies();
-            
-            // Open modal and play
+            // Open modal and play video
             modal.classList.add('active');
             modalMovieTitle.textContent = currentLanguage === 'ar' ? movie.titleAr : movie.titleEn;
-            
             modalVideo.style.display = 'none';
             modalVideo.pause();
             modalVideo.src = '';
-            
             embedIframe.style.display = 'block';
             embedIframe.src = movie.videoUrl;
-            
             if (movie.id === '6') {
                 embedIframe.setAttribute('scrolling', 'no');
                 embedIframe.setAttribute('frameborder', '0');
@@ -780,7 +790,7 @@
             }
         };
 
-        // Close modal
+        // Modal close logic
         closeModal.addEventListener('click', () => {
             modal.classList.remove('active');
             modalVideo.pause();
@@ -789,12 +799,14 @@
             embedIframe.src = '';
             embedIframe.style.display = 'none';
         });
-
         modal.addEventListener('click', (e) => {
             if (e.target === modal) closeModal.click();
         });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modal.classList.contains('active')) closeModal.click();
+        });
 
-        // Filter functionality
+        // Filter buttons
         filterBtns.forEach(btn => {
             btn.addEventListener('click', () => {
                 filterBtns.forEach(b => b.classList.remove('active'));
@@ -815,14 +827,9 @@
         // Search handlers
         function handleSearchInput() {
             currentSearchQuery = searchInput.value;
-            if (currentSearchQuery.length > 0) {
-                clearSearchBtn.style.display = 'block';
-            } else {
-                clearSearchBtn.style.display = 'none';
-            }
+            clearSearchBtn.style.display = currentSearchQuery.length > 0 ? 'block' : 'none';
             renderMovies();
         }
-        
         function clearSearch() {
             searchInput.value = '';
             currentSearchQuery = '';
@@ -830,19 +837,14 @@
             renderMovies();
             searchInput.focus();
         }
-        
         searchInput.addEventListener('input', handleSearchInput);
         clearSearchBtn.addEventListener('click', clearSearch);
-        
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && modal.classList.contains('active')) {
-                closeModal.click();
-            }
-        });
 
-        // --- INITIALIZE VIEWS FROM STORAGE AND RENDER ---
-        loadStoredViews();
-        renderMovies();
+        // INITIALIZATION: show zero counts then load real global counters from API
+        // set temporary zero views for all movies while loading
+        for (let m of movies) m.views = 0;
+        renderMovies();   // first render with "0" views
+        loadAllGlobalCounters(); // fetch real global counters and re-render when done
     })();
 </script>
 </body>

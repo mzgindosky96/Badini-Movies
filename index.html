@@ -3,16 +3,12 @@
 <head>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3032189625676969"
      crossorigin="anonymous"></script>
-
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3032189625676969"
      crossorigin="anonymous"></script>
-
 <meta name="google-adsense-account" content="ca-pub-3032189625676969">
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Badini · Movies - Watch</title>
-    <!-- Font Awesome 6 (free) -->
+    <title>Badini · Movies - Multi Server Player</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         * {
@@ -21,39 +17,12 @@
             box-sizing: border-box;
             font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
         }
-
         body {
             background: #0c0b14;
             color: #f0eef7;
             line-height: 1.5;
-            direction: ltr;
-            margin: 0 !important;
-            padding: 0 !important;
+            margin: 0;
         }
-
-        {
-            display: none !important;
-            height: 0 !important;
-            min-height: 0 !important;
-            max-height: 0 !important;
-            visibility: hidden !important;
-            opacity: 0 !important;
-            position: absolute !important;
-            top: -9999px !important;
-            left: -9999px !important;
-            z-index: -9999 !important;
-            pointer-events: none !important;
-            overflow: hidden !important;
-            margin: 0 !important;
-            padding: 0 !important;
-            border: 0 !important;
-        }
-
-        body {
-            margin-top: 0 !important;
-            padding-top: 0 !important;
-        }
-
         .container {
             max-width: 1400px;
             margin: 0 auto;
@@ -61,8 +30,6 @@
             position: relative;
             z-index: 1;
         }
-
-        /* header */
         .badini-header {
             display: flex;
             align-items: center;
@@ -73,29 +40,24 @@
             border-bottom: 2px solid #2f2b45;
             padding-bottom: 1rem;
         }
-
         .logo-area {
             display: flex;
             align-items: center;
             gap: 12px;
         }
-
         .logo-icon {
             font-size: 2.5rem;
             color: #e4b363;
         }
-
         .badini-title {
             font-size: 2.2rem;
             font-weight: 700;
             letter-spacing: -0.5px;
         }
-
         .badini-title span {
             color: #e4b363;
             font-weight: 300;
         }
-
         .lang-tag {
             background: #2f2b45;
             padding: 0.5rem 1.2rem;
@@ -106,7 +68,6 @@
             gap: 10px;
             cursor: pointer;
         }
-
         .section-title {
             display: flex;
             align-items: center;
@@ -117,7 +78,6 @@
             border-left: 5px solid #e4b363;
             padding-left: 1rem;
         }
-
         .btn-secondary {
             background: transparent;
             border: 2px solid #4b446b;
@@ -128,19 +88,15 @@
             cursor: pointer;
             transition: 0.2s;
         }
-
         .btn-secondary:hover {
             border-color: #e4b363;
             color: #e4b363;
         }
-
-        /* SEARCH BAR STYLES */
         .search-container {
             margin-bottom: 1.2rem;
             position: relative;
             max-width: 500px;
         }
-
         .search-wrapper {
             display: flex;
             align-items: center;
@@ -150,18 +106,15 @@
             padding: 0.3rem 0.3rem 0.3rem 1.5rem;
             transition: all 0.3s ease;
         }
-
         .search-wrapper:focus-within {
             border-color: #e4b363;
             box-shadow: 0 0 0 2px rgba(228, 179, 99, 0.2);
         }
-
         .search-icon {
             color: #a29cc0;
             font-size: 1.2rem;
             margin-right: 0.8rem;
         }
-
         #searchInput {
             background: transparent;
             border: none;
@@ -171,12 +124,9 @@
             width: 100%;
             outline: none;
         }
-
         #searchInput::placeholder {
             color: #5e577a;
-            font-weight: 400;
         }
-
         .clear-search {
             background: none;
             border: none;
@@ -185,21 +135,16 @@
             padding: 0 1rem;
             font-size: 1.3rem;
             display: none;
-            transition: color 0.2s;
         }
-
         .clear-search:hover {
             color: #e4b363;
         }
-
         .search-stats {
             margin-top: 0.6rem;
             font-size: 0.85rem;
             color: #a29cc0;
             padding-left: 0.5rem;
         }
-
-        /* --- MODERN MARQUEE (FILM NAMES TICKER) --- */
         .film-marquee {
             background: linear-gradient(95deg, #181526 0%, #201d30 100%);
             border-radius: 60px;
@@ -210,10 +155,7 @@
             align-items: center;
             gap: 0.8rem;
             backdrop-filter: blur(2px);
-            box-shadow: 0 5px 12px rgba(0, 0, 0, 0.3);
-            transition: all 0.2s ease;
         }
-
         .marquee-icon {
             background: #2f2b45;
             border-radius: 40px;
@@ -227,34 +169,22 @@
             white-space: nowrap;
             flex-shrink: 0;
         }
-
         .marquee-icon i {
             font-size: 1.1rem;
         }
-
-        .marquee-icon span {
-            display: inline-block;
-        }
-
         .marquee-scroll-container {
             flex: 1;
             overflow: hidden;
-            position: relative;
             mask-image: linear-gradient(90deg, transparent, black 5%, black 95%, transparent);
-            -webkit-mask-image: linear-gradient(90deg, transparent, black 5%, black 95%, transparent);
         }
-
         .marquee-track {
             display: inline-flex;
             white-space: nowrap;
             animation: scrollMarquee 140s linear infinite;
-            will-change: transform;
         }
-
         .marquee-track:hover {
             animation-play-state: paused;
         }
-
         .marquee-item {
             display: inline-flex;
             align-items: center;
@@ -263,75 +193,33 @@
             font-size: 0.9rem;
             font-weight: 500;
             color: #eae6ff;
-            letter-spacing: 0.3px;
         }
-
         .marquee-item i {
             color: #e4b363;
             font-size: 0.75rem;
-            opacity: 0.8;
         }
-
-        .film-name-en {
-            color: #f2e9c2;
-        }
-
         .film-name-ar {
-            font-family: 'Segoe UI', 'Tahoma', system-ui;
-            font-size: 0.85rem;
-            color: #bcb4e0;
             direction: rtl;
             display: inline-block;
         }
-
         .separator-dot {
             margin: 0 0.25rem;
             color: #e4b363;
-            font-weight: bold;
         }
-
         @keyframes scrollMarquee {
-            0% {
-                transform: translateX(0);
-            }
-            100% {
-                transform: translateX(-50%);
-            }
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
         }
-
-        /* responsive marquee */
         @media (max-width: 768px) {
-            .film-marquee {
-                padding: 0.3rem 0.6rem;
-                gap: 0.4rem;
-            }
-            .marquee-icon span {
-                display: none;
-            }
-            .marquee-icon {
-                padding: 0.4rem 0.8rem;
-            }
-            .marquee-item {
-                font-size: 0.75rem;
-                gap: 0.6rem;
-                margin-right: 1rem;
-            }
-            .film-name-ar {
-                font-size: 0.7rem;
-            }
-            .marquee-track {
-                animation-duration: 240s;
-            }
+            .marquee-icon span { display: none; }
+            .marquee-track { animation-duration: 240s; }
         }
-
-        /* movies grid */
         .movies-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             gap: 2rem;
             margin: 2rem 0;
         }
-
         .movie-card {
             background: #1a1728;
             border-radius: 24px;
@@ -340,13 +228,11 @@
             transition: 0.3s;
             cursor: pointer;
         }
-
         .movie-card:hover {
             transform: translateY(-5px);
             border-color: #e4b363;
             box-shadow: 0 10px 30px rgba(228, 179, 99, 0.15);
         }
-
         .video-thumbnail {
             width: 100%;
             height: 180px;
@@ -354,13 +240,11 @@
             position: relative;
             overflow: hidden;
         }
-
         .video-thumbnail img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
-
         .play-overlay {
             position: absolute;
             top: 0;
@@ -374,21 +258,16 @@
             opacity: 0;
             transition: 0.3s;
         }
-
         .movie-card:hover .play-overlay {
             opacity: 1;
         }
-
         .play-overlay i {
             font-size: 3rem;
             color: #e4b363;
-            text-shadow: 0 2px 10px black;
         }
-
         .movie-details {
             padding: 1.5rem;
         }
-
         .movie-title {
             font-size: 1.3rem;
             font-weight: 600;
@@ -397,7 +276,6 @@
             justify-content: space-between;
             align-items: center;
         }
-
         .movie-year {
             background: #2f2b45;
             padding: 0.3rem 0.8rem;
@@ -405,7 +283,6 @@
             font-size: 0.8rem;
             color: #b9b3d6;
         }
-
         .movie-meta {
             display: flex;
             align-items: center;
@@ -415,7 +292,6 @@
             font-size: 0.9rem;
             flex-wrap: wrap;
         }
-
         .lang-badge {
             background: #e4b363;
             color: #12101c;
@@ -424,15 +300,8 @@
             font-size: 0.8rem;
             font-weight: 600;
         }
-
-        .lang-badge.ar {
-            background: #1e9c8d;
-        }
-
-        .lang-badge.both {
-            background: #9b87e0;
-        }
-        
+        .lang-badge.ar { background: #1e9c8d; }
+        .lang-badge.both { background: #9b87e0; }
         .watch-counter {
             display: inline-flex;
             align-items: center;
@@ -442,47 +311,14 @@
             border-radius: 30px;
             font-size: 0.8rem;
             font-weight: 500;
-            color: #dbd4f5;
-            border: 1px solid rgba(228, 179, 99, 0.2);
-            transition: all 0.3s ease;
-            white-space: nowrap;
         }
-        
-        .watch-counter:hover {
-            background: linear-gradient(135deg, #e4b363 0%, #d4a247 100%);
-            color: #12101c;
-            transform: scale(1.05);
-        }
-        
-        .watch-counter i {
-            font-size: 0.75rem;
-            color: #e4b363;
-            animation: pulse 2s infinite;
-        }
-        
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.7; }
-        }
-
-        /* no results message */
         .no-results {
             text-align: center;
             padding: 3rem;
             background: #1a1728;
             border-radius: 32px;
             margin: 2rem 0;
-            color: #b9b3d6;
         }
-
-        .no-results i {
-            font-size: 3rem;
-            color: #e4b363;
-            margin-bottom: 1rem;
-            opacity: 0.7;
-        }
-
-        /* video player modal */
         .modal {
             display: none;
             position: fixed;
@@ -494,38 +330,77 @@
             z-index: 9999;
             padding: 1rem;
         }
-
         .modal.active {
             display: flex;
             flex-direction: column;
         }
-
         .modal-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 1rem;
-            color: white;
+            margin-bottom: 0.8rem;
             padding: 0.5rem 1rem;
+            flex-wrap: wrap;
+            gap: 10px;
         }
-
+        .modal-title-area h2 {
+            font-size: 1.3rem;
+        }
         .close-modal {
             background: none;
             border: none;
             color: white;
             font-size: 2.5rem;
             cursor: pointer;
-            padding: 0.5rem 1.5rem;
-            line-height: 1;
+            padding: 0.5rem 1rem;
         }
-
         .close-modal:hover {
             color: #e4b363;
         }
-
+        .server-buttons-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.7rem;
+            padding: 0.7rem 1rem;
+            background: rgba(0,0,0,0.5);
+            border-radius: 50px;
+            margin-bottom: 0.8rem;
+            border: 1px solid #2f2b45;
+        }
+        .server-btn {
+            background: #1a1728;
+            border: 1px solid #4b446b;
+            color: #dbd4f5;
+            padding: 0.4rem 1rem;
+            border-radius: 40px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .server-btn i {
+            font-size: 0.7rem;
+            color: #e4b363;
+        }
+        .server-btn:hover {
+            background: #2f2b45;
+            border-color: #e4b363;
+            color: #e4b363;
+        }
+        .server-btn.active-server {
+            background: #e4b363;
+            color: #12101c;
+            border-color: #e4b363;
+        }
+        .server-btn.active-server i {
+            color: #12101c;
+        }
         .video-container {
             width: 100%;
-            height: calc(100vh - 100px);
+            height: calc(100vh - 150px);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -534,84 +409,35 @@
             overflow: hidden;
             position: relative;
         }
-
-        .video-container video,
         .video-container iframe {
             width: 100%;
             height: 100%;
             border: none;
-        }
-
-        .video-container iframe {
             position: absolute;
             top: 0;
             left: 0;
         }
-
-        #modalVideo {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            display: block;
-        }
-
-        #embedIframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-            display: none;
-        }
-
-        /* filter tabs */
         .filter-btn.active {
             background: #e4b363;
             color: #12101c;
             border-color: #e4b363;
         }
-        
-        .filter-btn.active:hover {
-            background: #f7c579;
-        }
-
         .filter-container {
             display: flex;
             gap: 1rem;
             margin-bottom: 2rem;
             flex-wrap: wrap;
         }
-
-        /* Responsive */
         @media (max-width: 768px) {
-            .container {
-                padding: 1rem;
-            }
-            
-            .badini-header {
-                flex-direction: column;
-                text-align: center;
-            }
-            
-            .movies-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .modal {
-                padding: 0.5rem;
-            }
-            
-            .video-container {
-                height: calc(100vh - 80px);
-            }
-
-            .search-container {
-                max-width: 100%;
-            }
+            .container { padding: 1rem; }
+            .badini-header { flex-direction: column; text-align: center; }
+            .movies-grid { grid-template-columns: 1fr; }
+            .video-container { height: calc(100vh - 180px); }
         }
     </style>
 </head>
 <body>
 <div class="container">
-    <!-- header -->
     <div class="badini-header">
         <div class="logo-area">
             <i class="fas fa-film logo-icon"></i>
@@ -622,170 +448,153 @@
             <span id="langDisplay">EN | عربي</span>
         </div>
     </div>
-
-    <!-- movies library section -->
     <div class="section-title">
         <i class="fas fa-film"></i> <span id="libraryTitle">Movie Library / مكتبة الأفلام</span>
     </div>
-
-    <!-- SEARCH BAR -->
     <div class="search-container">
         <div class="search-wrapper">
             <i class="fas fa-search search-icon"></i>
             <input type="text" id="searchInput" placeholder="Search by film name... / ابحث باسم الفيلم...">
-            <button class="clear-search" id="clearSearchBtn" aria-label="Clear search">
-                <i class="fas fa-times-circle"></i>
-            </button>
+            <button class="clear-search" id="clearSearchBtn"><i class="fas fa-times-circle"></i></button>
         </div>
         <div class="search-stats" id="searchStats"></div>
     </div>
-
-    <!-- ========== MODERN MARQUEE WITH ALL FILM NAMES ========== -->
-    <div class="film-marquee" id="filmMarquee">
-        <div class="marquee-icon">
-            <i class="fas fa-ticket-alt"></i>
-            <span>NOW SHOWING</span>
-        </div>
-        <div class="marquee-scroll-container">
-            <div class="marquee-track" id="marqueeTrack">
-                <!-- dynamic film names injected via js -->
-            </div>
-        </div>
+    <div class="film-marquee">
+        <div class="marquee-icon"><i class="fas fa-ticket-alt"></i><span>NOW SHOWING</span></div>
+        <div class="marquee-scroll-container"><div class="marquee-track" id="marqueeTrack"></div></div>
     </div>
-
-    <!-- filter tabs -->
     <div class="filter-container">
         <button class="btn-secondary filter-btn active" data-filter="all">All / الكل</button>
         <button class="btn-secondary filter-btn" data-filter="en">English</button>
         <button class="btn-secondary filter-btn" data-filter="ar">العربية</button>
     </div>
-
-    <!-- movies grid -->
-    <div class="movies-grid" id="moviesGrid">
-        <!-- movies will be dynamically inserted here -->
-    </div>
-
-    <!-- video player modal -->
+    <div class="movies-grid" id="moviesGrid"></div>
     <div class="modal" id="videoModal">
         <div class="modal-header">
-            <h2 id="modalMovieTitle">Now Playing</h2>
+            <div class="modal-title-area"><h2 id="modalMovieTitle">Now Playing</h2></div>
             <button class="close-modal" id="closeModal">&times;</button>
         </div>
+        <div id="serverButtonsPanel" class="server-buttons-container"></div>
         <div class="video-container" id="videoContainer">
-            <video id="modalVideo" controls controlsList="nodownload" style="display: none;">
-                <source src="" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
-            <!-- Iframe for embeds will be inserted here -->
+            <iframe id="embedIframe" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen frameborder="0"></iframe>
         </div>
     </div>
 </div>
-
 <script>
     (function() {
-        // ------------------------------------------------------------------
-        // MOVIE DATABASE (all films)
-        // Auto-refreshing random view counters + dynamic marquee with all film names
-        // ------------------------------------------------------------------
-        let movies = [
-            { id: '1', titleEn: 'The Aftermath 2019', titleAr: 'ما بعد الأحداث ٢٠١٩', year: '2024', lang: 'both', videoUrl: 'https://www.vidspeeds.com/embed-1yjmv1iiev42.html', posterUrl: 'https://observer.com/wp-content/uploads/sites/2/2019/03/aftermath-dom-ta_03670_rgb-1.jpg', videoType: 'embed' },
-            { id: '2', titleEn: 'The Aftermath 2024', titleAr: 'الرجل التالي ٢٠٢٤', year: '2022', lang: 'both', videoUrl: 'https://1vid.xyz/embed-da6da2wutmc9.html', posterUrl: 'https://upload.wikimedia.org/wikipedia/en/1/13/Aftermath2024.jpg', videoType: 'embed' },
-            { id: '3', titleEn: '7G 2024', titleAr: 'مشاهدة فلم ٥جي', year: '2023', lang: 'both', videoUrl: 'https://vk.com/video_ext.php?oid=745497736&id=456242418&hash=48fcf213e4fa140d', posterUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgJ_PpLsEjZRoNh86YY9mlAl3AjJtoN_FwLmzCAZyNKA&s=10', videoType: 'embed' },
-            { id: '4', titleEn: 'Terrifier 2017', titleAr: 'الموت المرعب', year: '2023', lang: 'both', videoUrl: 'https://www.vidspeeds.com/embed-xezpn5cajs17.html', posterUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlHm-l8u9zAAO6KaeKey1Ivy7L-C5H7ksmTvmYUIByjw&s=10', videoType: 'embed' },
-            { id: '5', titleEn: 'Fear Farm 2022', titleAr: 'مزرعة الرعب', year: '2023', lang: 'both', videoUrl: 'https://uqload.net/embed-yi9l18v525t2.html', posterUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQIWWgz8DbkZO0q0DnBNOnT8Nrfl3Iu1v8ffMw1IBK21A&s=10', videoType: 'embed' },
-            { id: '6', titleEn: 'The Farm 2', titleAr: 'المزرعة ٢', year: '2023', lang: 'both', videoUrl: 'https://www.vidspeeds.com:2053/embed-w5z4zj4uierg.html', posterUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZmJeEAwshSOGtgXa5ffL_nylq63WNw0RpcP496IkdRQ&s=10', videoType: 'embed' },
-            { id: '7', titleEn: 'Wrong Turn 2', titleAr: 'اwrong turn 2', year: '2007', lang: 'both', videoUrl: 'https://vidspeed.org/embed-wv56vclm9ofb.html', posterUrl: 'https://i.ytimg.com/vi/uHhO3z4Cw7A/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLCKrKhTDf-Uw4gEyNdYrQATV1TuvQ', videoType: 'embed' },
-            { id: '8', titleEn: 'Wrong Turn 1', titleAr: 'اwrong turn 1', year: '2003', lang: 'both', videoUrl: 'https://vidspeed.org/embed-zqjlljw9twxl.html', posterUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQAMKY5WhjWrB_C3x6QDricgG-DOU_3eEPP_A&s', videoType: 'embed' },
-            { id: '9', titleEn: 'Wrong Turn 3', titleAr: 'اwrong turn 3', year: '2009', lang: 'both', videoUrl: 'https://www.vidspeeds.com:2096/embed-monjpwuamt28.html', posterUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRN2hmSTr9sG-_WsN6O6uoDVGfP_2ojwowenA&s', videoType: 'embed' },
-            { id: '10', titleEn: 'Wrong Turn 5', titleAr: 'اwrong turn 5', year: '2012', lang: 'both', videoUrl: 'https://www.vidspeeds.com/embed-8m4njt9wesmn.html', posterUrl: 'https://static0.srcdn.com/wordpress/wp-content/uploads/2020/01/Wrong-Turn-5-Bloodlines-Borislav-Iliev.jpg', videoType: 'embed' },
-            { id: '11', titleEn: 'Wrong Turn 4', titleAr: 'اwrong turn 4', year: '2011', lang: 'both', videoUrl: 'https://www.vidspeeds.com/embed-8nmzicw74unq.html', posterUrl: 'https://static0.moviewebimages.com/wordpress/wp-content/uploads/photo/lb8mOLS8SpuquyTQdZUAGg8DBZXcFd.jpg', videoType: 'embed' },
-            { id: '12', titleEn: 'Wrong Turn 6', titleAr: 'اwrong turn 6', year: '2014', lang: 'both', videoUrl: 'https://www.vidspeeds.com/embed-f44xlupx7k7c.html', posterUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQqMD7hsLw8uQL7xii6h-uASbVpcjLh7RaPeQ&s', videoType: 'embed' },
-            { id: '13', titleEn: 'Dont Breathe 1', titleAr: 'اDont Breathe 1', year: '2016', lang: 'both', videoUrl: 'https://www.vidroba.com:2053/embed-cl7yuevr3fxt.html', posterUrl: 'https://vid.mycima.cc/uploads/thumbs/835d46567-1.jpg', videoType: 'embed' },
-            { id: '14', titleEn: 'Swallow 2019', titleAr: 'اSwallow 2019', year: '2019', lang: 'both', videoUrl: 'https://www.vidspeeds.com/embed-8yw1rdmk00la.html', posterUrl: 'https://wecima.ahwaktv.net/uploads/thumbs/cd86f36fc-1.jpg', videoType: 'embed' },
-            { id: '15', titleEn: 'The Church 2018', titleAr: 'اThe Church 2018', year: '2018', lang: 'both', videoUrl: 'https://ok.ru/videoembed/1980799388369', posterUrl: 'https://m.media-amazon.com/images/M/MV5BZWY3ZTViMDUtNzhiYy00MGZiLWIzZDgtOWJlZGRmMTA3MmQ1XkEyXkFqcGc@._V1_.jpg', videoType: 'embed' },
-            { id: '16', titleEn: 'The Cell 2016', titleAr: 'اThe Cell 2016', year: '2016', lang: 'both', videoUrl: 'https://www.vidspeeds.com/embed-iu544n3bv96x.html', posterUrl: 'https://wecima.ahwaktv.net/uploads/thumbs/2fe22bb8d-1.jpg', videoType: 'embed' },
-            { id: '17', titleEn: 'Wrong Turn 7', titleAr: 'wrong turn 7', year: '2021', lang: 'both', videoUrl: 'https://www.yourupload.com/embed/7u1j55y84ND1', posterUrl: 'https://s1.dmcdn.net/v/YpVWu1eZMI81iEX_m/x720', videoType: 'embed' },
-            { id: '18', titleEn: 'Wij 2018', titleAr: 'wij 2018', year: '2018', lang: 'both', videoUrl: 'https://f75s.com/d/c23b7zb8ihm1', posterUrl: 'https://horrornews.net/wp-content/uploads/2020/02/We-Wij-movie-2018-Rene-Eller-9-550x330.jpg', videoType: 'embed' },
-            { id: '19', titleEn: 'Tale Of Tales 2015', titleAr: 'tale of tales 2015', year: '2015', lang: 'both', videoUrl: 'https://www.vidspeeds.com/embed-f1cyojqniqke.html', posterUrl: 'https://wecima.ahwaktv.net/uploads/thumbs/2254c5a17-1.jpg', videoType: 'embed' },
-            { id: '20', titleEn: 'Dolly', titleAr: 'dolly', year: '2015', lang: 'both', videoUrl: 'https://wwa.liiivideo.com/embed-23728r5ffeys.html', posterUrl: 'https://m.qfilm.tv/uploads/thumbs/41a8d1c28-1.jpg', videoType: 'embed' },
-            { id: '21', titleEn: 'Matriarch 2022', titleAr: 'matriarch 2022', year: '2022', lang: 'both', videoUrl: 'https://mp4plus.org/embed-m42acnjmauzk.html', posterUrl: 'https://c.ifushaar.com/wp-content/uploads/2022/10/Matriarch-2022-640x360.jpg', videoType: 'embed' },
-            { id: '22', titleEn: 'Project Power', titleAr: 'project power', year: '2022', lang: 'both', videoUrl: 'https://www.vidspeeds.com:2053/embed-ynpeomgoimd0.html', posterUrl: 'https://cimalina.live/wp-content/uploads/2020/07/Ashampoo_Snap_2020.07.22_14h26m25s_004_.png', videoType: 'embed' },
-            { id: '23', titleEn: 'The Bluff', titleAr: 'the bluff', year: '2026', lang: 'both', videoUrl: 'https://akhbarworld.online?mycimafsd=aHR0cHM6Ly9mYXN0dmlwLnNwYWNlL2UvMThkNmh2NGdiZnd4', posterUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTsfyDblS3C8hIFOAncOScvVvbSocwx6LBMrYlUHR-vOUrS6BgoXI6dce0-&s=10', videoType: 'embed' },
-            { id: '24', titleEn: 'Battelship', titleAr: 'battelship', year: '2012', lang: 'both', videoUrl: 'https://www.vidspeeds.com:2053/embed-npc2a7wsxlxe.html', posterUrl: 'https://i.ebayimg.com/images/g/X38AAMXQOT5Q9sJg/s-l1200.jpg', videoType: 'embed' },
-            { id: '25', titleEn: 'The Tit and The Moon', titleAr: 'the tit and the moon', year: '1994', lang: 'both', videoUrl: 'https://1vid.xyz/embed-22j2p3yqh9jp.html', posterUrl: 'https://qfilm.tv/uploads/thumbs/06ac5dc0d-1.jpg', videoType: 'embed' },
-            { id: '26', titleEn: 'furioza 1', titleAr: 'furioza 1', year: '2021', lang: 'both', videoUrl: 'https://filemoon.sx/e/k6vmiyxvixrm', posterUrl: 'https://tv.halabieh.com/uploads/thumbs/3ee27f2b5-1.jpg', videoType: 'embed' },
-            { id: '27', titleEn: 'Furioza 2', titleAr: 'Furioza 2', year: '2025', lang: 'both', videoUrl: 'https://egybestvid.com/embed-7e1at1fsj28e.html', posterUrl: 'https://image.tmdb.org/t/p/original/yOLnV1lM3NuMsgYwIhz454fQRgt.jpg', videoType: 'embed' },
-            { id: '28', titleEn: 'The Forever Purge', titleAr: 'the forever purge', year: '2021', lang: 'both', videoUrl: 'https://krdline.shafilm.vip/ShaSorani/Movie/The.Forever.Purge.2021.1080p.Webrip.Sorani.mp4', posterUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSNEH6BvUrpwWAcMDOHqTqulLxHKC6nYfAGVx1Tq10aE9qZA0x_l2MZdwei&s=10', videoType: 'embed' },
-            { id: '29', titleEn: 'Evil Dead 2023', titleAr: 'evil dead 2023', year: '2023', lang: 'both', videoUrl: 'https://uqload.net/embed-uvc954a1ktz9.html', posterUrl: 'https://wecima.ahwaktv.net/uploads/thumbs/a945469f0-1.jpg', videoType: 'embed' },
-            { id: '30', titleEn: 'Evil Dead 2013', titleAr: 'evil dead 2013', year: '2013', lang: 'both', videoUrl: 'https://uqload.net/embed-th7phxs8urvh.html', posterUrl: 'https://tye.ahwaktv.net/uploads/thumbs/5b1918b02-1.jpg', videoType: 'embed' },
-            { id: '31', titleEn: 'Evil Dead 1986', titleAr: 'evil dead 1986', year: '1986', lang: 'both', videoUrl: 'https://uqload.net/embed-1afxc1464avr.html', posterUrl: 'https://tye.ahwaktv.net/uploads/thumbs/067ebc930-1.jpg', videoType: 'embed' },
-            { id: '32', titleEn: 'Evil Dead 1981', titleAr: 'evil dead 1981', year: '1981', lang: 'both', videoUrl: 'https://uqload.net/embed-af95js8wixyz.html', posterUrl: 'https://tye.ahwaktv.net/uploads/thumbs/520de226f-1.jpg', videoType: 'embed' },
-            { id: '33', titleEn: 'Maniac 2012', titleAr: 'maniac 2012', year: '2012', lang: 'both', videoUrl: 'https://www.vidspeeds.com:2096/embed-crhuszg4fmzs.html', posterUrl: 'https://yam.ahwaktv.net/uploads/thumbs/bcdc73f20-1.jpg', videoType: 'embed' },
-            { id: '34', titleEn: 'i Saw The Devil', titleAr: 'i saw the devil', year: '2010', lang: 'both', videoUrl: 'https://www.vidspeeds.com/embed-zoiqylr8wg1x.html', posterUrl: 'https://wecima.ahwaktv.net/uploads/thumbs/8f641f3b9-1.jpg', videoType: 'embed' },
-            { id: '35', titleEn: 'into The Blue 2005', titleAr: 'into the blue 2005', year: '2005', lang: 'both', videoUrl: 'https://www.vidspeeds.com:2096/embed-drvc3rgtoxr9.html', posterUrl: 'https://pic.bstarstatic.com/ugc/106fde4135d761ac359d2ae41b57125c.jpg', videoType: 'embed' },
-            { id: '36', titleEn: 'Cabin Fever 2002', titleAr: 'cabin fever 2002', year: '2002', lang: 'both', videoUrl: 'https://www.vidspeeds.com:2096/embed-osgs8kofrnpt.html', posterUrl: 'https://dal.ahwaktv.net/uploads/thumbs/af65ba1b6-1.jpg', videoType: 'embed' },
-            { id: '37', titleEn: 'Cabin Fever 2009', titleAr: 'cabin fever 2009', year: '2009', lang: 'both', videoUrl: 'https://www.vidspeeds.com:2096/embed-g7jrvzd1qn45.html', posterUrl: 'https://wecima.ahwaktv.net/uploads/thumbs/a7d1dbfb0-1.jpg', videoType: 'embed' },
-            { id: '38', titleEn: 'Cabin Fever 2014', titleAr: 'cabin fever 2014', year: '2014', lang: 'both', videoUrl: 'https://ok.ru/videoembed/2374228511265', posterUrl: 'https://yam.ahwaktv.net/uploads/thumbs/36f2fe49c-1.jpg', videoType: 'embed' },
-            { id: '39', titleEn: 'Cabin Fever 2016', titleAr: 'cabin fever 2016', year: '2016', lang: 'both', videoUrl: 'https://www.vidroba.com:2053/embed-hqbft8d9mvp7.html', posterUrl: 'https://yam.ahwaktv.net/uploads/thumbs/d676d09e4-1.jpg', videoType: 'embed' },
-            { id: '40', titleEn: 'Pandora', titleAr: 'pandora', year: '2016', lang: 'both', videoUrl: 'https://www.vidspeeds.com:2053/embed-wtf6a0syau0v.html', posterUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSch7ao2t0EfvRU0PvdNcSeXJrhMFVVL6uq2DZWLFFcU6A5p-dFOmAhMj0&s=10', videoType: 'embed' },
-          { id: '41', titleEn: 'The Human Centipede 3', titleAr: 'the human centipede 3', year: '2015', lang: 'both', videoUrl: 'https://fdewsdc.sbs/embed/9qck0f0g8xjb', posterUrl: 'https://m.media-amazon.com/images/I/91XoWuxC3mL._AC_UF894,1000_QL80_.jpg', videoType: 'embed' },
-{ id: '42', titleEn: 'The Human Centipede 2', titleAr: 'the human centipede 2', year: '2011', lang: 'both', videoUrl: 'https://www.ok.ru/videoembed/88168336098', posterUrl: 'https://m.media-amazon.com/images/I/81BhPvzTN+L._AC_UF894,1000_QL80_.jpg', videoType: 'embed' },
-{ id: '43', titleEn: 'The Human Centipede 1', titleAr: 'the human centipede 1', year: '2009', lang: 'both', videoUrl: 'https://www.ok.ru/videoembed/426175040120', posterUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Still8_Human_Centipede.jpg/330px-Still8_Human_Centipede.jpg', videoType: 'embed' }
+        // ======================== MOVIE DATABASE WITH MULTI-SERVER SUPPORT ========================
+        // Each movie now has a 'servers' array. You can add unlimited server objects.
+        // Format: { label: "Server Name", url: "https://embed.url", icon: "fa-server" }
+        // Icon can be any Font Awesome 6 free icon class (e.g., fa-link, fa-cloud, fa-video).
+        // The first server in the array will be the default.
+        
+        const moviesData = [
+            { id: '1', titleEn: 'The Aftermath 2019', titleAr: 'ما بعد الأحداث ٢٠١٩', year: '2024', lang: 'both', posterUrl: 'https://observer.com/wp-content/uploads/sites/2/2019/03/aftermath-dom-ta_03670_rgb-1.jpg', 
+              servers: [
+                  { label: "VidSpeed", url: "https://www.vidspeeds.com/embed-1yjmv1iiev42.html", icon: "fa-server" },
+                  { label: "Mirror 1", url: "https://uqload.net/embed-example1.html", icon: "fa-link" },     // <--- ADD YOUR MIRROR LINK HERE
+                  { label: "Backup", url: "https://vidspeed.org/embed-example2.html", icon: "fa-cloud" }     // <--- ADD ANOTHER MIRROR
+              ] },
+            { id: '2', titleEn: 'The Aftermath 2024', titleAr: 'الرجل التالي ٢٠٢٤', year: '2022', lang: 'both', posterUrl: 'https://upload.wikimedia.org/wikipedia/en/1/13/Aftermath2024.jpg',
+              servers: [{ label: "Main", url: "https://1vid.xyz/embed-da6da2wutmc9.html", icon: "fa-server" }, { label: "Mirror", url: "https://1vid.xyz/embed-da6da2wutmc9.html", icon: "fa-link" }] },
+            { id: '3', titleEn: '7G 2024', titleAr: 'مشاهدة فلم ٥جي', year: '2023', lang: 'both', posterUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgJ_PpLsEjZRoNh86YY9mlAl3AjJtoN_FwLmzCAZyNKA&s=10',
+              servers: [{ label: "VK", url: "https://vk.com/video_ext.php?oid=745497736&id=456242418&hash=48fcf213e4fa140d", icon: "fa-server" }] },
+            { id: '4', titleEn: 'Terrifier 2017', titleAr: 'الموت المرعب', year: '2023', lang: 'both', posterUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlHm-l8u9zAAO6KaeKey1Ivy7L-C5H7ksmTvmYUIByjw&s=10',
+              servers: [{ label: "VidSpeed", url: "https://www.vidspeeds.com/embed-xezpn5cajs17.html", icon: "fa-server" }] },
+            { id: '5', titleEn: 'Fear Farm 2022', titleAr: 'مزرعة الرعب', year: '2023', lang: 'both', posterUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQIWWgz8DbkZO0q0DnBNOnT8Nrfl3Iu1v8ffMw1IBK21A&s=10',
+              servers: [{ label: "Uqload", url: "https://uqload.net/embed-yi9l18v525t2.html", icon: "fa-server" }] },
+            { id: '6', titleEn: 'The Farm 2', titleAr: 'المزرعة ٢', year: '2023', lang: 'both', posterUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZmJeEAwshSOGtgXa5ffL_nylq63WNw0RpcP496IkdRQ&s=10',
+              servers: [{ label: "VidSpeed", url: "https://www.vidspeeds.com:2053/embed-w5z4zj4uierg.html", icon: "fa-server" }] },
+            { id: '7', titleEn: 'Wrong Turn 2', titleAr: 'اwrong turn 2', year: '2007', lang: 'both', posterUrl: 'https://i.ytimg.com/vi/uHhO3z4Cw7A/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLCKrKhTDf-Uw4gEyNdYrQATV1TuvQ',
+              servers: [{ label: "VidSpeed", url: "https://vidspeed.org/embed-wv56vclm9ofb.html", icon: "fa-server" }] },
+            { id: '8', titleEn: 'Wrong Turn 1', titleAr: 'اwrong turn 1', year: '2003', lang: 'both', posterUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQAMKY5WhjWrB_C3x6QDricgG-DOU_3eEPP_A&s',
+              servers: [{ label: "VidSpeed", url: "https://vidspeed.org/embed-zqjlljw9twxl.html", icon: "fa-server" }] },
+            { id: '9', titleEn: 'Wrong Turn 3', titleAr: 'اwrong turn 3', year: '2009', lang: 'both', posterUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRN2hmSTr9sG-_WsN6O6uoDVGfP_2ojwowenA&s',
+              servers: [{ label: "VidSpeed", url: "https://www.vidspeeds.com:2096/embed-monjpwuamt28.html", icon: "fa-server" }] },
+            { id: '10', titleEn: 'Wrong Turn 5', titleAr: 'اwrong turn 5', year: '2012', lang: 'both', posterUrl: 'https://static0.srcdn.com/wordpress/wp-content/uploads/2020/01/Wrong-Turn-5-Bloodlines-Borislav-Iliev.jpg',
+              servers: [{ label: "VidSpeed", url: "https://www.vidspeeds.com/embed-8m4njt9wesmn.html", icon: "fa-server" }] },
+            { id: '11', titleEn: 'Wrong Turn 4', titleAr: 'اwrong turn 4', year: '2011', lang: 'both', posterUrl: 'https://static0.moviewebimages.com/wordpress/wp-content/uploads/photo/lb8mOLS8SpuquyTQdZUAGg8DBZXcFd.jpg',
+              servers: [{ label: "VidSpeed", url: "https://www.vidspeeds.com/embed-8nmzicw74unq.html", icon: "fa-server" }] },
+            { id: '12', titleEn: 'Wrong Turn 6', titleAr: 'اwrong turn 6', year: '2014', lang: 'both', posterUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQqMD7hsLw8uQL7xii6h-uASbVpcjLh7RaPeQ&s',
+              servers: [{ label: "VidSpeed", url: "https://www.vidspeeds.com/embed-f44xlupx7k7c.html", icon: "fa-server" }] },
+            { id: '13', titleEn: 'Dont Breathe 1', titleAr: 'اDont Breathe 1', year: '2016', lang: 'both', posterUrl: 'https://vid.mycima.cc/uploads/thumbs/835d46567-1.jpg',
+              servers: [{ label: "VidRoba", url: "https://www.vidroba.com:2053/embed-cl7yuevr3fxt.html", icon: "fa-server" }] },
+            { id: '14', titleEn: 'Swallow 2019', titleAr: 'اSwallow 2019', year: '2019', lang: 'both', posterUrl: 'https://wecima.ahwaktv.net/uploads/thumbs/cd86f36fc-1.jpg',
+              servers: [{ label: "VidSpeed", url: "https://www.vidspeeds.com/embed-8yw1rdmk00la.html", icon: "fa-server" }] },
+            { id: '15', titleEn: 'The Church 2018', titleAr: 'اThe Church 2018', year: '2018', lang: 'both', posterUrl: 'https://m.media-amazon.com/images/M/MV5BZWY3ZTViMDUtNzhiYy00MGZiLWIzZDgtOWJlZGRmMTA3MmQ1XkEyXkFqcGc@._V1_.jpg',
+              servers: [{ label: "OK.ru", url: "https://ok.ru/videoembed/1980799388369", icon: "fa-server" }] },
+            { id: '16', titleEn: 'The Cell 2016', titleAr: 'اThe Cell 2016', year: '2016', lang: 'both', posterUrl: 'https://wecima.ahwaktv.net/uploads/thumbs/2fe22bb8d-1.jpg',
+              servers: [{ label: "VidSpeed", url: "https://www.vidspeeds.com/embed-iu544n3bv96x.html", icon: "fa-server" }] },
+            { id: '17', titleEn: 'Wrong Turn 7', titleAr: 'wrong turn 7', year: '2021', lang: 'both', posterUrl: 'https://s1.dmcdn.net/v/YpVWu1eZMI81iEX_m/x720',
+              servers: [{ label: "YourUpload", url: "https://www.yourupload.com/embed/7u1j55y84ND1", icon: "fa-server" }] },
+            { id: '18', titleEn: 'Wij 2018', titleAr: 'wij 2018', year: '2018', lang: 'both', posterUrl: 'https://horrornews.net/wp-content/uploads/2020/02/We-Wij-movie-2018-Rene-Eller-9-550x330.jpg',
+              servers: [{ label: "F75S", url: "https://f75s.com/d/c23b7zb8ihm1", icon: "fa-server" }] },
+            { id: '19', titleEn: 'Tale Of Tales 2015', titleAr: 'tale of tales 2015', year: '2015', lang: 'both', posterUrl: 'https://wecima.ahwaktv.net/uploads/thumbs/2254c5a17-1.jpg',
+              servers: [{ label: "VidSpeed", url: "https://www.vidspeeds.com/embed-f1cyojqniqke.html", icon: "fa-server" }] },
+            { id: '20', titleEn: 'Dolly', titleAr: 'dolly', year: '2015', lang: 'both', posterUrl: 'https://m.qfilm.tv/uploads/thumbs/41a8d1c28-1.jpg',
+              servers: [{ label: "LiiVideo", url: "https://wwa.liiivideo.com/embed-23728r5ffeys.html", icon: "fa-server" }] },
+            { id: '21', titleEn: 'Matriarch 2022', titleAr: 'matriarch 2022', year: '2022', lang: 'both', posterUrl: 'https://c.ifushaar.com/wp-content/uploads/2022/10/Matriarch-2022-640x360.jpg',
+              servers: [{ label: "MP4Plus", url: "https://mp4plus.org/embed-m42acnjmauzk.html", icon: "fa-server" }] },
+            { id: '22', titleEn: 'Project Power', titleAr: 'project power', year: '2022', lang: 'both', posterUrl: 'https://cimalina.live/wp-content/uploads/2020/07/Ashampoo_Snap_2020.07.22_14h26m25s_004_.png',
+              servers: [{ label: "VidSpeed", url: "https://www.vidspeeds.com:2053/embed-ynpeomgoimd0.html", icon: "fa-server" }] },
+            { id: '23', titleEn: 'The Bluff', titleAr: 'the bluff', year: '2026', lang: 'both', posterUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTsfyDblS3C8hIFOAncOScvVvbSocwx6LBMrYlUHR-vOUrS6BgoXI6dce0-&s=10',
+              servers: [{ label: "FastVip", url: "https://akhbarworld.online?mycimafsd=aHR0cHM6Ly9mYXN0dmlwLnNwYWNlL2UvMThkNmh2NGdiZnd4", icon: "fa-server" }] },
+            { id: '24', titleEn: 'Battelship', titleAr: 'battelship', year: '2012', lang: 'both', posterUrl: 'https://i.ebayimg.com/images/g/X38AAMXQOT5Q9sJg/s-l1200.jpg',
+              servers: [{ label: "VidSpeed", url: "https://www.vidspeeds.com:2053/embed-npc2a7wsxlxe.html", icon: "fa-server" }] },
+            { id: '25', titleEn: 'The Tit and The Moon', titleAr: 'the tit and the moon', year: '1994', lang: 'both', posterUrl: 'https://qfilm.tv/uploads/thumbs/06ac5dc0d-1.jpg',
+              servers: [{ label: "1Vid", url: "https://1vid.xyz/embed-22j2p3yqh9jp.html", icon: "fa-server" }] },
+            { id: '26', titleEn: 'furioza 1', titleAr: 'furioza 1', year: '2021', lang: 'both', posterUrl: 'https://tv.halabieh.com/uploads/thumbs/3ee27f2b5-1.jpg',
+              servers: [{ label: "FileMoon", url: "https://filemoon.sx/e/k6vmiyxvixrm", icon: "fa-server" }] },
+            { id: '27', titleEn: 'Furioza 2', titleAr: 'Furioza 2', year: '2025', lang: 'both', posterUrl: 'https://image.tmdb.org/t/p/original/yOLnV1lM3NuMsgYwIhz454fQRgt.jpg',
+              servers: [{ label: "EgyptBest", url: "https://egybestvid.com/embed-7e1at1fsj28e.html", icon: "fa-server" }] },
+            { id: '28', titleEn: 'The Forever Purge', titleAr: 'the forever purge', year: '2021', lang: 'both', posterUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSNEH6BvUrpwWAcMDOHqTqulLxHKC6nYfAGVx1Tq10aE9qZA0x_l2MZdwei&s=10',
+              servers: [{ label: "Direct MP4", url: "https://krdline.shafilm.vip/ShaSorani/Movie/The.Forever.Purge.2021.1080p.Webrip.Sorani.mp4", icon: "fa-video" }] },
+            { id: '29', titleEn: 'Evil Dead 2023', titleAr: 'evil dead 2023', year: '2023', lang: 'both', posterUrl: 'https://wecima.ahwaktv.net/uploads/thumbs/a945469f0-1.jpg',
+              servers: [{ label: "Uqload", url: "https://uqload.net/embed-uvc954a1ktz9.html", icon: "fa-server" }] },
+            { id: '30', titleEn: 'Evil Dead 2013', titleAr: 'evil dead 2013', year: '2013', lang: 'both', posterUrl: 'https://tye.ahwaktv.net/uploads/thumbs/5b1918b02-1.jpg',
+              servers: [{ label: "Uqload", url: "https://uqload.net/embed-th7phxs8urvh.html", icon: "fa-server" }] },
+            { id: '31', titleEn: 'Evil Dead 1986', titleAr: 'evil dead 1986', year: '1986', lang: 'both', posterUrl: 'https://tye.ahwaktv.net/uploads/thumbs/067ebc930-1.jpg',
+              servers: [{ label: "Uqload", url: "https://uqload.net/embed-1afxc1464avr.html", icon: "fa-server" }] },
+            { id: '32', titleEn: 'Evil Dead 1981', titleAr: 'evil dead 1981', year: '1981', lang: 'both', posterUrl: 'https://tye.ahwaktv.net/uploads/thumbs/520de226f-1.jpg',
+              servers: [{ label: "Uqload", url: "https://uqload.net/embed-af95js8wixyz.html", icon: "fa-server" }] },
+            { id: '33', titleEn: 'Maniac 2012', titleAr: 'maniac 2012', year: '2012', lang: 'both', posterUrl: 'https://yam.ahwaktv.net/uploads/thumbs/bcdc73f20-1.jpg',
+              servers: [{ label: "VidSpeed", url: "https://www.vidspeeds.com:2096/embed-crhuszg4fmzs.html", icon: "fa-server" }] },
+            { id: '34', titleEn: 'i Saw The Devil', titleAr: 'i saw the devil', year: '2010', lang: 'both', posterUrl: 'https://wecima.ahwaktv.net/uploads/thumbs/8f641f3b9-1.jpg',
+              servers: [{ label: "VidSpeed", url: "https://www.vidspeeds.com/embed-zoiqylr8wg1x.html", icon: "fa-server" }] },
+            { id: '35', titleEn: 'into The Blue 2005', titleAr: 'into the blue 2005', year: '2005', lang: 'both', posterUrl: 'https://pic.bstarstatic.com/ugc/106fde4135d761ac359d2ae41b57125c.jpg',
+              servers: [{ label: "VidSpeed", url: "https://www.vidspeeds.com:2096/embed-drvc3rgtoxr9.html", icon: "fa-server" }] },
+            { id: '36', titleEn: 'Cabin Fever 2002', titleAr: 'cabin fever 2002', year: '2002', lang: 'both', posterUrl: 'https://dal.ahwaktv.net/uploads/thumbs/af65ba1b6-1.jpg',
+              servers: [{ label: "VidSpeed", url: "https://www.vidspeeds.com:2096/embed-osgs8kofrnpt.html", icon: "fa-server" }] },
+            { id: '37', titleEn: 'Cabin Fever 2009', titleAr: 'cabin fever 2009', year: '2009', lang: 'both', posterUrl: 'https://wecima.ahwaktv.net/uploads/thumbs/a7d1dbfb0-1.jpg',
+              servers: [{ label: "VidSpeed", url: "https://www.vidspeeds.com:2096/embed-g7jrvzd1qn45.html", icon: "fa-server" }] },
+            { id: '38', titleEn: 'Cabin Fever 2014', titleAr: 'cabin fever 2014', year: '2014', lang: 'both', posterUrl: 'https://yam.ahwaktv.net/uploads/thumbs/36f2fe49c-1.jpg',
+              servers: [{ label: "OK.ru", url: "https://ok.ru/videoembed/2374228511265", icon: "fa-server" }] },
+            { id: '39', titleEn: 'Cabin Fever 2016', titleAr: 'cabin fever 2016', year: '2016', lang: 'both', posterUrl: 'https://yam.ahwaktv.net/uploads/thumbs/d676d09e4-1.jpg',
+              servers: [{ label: "VidRoba", url: "https://www.vidroba.com:2053/embed-hqbft8d9mvp7.html", icon: "fa-server" }] },
+            { id: '40', titleEn: 'Pandora', titleAr: 'pandora', year: '2016', lang: 'both', posterUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSch7ao2t0EfvRU0PvdNcSeXJrhMFVVL6uq2DZWLFFcU6A5p-dFOmAhMj0&s=10',
+              servers: [{ label: "VidSpeed", url: "https://www.vidspeeds.com:2053/embed-wtf6a0syau0v.html", icon: "fa-server" }] },
+            { id: '41', titleEn: 'The Human Centipede 3', titleAr: 'the human centipede 3', year: '2015', lang: 'both', posterUrl: 'https://m.media-amazon.com/images/I/91XoWuxC3mL._AC_UF894,1000_QL80_.jpg',
+              servers: [{ label: "Fdewsdc", url: "https://fdewsdc.sbs/embed/9qck0f0g8xjb", icon: "fa-server" }, { label: "uploud", url: "https://uqload.co/embed-mu0qjyfsas8v.html", icon: "fa-server" }] },
+            { id: '42', titleEn: 'The Human Centipede 2', titleAr: 'the human centipede 2', year: '2011', lang: 'both', posterUrl: 'https://m.media-amazon.com/images/I/81BhPvzTN+L._AC_UF894,1000_QL80_.jpg',
+              servers: [{ label: "OK.ru", url: "https://www.ok.ru/videoembed/88168336098", icon: "fa-server" }] },
+            { id: '43', titleEn: 'The Human Centipede 1', titleAr: 'the human centipede 1', year: '2009', lang: 'both', posterUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Still8_Human_Centipede.jpg/330px-Still8_Human_Centipede.jpg',
+              servers: [{ label: "OK.ru", url: "https://www.ok.ru/videoembed/426175040120", icon: "fa-server" },{label: "uploud", url: " https://uqload.co/embed-rqrdmg10anvi.html", icon: "fa-server"}] }
         ];
 
-        // ---------------- MARQUEE BUILDER (all film names) ----------------
-        function buildMarqueeContent() {
-            const track = document.getElementById('marqueeTrack');
-            if (!track) return;
-            // Create a rich list with both English & Arabic names
-            let itemsHtml = '';
-            movies.forEach(movie => {
-                itemsHtml += `
-                    <div class="marquee-item">
-                        <i class="fas fa-play-circle"></i>
-                        <span class="film-name-en">${escapeHtml(movie.titleEn)}</span>
-                        <span class="separator-dot">/</span>
-                        <span class="film-name-ar">${escapeHtml(movie.titleAr)}</span>
-                        <i class="fas fa-star" style="font-size: 0.65rem; opacity:0.6;"></i>
-                    </div>
-                `;
-            });
-            // Duplicate the entire list to create seamless infinite scroll effect
-            const doubleItems = itemsHtml + itemsHtml;
-            track.innerHTML = doubleItems;
-        }
-
-        function escapeHtml(str) {
-            return str.replace(/[&<>]/g, function(m) {
-                if (m === '&') return '&amp;';
-                if (m === '<') return '&lt;';
-                if (m === '>') return '&gt;';
-                return m;
-            });
-        }
-
-        // View counter logic (same as original)
+        // view counters
         let viewCounts = {};
         let counterInterval;
 
         function initializeViewCounts() {
-            movies.forEach(movie => {
+            moviesData.forEach(movie => {
                 const baseViews = Math.floor(Math.random() * 15000) + 5000;
-                const popularityBoost = movies.indexOf(movie) < 10 ? Math.floor(Math.random() * 20000) + 10000 : 0;
-                viewCounts[movie.id] = baseViews + popularityBoost;
+                viewCounts[movie.id] = baseViews + (moviesData.indexOf(movie) < 10 ? Math.floor(Math.random() * 20000) + 10000 : 0);
             });
         }
-
-        function incrementViewCount(movieId) {
-            const increment = Math.floor(Math.random() * 5) + 1;
-            viewCounts[movieId] += increment;
-        }
-
+        function incrementViewCount(movieId) { viewCounts[movieId] += Math.floor(Math.random() * 5) + 1; }
         function startAutoRefresh() {
             counterInterval = setInterval(() => {
-                movies.forEach(movie => {
-                    incrementViewCount(movie.id);
-                });
+                moviesData.forEach(movie => incrementViewCount(movie.id));
                 renderMovies();
             }, Math.random() * 10000 + 15000);
         }
@@ -794,10 +603,10 @@
         const moviesGrid = document.getElementById('moviesGrid');
         const modal = document.getElementById('videoModal');
         const closeModal = document.getElementById('closeModal');
-        const modalVideo = document.getElementById('modalVideo');
         const modalMovieTitle = document.getElementById('modalMovieTitle');
         const filterBtns = document.querySelectorAll('.filter-btn');
-        const videoContainer = document.getElementById('videoContainer');
+        const embedIframe = document.getElementById('embedIframe');
+        const serverButtonsPanel = document.getElementById('serverButtonsPanel');
         const searchInput = document.getElementById('searchInput');
         const clearSearchBtn = document.getElementById('clearSearchBtn');
         const searchStats = document.getElementById('searchStats');
@@ -805,127 +614,76 @@
         let currentFilter = 'all';
         let currentLanguage = 'en';
         let currentSearchQuery = '';
-
-        let embedIframe = document.createElement('iframe');
-        embedIframe.id = 'embedIframe';
-        embedIframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
-        embedIframe.allowFullscreen = true;
-        embedIframe.style.display = 'none';
-        embedIframe.setAttribute('frameborder', '0');
-        embedIframe.setAttribute('loading', 'lazy');
-        videoContainer.appendChild(embedIframe);
+        let currentMovie = null;
 
         function getFilteredMovies() {
-            let filtered = movies.filter(movie => {
+            let filtered = moviesData.filter(movie => {
                 if (currentFilter === 'all') return true;
                 if (currentFilter === 'en') return movie.lang === 'en' || movie.lang === 'both';
                 if (currentFilter === 'ar') return movie.lang === 'ar' || movie.lang === 'both';
                 return true;
             });
             if (currentSearchQuery.trim() !== '') {
-                const query = currentSearchQuery.trim().toLowerCase();
-                filtered = filtered.filter(movie => 
-                    movie.titleEn.toLowerCase().includes(query) || 
-                    movie.titleAr.toLowerCase().includes(query)
-                );
+                const q = currentSearchQuery.trim().toLowerCase();
+                filtered = filtered.filter(m => m.titleEn.toLowerCase().includes(q) || m.titleAr.toLowerCase().includes(q));
             }
             return filtered;
         }
-
-        function updateSearchStats(visibleCount) {
-            if (currentSearchQuery.trim() === '') {
-                searchStats.innerHTML = '';
-                return;
-            }
-            const resultText = currentLanguage === 'en' 
-                ? `Found ${visibleCount} movie${visibleCount !== 1 ? 's' : ''} matching "${escapeHtml(currentSearchQuery)}"`
-                : `تم العثور على ${visibleCount} فيلماً تطابق "${escapeHtml(currentSearchQuery)}"`;
-            searchStats.innerHTML = resultText;
+        function updateSearchStats(count) {
+            if (!currentSearchQuery.trim()) { searchStats.innerHTML = ''; return; }
+            searchStats.innerHTML = currentLanguage === 'en' ? `Found ${count} movie${count !== 1 ? 's' : ''} matching "${escapeHtml(currentSearchQuery)}"` : `تم العثور على ${count} فيلماً تطابق "${escapeHtml(currentSearchQuery)}"`;
         }
-
         function renderMovies() {
-            const filteredMovies = getFilteredMovies();
-            if (filteredMovies.length === 0) {
-                moviesGrid.innerHTML = `
-                    <div class="no-results">
-                        <i class="fas fa-film-slash"></i>
-                        <h3>${currentLanguage === 'en' ? 'No movies found' : 'لا توجد أفلام'}</h3>
-                        <p>${currentLanguage === 'en' ? 'Try adjusting your search or filter.' : 'حاول تعديل البحث أو التصفية.'}</p>
-                    </div>
-                `;
-                if (currentSearchQuery.trim() !== '') {
-                    searchStats.innerHTML = currentLanguage === 'en' 
-                        ? `No movies found for "${escapeHtml(currentSearchQuery)}"`
-                        : `لم يتم العثور على أفلام لـ "${escapeHtml(currentSearchQuery)}"`;
-                } else {
-                    searchStats.innerHTML = '';
-                }
+            const filtered = getFilteredMovies();
+            if (filtered.length === 0) {
+                moviesGrid.innerHTML = `<div class="no-results"><i class="fas fa-film-slash"></i><h3>${currentLanguage === 'en' ? 'No movies found' : 'لا توجد أفلام'}</h3><p>${currentLanguage === 'en' ? 'Try adjusting your search or filter.' : 'حاول تعديل البحث أو التصفية.'}</p></div>`;
+                updateSearchStats(0);
                 return;
             }
-            updateSearchStats(filteredMovies.length);
-            moviesGrid.innerHTML = filteredMovies.map(movie => {
+            updateSearchStats(filtered.length);
+            moviesGrid.innerHTML = filtered.map(movie => {
                 const displayTitle = currentLanguage === 'ar' ? movie.titleAr : movie.titleEn;
                 const langClass = movie.lang === 'ar' ? 'ar' : (movie.lang === 'both' ? 'both' : 'en');
                 const views = viewCounts[movie.id] || 0;
-                return `
-                    <div class="movie-card" onclick="playMovie('${movie.id}')">
-                        <div class="video-thumbnail">
-                            <img src="${movie.posterUrl}" alt="${displayTitle}" onerror="this.src='https://via.placeholder.com/300x180?text=No+Poster'">
-                            <div class="play-overlay">
-                                <i class="fas fa-play-circle"></i>
-                            </div>
-                        </div>
-                        <div class="movie-details">
-                            <div class="movie-title">
-                                <span>${displayTitle}</span>
-                                <span class="movie-year">${movie.year}</span>
-                            </div>
-                            <div class="movie-meta">
-                                <span class="lang-badge ${langClass}">
-                                    ${movie.lang === 'en' ? 'EN' : movie.lang === 'ar' ? 'AR' : 'EN/AR'}
-                                </span>
-                                <span class="watch-counter" data-movie-id="${movie.id}">
-                                    <i class="fas fa-eye"></i> ${views.toLocaleString()}
-                                </span>
-                                <i class="fas fa-video" style="color:#4CAF50;" title="video available"></i>
-                            </div>
-                        </div>
-                    </div>
-                `;
+                return `<div class="movie-card" onclick="playMovie('${movie.id}')">
+                            <div class="video-thumbnail"><img src="${movie.posterUrl}" alt="${displayTitle}" onerror="this.src='https://via.placeholder.com/300x180?text=No+Poster'"><div class="play-overlay"><i class="fas fa-play-circle"></i></div></div>
+                            <div class="movie-details"><div class="movie-title"><span>${displayTitle}</span><span class="movie-year">${movie.year}</span></div>
+                            <div class="movie-meta"><span class="lang-badge ${langClass}">${movie.lang === 'en' ? 'EN' : movie.lang === 'ar' ? 'AR' : 'EN/AR'}</span>
+                            <span class="watch-counter"><i class="fas fa-eye"></i> ${views.toLocaleString()}</span><i class="fas fa-video" style="color:#4CAF50;"></i></div></div></div>`;
             }).join('');
         }
 
         window.playMovie = function(movieId) {
-            const movie = movies.find(m => m.id === movieId);
-            if (!movie || !movie.videoUrl) {
-                alert('No video available for this film yet.');
-                return;
-            }
+            const movie = moviesData.find(m => m.id === movieId);
+            if (!movie || !movie.servers || movie.servers.length === 0) { alert('No video source available.'); return; }
             incrementViewCount(movieId);
             renderMovies();
+            currentMovie = movie;
             modal.classList.add('active');
             modalMovieTitle.textContent = currentLanguage === 'ar' ? movie.titleAr : movie.titleEn;
-            modalVideo.style.display = 'none';
-            modalVideo.pause();
-            modalVideo.src = '';
-            embedIframe.style.display = 'block';
-            embedIframe.src = movie.videoUrl;
+            serverButtonsPanel.innerHTML = '';
+            movie.servers.forEach((server, idx) => {
+                const btn = document.createElement('button');
+                btn.className = 'server-btn' + (idx === 0 ? ' active-server' : '');
+                btn.innerHTML = `<i class="fas ${server.icon || 'fa-play-circle'}"></i> ${server.label}`;
+                btn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    document.querySelectorAll('.server-btn').forEach(b => b.classList.remove('active-server'));
+                    btn.classList.add('active-server');
+                    embedIframe.src = server.url;
+                });
+                serverButtonsPanel.appendChild(btn);
+            });
+            embedIframe.src = movie.servers[0].url;
         };
 
         closeModal.addEventListener('click', () => {
             modal.classList.remove('active');
-            modalVideo.pause();
-            modalVideo.src = '';
-            modalVideo.style.display = 'none';
             embedIframe.src = '';
-            embedIframe.style.display = 'none';
+            currentMovie = null;
         });
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) closeModal.click();
-        });
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && modal.classList.contains('active')) closeModal.click();
-        });
+        modal.addEventListener('click', (e) => { if (e.target === modal) closeModal.click(); });
+        document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && modal.classList.contains('active')) closeModal.click(); });
 
         filterBtns.forEach(btn => {
             btn.addEventListener('click', () => {
@@ -943,24 +701,22 @@
             renderMovies();
         };
 
-        function handleSearchInput() {
-            currentSearchQuery = searchInput.value;
-            clearSearchBtn.style.display = currentSearchQuery.length > 0 ? 'block' : 'none';
-            renderMovies();
-        }
-        function clearSearch() {
-            searchInput.value = '';
-            currentSearchQuery = '';
-            clearSearchBtn.style.display = 'none';
-            renderMovies();
-            searchInput.focus();
-        }
+        function handleSearchInput() { currentSearchQuery = searchInput.value; clearSearchBtn.style.display = currentSearchQuery.length > 0 ? 'block' : 'none'; renderMovies(); }
+        function clearSearch() { searchInput.value = ''; currentSearchQuery = ''; clearSearchBtn.style.display = 'none'; renderMovies(); searchInput.focus(); }
         searchInput.addEventListener('input', handleSearchInput);
         clearSearchBtn.addEventListener('click', clearSearch);
 
-        // Initialize everything
+        function buildMarqueeContent() {
+            const track = document.getElementById('marqueeTrack');
+            if (!track) return;
+            let html = '';
+            moviesData.forEach(m => { html += `<div class="marquee-item"><i class="fas fa-play-circle"></i><span class="film-name-en">${escapeHtml(m.titleEn)}</span><span class="separator-dot">/</span><span class="film-name-ar">${escapeHtml(m.titleAr)}</span><i class="fas fa-star"></i></div>`; });
+            track.innerHTML = html + html;
+        }
+        function escapeHtml(str) { return str.replace(/[&<>]/g, function(m) { if (m === '&') return '&amp;'; if (m === '<') return '&lt;'; if (m === '>') return '&gt;'; return m; }); }
+
         initializeViewCounts();
-        buildMarqueeContent();    // Populate marquee with all film names
+        buildMarqueeContent();
         renderMovies();
         startAutoRefresh();
     })();

@@ -7,8 +7,8 @@
      crossorigin="anonymous"></script>
 <meta name="google-adsense-account" content="ca-pub-3032189625676969">
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Badini · Movies - Multi Server Player</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Badini · Movies - Multi Server Player | 20 Movies Per Page</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         * {
@@ -67,6 +67,11 @@
             display: flex;
             gap: 10px;
             cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .lang-tag:hover {
+            background: #e4b363;
+            color: #12101c;
         }
         .section-title {
             display: flex;
@@ -319,6 +324,58 @@
             border-radius: 32px;
             margin: 2rem 0;
         }
+        /* ========== PAGINATION STYLES ========== */
+        .pagination-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.7rem;
+            margin: 2rem 0 1.5rem;
+            padding: 1rem 0;
+        }
+        .pagination-btn {
+            background: #1a1728;
+            border: 1px solid #4b446b;
+            color: #dbd4f5;
+            padding: 0.6rem 1.2rem;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .pagination-btn i {
+            font-size: 0.8rem;
+        }
+        .pagination-btn.active-page {
+            background: #e4b363;
+            color: #12101c;
+            border-color: #e4b363;
+            box-shadow: 0 0 8px rgba(228,179,99,0.4);
+        }
+        .pagination-btn:hover:not(.active-page) {
+            background: #2f2b45;
+            border-color: #e4b363;
+            color: #e4b363;
+        }
+        .pagination-btn.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+        .page-info {
+            background: #2f2b45;
+            padding: 0.4rem 1rem;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #e4b363;
+            margin: 0 0.3rem;
+        }
         .modal {
             display: none;
             position: fixed;
@@ -428,11 +485,127 @@
             margin-bottom: 2rem;
             flex-wrap: wrap;
         }
+
+        /* FOOTER */
+        .footer {
+            margin-top: 5rem;
+            padding: 3rem 0 2rem;
+            background: linear-gradient(145deg, #12101f 0%, #0a0912 100%);
+            border-radius: 48px 48px 24px 24px;
+            position: relative;
+            z-index: 2;
+            box-shadow: 0 -10px 30px rgba(0,0,0,0.5);
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 2rem;
+            padding: 0 1rem;
+        }
+        .footer-card {
+            background: rgba(26, 23, 40, 0.6);
+            backdrop-filter: blur(10px);
+            border-radius: 32px;
+            padding: 1.8rem;
+            border: 1px solid rgba(228, 179, 99, 0.2);
+            transition: all 0.4s ease;
+            height: 100%;
+        }
+        .footer-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(228, 179, 99, 0.6);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+            background: rgba(30, 26, 48, 0.8);
+        }
+        .footer-icon {
+            font-size: 2.2rem;
+            color: #e4b363;
+            margin-bottom: 1rem;
+            display: inline-block;
+            transition: transform 0.3s;
+        }
+        .footer-card:hover .footer-icon {
+            transform: scale(1.1);
+        }
+        .footer-card h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #fff;
+            border-left: 4px solid #e4b363;
+            padding-left: 12px;
+        }
+        .footer-card p {
+            color: #cbc6e6;
+            line-height: 1.6;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+        .contact-details {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+            margin-top: 1rem;
+        }
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #dbd4f5;
+            transition: 0.3s;
+        }
+        .contact-item i {
+            width: 28px;
+            font-size: 1.2rem;
+            color: #e4b363;
+        }
+        .contact-item a {
+            color: #dbd4f5;
+            text-decoration: none;
+            border-bottom: 1px dashed #e4b363;
+            transition: 0.2s;
+        }
+        .contact-item a:hover {
+            color: #e4b363;
+            border-bottom-style: solid;
+        }
+        .social-links {
+            display: flex;
+            gap: 1.2rem;
+            margin-top: 1.5rem;
+        }
+        .social-links a {
+            background: #2f2b45;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #e4b363;
+            transition: all 0.3s;
+        }
+        .social-links a:hover {
+            background: #e4b363;
+            color: #12101c;
+            transform: translateY(-3px);
+        }
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2.5rem;
+            margin-top: 2rem;
+            border-top: 1px solid rgba(228, 179, 99, 0.2);
+            font-size: 0.8rem;
+            color: #8a84aa;
+        }
         @media (max-width: 768px) {
             .container { padding: 1rem; }
             .badini-header { flex-direction: column; text-align: center; }
             .movies-grid { grid-template-columns: 1fr; }
             .video-container { height: calc(100vh - 180px); }
+            .footer-card { padding: 1.2rem; }
+            .footer-card h3 { font-size: 1.2rem; }
+            .pagination-btn { padding: 0.4rem 0.9rem; font-size: 0.8rem; }
         }
     </style>
 </head>
@@ -469,31 +642,70 @@
         <button class="btn-secondary filter-btn" data-filter="ar">العربية</button>
     </div>
     <div class="movies-grid" id="moviesGrid"></div>
-    <div class="modal" id="videoModal">
-        <div class="modal-header">
-            <div class="modal-title-area"><h2 id="modalMovieTitle">Now Playing</h2></div>
-            <button class="close-modal" id="closeModal">&times;</button>
+    <!-- PAGINATION SECTION : 20 Movies Per Page -->
+    <div id="paginationWrapper" class="pagination-container"></div>
+</div>
+
+<!-- FOOTER SECTION (same beauty) -->
+<footer class="footer">
+    <div class="container" style="padding: 0 1rem;">
+        <div class="footer-grid">
+            <div class="footer-card">
+                <div class="footer-icon"><i class="fas fa-info-circle"></i></div>
+                <h3 id="footerAboutTitle">من نحن</h3>
+                <p id="footerAboutText">باديني موفيز هي منصة مجانية لمشاهدة الأفلام بجودة عالية وخوادم متعددة. كل صفحة تعرض 20 فيلماً لتصفح سلس.</p>
+            </div>
+            <div class="footer-card">
+                <div class="footer-icon"><i class="fas fa-envelope"></i></div>
+                <h3 id="footerContactTitle">اتصل بنا</h3>
+                <div class="contact-details">
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <a href="mailto:mzgindosky@icloud.com">support@badinimovies.com</a>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fab fa-telegram"></i>
+                        <a href="https://t.me/mzginlghazi">Telegram: @BadiniSupport</a>
+                    </div>
+                </div>
+                <div class="social-links">
+                    <a href="https://www.facebook.com/MzginLGhazi"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://x.com/mzginlghazi?s=21"><i class="fab fa-twitter"></i></a>
+                    <a href="https://www.instagram.com/mzgindosky/"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="footer-card">
+                <div class="footer-icon"><i class="fas fa-shield-alt"></i></div>
+                <h3 id="footerPrivacyTitle">سياسة الخصوصية</h3>
+                <p id="footerPrivacyText">نستخدم Google AdSense لتحسين تجربتك. بياناتك آمنة.</p>
+            </div>
         </div>
-        <div id="serverButtonsPanel" class="server-buttons-container"></div>
-        <div class="video-container" id="videoContainer">
-            <iframe id="embedIframe" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen frameborder="0"></iframe>
+        <div class="footer-bottom">
+            <p>&copy; 2025 BadiniMovies. 20 Movies per page | جميع الحقوق محفوظة</p>
         </div>
     </div>
+</footer>
+
+<div class="modal" id="videoModal">
+    <div class="modal-header">
+        <div class="modal-title-area"><h2 id="modalMovieTitle">Now Playing</h2></div>
+        <button class="close-modal" id="closeModal">&times;</button>
+    </div>
+    <div id="serverButtonsPanel" class="server-buttons-container"></div>
+    <div class="video-container" id="videoContainer">
+        <iframe id="embedIframe" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen frameborder="0"></iframe>
+    </div>
 </div>
+
 <script>
     (function() {
-        // ======================== MOVIE DATABASE WITH MULTI-SERVER SUPPORT ========================
-        // Each movie now has a 'servers' array. You can add unlimited server objects.
-        // Format: { label: "Server Name", url: "https://embed.url", icon: "fa-server" }
-        // Icon can be any Font Awesome 6 free icon class (e.g., fa-link, fa-cloud, fa-video).
-        // The first server in the array will be the default.
-        
+        // ---------- MOVIE DATABASE (unchanged but full) ----------
         const moviesData = [
-            { id: '1', titleEn: 'The Aftermath 2019', titleAr: 'ما بعد الأحداث ٢٠١٩', year: '2024', lang: 'both', posterUrl: 'https://observer.com/wp-content/uploads/sites/2/2019/03/aftermath-dom-ta_03670_rgb-1.jpg', 
+           { id: '1', titleEn: 'The Aftermath 2019', titleAr: 'ما بعد الأحداث ٢٠١٩', year: '2024', lang: 'both', posterUrl: 'https://observer.com/wp-content/uploads/sites/2/2019/03/aftermath-dom-ta_03670_rgb-1.jpg', 
               servers: [
                   { label: "VidSpeed", url: "https://www.vidspeeds.com/embed-1yjmv1iiev42.html", icon: "fa-server" },
-                  { label: "Mirror 1", url: "https://uqload.net/embed-example1.html", icon: "fa-link" },     // <--- ADD YOUR MIRROR LINK HERE
-                  { label: "Backup", url: "https://vidspeed.org/embed-example2.html", icon: "fa-cloud" }     // <--- ADD ANOTHER MIRROR
+                  { label: "Mirror 1", url: "https://uqload.net/embed-example1.html", icon: "fa-link" },
+                  { label: "Backup", url: "https://vidspeed.org/embed-example2.html", icon: "fa-cloud" }
               ] },
             { id: '2', titleEn: 'The Aftermath 2024', titleAr: 'الرجل التالي ٢٠٢٤', year: '2022', lang: 'both', posterUrl: 'https://upload.wikimedia.org/wikipedia/en/1/13/Aftermath2024.jpg',
               servers: [{ label: "Main", url: "https://1vid.xyz/embed-da6da2wutmc9.html", icon: "fa-server" }, { label: "Mirror", url: "https://1vid.xyz/embed-da6da2wutmc9.html", icon: "fa-link" }] },
@@ -585,44 +797,23 @@
               servers: [{ label: "Vidspeeds", url: "https://www.vidspeeds.com:2096/embed-a8tn3eyrf9lt.html", icon: "fa-server" },{label: "uploud", url: " https://uqload.net/embed-o9yalok0qu2d.html", icon: "fa-server"}] },
             { id: '46', titleEn: 'Heart Eyes', titleAr: 'heart eyes', year: '2025', lang: 'both', posterUrl: 'https://www.hawak.net/uploads/thumbs/b1ac04ec4-1.jpg',
               servers: [{ label: "Server1", url: "https://movearnpre.com/embed/e7kamtqd17nt", icon: "fa-server" },{label: "Server2", url: "https://hglink.to/e/5mwwowpbgim4", icon: "fa-server"},{label: "Server3", url: "https://movearnpre.com/embed/e7kamtqd17nt", icon: "fa-server"}] }
-
         ];
 
-        // view counters
         let viewCounts = {};
-        let counterInterval;
+        let currentLanguage = 'en';
+        let currentFilter = 'all';
+        let currentSearchQuery = '';
+        let currentPage = 1;
+        const ITEMS_PER_PAGE = 20;   // ✅ 20 movies per page as requested
 
         function initializeViewCounts() {
-            moviesData.forEach(movie => {
+            moviesData.forEach((movie, idx) => {
                 const baseViews = Math.floor(Math.random() * 15000) + 5000;
-                viewCounts[movie.id] = baseViews + (moviesData.indexOf(movie) < 10 ? Math.floor(Math.random() * 20000) + 10000 : 0);
+                viewCounts[movie.id] = baseViews + (idx < 10 ? Math.floor(Math.random() * 20000) : 0);
             });
         }
         function incrementViewCount(movieId) { viewCounts[movieId] += Math.floor(Math.random() * 5) + 1; }
-        function startAutoRefresh() {
-            counterInterval = setInterval(() => {
-                moviesData.forEach(movie => incrementViewCount(movie.id));
-                renderMovies();
-            }, Math.random() * 10000 + 15000);
-        }
-
-        // DOM elements
-        const moviesGrid = document.getElementById('moviesGrid');
-        const modal = document.getElementById('videoModal');
-        const closeModal = document.getElementById('closeModal');
-        const modalMovieTitle = document.getElementById('modalMovieTitle');
-        const filterBtns = document.querySelectorAll('.filter-btn');
-        const embedIframe = document.getElementById('embedIframe');
-        const serverButtonsPanel = document.getElementById('serverButtonsPanel');
-        const searchInput = document.getElementById('searchInput');
-        const clearSearchBtn = document.getElementById('clearSearchBtn');
-        const searchStats = document.getElementById('searchStats');
-
-        let currentFilter = 'all';
-        let currentLanguage = 'en';
-        let currentSearchQuery = '';
-        let currentMovie = null;
-
+        
         function getFilteredMovies() {
             let filtered = moviesData.filter(movie => {
                 if (currentFilter === 'all') return true;
@@ -636,36 +827,107 @@
             }
             return filtered;
         }
-        function updateSearchStats(count) {
-            if (!currentSearchQuery.trim()) { searchStats.innerHTML = ''; return; }
-            searchStats.innerHTML = currentLanguage === 'en' ? `Found ${count} movie${count !== 1 ? 's' : ''} matching "${escapeHtml(currentSearchQuery)}"` : `تم العثور على ${count} فيلماً تطابق "${escapeHtml(currentSearchQuery)}"`;
-        }
-        function renderMovies() {
-            const filtered = getFilteredMovies();
-            if (filtered.length === 0) {
-                moviesGrid.innerHTML = `<div class="no-results"><i class="fas fa-film-slash"></i><h3>${currentLanguage === 'en' ? 'No movies found' : 'لا توجد أفلام'}</h3><p>${currentLanguage === 'en' ? 'Try adjusting your search or filter.' : 'حاول تعديل البحث أو التصفية.'}</p></div>`;
-                updateSearchStats(0);
-                return;
-            }
-            updateSearchStats(filtered.length);
-            moviesGrid.innerHTML = filtered.map(movie => {
-                const displayTitle = currentLanguage === 'ar' ? movie.titleAr : movie.titleEn;
-                const langClass = movie.lang === 'ar' ? 'ar' : (movie.lang === 'both' ? 'both' : 'en');
-                const views = viewCounts[movie.id] || 0;
-                return `<div class="movie-card" onclick="playMovie('${movie.id}')">
-                            <div class="video-thumbnail"><img src="${movie.posterUrl}" alt="${displayTitle}" onerror="this.src='https://via.placeholder.com/300x180?text=No+Poster'"><div class="play-overlay"><i class="fas fa-play-circle"></i></div></div>
-                            <div class="movie-details"><div class="movie-title"><span>${displayTitle}</span><span class="movie-year">${movie.year}</span></div>
-                            <div class="movie-meta"><span class="lang-badge ${langClass}">${movie.lang === 'en' ? 'EN' : movie.lang === 'ar' ? 'AR' : 'EN/AR'}</span>
-                            <span class="watch-counter"><i class="fas fa-eye"></i> ${views.toLocaleString()}</span><i class="fas fa-video" style="color:#4CAF50;"></i></div></div></div>`;
-            }).join('');
-        }
 
+        function renderMoviesAndPagination() {
+            const filtered = getFilteredMovies();
+            const totalPages = Math.ceil(filtered.length / ITEMS_PER_PAGE);
+            if (currentPage > totalPages && totalPages > 0) currentPage = totalPages;
+            else if (totalPages === 0) currentPage = 1;
+            
+            const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+            const paginatedMovies = filtered.slice(startIndex, startIndex + ITEMS_PER_PAGE);
+            
+            // render grid
+            const moviesGrid = document.getElementById('moviesGrid');
+            if (paginatedMovies.length === 0) {
+                moviesGrid.innerHTML = `<div class="no-results"><i class="fas fa-film-slash"></i><h3>${currentLanguage === 'en' ? 'No movies found' : 'لا توجد أفلام'}</h3><p>${currentLanguage === 'en' ? 'Try adjusting search or filters.' : 'حاول تعديل البحث أو التصفية.'}</p></div>`;
+            } else {
+                moviesGrid.innerHTML = paginatedMovies.map(movie => {
+                    const displayTitle = currentLanguage === 'ar' ? movie.titleAr : movie.titleEn;
+                    const langClass = movie.lang === 'ar' ? 'ar' : (movie.lang === 'both' ? 'both' : 'en');
+                    const views = viewCounts[movie.id] || 0;
+                    return `<div class="movie-card" onclick="playMovie('${movie.id}')">
+                                <div class="video-thumbnail"><img src="${movie.posterUrl}" alt="${displayTitle}" onerror="this.src='https://via.placeholder.com/300x180?text=No+Poster'"><div class="play-overlay"><i class="fas fa-play-circle"></i></div></div>
+                                <div class="movie-details"><div class="movie-title"><span>${escapeHtml(displayTitle)}</span><span class="movie-year">${movie.year}</span></div>
+                                <div class="movie-meta"><span class="lang-badge ${langClass}">${movie.lang === 'en' ? 'EN' : movie.lang === 'ar' ? 'AR' : 'EN/AR'}</span>
+                                <span class="watch-counter"><i class="fas fa-eye"></i> ${views.toLocaleString()}</span><i class="fas fa-video" style="color:#4CAF50;"></i></div></div></div>`;
+                }).join('');
+            }
+            
+            // update search stats
+            const searchStats = document.getElementById('searchStats');
+            if (currentSearchQuery.trim() !== '') {
+                searchStats.innerHTML = currentLanguage === 'en' ? `Found ${filtered.length} movie(s) matching "${escapeHtml(currentSearchQuery)}"` : `تم العثور على ${filtered.length} فيلماً تطابق "${escapeHtml(currentSearchQuery)}"`;
+            } else {
+                searchStats.innerHTML = '';
+            }
+            
+            renderPaginationControls(totalPages, filtered.length);
+        }
+        
+        function renderPaginationControls(totalPages, totalItems) {
+            const wrapper = document.getElementById('paginationWrapper');
+            if (!wrapper) return;
+            if (totalPages <= 1) { wrapper.innerHTML = ''; return; }
+            
+            const isEn = currentLanguage === 'en';
+            let buttonsHtml = '';
+            
+            // Prev button
+            buttonsHtml += `<button class="pagination-btn prev-btn ${currentPage === 1 ? 'disabled' : ''}" data-page="prev"><i class="fas fa-chevron-left"></i> ${isEn ? 'Prev' : 'السابق'}</button>`;
+            
+            // Page numbers (limit to max 5 visible)
+            let startPage = Math.max(1, currentPage - 2);
+            let endPage = Math.min(totalPages, startPage + 4);
+            if (endPage - startPage < 4) startPage = Math.max(1, endPage - 4);
+            for (let i = startPage; i <= endPage; i++) {
+                buttonsHtml += `<button class="pagination-btn ${i === currentPage ? 'active-page' : ''}" data-page="${i}">${i}</button>`;
+            }
+            
+            // Next button
+            buttonsHtml += `<button class="pagination-btn next-btn ${currentPage === totalPages ? 'disabled' : ''}" data-page="next"><i class="fas fa-chevron-right"></i> ${isEn ? 'Next' : 'التالي'}</button>`;
+            
+            // optional info
+            const startItem = (currentPage-1)*ITEMS_PER_PAGE + 1;
+            const endItem = Math.min(currentPage * ITEMS_PER_PAGE, totalItems);
+            const infoSpan = `<span class="page-info"><i class="fas fa-film"></i> ${startItem}-${endItem} / ${totalItems}</span>`;
+            
+            wrapper.innerHTML = buttonsHtml + infoSpan;
+            
+            // attach events via delegation
+            document.querySelectorAll('.pagination-btn').forEach(btn => {
+                btn.removeEventListener('click', paginationClickHandler);
+                btn.addEventListener('click', paginationClickHandler);
+            });
+        }
+        
+        function paginationClickHandler(e) {
+            const btn = e.currentTarget;
+            if (btn.classList.contains('disabled')) return;
+            const pageVal = btn.dataset.page;
+            const filteredTotal = getFilteredMovies().length;
+            const totalPages = Math.ceil(filteredTotal / ITEMS_PER_PAGE);
+            let newPage = currentPage;
+            if (pageVal === 'prev') newPage = Math.max(1, currentPage - 1);
+            else if (pageVal === 'next') newPage = Math.min(totalPages, currentPage + 1);
+            else if (!isNaN(parseInt(pageVal))) newPage = parseInt(pageVal);
+            if (newPage !== currentPage && newPage >= 1 && newPage <= totalPages) {
+                currentPage = newPage;
+                renderMoviesAndPagination();
+            }
+        }
+        
+        function resetToFirstPage() { currentPage = 1; renderMoviesAndPagination(); }
+        
         window.playMovie = function(movieId) {
             const movie = moviesData.find(m => m.id === movieId);
             if (!movie || !movie.servers || movie.servers.length === 0) { alert('No video source available.'); return; }
             incrementViewCount(movieId);
-            renderMovies();
-            currentMovie = movie;
+            renderMoviesAndPagination();  // refresh views
+            const modal = document.getElementById('videoModal');
+            const modalMovieTitle = document.getElementById('modalMovieTitle');
+            const serverButtonsPanel = document.getElementById('serverButtonsPanel');
+            const embedIframe = document.getElementById('embedIframe');
             modal.classList.add('active');
             modalMovieTitle.textContent = currentLanguage === 'ar' ? movie.titleAr : movie.titleEn;
             serverButtonsPanel.innerHTML = '';
@@ -683,36 +945,46 @@
             });
             embedIframe.src = movie.servers[0].url;
         };
-
-        closeModal.addEventListener('click', () => {
-            modal.classList.remove('active');
-            embedIframe.src = '';
-            currentMovie = null;
-        });
-        modal.addEventListener('click', (e) => { if (e.target === modal) closeModal.click(); });
-        document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && modal.classList.contains('active')) closeModal.click(); });
-
-        filterBtns.forEach(btn => {
+        
+        // close modal logic
+        const modalEl = document.getElementById('videoModal');
+        const closeModalBtn = document.getElementById('closeModal');
+        closeModalBtn.addEventListener('click', () => { modalEl.classList.remove('active'); document.getElementById('embedIframe').src = ''; });
+        modalEl.addEventListener('click', (e) => { if (e.target === modalEl) closeModalBtn.click(); });
+        document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && modalEl.classList.contains('active')) closeModalBtn.click(); });
+        
+        // search & filter
+        const searchInput = document.getElementById('searchInput');
+        const clearSearchBtn = document.getElementById('clearSearchBtn');
+        searchInput.addEventListener('input', () => { currentSearchQuery = searchInput.value; clearSearchBtn.style.display = currentSearchQuery.length > 0 ? 'block' : 'none'; resetToFirstPage(); });
+        clearSearchBtn.addEventListener('click', () => { searchInput.value = ''; currentSearchQuery = ''; clearSearchBtn.style.display = 'none'; resetToFirstPage(); searchInput.focus(); });
+        
+        document.querySelectorAll('.filter-btn').forEach(btn => {
             btn.addEventListener('click', () => {
-                filterBtns.forEach(b => b.classList.remove('active'));
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
                 currentFilter = btn.dataset.filter;
-                renderMovies();
+                resetToFirstPage();
             });
         });
-
+        
         window.toggleLanguage = function() {
             currentLanguage = currentLanguage === 'en' ? 'ar' : 'en';
             document.getElementById('langDisplay').textContent = currentLanguage === 'en' ? 'EN | عربي' : 'عربي | EN';
             document.getElementById('libraryTitle').textContent = currentLanguage === 'en' ? 'Movie Library / مكتبة الأفلام' : 'مكتبة الأفلام / Movie Library';
-            renderMovies();
+            updateFooterTexts();
+            renderMoviesAndPagination();
         };
-
-        function handleSearchInput() { currentSearchQuery = searchInput.value; clearSearchBtn.style.display = currentSearchQuery.length > 0 ? 'block' : 'none'; renderMovies(); }
-        function clearSearch() { searchInput.value = ''; currentSearchQuery = ''; clearSearchBtn.style.display = 'none'; renderMovies(); searchInput.focus(); }
-        searchInput.addEventListener('input', handleSearchInput);
-        clearSearchBtn.addEventListener('click', clearSearch);
-
+        
+        function updateFooterTexts() {
+            const isEn = currentLanguage === 'en';
+            document.getElementById('footerAboutTitle').innerHTML = isEn ? 'About Us' : 'من نحن';
+            document.getElementById('footerContactTitle').innerHTML = isEn ? 'Contact Us' : 'اتصل بنا';
+            document.getElementById('footerPrivacyTitle').innerHTML = isEn ? 'Privacy Policy' : 'سياسة الخصوصية';
+            document.getElementById('footerAboutText').innerHTML = isEn ? 'BadiniMovies offers 20 movies per page, multi-server streaming, English & Arabic films.' : 'باديني موفيز: 20 فلم في كل صفحة، خوادم متعددة، أفلام عربية وإنجليزية.';
+            document.getElementById('footerPrivacyText').innerHTML = isEn ? 'We use Google AdSense & cookies for better experience. Your data is secure.' : 'نستخدم AdSense وملفات تعريف الارتباط، بياناتك آمنة.';
+        }
+        
         function buildMarqueeContent() {
             const track = document.getElementById('marqueeTrack');
             if (!track) return;
@@ -720,12 +992,13 @@
             moviesData.forEach(m => { html += `<div class="marquee-item"><i class="fas fa-play-circle"></i><span class="film-name-en">${escapeHtml(m.titleEn)}</span><span class="separator-dot">/</span><span class="film-name-ar">${escapeHtml(m.titleAr)}</span><i class="fas fa-star"></i></div>`; });
             track.innerHTML = html + html;
         }
-        function escapeHtml(str) { return str.replace(/[&<>]/g, function(m) { if (m === '&') return '&amp;'; if (m === '<') return '&lt;'; if (m === '>') return '&gt;'; return m; }); }
-
+        
+        function escapeHtml(str) { return str.replace(/[&<>]/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[m])); }
+        
         initializeViewCounts();
         buildMarqueeContent();
-        renderMovies();
-        startAutoRefresh();
+        renderMoviesAndPagination();
+        updateFooterTexts();
     })();
 </script>
 </body>

@@ -26,7 +26,7 @@
     <meta charset="UTF-8">
         <meta name="referrer" content="no-referrer-when-downgrade" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Badini-Movies| Watch Free Movies </title>
+    <title>Badini-Movies| Watch Free Movies - روابط فريدة للمشاركة</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         * {
@@ -889,7 +889,7 @@
         let currentFilter = 'all';
         let currentSearchQuery = '';
         let currentPage = 1;
-        const ITEMS_PER_PAGE = 20;   // ✅ 20 movies per page as requested
+        const ITEMS_PER_PAGE = 20;
 
         function initializeViewCounts() {
             moviesData.forEach((movie, idx) => {
@@ -922,7 +922,6 @@
             const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
             const paginatedMovies = filtered.slice(startIndex, startIndex + ITEMS_PER_PAGE);
             
-            // render grid
             const moviesGrid = document.getElementById('moviesGrid');
             if (paginatedMovies.length === 0) {
                 moviesGrid.innerHTML = `<div class="no-results"><i class="fas fa-film-slash"></i><h3>${currentLanguage === 'en' ? 'No movies found' : 'لا توجد أفلام'}</h3><p>${currentLanguage === 'en' ? 'Try adjusting search or filters.' : 'حاول تعديل البحث أو التصفية.'}</p></div>`;
@@ -939,7 +938,6 @@
                 }).join('');
             }
             
-            // update search stats
             const searchStats = document.getElementById('searchStats');
             if (currentSearchQuery.trim() !== '') {
                 searchStats.innerHTML = currentLanguage === 'en' ? `Found ${filtered.length} movie(s) matching "${escapeHtml(currentSearchQuery)}"` : `تم العثور على ${filtered.length} فيلماً تطابق "${escapeHtml(currentSearchQuery)}"`;
@@ -957,29 +955,18 @@
             
             const isEn = currentLanguage === 'en';
             let buttonsHtml = '';
-            
-            // Prev button
             buttonsHtml += `<button class="pagination-btn prev-btn ${currentPage === 1 ? 'disabled' : ''}" data-page="prev"><i class="fas fa-chevron-left"></i> ${isEn ? 'Prev' : 'السابق'}</button>`;
-            
-            // Page numbers (limit to max 5 visible)
             let startPage = Math.max(1, currentPage - 2);
             let endPage = Math.min(totalPages, startPage + 4);
             if (endPage - startPage < 4) startPage = Math.max(1, endPage - 4);
             for (let i = startPage; i <= endPage; i++) {
                 buttonsHtml += `<button class="pagination-btn ${i === currentPage ? 'active-page' : ''}" data-page="${i}">${i}</button>`;
             }
-            
-            // Next button
             buttonsHtml += `<button class="pagination-btn next-btn ${currentPage === totalPages ? 'disabled' : ''}" data-page="next"><i class="fas fa-chevron-right"></i> ${isEn ? 'Next' : 'التالي'}</button>`;
-            
-            // optional info
             const startItem = (currentPage-1)*ITEMS_PER_PAGE + 1;
             const endItem = Math.min(currentPage * ITEMS_PER_PAGE, totalItems);
             const infoSpan = `<span class="page-info"><i class="fas fa-film"></i> ${startItem}-${endItem} / ${totalItems}</span>`;
-            
             wrapper.innerHTML = buttonsHtml + infoSpan;
-            
-            // attach events via delegation
             document.querySelectorAll('.pagination-btn').forEach(btn => {
                 btn.removeEventListener('click', paginationClickHandler);
                 btn.addEventListener('click', paginationClickHandler);
@@ -1004,11 +991,23 @@
         
         function resetToFirstPage() { currentPage = 1; renderMoviesAndPagination(); }
         
-        window.playMovie = function(movieId) {
+        // ========== DEEP LINKING: unique URL for each movie ==========
+        function updateUrlForMovie(movieId) {
+            const url = new URL(window.location);
+            if (movieId) {
+                url.searchParams.set('movie', movieId);
+            } else {
+                url.searchParams.delete('movie');
+            }
+            window.history.pushState({ movieId: movieId || null }, '', url);
+        }
+        
+        // Modified playMovie to support addToHistory flag
+        window.playMovie = function(movieId, addToHistory = true) {
             const movie = moviesData.find(m => m.id === movieId);
             if (!movie || !movie.servers || movie.servers.length === 0) { alert('No video source available.'); return; }
             incrementViewCount(movieId);
-            renderMoviesAndPagination();  // refresh views
+            renderMoviesAndPagination();
             const modal = document.getElementById('videoModal');
             const modalMovieTitle = document.getElementById('modalMovieTitle');
             const serverButtonsPanel = document.getElementById('serverButtonsPanel');
@@ -1029,14 +1028,43 @@
                 serverButtonsPanel.appendChild(btn);
             });
             embedIframe.src = movie.servers[0].url;
+            if (addToHistory) updateUrlForMovie(movieId);
         };
         
-        // close modal logic
+        function closeModalAndClearUrl() {
+            const modalEl = document.getElementById('videoModal');
+            const iframe = document.getElementById('embedIframe');
+            modalEl.classList.remove('active');
+            iframe.src = '';
+            if (window.location.search.includes('movie')) {
+                updateUrlForMovie(null);
+            }
+        }
+        
+        function openMovieFromUrl() {
+            const params = new URLSearchParams(window.location.search);
+            const movieId = params.get('movie');
+            if (movieId && moviesData.some(m => m.id === movieId)) {
+                setTimeout(() => window.playMovie(movieId, false), 100);
+            }
+        }
+        
+        // close modal logic with URL clearing
         const modalEl = document.getElementById('videoModal');
         const closeModalBtn = document.getElementById('closeModal');
-        closeModalBtn.addEventListener('click', () => { modalEl.classList.remove('active'); document.getElementById('embedIframe').src = ''; });
-        modalEl.addEventListener('click', (e) => { if (e.target === modalEl) closeModalBtn.click(); });
-        document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && modalEl.classList.contains('active')) closeModalBtn.click(); });
+        closeModalBtn.addEventListener('click', () => closeModalAndClearUrl());
+        modalEl.addEventListener('click', (e) => { if (e.target === modalEl) closeModalAndClearUrl(); });
+        document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && modalEl.classList.contains('active')) closeModalAndClearUrl(); });
+        
+        // handle browser back/forward
+        window.addEventListener('popstate', (event) => {
+            const movieId = event.state?.movieId;
+            if (movieId && moviesData.some(m => m.id === movieId)) {
+                window.playMovie(movieId, false);
+            } else if (modalEl.classList.contains('active')) {
+                closeModalAndClearUrl();
+            }
+        });
         
         // search & filter
         const searchInput = document.getElementById('searchInput');
@@ -1066,7 +1094,7 @@
             document.getElementById('footerAboutTitle').innerHTML = isEn ? 'About Us' : 'من نحن';
             document.getElementById('footerContactTitle').innerHTML = isEn ? 'Contact Us' : 'اتصل بنا';
             document.getElementById('footerPrivacyTitle').innerHTML = isEn ? 'Privacy Policy' : 'سياسة الخصوصية';
-            document.getElementById('footerAboutText').innerHTML = isEn ? 'BadiniMovies offers 20 movies per page, multi-server streaming, English & Arabic films.' : 'باديني موفيز: 20 فلم في كل صفحة، خوادم متعددة، أفلام عربية وإنجليزية.';
+            document.getElementById('footerAboutText').innerHTML = isEn ? 'BadiniMovies offers 20 movies per page, multi-server streaming, English & Arabic films. Each movie has a unique shareable link.' : 'باديني موفيز: 20 فلم في كل صفحة، خوادم متعددة، أفلام عربية وإنجليزية. كل فيلم له رابط فريد للمشاركة.';
             document.getElementById('footerPrivacyText').innerHTML = isEn ? 'We use Google AdSense & cookies for better experience. Your data is secure.' : 'نستخدم AdSense وملفات تعريف الارتباط، بياناتك آمنة.';
         }
         
@@ -1084,6 +1112,7 @@
         buildMarqueeContent();
         renderMoviesAndPagination();
         updateFooterTexts();
+        openMovieFromUrl(); // open movie if URL contains ?movie=xxx
     })();
 </script>
 </body>

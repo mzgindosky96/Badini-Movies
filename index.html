@@ -101,12 +101,6 @@
             border-left: 5px solid #e4b363;
             padding-left: 1rem;
         }
-        .section-title h1 {
-            font-size: inherit;
-            font-weight: inherit;
-            margin: 0;
-            color: #f0eef7;
-        }
         .btn-secondary {
             background: transparent;
             border: 2px solid #4b446b;
@@ -647,8 +641,7 @@
         </div>
     </div>
     <div class="section-title">
-        <i class="fas fa-film"></i>
-        <h1 id="dynamicMovieTitle">مكتبة الأفلام</h1>
+        <i class="fas fa-film"></i> <span id="libraryTitle">Movie Library / مكتبة الأفلام</span>
     </div>
     <div class="search-container">
         <div class="search-wrapper">
@@ -731,7 +724,27 @@
         // ---------- MOVIE DATABASE (unchanged but full) ----------
         const moviesData = [
 
-{ id: '77', titleEn:' فلم مترجم Crazy Lake',titleAr: 'فلم مترجم ', year: '2016', lang: 'both', posterUrl: 'https://dramacafe-tv.diy/uploads/thumbs/6c72fcbdf-1.jpg',
+{ id: '87', titleEn:' فلم مترجم Fragments of Love', titleAr: 'فلم مترجم ', year: '2016', lang: 'both', posterUrl: 'https://m.media-amazon.com/images/S/pv-target-images/fd4efb6d1105e0d734b120dbb977eaadc12771a50c1a0cf25ee3d56f7dfcfb17.png',
+              servers: [{ label: "vipserver", url: "https://vipserver.liiivideo.com/embed-5nzv28p048nw.html", icon: "fa-server" },{ label: "vidroba", url: "https://ok.ru/videoembed/273745119994", icon: "fa-server" },{label: "ok.ru", url: "http://ok.ru/videoembed/7791067073149", icon: "fa-server"}] },
+{ id: '86', titleEn:' فلم مترجم The Love Witch', titleAr: 'فلم مترجم ', year: '2016', lang: 'both', posterUrl: 'https://images.mubicdn.net/images/artworks/867928/cache-867928-1759348886/images-original.png',
+              servers: [{ label: "vidspeeds", url: "https://www.vidspeeds.com:2053/embed-vs5yzbxcx4ta.html", icon: "fa-server" },{ label: "vidroba", url: "https://www.vidroba.com:2053/embed-8neucqw1vr5e.html", icon: "fa-server" },{label: "ok.ru", url: "https://www.ok.ru/videoembed/237023202041", icon: "fa-server"}] },
+{ id: '85', titleEn:' فلم مترجم Blair Witch', titleAr: 'فلم مترجم ', year: '2016', lang: 'both', posterUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJivnzMZF4HWkYuMJTZ_taSX973UU1o5nim_6Px2LqzYC1-fwcd8cUc-cZ&s=10',
+              servers: [{ label: "vidroba", url: "https://www.vidroba.com:2053/embed-yqzvn912w9g8.html", icon: "fa-server" },{ label: "ok.ru", url: "https://www.ok.ru/videoembed/407736552134", icon: "fa-server" },{label: "vidspeeds", url: "https://www.vidspeeds.com:2053/embed-das4vdk7t6j7.html", icon: "fa-server"}] },
+{ id: '84', titleEn:' فلم مترجم Whisper of The Witch', titleAr: 'فلم مترجم ', year: '2023', lang: 'both', posterUrl: 'https://i.ytimg.com/vi/lnSBDIJshQA/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLBhlOzuXonbmHwo3BuQvXCt_egKWg',
+              servers: [{ label: "vkserver", url: "https://vk.com/video_ext.php?oid=745497736&id=456243725&hash=f1ebff2d055e085c", icon: "fa-server" },{ label: "playerwish", url: "https://playerwish.com/e/pod3xhtfjaza", icon: "fa-server" },{label: "vidmoly", url: "https://vidhidehub.com/embed/9skvqmocc6xt", icon: "fa-server"}] },
+{ id: '83', titleEn:' فلم مترجم More The Merrier +18', titleAr: 'فلم مترجم ', year: '2021', lang: 'both', posterUrl: 'https://c.ifushaar.com/wp-content/uploads/2021/12/More-the-Merrier-2021.jpg',
+              servers: [{ label: "vidspeeds", url: "https://www.vidspeeds.com:2053/embed-w5h7t291mpb7.html", icon: "fa-server" },{ label: "vidroba", url: "https://www.vidroba.com:2053/embed-53sr78ou24ks.html", icon: "fa-server" },{label: "vipserver", url: "https://vipserver.liiivideo.com/embed-nq5akbcig6oo.html", icon: "fa-server"}] },
+{ id: '82', titleEn:' فلم مترجم Q 2011 +18', titleAr: 'فلم مترجم ', year: '2011', lang: 'both', posterUrl: 'https://zamunda.bg/wp-content/uploads/2026/01/%D0%B6%D0%B5%D0%BB%D0%B0%D0%BD%D0%B8%D0%B5.jpg',
+              servers: [{ label: "swdyu", url: "https://swdyu.com/e/pr1n5w1ccsdm", icon: "fa-server" },{ label: "server2", url: "https://vipserver.liiivideo.com/embed-le3uyq5vr6l8.html", icon: "fa-server" },{label: "iserver", url: "https://vipserver.liiivideo.com/embed-le3uyq5vr6l8.html", icon: "fa-server"}] },
+{ id: '81', titleEn:' فلم مترجم Monamour+18', titleAr: 'فلم مترجم ', year: '2006', lang: 'both', posterUrl: 'https://i.ytimg.com/vi/Ir9U49YfMtE/mqdefault.jpg',
+              servers: [{ label: "vk", url: "https://vk.com/video_ext.php?oid=784675179&id=456239019&hash=218c5bd08ed109ab", icon: "fa-server" },{ label: "swdyu", url: "https://swdyu.com/e/bn4xduox692n", icon: "fa-server" },{label: "iserver", url: "https://i.all-vid/embed-8z3bkg4zbgm8.html", icon: "fa-server"}] },
+{ id: '80', titleEn:' فلم مترجم You Get Me', titleAr: 'فلم مترجم ', year: '2017', lang: 'both', posterUrl: 'https://hia.fosta-tv.net/uploads/thumbs/79f3957b6-1.jpg',
+              servers: [{ label: "Vidspeeds", url: "https://www.vidspeeds.com:2053/embed-dax4cweautdn.html", icon: "fa-server" },{ label: "iserver", url: "https://i.all-vid/embed-qovjlub7jvzw.html", icon: "fa-server" },{label: "Vidroba", url: "https://www.vidroba.com:2053/embed-7scb1lqmnvsc.html", icon: "fa-server"}] },
+{ id: '79', titleEn:' فلم مترجم XX', titleAr: 'فلم مترجم ', year: '2017', lang: 'both', posterUrl: 'https://ew.com/thmb/QVF6dLe5iX_cN8cHaRZ1QslrIi4=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/poster-fb-4671b8afa5524acfa3743868a46430a8.jpg',
+              servers: [{ label: "Vidspeeds", url: "https://www.vidspeeds.com:2053/embed-ngj1h0jhqie1.html", icon: "fa-server" },{ label: "ok.ru", url: "https://www.ok.ru/videoembed/4200393476690", icon: "fa-server" },{label: "Vidroba", url: "https://www.vidroba.com:2053/embed-p6uju8euhqte.html", icon: "fa-server"}] },
+{ id: '78', titleEn:' فلم مترجم The Bar', titleAr: 'فلم مترجم ', year: '2017', lang: 'both', posterUrl: 'https://w30.shahidwbas.tv/uploads/thumbs/15a606755-1.jpg',
+              servers: [{ label: "Vidspeeds", url: "https://www.vidspeeds.com:2053/embed-gvarbpm3thhm.html", icon: "fa-server" },{ label: "iserver", url: "https://i.all-vid/embed-5gw94obodd9n.html", icon: "fa-server" },{label: "Vidroba", url: "https://www.vidroba.com:2053/embed-xlw448lw8agk.html", icon: "fa-server"}] },
+{ id: '77', titleEn:' فلم مترجم Crazy Lake', titleAr: 'فلم مترجم ', year: '2016', lang: 'both', posterUrl: 'https://dramacafe-tv.diy/uploads/thumbs/6c72fcbdf-1.jpg',
               servers: [{ label: "Vidspeeds", url: "https://www.vidspeeds.com:2096/embed-vvuguoqe3rem.html", icon: "fa-server" },{ label: "Upload", url: "https://uqload.net/embed-vcmd306unsz4.html", icon: "fa-server" },{label: "ok.ru", url: "https://www.ok.ru/videoembed/8128189893", icon: "fa-server"}] },
 { id: '76', titleEn:' فلم مترجم Army of the Dead', titleAr: 'فلم مترجم ', year: '2021', lang: 'both', posterUrl: 'https://wecima.ahwaktv.net/uploads/thumbs/729f54b1c-1.jpg',
               servers: [{ label: "Vidspeeds", url: "https://www.vidspeeds.com/embed-hw8p97jbc8bd.html", icon: "fa-server" },{ label: "Upload", url: "https://uqload.net/embed-mzoz0g4ek846.html", icon: "fa-server" },{label: "ok.ru", url: "https://www.ok.ru/videoembed/8128189893301", icon: "fa-server"}] },
@@ -907,24 +920,6 @@
         }
         function incrementViewCount(movieId) { viewCounts[movieId] += Math.floor(Math.random() * 5) + 1; }
         
-        // ========== H1 dynamic title function ==========
-        function updateH1Title() {
-            const h1 = document.getElementById('dynamicMovieTitle');
-            if (!h1) return;
-            const params = new URLSearchParams(window.location.search);
-            const movieId = params.get('movie');
-            if (movieId) {
-                const movie = moviesData.find(m => m.id === movieId);
-                if (movie) {
-                    const title = currentLanguage === 'ar' ? movie.titleAr : movie.titleEn;
-                    h1.textContent = title;
-                    return;
-                }
-            }
-            // default text based on language
-            h1.textContent = currentLanguage === 'ar' ? 'مكتبة الأفلام' : 'Movie Library';
-        }
-        
         function getFilteredMovies() {
             let filtered = moviesData.filter(movie => {
                 if (currentFilter === 'all') return true;
@@ -1026,7 +1021,6 @@
                 url.searchParams.delete('movie');
             }
             window.history.pushState({ movieId: movieId || null }, '', url);
-            updateH1Title(); // update H1 when URL changes
         }
         
         // Modified playMovie to support addToHistory flag
@@ -1056,7 +1050,6 @@
             });
             embedIframe.src = movie.servers[0].url;
             if (addToHistory) updateUrlForMovie(movieId);
-            else updateH1Title(); // ensure H1 updates even without history push
         };
         
         function closeModalAndClearUrl() {
@@ -1066,8 +1059,6 @@
             iframe.src = '';
             if (window.location.search.includes('movie')) {
                 updateUrlForMovie(null);
-            } else {
-                updateH1Title(); // ensure default title
             }
         }
         
@@ -1076,8 +1067,6 @@
             const movieId = params.get('movie');
             if (movieId && moviesData.some(m => m.id === movieId)) {
                 setTimeout(() => window.playMovie(movieId, false), 100);
-            } else {
-                updateH1Title();
             }
         }
         
@@ -1095,8 +1084,6 @@
                 window.playMovie(movieId, false);
             } else if (modalEl.classList.contains('active')) {
                 closeModalAndClearUrl();
-            } else {
-                updateH1Title();
             }
         });
         
@@ -1118,7 +1105,7 @@
         window.toggleLanguage = function() {
             currentLanguage = currentLanguage === 'en' ? 'ar' : 'en';
             document.getElementById('langDisplay').textContent = currentLanguage === 'en' ? 'EN | عربي' : 'عربي | EN';
-            updateH1Title(); // update H1 when language changes
+            document.getElementById('libraryTitle').textContent = currentLanguage === 'en' ? 'Movie Library / مكتبة الأفلام' : 'مكتبة الأفلام / Movie Library';
             updateFooterTexts();
             renderMoviesAndPagination();
         };

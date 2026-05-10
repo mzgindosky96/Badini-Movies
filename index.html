@@ -101,6 +101,12 @@
             border-left: 5px solid #e4b363;
             padding-left: 1rem;
         }
+        .section-title h1 {
+            font-size: inherit;
+            font-weight: inherit;
+            margin: 0;
+            color: #f0eef7;
+        }
         .btn-secondary {
             background: transparent;
             border: 2px solid #4b446b;
@@ -641,7 +647,8 @@
         </div>
     </div>
     <div class="section-title">
-        <i class="fas fa-film"></i> <span id="libraryTitle">Movie Library / مكتبة الأفلام</span>
+        <i class="fas fa-film"></i>
+        <h1 id="dynamicMovieTitle">مكتبة الأفلام</h1>
     </div>
     <div class="search-container">
         <div class="search-wrapper">
@@ -723,7 +730,8 @@
     (function() {
         // ---------- MOVIE DATABASE (unchanged but full) ----------
         const moviesData = [
-{ id: '77', titleEn:' فلم مترجم Crazy Lake', titleAr: 'فلم مترجم ', year: '2016', lang: 'both', posterUrl: 'https://dramacafe-tv.diy/uploads/thumbs/6c72fcbdf-1.jpg',
+
+{ id: '77', titleEn:' فلم مترجم Crazy Lake',titleAr: 'فلم مترجم ', year: '2016', lang: 'both', posterUrl: 'https://dramacafe-tv.diy/uploads/thumbs/6c72fcbdf-1.jpg',
               servers: [{ label: "Vidspeeds", url: "https://www.vidspeeds.com:2096/embed-vvuguoqe3rem.html", icon: "fa-server" },{ label: "Upload", url: "https://uqload.net/embed-vcmd306unsz4.html", icon: "fa-server" },{label: "ok.ru", url: "https://www.ok.ru/videoembed/8128189893", icon: "fa-server"}] },
 { id: '76', titleEn:' فلم مترجم Army of the Dead', titleAr: 'فلم مترجم ', year: '2021', lang: 'both', posterUrl: 'https://wecima.ahwaktv.net/uploads/thumbs/729f54b1c-1.jpg',
               servers: [{ label: "Vidspeeds", url: "https://www.vidspeeds.com/embed-hw8p97jbc8bd.html", icon: "fa-server" },{ label: "Upload", url: "https://uqload.net/embed-mzoz0g4ek846.html", icon: "fa-server" },{label: "ok.ru", url: "https://www.ok.ru/videoembed/8128189893301", icon: "fa-server"}] },
@@ -899,6 +907,24 @@
         }
         function incrementViewCount(movieId) { viewCounts[movieId] += Math.floor(Math.random() * 5) + 1; }
         
+        // ========== H1 dynamic title function ==========
+        function updateH1Title() {
+            const h1 = document.getElementById('dynamicMovieTitle');
+            if (!h1) return;
+            const params = new URLSearchParams(window.location.search);
+            const movieId = params.get('movie');
+            if (movieId) {
+                const movie = moviesData.find(m => m.id === movieId);
+                if (movie) {
+                    const title = currentLanguage === 'ar' ? movie.titleAr : movie.titleEn;
+                    h1.textContent = title;
+                    return;
+                }
+            }
+            // default text based on language
+            h1.textContent = currentLanguage === 'ar' ? 'مكتبة الأفلام' : 'Movie Library';
+        }
+        
         function getFilteredMovies() {
             let filtered = moviesData.filter(movie => {
                 if (currentFilter === 'all') return true;
@@ -1000,6 +1026,7 @@
                 url.searchParams.delete('movie');
             }
             window.history.pushState({ movieId: movieId || null }, '', url);
+            updateH1Title(); // update H1 when URL changes
         }
         
         // Modified playMovie to support addToHistory flag
@@ -1029,6 +1056,7 @@
             });
             embedIframe.src = movie.servers[0].url;
             if (addToHistory) updateUrlForMovie(movieId);
+            else updateH1Title(); // ensure H1 updates even without history push
         };
         
         function closeModalAndClearUrl() {
@@ -1038,6 +1066,8 @@
             iframe.src = '';
             if (window.location.search.includes('movie')) {
                 updateUrlForMovie(null);
+            } else {
+                updateH1Title(); // ensure default title
             }
         }
         
@@ -1046,6 +1076,8 @@
             const movieId = params.get('movie');
             if (movieId && moviesData.some(m => m.id === movieId)) {
                 setTimeout(() => window.playMovie(movieId, false), 100);
+            } else {
+                updateH1Title();
             }
         }
         
@@ -1063,6 +1095,8 @@
                 window.playMovie(movieId, false);
             } else if (modalEl.classList.contains('active')) {
                 closeModalAndClearUrl();
+            } else {
+                updateH1Title();
             }
         });
         
@@ -1084,7 +1118,7 @@
         window.toggleLanguage = function() {
             currentLanguage = currentLanguage === 'en' ? 'ar' : 'en';
             document.getElementById('langDisplay').textContent = currentLanguage === 'en' ? 'EN | عربي' : 'عربي | EN';
-            document.getElementById('libraryTitle').textContent = currentLanguage === 'en' ? 'Movie Library / مكتبة الأفلام' : 'مكتبة الأفلام / Movie Library';
+            updateH1Title(); // update H1 when language changes
             updateFooterTexts();
             renderMoviesAndPagination();
         };

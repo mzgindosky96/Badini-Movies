@@ -54,7 +54,7 @@
             justify-content: space-between;
             flex-wrap: wrap;
             gap: 1.5rem;
-            margin-bottom: 2.5rem;
+            margin-bottom: 2rem;
             border-bottom: 2px solid #2f2b45;
             padding-bottom: 1rem;
         }
@@ -342,7 +342,6 @@
             border-radius: 32px;
             margin: 2rem 0;
         }
-        /* ========== PAGINATION STYLES ========== */
         .pagination-container {
             display: flex;
             justify-content: center;
@@ -503,10 +502,28 @@
             margin-bottom: 2rem;
             flex-wrap: wrap;
         }
-
-        /* FOOTER */
+        /* style for the moved H3 (all movies names) */
+        .all-movies-h3 {
+            background: linear-gradient(95deg, #1f1c2e, #151225);
+            border-radius: 30px;
+            padding: 0.9rem 1.4rem;
+            margin: 1rem 0 2rem 0;
+            border-left: 6px solid #e4b363;
+            font-size: 1rem;
+            font-weight: 500;
+            max-height: 120px;
+            overflow-y: auto;
+            line-height: 1.6;
+            word-break: break-word;
+            color: #f0eef7;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+        .all-movies-h3 i {
+            color: #e4b363;
+            margin-right: 8px;
+        }
         .footer {
-            margin-top: 5rem;
+            margin-top: 2rem;
             padding: 3rem 0 2rem;
             background: linear-gradient(145deg, #12101f 0%, #0a0912 100%);
             border-radius: 48px 48px 24px 24px;
@@ -624,6 +641,7 @@
             .footer-card { padding: 1.2rem; }
             .footer-card h3 { font-size: 1.2rem; }
             .pagination-btn { padding: 0.4rem 0.9rem; font-size: 0.8rem; }
+            .all-movies-h3 { font-size: 0.85rem; max-height: 100px; }
         }
     </style>
 </head>
@@ -661,11 +679,16 @@
         <button class="btn-secondary filter-btn" data-filter="ar">العربية</button>
     </div>
     <div class="movies-grid" id="moviesGrid"></div>
-    <!-- PAGINATION SECTION : 20 Movies Per Page -->
+    <!-- PAGINATION SECTION -->
     <div id="paginationWrapper" class="pagination-container"></div>
+
+    <!-- H3 containing all movies names - moved below pagination -->
+    <div class="all-movies-h3">
+        <i class="fas fa-list-ul"></i> <strong id="allMoviesLabel">جميع الأفلام · All Movies:</strong><br>
+        <span id="allMoviesList">جاري التحميل...</span>
+    </div>
 </div>
 
-<!-- FOOTER SECTION (same beauty) -->
 <footer class="footer">
   <script>
     aclib.runPop({zoneId: '11258314'});
@@ -721,7 +744,7 @@
 
 <script>
     (function() {
-        // ---------- MOVIE DATABASE (unchanged but full) ----------
+        // ---------- MOVIE DATABASE ----------
         const moviesData = [
 
 { id: '87', titleEn:' فلم مترجم Fragments of Love', titleAr: 'فلم مترجم ', year: '2016', lang: 'both', posterUrl: 'https://m.media-amazon.com/images/S/pv-target-images/fd4efb6d1105e0d734b120dbb977eaadc12771a50c1a0cf25ee3d56f7dfcfb17.png',
@@ -865,7 +888,7 @@
               servers: [{ label: "VidRoba", url: "https://www.vidroba.com:2053/embed-hqbft8d9mvp7.html", icon: "fa-server" }] },
             { id: '40', titleEn: 'فلم مترجم Pandora', titleAr: 'pandora', year: '2016', lang: 'both', posterUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSch7ao2t0EfvRU0PvdNcSeXJrhMFVVL6uq2DZWLFFcU6A5p-dFOmAhMj0&s=10',
               servers: [{ label: "VidSpeed", url: "https://www.vidspeeds.com:2053/embed-wtf6a0syau0v.html", icon: "fa-server" }] },
-            { id: '41', titleEn: 'فلم مترجم The Human Centipede 3', titleAr: 'the human centipede 3', year: '2015', lang: 'both', posterUrl: 'https://m.media-amazon.com/images/I/91XoWuxC3mL._AC_UF894,1000_QL80_.jpg',
+            { id: '41', titleEn: 'فلم مترجم The Human Centipede 3', titleAr: 'the human centipede 3', year: '2015', lang: 'both', posterUrl: 'https://m.media-amazon.com/images/I/91XWouxC3mL._AC_UF894,1000_QL80_.jpg',
               servers: [{ label: "Fdewsdc", url: "https://fdewsdc.sbs/embed/9qck0f0g8xjb", icon: "fa-server" }, { label: "uploud", url: "https://uqload.co/embed-mu0qjyfsas8v.html", icon: "fa-server" }] },
             { id: '42', titleEn: 'فلم مترجم The Human Centipede 2', titleAr: 'the human centipede 2', year: '2011', lang: 'both', posterUrl: 'https://m.media-amazon.com/images/I/81BhPvzTN+L._AC_UF894,1000_QL80_.jpg',
               servers: [{ label: "OK.ru", url: "https://www.ok.ru/videoembed/88168336098", icon: "fa-server" },{label: "Server 2", url: "https://fastvid.cam/embed/3lajn4asp9pm", icon: "fa-server"}] },
@@ -911,6 +934,8 @@
         let currentSearchQuery = '';
         let currentPage = 1;
         const ITEMS_PER_PAGE = 20;
+        // جعل المصفوفة متاحة عالمياً لتعديلها من أي مكان
+        window.moviesData = moviesData;
 
         function initializeViewCounts() {
             moviesData.forEach((movie, idx) => {
@@ -919,6 +944,18 @@
             });
         }
         function incrementViewCount(movieId) { viewCounts[movieId] += Math.floor(Math.random() * 5) + 1; }
+        
+        // ========== FUNCTION: Update the H3 with all movie names ==========
+        function updateAllMoviesH3() {
+            const spanElement = document.getElementById('allMoviesList');
+            if (!spanElement) return;
+            const names = moviesData.map(movie => currentLanguage === 'ar' ? movie.titleAr : movie.titleEn);
+            if (names.length === 0) {
+                spanElement.textContent = currentLanguage === 'ar' ? 'لا توجد أفلام' : 'No movies';
+                return;
+            }
+            spanElement.innerHTML = names.join(' · ');
+        }
         
         function getFilteredMovies() {
             let filtered = moviesData.filter(movie => {
@@ -965,7 +1002,6 @@
             } else {
                 searchStats.innerHTML = '';
             }
-            
             renderPaginationControls(totalPages, filtered.length);
         }
         
@@ -1012,7 +1048,7 @@
         
         function resetToFirstPage() { currentPage = 1; renderMoviesAndPagination(); }
         
-        // ========== DEEP LINKING: unique URL for each movie ==========
+        // Deep linking
         function updateUrlForMovie(movieId) {
             const url = new URL(window.location);
             if (movieId) {
@@ -1023,7 +1059,6 @@
             window.history.pushState({ movieId: movieId || null }, '', url);
         }
         
-        // Modified playMovie to support addToHistory flag
         window.playMovie = function(movieId, addToHistory = true) {
             const movie = moviesData.find(m => m.id === movieId);
             if (!movie || !movie.servers || movie.servers.length === 0) { alert('No video source available.'); return; }
@@ -1070,14 +1105,12 @@
             }
         }
         
-        // close modal logic with URL clearing
+        // close modal logic
         const modalEl = document.getElementById('videoModal');
         const closeModalBtn = document.getElementById('closeModal');
-        closeModalBtn.addEventListener('click', () => closeModalAndClearUrl());
+        if(closeModalBtn) closeModalBtn.addEventListener('click', () => closeModalAndClearUrl());
         modalEl.addEventListener('click', (e) => { if (e.target === modalEl) closeModalAndClearUrl(); });
         document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && modalEl.classList.contains('active')) closeModalAndClearUrl(); });
-        
-        // handle browser back/forward
         window.addEventListener('popstate', (event) => {
             const movieId = event.state?.movieId;
             if (movieId && moviesData.some(m => m.id === movieId)) {
@@ -1090,8 +1123,10 @@
         // search & filter
         const searchInput = document.getElementById('searchInput');
         const clearSearchBtn = document.getElementById('clearSearchBtn');
-        searchInput.addEventListener('input', () => { currentSearchQuery = searchInput.value; clearSearchBtn.style.display = currentSearchQuery.length > 0 ? 'block' : 'none'; resetToFirstPage(); });
-        clearSearchBtn.addEventListener('click', () => { searchInput.value = ''; currentSearchQuery = ''; clearSearchBtn.style.display = 'none'; resetToFirstPage(); searchInput.focus(); });
+        if(searchInput) {
+            searchInput.addEventListener('input', () => { currentSearchQuery = searchInput.value; if(clearSearchBtn) clearSearchBtn.style.display = currentSearchQuery.length > 0 ? 'block' : 'none'; resetToFirstPage(); });
+            if(clearSearchBtn) clearSearchBtn.addEventListener('click', () => { searchInput.value = ''; currentSearchQuery = ''; clearSearchBtn.style.display = 'none'; resetToFirstPage(); searchInput.focus(); });
+        }
         
         document.querySelectorAll('.filter-btn').forEach(btn => {
             btn.addEventListener('click', () => {
@@ -1104,19 +1139,28 @@
         
         window.toggleLanguage = function() {
             currentLanguage = currentLanguage === 'en' ? 'ar' : 'en';
-            document.getElementById('langDisplay').textContent = currentLanguage === 'en' ? 'EN | عربي' : 'عربي | EN';
-            document.getElementById('libraryTitle').textContent = currentLanguage === 'en' ? 'Movie Library / مكتبة الأفلام' : 'مكتبة الأفلام / Movie Library';
+            const langDisplay = document.getElementById('langDisplay');
+            if(langDisplay) langDisplay.textContent = currentLanguage === 'en' ? 'EN | عربي' : 'عربي | EN';
+            const libraryTitle = document.getElementById('libraryTitle');
+            if(libraryTitle) libraryTitle.textContent = currentLanguage === 'en' ? 'Movie Library / مكتبة الأفلام' : 'مكتبة الأفلام / Movie Library';
             updateFooterTexts();
             renderMoviesAndPagination();
+            updateAllMoviesH3();   // تحديث الـ h3 عند تغيير اللغة
+            buildMarqueeContent(); // تحديث الشريط الدوار أيضاً
         };
         
         function updateFooterTexts() {
             const isEn = currentLanguage === 'en';
-            document.getElementById('footerAboutTitle').innerHTML = isEn ? 'About Us' : 'من نحن';
-            document.getElementById('footerContactTitle').innerHTML = isEn ? 'Contact Us' : 'اتصل بنا';
-            document.getElementById('footerPrivacyTitle').innerHTML = isEn ? 'Privacy Policy' : 'سياسة الخصوصية';
-            document.getElementById('footerAboutText').innerHTML = isEn ? 'BadiniMovies offers 20 movies per page, multi-server streaming, English & Arabic films. Each movie has a unique shareable link.' : 'باديني موفيز: 20 فلم في كل صفحة، خوادم متعددة، أفلام عربية وإنجليزية. كل فيلم له رابط فريد للمشاركة.';
-            document.getElementById('footerPrivacyText').innerHTML = isEn ? 'We use Google AdSense & cookies for better experience. Your data is secure.' : 'نستخدم AdSense وملفات تعريف الارتباط، بياناتك آمنة.';
+            const aboutTitle = document.getElementById('footerAboutTitle');
+            const contactTitle = document.getElementById('footerContactTitle');
+            const privacyTitle = document.getElementById('footerPrivacyTitle');
+            const aboutText = document.getElementById('footerAboutText');
+            const privacyText = document.getElementById('footerPrivacyText');
+            if(aboutTitle) aboutTitle.innerHTML = isEn ? 'About Us' : 'من نحن';
+            if(contactTitle) contactTitle.innerHTML = isEn ? 'Contact Us' : 'اتصل بنا';
+            if(privacyTitle) privacyTitle.innerHTML = isEn ? 'Privacy Policy' : 'سياسة الخصوصية';
+            if(aboutText) aboutText.innerHTML = isEn ? 'BadiniMovies offers 20 movies per page, multi-server streaming, English & Arabic films. Each movie has a unique shareable link.' : 'باديني موفيز: 20 فلم في كل صفحة، خوادم متعددة، أفلام عربية وإنجليزية. كل فيلم له رابط فريد للمشاركة.';
+            if(privacyText) privacyText.innerHTML = isEn ? 'We use Google AdSense & cookies for better experience. Your data is secure.' : 'نستخدم AdSense وملفات تعريف الارتباط، بياناتك آمنة.';
         }
         
         function buildMarqueeContent() {
@@ -1133,7 +1177,8 @@
         buildMarqueeContent();
         renderMoviesAndPagination();
         updateFooterTexts();
-        openMovieFromUrl(); // open movie if URL contains ?movie=xxx
+        updateAllMoviesH3();      // العرض الأولي لأسماء الأفلام في الـ h3
+        openMovieFromUrl();
     })();
 </script>
 </body>

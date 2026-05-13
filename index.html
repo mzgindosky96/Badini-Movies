@@ -62,6 +62,7 @@
             display: flex;
             align-items: center;
             gap: 12px;
+            cursor: pointer;
         }
         .logo-icon {
             font-size: 2.5rem;
@@ -633,6 +634,25 @@
             font-size: 0.8rem;
             color: #8a84aa;
         }
+        .sitemap-btn {
+            background: #2a2540;
+            border: 1px solid #e4b363;
+            color: #e4b363;
+            padding: 0.5rem 1.2rem;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+            margin-top: 1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .sitemap-btn:hover {
+            background: #e4b363;
+            color: #12101c;
+        }
         @media (max-width: 768px) {
             .container { padding: 1rem; }
             .badini-header { flex-direction: column; text-align: center; }
@@ -649,7 +669,7 @@
 
 <div class="container">
     <div class="badini-header">
-        <div class="logo-area">
+        <div class="logo-area" id="homeLogo">
             <i class="fas fa-film logo-icon"></i>
             <div class="badini-title">Badini<span>Movies</span></div>
         </div>
@@ -723,6 +743,7 @@
                 <div class="footer-icon"><i class="fas fa-shield-alt"></i></div>
                 <h3 id="footerPrivacyTitle">سياسة الخصوصية</h3>
                 <p id="footerPrivacyText">نستخدم Google AdSense لتحسين تجربتك. بياناتك آمنة.</p>
+                <button id="generateSitemapBtn" class="sitemap-btn"><i class="fas fa-sitemap"></i> تنزيل sitemap.xml</button>
             </div>
         </div>
         <div class="footer-bottom">
@@ -938,18 +959,16 @@
               servers: [{ label: "Server1", url: "https://hgcloud.to/e/ecrlb4q3m8mw", icon: "fa-server" },{label: "Server2", url: "https://movearnpre.com/embed/gnofv1a8phrw", icon: "fa-server"}] }
         ];
 
-        // ----- Helper: Generate unique slug from titleEn and id -----
+        // Helper: Generate unique slug from titleEn and id
         function generateSlug(title, id) {
             let slug = title
                 .toString()
                 .toLowerCase()
-                .replace(/[^a-z0-9\s-]/g, '')      // remove special chars
+                .replace(/[^a-z0-9\s-]/g, '')
                 .trim()
-                .replace(/\s+/g, '-')               // spaces to dashes
-                .replace(/-+/g, '-');               // collapse multiple dashes
-            // Ensure not empty
+                .replace(/\s+/g, '-')
+                .replace(/-+/g, '-');
             if (!slug) slug = 'movie';
-            // Append id to guarantee uniqueness (since some titles may be identical)
             return `${slug}-${id}`;
         }
 
@@ -959,7 +978,6 @@
             return { ...movie, slug };
         });
 
-        // Create slug -> movie map for fast lookup
         const slugToMovie = new Map();
         moviesData.forEach(m => slugToMovie.set(m.slug, m));
 
@@ -972,12 +990,24 @@
         window.moviesData = moviesData;
 
         function initializeViewCounts() {
-            moviesData.forEach((movie, idx) => {
-                const baseViews = Math.floor(Math.random() * 15000) + 5000;
-                viewCounts[movie.id] = baseViews + (idx < 10 ? Math.floor(Math.random() * 20000) : 0);
-            });
+            const stored = localStorage.getItem('badini_view_counts');
+            if(stored) {
+                viewCounts = JSON.parse(stored);
+            } else {
+                moviesData.forEach((movie, idx) => {
+                    const baseViews = Math.floor(Math.random() * 15000) + 5000;
+                    viewCounts[movie.id] = baseViews + (idx < 10 ? Math.floor(Math.random() * 20000) : 0);
+                });
+                saveViewCounts();
+            }
         }
-        function incrementViewCount(movieId) { viewCounts[movieId] += Math.floor(Math.random() * 5) + 1; }
+        function saveViewCounts() {
+            localStorage.setItem('badini_view_counts', JSON.stringify(viewCounts));
+        }
+        function incrementViewCount(movieId) { 
+            viewCounts[movieId] = (viewCounts[movieId] || 0) + Math.floor(Math.random() * 5) + 1;
+            saveViewCounts();
+        }
         
         function updateAllMoviesH3() {
             const spanElement = document.getElementById('allMoviesList');
@@ -1021,9 +1051,8 @@
                     const displayTitle = currentLanguage === 'ar' ? movie.titleAr : movie.titleEn;
                     const langClass = movie.lang === 'ar' ? 'ar' : (movie.lang === 'both' ? 'both' : 'en');
                     const views = viewCounts[movie.id] || 0;
-                    // Use slug instead of id for playMovie
                     return `<div class="movie-card" onclick="playMovieBySlug('${movie.slug}')">
-                                <div class="video-thumbnail"><img src="${movie.posterUrl}" alt="${displayTitle}" onerror="this.src='https://via.placeholder.com/300x180?text=No+Poster'"><div class="play-overlay"><i class="fas fa-play-circle"></i></div></div>
+                                <div class="video-thumbnail"><img src="${movie.posterUrl}" alt="${escapeHtml(displayTitle)}" onerror="this.src='https://via.placeholder.com/300x180?text=No+Poster'"><div class="play-overlay"><i class="fas fa-play-circle"></i></div></div>
                                 <div class="movie-details"><div class="movie-title"><span>${escapeHtml(displayTitle)}</span><span class="movie-year">${movie.year}</span></div>
                                 <div class="movie-meta"><span class="lang-badge ${langClass}">${movie.lang === 'en' ? 'EN' : movie.lang === 'ar' ? 'AR' : 'EN/AR'}</span>
                                 <span class="watch-counter"><i class="fas fa-eye"></i> ${views.toLocaleString()}</span><i class="fas fa-video" style="color:#4CAF50;"></i></div></div></div>`;
@@ -1082,11 +1111,11 @@
         
         function resetToFirstPage() { currentPage = 1; renderMoviesAndPagination(); }
         
-        // ---------- NEW: URL handling using slug ----------
+        // ---------- URL handling using slug ----------
         function updateUrlForMovie(movieSlug) {
             const url = new URL(window.location);
             if (movieSlug) {
-                url.searchParams.set('movie', movieSlug);   // now using slug instead of id
+                url.searchParams.set('movie', movieSlug);
             } else {
                 url.searchParams.delete('movie');
             }
@@ -1130,11 +1159,10 @@
             if (addToHistory) updateUrlForMovie(movie.slug);
         };
         
-        // Keep old playMovie for compatibility (but map to slug version)
+        // Legacy support
         window.playMovie = function(movieId) {
             const movie = moviesData.find(m => m.id === movieId);
             if (movie) playMovieBySlug(movie.slug, true);
-            else console.warn('No movie with id', movieId);
         };
         
         function closeModalAndClearUrl() {
@@ -1151,15 +1179,61 @@
             const params = new URLSearchParams(window.location.search);
             const slugOrId = params.get('movie');
             if (slugOrId) {
-                // First try as slug
                 let movie = slugToMovie.get(slugOrId);
                 if (!movie) {
-                    // fallback: maybe it's an old numeric ID (for backward compatibility)
                     movie = moviesData.find(m => m.id === slugOrId);
                     if (!movie) return;
                 }
                 setTimeout(() => playMovieBySlug(movie.slug, false), 100);
             }
+        }
+        
+        // ---------- SITEMAP GENERATION ----------
+        function generateAndDownloadSitemap() {
+            const baseUrl = window.location.origin + window.location.pathname.replace(/\/[^\/]*$/, '/'); // الصفحة الرئيسية بدون query
+            // تأكد من إزالة أي معاملات من baseUrl
+            const cleanBaseUrl = baseUrl.split('?')[0];
+            const today = new Date().toISOString().split('T')[0];
+            
+            let urls = `
+  <url>
+    <loc>${cleanBaseUrl}</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>`;
+            
+            moviesData.forEach(movie => {
+                const movieUrl = `${cleanBaseUrl}?movie=${movie.slug}`;
+                urls += `
+  <url>
+    <loc>${movieUrl}</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>`;
+            });
+            
+            const sitemapXml = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${urls}
+</urlset>`;
+            
+            const blob = new Blob([sitemapXml], { type: 'application/xml' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = 'sitemap.xml';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(link.href);
+            
+            alert(currentLanguage === 'en' ? 'sitemap.xml generated and downloaded successfully!' : 'تم إنشاء وتحميل ملف sitemap.xml بنجاح!');
+        }
+        
+        // attach sitemap button event
+        const sitemapBtn = document.getElementById('generateSitemapBtn');
+        if(sitemapBtn) {
+            sitemapBtn.addEventListener('click', generateAndDownloadSitemap);
         }
         
         // close modal logic
@@ -1228,7 +1302,21 @@
             track.innerHTML = html + html;
         }
         
-        function escapeHtml(str) { return str.replace(/[&<>]/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[m])); }
+        function escapeHtml(str) { 
+            if(!str) return '';
+            return str.replace(/[&<>]/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[m])); 
+        }
+        
+        // Home logo click: clear movie param and refresh
+        const homeLogo = document.getElementById('homeLogo');
+        if(homeLogo) {
+            homeLogo.addEventListener('click', () => {
+                if(window.location.search) {
+                    updateUrlForMovie(null);
+                }
+                if(modalEl.classList.contains('active')) closeModalAndClearUrl();
+            });
+        }
         
         initializeViewCounts();
         buildMarqueeContent();

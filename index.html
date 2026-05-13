@@ -1,32 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3032189625676969"
-     crossorigin="anonymous"></script>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3032189625676969"
-     crossorigin="anonymous"></script>
-  <script type="text/javascript">
-    aclib.runAutoTag({
-        zoneId: 'juk8ntjy19',
-    });
-</script>
-<script id="aclib" type="text/javascript" src="//acscdn.com/script/aclib.js"></script>
-<script type="text/javascript" src="lib.js"></script>
-<!-- BEGIN AADS AD UNIT 2436259 -->
-     <script>
-    const player = videojs("my-video");
-    player.ima({
-        adTagUrl: "https://youradexchange.com/video/select.php?r=11258882",
-    });
-</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3032189625676969" crossorigin="anonymous">
+    </script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3032189625676969" crossorigin="anonymous">
+    </script>
+    <script type="text/javascript">
+        aclib.runAutoTag({
+            zoneId: 'juk8ntjy19',
+        });
+    </script>
+    <script id="aclib" type="text/javascript" src="//acscdn.com/script/aclib.js">
+    </script>
+    <script type="text/javascript" src="lib.js">
+    </script>
+    <!-- BEGIN AADS AD UNIT 2436259 -->
+    <script>
+        const player = videojs("my-video");
+        player.ima({
+            adTagUrl: "https://youradexchange.com/video/select.php?r=11258882",
+        });
+    </script>
+    <!-- END AADS AD UNIT 2436259 -->
 
-<!-- END AADS AD UNIT 2436259 -->
-
-<meta name="32972f243796025e2b85c23daf5831e718dcfe3f" content="32972f243796025e2b85c23daf5831e718dcfe3f" />
+    <meta name="32972f243796025e2b85c23daf5831e718dcfe3f" content="32972f243796025e2b85c23daf5831e718dcfe3f" />
     <meta charset="UTF-8">
-        <meta name="referrer" content="no-referrer-when-downgrade" />
+    <meta name="referrer" content="no-referrer-when-downgrade" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Badini-Movies| Watch Free Movies - روابط فريدة باسم الفيلم</title>
+    <title>Badini-Movies | Watch Free Movies</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         * {
@@ -231,12 +232,20 @@
             color: #e4b363;
         }
         @keyframes scrollMarquee {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
         }
         @media (max-width: 768px) {
-            .marquee-icon span { display: none; }
-            .marquee-track { animation-duration: 600s; }
+            .marquee-icon span {
+                display: none;
+            }
+            .marquee-track {
+                animation-duration: 600s;
+            }
         }
         .movies-grid {
             display: grid;
@@ -275,7 +284,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(0,0,0,0.4);
+            background: rgba(0, 0, 0, 0.4);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -324,8 +333,12 @@
             font-size: 0.8rem;
             font-weight: 600;
         }
-        .lang-badge.ar { background: #1e9c8d; }
-        .lang-badge.both { background: #9b87e0; }
+        .lang-badge.ar {
+            background: #1e9c8d;
+        }
+        .lang-badge.both {
+            background: #9b87e0;
+        }
         .watch-counter {
             display: inline-flex;
             align-items: center;
@@ -373,7 +386,7 @@
             background: #e4b363;
             color: #12101c;
             border-color: #e4b363;
-            box-shadow: 0 0 8px rgba(228,179,99,0.4);
+            box-shadow: 0 0 8px rgba(228, 179, 99, 0.4);
         }
         .pagination-btn:hover:not(.active-page) {
             background: #2f2b45;
@@ -394,97 +407,157 @@
             color: #e4b363;
             margin: 0 0.3rem;
         }
-        .modal {
+
+        /* ========== MOVIE DETAIL PAGE STYLES ========== */
+        .movie-detail-page {
             display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0,0,0,0.98);
-            z-index: 9999;
-            padding: 1rem;
+            flex-direction: column;
+            gap: 2rem;
+            margin: 2rem 0;
+            animation: fadeIn 0.4s ease;
         }
-        .modal.active {
+        .movie-detail-page.active {
+            display: flex;
+        }
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .movie-detail-header {
+            display: flex;
+            gap: 2.5rem;
+            background: #1a1728;
+            border-radius: 32px;
+            padding: 2rem;
+            border: 1px solid #332e48;
+            flex-wrap: wrap;
+        }
+        .movie-detail-poster {
+            flex: 0 0 280px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
+        }
+        .movie-detail-poster img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            display: block;
+        }
+        .movie-detail-info {
+            flex: 1;
+            min-width: 250px;
             display: flex;
             flex-direction: column;
+            justify-content: center;
         }
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        .movie-detail-info h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+            line-height: 1.2;
+        }
+        .movie-detail-info .title-ar {
+            font-size: 1.4rem;
+            color: #b9b3d6;
             margin-bottom: 0.8rem;
-            padding: 0.5rem 1rem;
+            direction: rtl;
+        }
+        .movie-detail-info .detail-meta {
+            display: flex;
             flex-wrap: wrap;
-            gap: 10px;
+            gap: 0.8rem 1.5rem;
+            margin: 0.8rem 0;
+            color: #a29cc0;
+            font-size: 0.95rem;
         }
-        .modal-title-area h2 {
-            font-size: 1.3rem;
-        }
-        .close-modal {
-            background: none;
-            border: none;
-            color: white;
-            font-size: 2.5rem;
-            cursor: pointer;
-            padding: 0.5rem 1rem;
-        }
-        .close-modal:hover {
+        .movie-detail-info .detail-meta i {
             color: #e4b363;
+            width: 20px;
         }
-        .server-buttons-container {
+        .movie-detail-info .detail-meta span {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .movie-description {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 1.2rem 1.5rem;
+            border-radius: 20px;
+            border-left: 4px solid #e4b363;
+            margin: 1rem 0;
+            font-size: 1rem;
+            line-height: 1.7;
+            color: #dbd4f5;
+            max-width: 700px;
+        }
+        .movie-description .label {
+            font-weight: 600;
+            color: #e4b363;
+            display: block;
+            margin-bottom: 6px;
+            font-size: 0.9rem;
+        }
+
+        .detail-server-buttons {
             display: flex;
             flex-wrap: wrap;
             gap: 0.7rem;
-            padding: 0.7rem 1rem;
-            background: rgba(0,0,0,0.5);
+            padding: 1rem 1.5rem;
+            background: rgba(0, 0, 0, 0.4);
             border-radius: 50px;
-            margin-bottom: 0.8rem;
             border: 1px solid #2f2b45;
+            margin: 1rem 0 0.5rem;
         }
-        .server-btn {
+        .detail-server-btn {
             background: #1a1728;
             border: 1px solid #4b446b;
             color: #dbd4f5;
-            padding: 0.4rem 1rem;
+            padding: 0.5rem 1.4rem;
             border-radius: 40px;
-            font-size: 0.75rem;
+            font-size: 0.8rem;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.2s;
             display: inline-flex;
             align-items: center;
-            gap: 6px;
+            gap: 8px;
         }
-        .server-btn i {
-            font-size: 0.7rem;
+        .detail-server-btn i {
             color: #e4b363;
+            font-size: 0.7rem;
         }
-        .server-btn:hover {
+        .detail-server-btn:hover {
             background: #2f2b45;
             border-color: #e4b363;
             color: #e4b363;
         }
-        .server-btn.active-server {
+        .detail-server-btn.active-server {
             background: #e4b363;
             color: #12101c;
             border-color: #e4b363;
         }
-        .server-btn.active-server i {
+        .detail-server-btn.active-server i {
             color: #12101c;
         }
-        .video-container {
+
+        .detail-video-container {
             width: 100%;
-            height: calc(100vh - 150px);
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            aspect-ratio: 16 / 9;
             background: #000;
-            border-radius: 12px;
+            border-radius: 24px;
             overflow: hidden;
+            border: 1px solid #332e48;
             position: relative;
         }
-        .video-container iframe {
+        .detail-video-container iframe {
             width: 100%;
             height: 100%;
             border: none;
@@ -492,18 +565,75 @@
             top: 0;
             left: 0;
         }
-        .filter-btn.active {
+
+        .back-to-home-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: #2f2b45;
+            color: #e4b363;
+            padding: 0.6rem 1.5rem;
+            border-radius: 40px;
+            border: 1px solid #e4b363;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            width: fit-content;
+        }
+        .back-to-home-btn:hover {
             background: #e4b363;
             color: #12101c;
-            border-color: #e4b363;
         }
-        .filter-container {
-            display: flex;
-            gap: 1rem;
-            margin-bottom: 2rem;
-            flex-wrap: wrap;
+
+        .detail-view-count {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(228, 179, 99, 0.15);
+            padding: 0.3rem 1rem;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            color: #e4b363;
         }
-        /* style for the moved H3 (all movies names) */
+
+        @media (max-width: 768px) {
+            .movie-detail-header {
+                flex-direction: column;
+                align-items: center;
+                padding: 1.2rem;
+            }
+            .movie-detail-poster {
+                flex: 0 0 auto;
+                width: 100%;
+                max-width: 320px;
+            }
+            .movie-detail-poster img {
+                height: 300px;
+            }
+            .movie-detail-info h1 {
+                font-size: 1.6rem;
+            }
+            .movie-description {
+                font-size: 0.9rem;
+                padding: 1rem;
+            }
+            .detail-server-buttons {
+                border-radius: 30px;
+                padding: 0.8rem 1rem;
+            }
+            .detail-server-btn {
+                padding: 0.4rem 0.9rem;
+                font-size: 0.7rem;
+            }
+            .detail-video-container {
+                aspect-ratio: 16 / 9;
+            }
+        }
+        /* ========== END MOVIE DETAIL PAGE STYLES ========== */
+
+        /* H3 all movies */
         .all-movies-h3 {
             background: linear-gradient(95deg, #1f1c2e, #151225);
             border-radius: 30px;
@@ -517,7 +647,7 @@
             line-height: 1.6;
             word-break: break-word;
             color: #f0eef7;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
         }
         .all-movies-h3 i {
             color: #e4b363;
@@ -530,7 +660,7 @@
             border-radius: 48px 48px 24px 24px;
             position: relative;
             z-index: 2;
-            box-shadow: 0 -10px 30px rgba(0,0,0,0.5);
+            box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.5);
         }
         .footer-grid {
             display: grid;
@@ -550,7 +680,7 @@
         .footer-card:hover {
             transform: translateY(-8px);
             border-color: rgba(228, 179, 99, 0.6);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
             background: rgba(30, 26, 48, 0.8);
         }
         .footer-icon {
@@ -654,312 +784,1379 @@
             color: #12101c;
         }
         @media (max-width: 768px) {
-            .container { padding: 1rem; }
-            .badini-header { flex-direction: column; text-align: center; }
-            .movies-grid { grid-template-columns: 1fr; }
-            .video-container { height: calc(100vh - 180px); }
-            .footer-card { padding: 1.2rem; }
-            .footer-card h3 { font-size: 1.2rem; }
-            .pagination-btn { padding: 0.4rem 0.9rem; font-size: 0.8rem; }
-            .all-movies-h3 { font-size: 0.85rem; max-height: 100px; }
+            .container {
+                padding: 1rem;
+            }
+            .badini-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            .movies-grid {
+                grid-template-columns: 1fr;
+            }
+            .footer-card {
+                padding: 1.2rem;
+            }
+            .footer-card h3 {
+                font-size: 1.2rem;
+            }
+            .pagination-btn {
+                padding: 0.4rem 0.9rem;
+                font-size: 0.8rem;
+            }
+            .all-movies-h3 {
+                font-size: 0.85rem;
+                max-height: 100px;
+            }
         }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <div class="badini-header">
-        <div class="logo-area" id="homeLogo">
-            <i class="fas fa-film logo-icon"></i>
-            <div class="badini-title">Badini<span>Movies</span></div>
-        </div>
-        <div class="lang-tag" onclick="toggleLanguage()">
-            <i class="fas fa-globe"></i>
-            <span id="langDisplay">EN | عربي</span>
-        </div>
-    </div>
-    <div class="section-title">
-        <i class="fas fa-film"></i> <span id="libraryTitle">Movie Library / مكتبة الأفلام</span>
-    </div>
-    <div class="search-container">
-        <div class="search-wrapper">
-            <i class="fas fa-search search-icon"></i>
-            <input type="text" id="searchInput" placeholder="Search by film name... / ابحث باسم الفيلم...">
-            <button class="clear-search" id="clearSearchBtn"><i class="fas fa-times-circle"></i></button>
-        </div>
-        <div class="search-stats" id="searchStats"></div>
-    </div>
-    <div class="film-marquee">
-        <div class="marquee-icon"><i class="fas fa-ticket-alt"></i><span>NOW SHOWING</span></div>
-        <div class="marquee-scroll-container"><div class="marquee-track" id="marqueeTrack"></div></div>
-    </div>
-    <div class="filter-container">
-        <button class="btn-secondary filter-btn active" data-filter="all">All / الكل</button>
-        <button class="btn-secondary filter-btn" data-filter="en">English</button>
-        <button class="btn-secondary filter-btn" data-filter="ar">العربية</button>
-    </div>
-    <div class="movies-grid" id="moviesGrid"></div>
-    <!-- PAGINATION SECTION -->
-    <div id="paginationWrapper" class="pagination-container"></div>
-
-    <!-- H3 containing all movies names - moved below pagination -->
-    <div class="all-movies-h3">
-        <i class="fas fa-list-ul"></i> <strong id="allMoviesLabel">جميع الأفلام · All Movies:</strong><br>
-        <span id="allMoviesList">جاري التحميل...</span>
-    </div>
-</div>
-
-<footer class="footer">
-  <script>
-    aclib.runPop({zoneId: '11258314'});
-</script>
-    <div class="container" style="padding: 0 1rem;">
-        <div class="footer-grid">
-            <div class="footer-card">
-                <div class="footer-icon"><i class="fas fa-info-circle"></i></div>
-                <h3 id="footerAboutTitle">من نحن</h3>
-                <p id="footerAboutText">باديني موفيز هي منصة مجانية لمشاهدة الأفلام بجودة عالية وخوادم متعددة. كل صفحة تعرض 20 فيلماً لتصفح سلس.</p>
+    <div class="container">
+        <!-- HEADER -->
+        <div class="badini-header">
+            <div class="logo-area" id="homeLogo">
+                <i class="fas fa-film logo-icon"></i>
+                <div class="badini-title">Badini<span>Movies</span></div>
             </div>
-            <div class="footer-card">
-                <div class="footer-icon"><i class="fas fa-envelope"></i></div>
-                <h3 id="footerContactTitle">اتصل بنا</h3>
-                <div class="contact-details">
-                    <div class="contact-item">
-                        <i class="fas fa-envelope"></i>
-                        <a href="mailto:mzgindosky@icloud.com">support@badinimovies.com</a>
+            <div class="lang-tag" onclick="toggleLanguage()">
+                <i class="fas fa-globe"></i>
+                <span id="langDisplay">EN | عربي</span>
+            </div>
+        </div>
+
+        <!-- SECTION TITLE -->
+        <div class="section-title">
+            <i class="fas fa-film"></i> <span id="libraryTitle">Movie Library / مكتبة الأفلام</span>
+        </div>
+
+        <!-- SEARCH -->
+        <div class="search-container">
+            <div class="search-wrapper">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" id="searchInput" placeholder="Search by film name... / ابحث باسم الفيلم...">
+                <button class="clear-search" id="clearSearchBtn"><i class="fas fa-times-circle"></i></button>
+            </div>
+            <div class="search-stats" id="searchStats"></div>
+        </div>
+
+        <!-- MARQUEE -->
+        <div class="film-marquee">
+            <div class="marquee-icon"><i class="fas fa-ticket-alt"></i><span>NOW SHOWING</span></div>
+            <div class="marquee-scroll-container">
+                <div class="marquee-track" id="marqueeTrack"></div>
+            </div>
+        </div>
+
+        <!-- FILTERS -->
+        <div class="filter-container">
+            <button class="btn-secondary filter-btn active" data-filter="all">All / الكل</button>
+            <button class="btn-secondary filter-btn" data-filter="en">English</button>
+            <button class="btn-secondary filter-btn" data-filter="ar">العربية</button>
+        </div>
+
+        <!-- ========== HOME VIEW (GRID) ========== -->
+        <div id="homeView">
+            <div class="movies-grid" id="moviesGrid"></div>
+            <div id="paginationWrapper" class="pagination-container"></div>
+        </div>
+
+        <!-- ========== MOVIE DETAIL VIEW ========== -->
+        <div id="movieDetailView" class="movie-detail-page">
+            <button class="back-to-home-btn" id="backToHomeBtn">
+                <i class="fas fa-arrow-left"></i> <span id="backBtnText">Back to Library / العودة إلى المكتبة</span>
+            </button>
+
+            <div class="movie-detail-header">
+                <div class="movie-detail-poster">
+                    <img id="detailPoster" src="" alt="Poster">
+                </div>
+                <div class="movie-detail-info">
+                    <h1 id="detailTitleEn">Title</h1>
+                    <div class="title-ar" id="detailTitleAr">العنوان</div>
+                    <div class="detail-meta">
+                        <span><i class="fas fa-calendar-alt"></i> <span id="detailYear">2025</span></span>
+                        <span><i class="fas fa-language"></i> <span id="detailLang">EN/AR</span></span>
+                        <span class="detail-view-count"><i class="fas fa-eye"></i> <span id="detailViews">0</span> views</span>
                     </div>
-                    <div class="contact-item">
-                        <i class="fab fa-telegram"></i>
-                        <a href="https://t.me/mzginlghazi">Telegram: @BadiniSupport</a>
+                    <div class="movie-description" id="detailDescription">
+                        <span class="label"><i class="fas fa-align-left"></i> <span id="descLabel">Story / القصة</span></span>
+                        <span id="detailDescText">Loading description...</span>
+                    </div>
+                    <div class="detail-server-buttons" id="detailServerButtons"></div>
+                </div>
+            </div>
+
+            <div class="detail-video-container" id="detailVideoContainer">
+                <iframe id="detailEmbedIframe" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen frameborder="0"></iframe>
+            </div>
+        </div>
+
+        <!-- ALL MOVIES H3 -->
+        <div class="all-movies-h3">
+            <i class="fas fa-list-ul"></i> <strong id="allMoviesLabel">جميع الأفلام · All Movies:</strong><br>
+            <span id="allMoviesList">جاري التحميل...</span>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <script>
+            aclib.runPop({
+                zoneId: '11258314'
+            });
+        </script>
+        <div class="container" style="padding: 0 1rem;">
+            <div class="footer-grid">
+                <div class="footer-card">
+                    <div class="footer-icon"><i class="fas fa-info-circle"></i></div>
+                    <h3 id="footerAboutTitle">من نحن</h3>
+                    <p id="footerAboutText">باديني موفيز هي منصة مجانية لمشاهدة الأفلام بجودة عالية وخوادم متعددة. كل صفحة تعرض 20 فيلماً لتصفح سلس.</p>
+                </div>
+                <div class="footer-card">
+                    <div class="footer-icon"><i class="fas fa-envelope"></i></div>
+                    <h3 id="footerContactTitle">اتصل بنا</h3>
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <a href="mailto:mzgindosky@icloud.com">support@badinimovies.com</a>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fab fa-telegram"></i>
+                            <a href="https://t.me/mzginlghazi">Telegram: @BadiniSupport</a>
+                        </div>
+                    </div>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/MzginLGhazi"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://x.com/mzginlghazi?s=21"><i class="fab fa-twitter"></i></a>
+                        <a href="https://www.instagram.com/mzgindosky/"><i class="fab fa-instagram"></i></a>
                     </div>
                 </div>
-                <div class="social-links">
-                    <a href="https://www.facebook.com/MzginLGhazi"><i class="fab fa-facebook-f"></i></a>
-                    <a href="https://x.com/mzginlghazi?s=21"><i class="fab fa-twitter"></i></a>
-                    <a href="https://www.instagram.com/mzgindosky/"><i class="fab fa-instagram"></i></a>
+                <div class="footer-card">
+                    <div class="footer-icon"><i class="fas fa-shield-alt"></i></div>
+                    <h3 id="footerPrivacyTitle">سياسة الخصوصية</h3>
+                    <p id="footerPrivacyText">نستخدم Google AdSense لتحسين تجربتك. بياناتك آمنة.</p>
+                    <button id="generateSitemapBtn" class="sitemap-btn"><i class="fas fa-sitemap"></i> تنزيل sitemap.xml</button>
                 </div>
             </div>
-            <div class="footer-card">
-                <div class="footer-icon"><i class="fas fa-shield-alt"></i></div>
-                <h3 id="footerPrivacyTitle">سياسة الخصوصية</h3>
-                <p id="footerPrivacyText">نستخدم Google AdSense لتحسين تجربتك. بياناتك آمنة.</p>
-                <button id="generateSitemapBtn" class="sitemap-btn"><i class="fas fa-sitemap"></i> تنزيل sitemap.xml</button>
+            <div class="footer-bottom">
+                <p>&copy; 2026 BadiniMovies. 20 Movies per page | جميع الحقوق محفوظة</p>
             </div>
         </div>
-        <div class="footer-bottom">
-            <p>&copy; 2026 BadiniMovies. 20 Movies per page | جميع الحقوق محفوظة</p>
-        </div>
-    </div>
-</footer>
+    </footer>
 
-<div class="modal" id="videoModal">
-    <div class="modal-header">
-        <div class="modal-title-area"><h2 id="modalMovieTitle">Now Playing</h2></div>
-        <button class="close-modal" id="closeModal">&times;</button>
-    </div>
-    <div id="serverButtonsPanel" class="server-buttons-container"></div>
-    <div class="video-container" id="videoContainer">
-        <iframe id="embedIframe" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen frameborder="0"></iframe>
-    </div>
-</div>
-
-<script>
-    (function() {
-        // ---------- MOVIE DATABASE (original) ----------
-        const rawMoviesData = [
-
-{ id: '92', titleEn:' فلم مترجم the Paramedic', titleAr: 'فلم مترجم ', year: '2020', lang: 'both', posterUrl: 'https://yam.ahwaktv.net/uploads/thumbs/ac35615c1-1.jpg',
-              servers: [{ label: "vidspeeds", url: "https://www.vidspeeds.com:2053/embed-77xngnsusq68.html", icon: "fa-server" },{ label: "vipserver", url: "https://vipserver.liiivideo.com/embed-new16p9ii031.html", icon: "fa-server" },{label: "ok.ru", url: "https://www.ok.ru/videoembed/1937921870556", icon: "fa-server"}] },
-{ id: '91', titleEn:' فلم مترجم Eye for Eye', titleAr: 'فلم مترجم ', year: '2022', lang: 'both', posterUrl: 'https://yam.ahwaktv.net/uploads/thumbs/c658a4b99-1.jpg',
-              servers: [{ label: "vidspeeds", url: "https://www.vidspeeds.com/embed-ga3x89rsab1y.html", icon: "fa-server" },{ label: "upload", url: "https://www.uqload.co/embed-be639pu5ft17.html", icon: "fa-server" },{label: "my.mail", url: "https://my.mail.ru/video/embed/7404905084414330099", icon: "fa-server"}] },
-{ id: '90', titleEn:' فلم مترجم Red Eye2', titleAr: 'فلم مترجم ', year: '2017', lang: 'both', posterUrl: 'https://yam.ahwaktv.net/uploads/thumbs/25dc6c4d0-1.jpg',
-              servers: [{ label: "vidspeeds", url: "https://www.vidspeeds.com:2096/embed-pfurd7eaw8wn.html", icon: "fa-server" },{ label: "upload", url: "https://uqload.net/embed-foko922nqprd.html", icon: "fa-server" },{label: "vkserver", url: "https://www.ok.ru/videoembed/2606488750756", icon: "fa-server"}] },
-{ id: '89', titleEn:' فلم مترجم Red Eye1', titleAr: 'فلم مترجم ', year: '2005', lang: 'both', posterUrl: 'https://cdn11.bigcommerce.com/s-yzgoj/images/stencil/1280x1280/products/2888962/5906599/MOVIF5930__68614.1679561772.jpg?c=2',
-              servers: [{ label: "vidspeeds", url: "https://www.vidspeeds.com:2096/embed-py4aodjscrzw.html", icon: "fa-server" },{ label: "1vidserver", url: "https://1vid.xyz/embed-amwulu5swpjd.html", icon: "fa-server" },{label: "iserver", url: "https://vk.com/video_ext.php?oid=848028866&id=456260273", icon: "fa-server"}] },
-{ id: '88', titleEn:' فلم مترجم Eden Lake ', titleAr: 'فلم مترجم ', year: '2008', lang: 'both', posterUrl: 'https://wecima.ahwaktv.net/uploads/thumbs/15491071c-1.jpg',
-              servers: [{ label: "vidspeeds", url: "https://www.vidspeeds.com:2053/embed-azpalg45cstb.html", icon: "fa-server" },{ label: "upload", url: "https://uqload.net/embed-ybylcfrjb2f5.html", icon: "fa-server" },{label: "vidhideplus", url: "https://vidhideplus.com/embed/tl14rkugqe24", icon: "fa-server"}] },
-{ id: '87', titleEn:' فلم مترجم Fragments of Love', titleAr: 'فلم مترجم ', year: '2016', lang: 'both', posterUrl: 'https://m.media-amazon.com/images/S/pv-target-images/fd4efb6d1105e0d734b120dbb977eaadc12771a50c1a0cf25ee3d56f7dfcfb17.png',
-              servers: [{ label: "vipserver", url: "https://vipserver.liiivideo.com/embed-5nzv28p048nw.html", icon: "fa-server" },{ label: "vidroba", url: "https://ok.ru/videoembed/273745119994", icon: "fa-server" },{label: "ok.ru", url: "http://ok.ru/videoembed/7791067073149", icon: "fa-server"}] },
-{ id: '86', titleEn:' فلم مترجم The Love Witch', titleAr: 'فلم مترجم ', year: '2016', lang: 'both', posterUrl: 'https://images.mubicdn.net/images/artworks/867928/cache-867928-1759348886/images-original.png',
-              servers: [{ label: "vidspeeds", url: "https://www.vidspeeds.com:2053/embed-vs5yzbxcx4ta.html", icon: "fa-server" },{ label: "vidroba", url: "https://www.vidroba.com:2053/embed-8neucqw1vr5e.html", icon: "fa-server" },{label: "ok.ru", url: "https://www.ok.ru/videoembed/237023202041", icon: "fa-server"}] },
-{ id: '85', titleEn:' فلم مترجم Blair Witch', titleAr: 'فلم مترجم ', year: '2016', lang: 'both', posterUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJivnzMZF4HWkYuMJTZ_taSX973UU1o5nim_6Px2LqzYC1-fwcd8cUc-cZ&s=10',
-              servers: [{ label: "vidroba", url: "https://www.vidroba.com:2053/embed-yqzvn912w9g8.html", icon: "fa-server" },{ label: "ok.ru", url: "https://www.ok.ru/videoembed/407736552134", icon: "fa-server" },{label: "vidspeeds", url: "https://www.vidspeeds.com:2053/embed-das4vdk7t6j7.html", icon: "fa-server"}] },
-{ id: '84', titleEn:' فلم مترجم Whisper of The Witch', titleAr: 'فلم مترجم ', year: '2023', lang: 'both', posterUrl: 'https://i.ytimg.com/vi/lnSBDIJshQA/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLBhlOzuXonbmHwo3BuQvXCt_egKWg',
-              servers: [{ label: "vkserver", url: "https://vk.com/video_ext.php?oid=745497736&id=456243725&hash=f1ebff2d055e085c", icon: "fa-server" },{ label: "playerwish", url: "https://playerwish.com/e/pod3xhtfjaza", icon: "fa-server" },{label: "vidmoly", url: "https://vidhidehub.com/embed/9skvqmocc6xt", icon: "fa-server"}] },
-{ id: '83', titleEn:' فلم مترجم More The Merrier +18', titleAr: 'فلم مترجم ', year: '2021', lang: 'both', posterUrl: 'https://c.ifushaar.com/wp-content/uploads/2021/12/More-the-Merrier-2021.jpg',
-              servers: [{ label: "vidspeeds", url: "https://www.vidspeeds.com:2053/embed-w5h7t291mpb7.html", icon: "fa-server" },{ label: "vidroba", url: "https://www.vidroba.com:2053/embed-53sr78ou24ks.html", icon: "fa-server" },{label: "vipserver", url: "https://vipserver.liiivideo.com/embed-nq5akbcig6oo.html", icon: "fa-server"}] },
-{ id: '82', titleEn:' فلم مترجم Q 2011 +18', titleAr: 'فلم مترجم ', year: '2011', lang: 'both', posterUrl: 'https://zamunda.bg/wp-content/uploads/2026/01/%D0%B6%D0%B5%D0%BB%D0%B0%D0%BD%D0%B8%D0%B5.jpg',
-              servers: [{ label: "swdyu", url: "https://swdyu.com/e/pr1n5w1ccsdm", icon: "fa-server" },{ label: "server2", url: "https://vipserver.liiivideo.com/embed-le3uyq5vr6l8.html", icon: "fa-server" },{label: "iserver", url: "https://vipserver.liiivideo.com/embed-le3uyq5vr6l8.html", icon: "fa-server"}] },
-{ id: '81', titleEn:' فلم مترجم Monamour+18', titleAr: 'فلم مترجم ', year: '2006', lang: 'both', posterUrl: 'https://i.ytimg.com/vi/Ir9U49YfMtE/mqdefault.jpg',
-              servers: [{ label: "vk", url: "https://vk.com/video_ext.php?oid=784675179&id=456239019&hash=218c5bd08ed109ab", icon: "fa-server" },{ label: "swdyu", url: "https://swdyu.com/e/bn4xduox692n", icon: "fa-server" },{label: "iserver", url: "https://i.all-vid/embed-8z3bkg4zbgm8.html", icon: "fa-server"}] },
-{ id: '80', titleEn:' فلم مترجم You Get Me', titleAr: 'فلم مترجم ', year: '2017', lang: 'both', posterUrl: 'https://hia.fosta-tv.net/uploads/thumbs/79f3957b6-1.jpg',
-              servers: [{ label: "Vidspeeds", url: "https://www.vidspeeds.com:2053/embed-dax4cweautdn.html", icon: "fa-server" },{ label: "iserver", url: "https://i.all-vid/embed-qovjlub7jvzw.html", icon: "fa-server" },{label: "Vidroba", url: "https://www.vidroba.com:2053/embed-7scb1lqmnvsc.html", icon: "fa-server"}] },
-{ id: '79', titleEn:' فلم مترجم XX', titleAr: 'فلم مترجم ', year: '2017', lang: 'both', posterUrl: 'https://ew.com/thmb/QVF6dLe5iX_cN8cHaRZ1QslrIi4=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/poster-fb-4671b8afa5524acfa3743868a46430a8.jpg',
-              servers: [{ label: "Vidspeeds", url: "https://www.vidspeeds.com:2053/embed-ngj1h0jhqie1.html", icon: "fa-server" },{ label: "ok.ru", url: "https://www.ok.ru/videoembed/4200393476690", icon: "fa-server" },{label: "Vidroba", url: "https://www.vidroba.com:2053/embed-p6uju8euhqte.html", icon: "fa-server"}] },
-{ id: '78', titleEn:' فلم مترجم The Bar', titleAr: 'فلم مترجم ', year: '2017', lang: 'both', posterUrl: 'https://w30.shahidwbas.tv/uploads/thumbs/15a606755-1.jpg',
-              servers: [{ label: "Vidspeeds", url: "https://www.vidspeeds.com:2053/embed-gvarbpm3thhm.html", icon: "fa-server" },{ label: "iserver", url: "https://i.all-vid/embed-5gw94obodd9n.html", icon: "fa-server" },{label: "Vidroba", url: "https://www.vidroba.com:2053/embed-xlw448lw8agk.html", icon: "fa-server"}] },
-{ id: '77', titleEn:' فلم مترجم Crazy Lake', titleAr: 'فلم مترجم ', year: '2016', lang: 'both', posterUrl: 'https://dramacafe-tv.diy/uploads/thumbs/6c72fcbdf-1.jpg',
-              servers: [{ label: "Vidspeeds", url: "https://www.vidspeeds.com:2096/embed-vvuguoqe3rem.html", icon: "fa-server" },{ label: "Upload", url: "https://uqload.net/embed-vcmd306unsz4.html", icon: "fa-server" },{label: "ok.ru", url: "https://www.ok.ru/videoembed/8128189893", icon: "fa-server"}] },
-{ id: '76', titleEn:' فلم مترجم Army of the Dead', titleAr: 'فلم مترجم ', year: '2021', lang: 'both', posterUrl: 'https://wecima.ahwaktv.net/uploads/thumbs/729f54b1c-1.jpg',
-              servers: [{ label: "Vidspeeds", url: "https://www.vidspeeds.com/embed-hw8p97jbc8bd.html", icon: "fa-server" },{ label: "Upload", url: "https://uqload.net/embed-mzoz0g4ek846.html", icon: "fa-server" },{label: "ok.ru", url: "https://www.ok.ru/videoembed/8128189893301", icon: "fa-server"}] },
-{ id: '75', titleEn:' فلم مترجم The Last House on The Left', titleAr: 'فلم مترجم ', year: '2009', lang: 'both', posterUrl: 'https://m.media-amazon.com/images/S/pv-target-images/34b24c0ab93b3dc224c83e1e0482938cc69b9566c24545894bb8062fb05cda75.jpg',
-              servers: [{ label: "Vidspeeds", url: "https://www.vidspeeds.com:2053/embed-6twxfi2zhg7s.html", icon: "fa-server" },{ label: "Vipserver", url: "https://vipserver.liiivideo.com/embed-2openohe1vzi.html", icon: "fa-server" },{label: "Vidspeeds", url: "https://uqload.net/embed-k9yai5fo784q.html", icon: "fa-server"}] },
-{ id: '74', titleEn:' فلم مترجم Beautiful Devils', titleAr: 'فلم مترجم ', year: '2017', lang: 'both', posterUrl: 'https://m.media-amazon.com/images/M/MV5BY2IxMDk4YmYtMzA4OS00YThjLTkzZmQtODA2ZGQ3NjdjOGI3XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg',
-              servers: [{ label: "AflamServer", url: "https://v.aflam.news/embed-dxl0jriwyqq8.html", icon: "fa-server" },{ label: "Anamove", url: "https://as.akwam.tube/embed/73886", icon: "fa-server" },{label: "Vidspeeds", url: "https://vidspeed.cc/embed-4vw7ie6g1ryh.html", icon: "fa-server"}] },
-{ id: '73', titleEn:' فلم مترجم The Whistler', titleAr: 'فلم مترجم ', year: '2026', lang: 'both', posterUrl: 'https://yam.ahwaktv.net/uploads/thumbs/ffdcbd12c-1.jpg',
-              servers: [{ label: "Vidspeeds", url: "https://vidspeed.org/embed-zrw8520v2upl.html", icon: "fa-server" },{ label: "Upload", url: "https://uqload.is/embed-usynpggq4311.html", icon: "fa-server" },{label: "Earnvids", url: "https://vidhideplus.com/embed/x0a6pernq7g5", icon: "fa-server"}] },
-{ id: '72', titleEn:' فلم مترجم The Furies', titleAr: 'فلم مترجم ', year: '2019', lang: 'both', posterUrl: 'https://wecima.ahwaktv.net/uploads/thumbs/5859E29f8-1.jpg',
-              servers: [{ label: "Vidspeeds", url: "https://www.vidspeeds.com/embed-vy218kbcy0rf.html", icon: "fa-server" },{ label: "Upload", url: "https://uqload.net/embed-bw25ririp19i.html", icon: "fa-server" },{label: "Vk", url: "https://vk.com/video_ext.php?oid=848076703&id=456241231&hd=2", icon: "fa-server"}] },
-{ id: '71', titleEn:' فلم مترجم Tric R Treat', titleAr: 'فلم مترجم ', year: '2007', lang: 'both', posterUrl: 'https://yam.ahwaktv.net/uploads/thumbs/5b267932c-1.jpg',
-              servers: [{ label: "Vidspeeds", url: "https://www.vidspeeds.com:2096/embed-dn155usckkmc.html", icon: "fa-server" },{ label: "Upload", url: "https://uqload.net/embed-jdkgw7j8dgt4.html", icon: "fa-server" },{label: "1Vid", url: "https://www.vidspeeds.com:2096/embed-dn155usckkmc.html", icon: "fa-server"}] },
-{ id: '70', titleEn:' فلم مترجم The Hill Have Eyes', titleAr: 'فلم مترجم ', year: '2006', lang: 'both', posterUrl: 'https://wecima.ahwaktv.net/uploads/thumbs/6704a7fc6-1.jpg',
-              servers: [{ label: "Vidspeeds", url: "https://www.vidspeeds.com/embed-o7px4twf8jhe.html", icon: "fa-server" },{ label: "mxdrop", url: "https://mxdrop.to/e/k01llgxwfzj87d", icon: "fa-server" },{label: "1Vid", url: "https://1vid.xyz/embed-8wcgdyibwn1k.html", icon: "fa-server"}] },
-{ id: '68', titleEn:' فلم مترجم The Teen Wolf', titleAr: 'فلم مترجم ', year: '2023', lang: 'both', posterUrl: 'https://w20.my-cima.net/uploads/thumbs/5fa66cc98-1.jpg',
-              servers: [{ label: "Vidspeeds", url: "https://www.vidspeeds.com:2053/embed-8j2fs02595qr.html", icon: "fa-server" },{ label: "Uploud", url: "https://uqload.com/embed-s6sf83iratv8.html", icon: "fa-server" },{label: "Server3", url: "https://i.all-vid/embed-0l9m2dy3sc5f.html", icon: "fa-server"}] },
-{ id: '67', titleEn:' فلم مترجم The Green Inferno', titleAr: 'فلم مترجم ', year: '2013', lang: 'both', posterUrl: 'https://w20.3oyn.com/social-thumb.php?vid=ecc1c99fe',
-              servers: [{ label: "Vidspeeds", url: "https://www.vidspeeds.com:2053/embed-1rem8wtv8qbb.html", icon: "fa-server" },{ label: "Server2", url: "https://i.all-vid/embed-mefkne76bg2y.html", icon: "fa-server" },{label: "vipserver", url: "https://vipserver.liiivideo.com/embed-3croqupics84.html", icon: "fa-server"},{label: "Vidspeeds", url: "https://www.vidspeeds.com:2053/embed-1rem8wtv8qbb.html", icon: "fa-server"}] },
-{ id: '66', titleEn:' فلم مترجم Dangerous Animals', titleAr: 'فلم مترجم ', year: '2025', lang: 'both', posterUrl: 'https://w20.my-cima.net/uploads/thumbs/2c921bfc4-1.jpg',
-              servers: [{ label: "hglink", url: "https://hglink.to/e/jglhj5xik7up", icon: "fa-server" },{ label: "vidmoly", url: "https://vidmoly.net/embed-vw2gwmjvffeb.html", icon: "fa-server" },{label: "Videoland", url: "https://videoland.cfd/#nq66cu", icon: "fa-server"},{label: "movearn", url: "https://movearnpre.com/embed/to1nybssqzdf", icon: "fa-server"}] },
-{ id: '65', titleEn: 'فلم  Play Dead 2025 مترجم ', titleAr: 'فلم مترجم ', year: '2025', lang: 'both', posterUrl: 'https://i.ytimg.com/vi/Ry9pq-ggBS8/maxresdefault.jpg',
-              servers: [{ label: "krakenfiles", url: "https://krakenfiles.com/embed-video/vw4l5db7vk", icon: "fa-server" },{ label: "Lulustream", url: "https://lulustream.com/e/3o1thim9961r", icon: "fa-server" },{ label: "Mixdrop", url: "https://mixdrop.ag/e/mknrg606hl7q3q", icon: "fa-server" },{ label: "Veev", url: "https://veev.to/e/ozl267ipivo5", icon: "fa-server" },{label: "Videoland", url: "https://videoland.cfd/#nq66cu", icon: "fa-server"},{label: "Ok.ru", url: "https://ok.ru/videoembed/11548646379855", icon: "fa-server"}] },
-{ id: '64', titleEn: 'فيلم Deadly Games 2025 ', titleAr: 'فلم مترجم ', year: '2025', lang: 'both', posterUrl: 'https://m.media-amazon.com/images/M/MV5BMGViODQ5NGEtODE1ZC00NWQwLTkzY2EtZmFkMWY0ZGZmZWVjXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg',
-              servers: [{ label: "Moviearn", url: "https://movearnpre.com/v/3q8f2qdcje3z", icon: "fa-server" },{label: "vidspeeds", url: "aHR0cHM6Ly9kb3BseS5uZXQvZS91eDF3amF2N2g4MHQ", icon: "fa-server"},{label: "Ok.ru", url: "https://ok.ru/videoembed/6292583549660?autoplay=1", icon: "fa-server"}] },
-{ id: '63', titleEn: 'فلم مترجم when Evil Lurks', titleAr: 'فلم مترجم ', year: '2023', lang: 'both', posterUrl: 'https://wecima.ahwaktv.net/uploads/thumbs/3b9d04ab9-1.jpg',
-              servers: [{ label: "Vidspeeds", url: "https://www.vidspeeds.com/embed-s9z881s8whsj.html", icon: "fa-server" },{label: "vidspeeds", url: "https://vidspeed.cc/embed-qa2a68a6v73b.html", icon: "fa-server"},{label: "Ok.ru", url: "https://ok.ru/videoembed/6292583549660?autoplay=1", icon: "fa-server"}] },
-{ id: '62', titleEn: 'فلم مترجم The Girl Next Dor', titleAr: 'فلم مترجم ', year: '2004', lang: 'both', posterUrl: 'https://disney.images.edge.bamgrid.com/ripcut-delivery/v2/variant/disney/02b5a2fc-873e-49df-b482-fe4050166077/compose?aspectRatio=1.78&format=webp&width=1200',
-              servers: [{ label: "Vipserver", url: "https://vipserver.liiivideo.com/embed-7zx4cqf6xp80.html", icon: "fa-server" },{label: "vidspeeds", url: "https://www.vidspeeds.com:2053/embed-szrkzqg95mgy.html", icon: "fa-server"},{label: "VkServer", url: "https://vk.com/video_ext.php?oid=763791080&id=456239695&hash=81bc894094d09b9b", icon: "fa-server"}] },
-{ id: '69', titleEn: 'فلم مترجم Sex Appeal', titleAr: 'فلم مترجم ', year: '2022', lang: 'both', posterUrl: 'https://cfm.yidio.com/images/movie/248653/backdrop-640x360.jpg',
-              servers: [{ label: "Vidspeeds", url: "https://www.vidspeeds.com/embed-dnj5558h9m60.html", icon: "fa-server" },{label: "Uploud", url: "https://uqload.net/embed-3isnysy6yki2.html", icon: "fa-server"}] },
-{ id: '55', titleEn: 'The Woman in the Yard 2025', titleAr: 'فلم مترجم ', year: '2025', lang: 'both', posterUrl: 'https://dal.ahwaktv.net/uploads/thumbs/4f3e468cb-1.jpg',
-              servers: [{ label: "Vidspeeds", url: "https://www.vidspeeds.com/embed-x9w1nwui9hnw.html", icon: "fa-server" },{label: "Uploud", url: "https://uqload.net/embed-w2zhoww0cnvh.html", icon: "fa-server" }] }           
-,
-{ id: '54', titleEn: 'فلم مترجم The Sacrifice Game 2023', titleAr: 'فلم مترجم ', year: '2023', lang: 'both', posterUrl: 'https://wecima.ahwaktv.net/uploads/thumbs/375548cc6-1.jpg',
-              servers: [{ label: "Ok.ru", url: "https://www.ok.ru/videoembed/7787130784437", icon: "fa-server" },{label: "Uploud", url: "https://uqload.net/embed-zdbvyaqe9gk0.html", icon: "fa-server" }] }           
-,{ id: '1', titleEn: 'The Aftermath 2019', titleAr: 'ما بعد الأحداث ٢٠١٩', year: '2024', lang: 'both', posterUrl: 'https://observer.com/wp-content/uploads/sites/2/2019/03/aftermath-dom-ta_03670_rgb-1.jpg', 
-              servers: [
-                  { label: "VidSpeed", url: "https://www.vidspeeds.com/embed-1yjmv1iiev42.html", icon: "fa-server" },
-                  { label: "Mirror 1", url: "https://uqload.net/embed-example1.html", icon: "fa-link" },
-                  { label: "Backup", url: "https://vidspeed.org/embed-example2.html", icon: "fa-cloud" }
-              ] },
-            { id: '2', titleEn: 'فلم مترجم The Aftermath 2024', titleAr: 'الرجل التالي ٢٠٢٤', year: '2022', lang: 'both', posterUrl: 'https://upload.wikimedia.org/wikipedia/en/1/13/Aftermath2024.jpg',
-              servers: [{ label: "Main", url: "https://1vid.xyz/embed-da6da2wutmc9.html", icon: "fa-server" }, { label: "Mirror", url: "https://1vid.xyz/embed-da6da2wutmc9.html", icon: "fa-link" }] },
-            { id: '3', titleEn: '7G 2024فلم مترجم', titleAr: 'مشاهدة فلم ٥جي', year: '2023', lang: 'both', posterUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgJ_PpLsEjZRoNh86YY9mlAl3AjJtoN_FwLmzCAZyNKA&s=10',
-              servers: [{ label: "VK", url: "https://vk.com/video_ext.php?oid=745497736&id=456242418&hash=48fcf213e4fa140d", icon: "fa-server" }] },
-            { id: '4', titleEn: 'فلم مترجم Terrifier 2017', titleAr: 'الموت المرعب', year: '2023', lang: 'both', posterUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlHm-l8u9zAAO6KaeKey1Ivy7L-C5H7ksmTvmYUIByjw&s=10',
-              servers: [{ label: "VidSpeed", url: "https://www.vidspeeds.com/embed-xezpn5cajs17.html", icon: "fa-server" }] },
-            { id: '5', titleEn: 'فلم مترجم Fear Farm 2022', titleAr: 'مزرعة الرعب', year: '2023', lang: 'both', posterUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQIWWgz8DbkZO0q0DnBNOnT8Nrfl3Iu1v8ffMw1IBK21A&s=10',
-              servers: [{ label: "Uqload", url: "https://uqload.net/embed-yi9l18v525t2.html", icon: "fa-server" }] },
-            { id: '6', titleEn: 'فلم مترجم The Farm 2', titleAr: 'المزرعة ٢', year: '2023', lang: 'both', posterUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZmJeEAwshSOGtgXa5ffL_nylq63WNw0RpcP496IkdRQ&s=10',
-              servers: [{ label: "VidSpeed", url: "https://www.vidspeeds.com:2053/embed-w5z4zj4uierg.html", icon: "fa-server" }] },
-            { id: '7', titleEn: 'فلم مترجم Wrong Turn 2', titleAr: 'اwrong turn 2', year: '2007', lang: 'both', posterUrl: 'https://i.ytimg.com/vi/uHhO3z4Cw7A/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLCKrKhTDf-Uw4gEyNdYrQATV1TuvQ',
-              servers: [{ label: "VidSpeed", url: "https://vidspeed.org/embed-wv56vclm9ofb.html", icon: "fa-server" }] },
-            { id: '8', titleEn: 'فلم مترجم Wrong Turn 1', titleAr: 'اwrong turn 1', year: '2003', lang: 'both', posterUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQAMKY5WhjWrB_C3x6QDricgG-DOU_3eEPP_A&s',
-              servers: [{ label: "VidSpeed", url: "https://vidspeed.org/embed-zqjlljw9twxl.html", icon: "fa-server" }] },
-            { id: '9', titleEn: 'فلم مترجم Wrong Turn 3', titleAr: 'اwrong turn 3', year: '2009', lang: 'both', posterUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRN2hmSTr9sG-_WsN6O6uoDVGfP_2ojwowenA&s',
-              servers: [{ label: "VidSpeed", url: "https://www.vidspeeds.com:2096/embed-monjpwuamt28.html", icon: "fa-server" }] },
-            { id: '10', titleEn: 'فلم مترجم Wrong Turn 5', titleAr: 'اwrong turn 5', year: '2012', lang: 'both', posterUrl: 'https://static0.srcdn.com/wordpress/wp-content/uploads/2020/01/Wrong-Turn-5-Bloodlines-Borislav-Iliev.jpg',
-              servers: [{ label: "VidSpeed", url: "https://www.vidspeeds.com/embed-8m4njt9wesmn.html", icon: "fa-server" }] },
-            { id: '11', titleEn: 'فلم مترجم Wrong Turn 4', titleAr: 'اwrong turn 4', year: '2011', lang: 'both', posterUrl: 'https://static0.moviewebimages.com/wordpress/wp-content/uploads/photo/lb8mOLS8SpuquyTQdZUAGg8DBZXcFd.jpg',
-              servers: [{ label: "VidSpeed", url: "https://www.vidspeeds.com/embed-8nmzicw74unq.html", icon: "fa-server" }] },
-            { id: '12', titleEn: 'فلم مترجم Wrong Turn 6', titleAr: 'اwrong turn 6', year: '2014', lang: 'both', posterUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQqMD7hsLw8uQL7xii6h-uASbVpcjLh7RaPeQ&s',
-              servers: [{ label: "VidSpeed", url: "https://www.vidspeeds.com/embed-f44xlupx7k7c.html", icon: "fa-server" }] },
-            { id: '13', titleEn: 'فلم مترجم Dont Breathe 1', titleAr: 'اDont Breathe 1', year: '2016', lang: 'both', posterUrl: 'https://vid.mycima.cc/uploads/thumbs/835d46567-1.jpg',
-              servers: [{ label: "VidRoba", url: "https://www.vidroba.com:2053/embed-cl7yuevr3fxt.html", icon: "fa-server" }] },
-            { id: '14', titleEn: 'فلم مترجم Swallow 2019', titleAr: 'اSwallow 2019', year: '2019', lang: 'both', posterUrl: 'https://wecima.ahwaktv.net/uploads/thumbs/cd86f36fc-1.jpg',
-              servers: [{ label: "VidSpeed", url: "https://www.vidspeeds.com/embed-8yw1rdmk00la.html", icon: "fa-server" }] },
-            { id: '15', titleEn: 'فلم مترجم The Church 2018', titleAr: 'اThe Church 2018', year: '2018', lang: 'both', posterUrl: 'https://m.media-amazon.com/images/M/MV5BZWY3ZTViMDUtNzhiYy00MGZiLWIzZDgtOWJlZGRmMTA3MmQ1XkEyXkFqcGc@._V1_.jpg',
-              servers: [{ label: "OK.ru", url: "https://ok.ru/videoembed/1980799388369", icon: "fa-server" }] },
-            { id: '16', titleEn: 'فلم مترجم The Cell 2016', titleAr: 'اThe Cell 2016', year: '2016', lang: 'both', posterUrl: 'https://wecima.ahwaktv.net/uploads/thumbs/2fe22bb8d-1.jpg',
-              servers: [{ label: "VidSpeed", url: "https://www.vidspeeds.com/embed-iu544n3bv96x.html", icon: "fa-server" }] },
-            { id: '17', titleEn: 'فلم مترجم Wrong Turn 7', titleAr: 'wrong turn 7', year: '2021', lang: 'both', posterUrl: 'https://s1.dmcdn.net/v/YpVWu1eZMI81iEX_m/x720',
-              servers: [{ label: "YourUpload", url: "https://www.yourupload.com/embed/7u1j55y84ND1", icon: "fa-server" }] },
-            { id: '18', titleEn: 'فلم مترجم Wij 2018', titleAr: 'wij 2018', year: '2018', lang: 'both', posterUrl: 'https://horrornews.net/wp-content/uploads/2020/02/We-Wij-movie-2018-Rene-Eller-9-550x330.jpg',
-              servers: [{ label: "F75S", url: "https://f75s.com/d/c23b7zb8ihm1", icon: "fa-server" }] },
-            { id: '19', titleEn: 'فلم مترجم Tale Of Tales 2015', titleAr: 'tale of tales 2015', year: '2015', lang: 'both', posterUrl: 'https://wecima.ahwaktv.net/uploads/thumbs/2254c5a17-1.jpg',
-              servers: [{ label: "VidSpeed", url: "https://www.vidspeeds.com/embed-f1cyojqniqke.html", icon: "fa-server" }] },
-            { id: '20', titleEn: 'فلم مترجم Dolly', titleAr: 'dolly', year: '2015', lang: 'both', posterUrl: 'https://m.qfilm.tv/uploads/thumbs/41a8d1c28-1.jpg',
-              servers: [{ label: "LiiVideo", url: "https://wwa.liiivideo.com/embed-23728r5ffeys.html", icon: "fa-server" }] },
-            { id: '21', titleEn: 'فلم مترجم Matriarch 2022', titleAr: 'matriarch 2022', year: '2022', lang: 'both', posterUrl: 'https://c.ifushaar.com/wp-content/uploads/2022/10/Matriarch-2022-640x360.jpg',
-              servers: [{ label: "MP4Plus", url: "https://mp4plus.org/embed-m42acnjmauzk.html", icon: "fa-server" }] },
-            { id: '22', titleEn: 'فلم مترجم Project Power', titleAr: 'project power', year: '2022', lang: 'both', posterUrl: 'https://cimalina.live/wp-content/uploads/2020/07/Ashampoo_Snap_2020.07.22_14h26m25s_004_.png',
-              servers: [{ label: "VidSpeed", url: "https://www.vidspeeds.com:2053/embed-ynpeomgoimd0.html", icon: "fa-server" }] },
-            { id: '23', titleEn: 'فلم مترجم The Bluff', titleAr: 'the bluff', year: '2026', lang: 'both', posterUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTsfyDblS3C8hIFOAncOScvVvbSocwx6LBMrYlUHR-vOUrS6BgoXI6dce0-&s=10',
-              servers: [{ label: "FastVip", url: "https://akhbarworld.online?mycimafsd=aHR0cHM6Ly9mYXN0dmlwLnNwYWNlL2UvMThkNmh2NGdiZnd4", icon: "fa-server" }] },
-            { id: '24', titleEn: 'Battelship', titleAr: 'battelship', year: '2012', lang: 'both', posterUrl: 'https://i.ebayimg.com/images/g/X38AAMXQOT5Q9sJg/s-l1200.jpg',
-              servers: [{ label: "VidSpeed", url: "https://www.vidspeeds.com:2053/embed-npc2a7wsxlxe.html", icon: "fa-server" }] },
-            { id: '25', titleEn: 'فلم مترجم The Tit and The Moon', titleAr: 'the tit and the moon', year: '1994', lang: 'both', posterUrl: 'https://qfilm.tv/uploads/thumbs/06ac5dc0d-1.jpg',
-              servers: [{ label: "1Vid", url: "https://1vid.xyz/embed-22j2p3yqh9jp.html", icon: "fa-server" }] },
-            { id: '26', titleEn: 'فلم مترجم furioza 1', titleAr: 'furioza 1', year: '2021', lang: 'both', posterUrl: 'https://tv.halabieh.com/uploads/thumbs/3ee27f2b5-1.jpg',
-              servers: [{ label: "FileMoon", url: "https://filemoon.sx/e/k6vmiyxvixrm", icon: "fa-server" }] },
-            { id: '27', titleEn: 'فلم مترجم Furioza 2', titleAr: 'Furioza 2', year: '2025', lang: 'both', posterUrl: 'https://image.tmdb.org/t/p/original/yOLnV1lM3NuMsgYwIhz454fQRgt.jpg',
-              servers: [{ label: "EgyptBest", url: "https://egybestvid.com/embed-7e1at1fsj28e.html", icon: "fa-server" }] },
-            { id: '28', titleEn: 'فلم مترجم The Forever Purge', titleAr: 'the forever purge', year: '2021', lang: 'both', posterUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSNEH6BvUrpwWAcMDOHqTqulLxHKC6nYfAGVx1Tq10aE9qZA0x_l2MZdwei&s=10',
-              servers: [{ label: "Direct MP4", url: "https://krdline.shafilm.vip/ShaSorani/Movie/The.Forever.Purge.2021.1080p.Webrip.Sorani.mp4", icon: "fa-video" }] },
-            { id: '29', titleEn: 'فلم مترجم Evil Dead 2023', titleAr: 'evil dead 2023', year: '2023', lang: 'both', posterUrl: 'https://wecima.ahwaktv.net/uploads/thumbs/a945469f0-1.jpg',
-              servers: [{ label: "Uqload", url: "https://uqload.net/embed-uvc954a1ktz9.html", icon: "fa-server" }] },
-            { id: '30', titleEn: 'فلم مترجم Evil Dead 2013', titleAr: 'evil dead 2013', year: '2013', lang: 'both', posterUrl: 'https://tye.ahwaktv.net/uploads/thumbs/5b1918b02-1.jpg',
-              servers: [{ label: "Uqload", url: "https://uqload.net/embed-th7phxs8urvh.html", icon: "fa-server" }] },
-            { id: '31', titleEn: 'فلم مترجم Evil Dead 1986', titleAr: 'evil dead 1986', year: '1986', lang: 'both', posterUrl: 'https://tye.ahwaktv.net/uploads/thumbs/067ebc930-1.jpg',
-              servers: [{ label: "Uqload", url: "https://uqload.net/embed-1afxc1464avr.html", icon: "fa-server" }] },
-            { id: '32', titleEn: 'فلم مترجم Evil Dead 1981', titleAr: 'evil dead 1981', year: '1981', lang: 'both', posterUrl: 'https://tye.ahwaktv.net/uploads/thumbs/520de226f-1.jpg',
-              servers: [{ label: "Uqload", url: "https://uqload.net/embed-af95js8wixyz.html", icon: "fa-server" }] },
-            { id: '33', titleEn: 'فلم مترجم Maniac 2012', titleAr: 'maniac 2012', year: '2012', lang: 'both', posterUrl: 'https://yam.ahwaktv.net/uploads/thumbs/bcdc73f20-1.jpg',
-              servers: [{ label: "VidSpeed", url: "https://www.vidspeeds.com:2096/embed-crhuszg4fmzs.html", icon: "fa-server" }] },
-            { id: '34', titleEn: 'فلم مترجم i Saw The Devil', titleAr: 'i saw the devil', year: '2010', lang: 'both', posterUrl: 'https://wecima.ahwaktv.net/uploads/thumbs/8f641f3b9-1.jpg',
-              servers: [{ label: "VidSpeed", url: "https://www.vidspeeds.com/embed-zoiqylr8wg1x.html", icon: "fa-server" }] },
-            { id: '35', titleEn: 'فلم مترجم into The Blue 2005', titleAr: 'into the blue 2005', year: '2005', lang: 'both', posterUrl: 'https://pic.bstarstatic.com/ugc/106fde4135d761ac359d2ae41b57125c.jpg',
-              servers: [{ label: "VidSpeed", url: "https://www.vidspeeds.com:2096/embed-drvc3rgtoxr9.html", icon: "fa-server" }] },
-            { id: '36', titleEn: 'فلم مترجم Cabin Fever 2002', titleAr: 'cabin fever 2002', year: '2002', lang: 'both', posterUrl: 'https://dal.ahwaktv.net/uploads/thumbs/af65ba1b6-1.jpg',
-              servers: [{ label: "VidSpeed", url: "https://www.vidspeeds.com:2096/embed-osgs8kofrnpt.html", icon: "fa-server" }] },
-            { id: '37', titleEn: 'فلم مترجم Cabin Fever 2009', titleAr: 'cabin fever 2009', year: '2009', lang: 'both', posterUrl: 'https://wecima.ahwaktv.net/uploads/thumbs/a7d1dbfb0-1.jpg',
-              servers: [{ label: "VidSpeed", url: "https://www.vidspeeds.com:2096/embed-g7jrvzd1qn45.html", icon: "fa-server" }] },
-            { id: '38', titleEn: 'فلم مترجم Cabin Fever 2014', titleAr: 'cabin fever 2014', year: '2014', lang: 'both', posterUrl: 'https://yam.ahwaktv.net/uploads/thumbs/36f2fe49c-1.jpg',
-              servers: [{ label: "OK.ru", url: "https://ok.ru/videoembed/2374228511265", icon: "fa-server" },{label: "Server 2", url: "https://w.aflamy.pro/albaplayer/cabin-fever-3-patient-zero-2014?serv=0", icon: "fa-server"}] },
-            { id: '39', titleEn: 'فلم مترجم Cabin Fever 2016', titleAr: 'cabin fever 2016', year: '2016', lang: 'both', posterUrl: 'https://yam.ahwaktv.net/uploads/thumbs/d676d09e4-1.jpg',
-              servers: [{ label: "VidRoba", url: "https://www.vidroba.com:2053/embed-hqbft8d9mvp7.html", icon: "fa-server" }] },
-            { id: '40', titleEn: 'فلم مترجم Pandora', titleAr: 'pandora', year: '2016', lang: 'both', posterUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSch7ao2t0EfvRU0PvdNcSeXJrhMFVVL6uq2DZWLFFcU6A5p-dFOmAhMj0&s=10',
-              servers: [{ label: "VidSpeed", url: "https://www.vidspeeds.com:2053/embed-wtf6a0syau0v.html", icon: "fa-server" }] },
-            { id: '41', titleEn: 'فلم مترجم The Human Centipede 3', titleAr: 'the human centipede 3', year: '2015', lang: 'both', posterUrl: 'https://m.media-amazon.com/images/I/91XWouxC3mL._AC_UF894,1000_QL80_.jpg',
-              servers: [{ label: "Fdewsdc", url: "https://fdewsdc.sbs/embed/9qck0f0g8xjb", icon: "fa-server" }, { label: "uploud", url: "https://uqload.co/embed-mu0qjyfsas8v.html", icon: "fa-server" }] },
-            { id: '42', titleEn: 'فلم مترجم The Human Centipede 2', titleAr: 'the human centipede 2', year: '2011', lang: 'both', posterUrl: 'https://m.media-amazon.com/images/I/81BhPvzTN+L._AC_UF894,1000_QL80_.jpg',
-              servers: [{ label: "OK.ru", url: "https://www.ok.ru/videoembed/88168336098", icon: "fa-server" },{label: "Server 2", url: "https://fastvid.cam/embed/3lajn4asp9pm", icon: "fa-server"}] },
-            { id: '43', titleEn: 'فلم مترجم The Human Centipede 1', titleAr: 'the human centipede 1', year: '2009', lang: 'both', posterUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Still8_Human_Centipede.jpg/330px-Still8_Human_Centipede.jpg',
-              servers: [{ label: "OK.ru", url: "https://www.ok.ru/videoembed/426175040120", icon: "fa-server" },{label: "uploud", url: " https://uqload.co/embed-rqrdmg10anvi.html", icon: "fa-server"}] },
-            { id: '44', titleEn: 'فلم مترجم The Ward ', titleAr: 'the ward', year: '2010', lang: 'both', posterUrl: 'https://wecima.ahwaktv.net/uploads/thumbs/d43b1f99f-1.jpg',
-              servers: [{ label: "Vidspeeds", url: "https://www.vidspeeds.com:2096/embed-z3urh629dvem.html", icon: "fa-server" },{label: "uploud", url: " https://uqload.net/embed-rg5vs3js9vy2.html", icon: "fa-server"}] },
-            { id: '45', titleEn: 'فلم مترجم Tamara Drewe  ', titleAr: 'tamara drewe', year: '2010', lang: 'both', posterUrl: 'https://wecima.ahwaktv.net/uploads/thumbs/df9e41124-1.jpg',
-              servers: [{ label: "Vidspeeds", url: "https://www.vidspeeds.com:2096/embed-a8tn3eyrf9lt.html", icon: "fa-server" },{label: "uploud", url: " https://uqload.net/embed-o9yalok0qu2d.html", icon: "fa-server"}] },
-            { id: '46', titleEn: 'فلم مترجم Heart Eyes', titleAr: 'heart eyes', year: '2025', lang: 'both', posterUrl: 'https://www.hawak.net/uploads/thumbs/b1ac04ec4-1.jpg',
-              servers: [{ label: "Server1", url: "https://movearnpre.com/embed/e7kamtqd17nt", icon: "fa-server" },{label: "Server2", url: "https://hglink.to/e/5mwwowpbgim4", icon: "fa-server"},{label: "Server3", url: "https://movearnpre.com/embed/e7kamtqd17nt", icon: "fa-server"}] },
-            { id: '47', titleEn: 'فلم مترجم Lumberjack Man 2015', titleAr: 'فلم مترجم ', year: '2015', lang: 'both', posterUrl: 'https://i.ytimg.com/vi/kCJk23Jsoh4/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLBnd1NFeVX5TykdchLOEsWC8CqDvw',
-              servers: [{ label: "Server1", url: "https://v.aflam.news/embed-f4qq5sgix0om.html", icon: "fa-server" },{label: "Server2", url: "https://v.aflam.news/embed-f4qq5sgix0om.html", icon: "fa-server"},{label: "OK.ru", url: "http://ok.ru/videoembed/7109591894682", icon: "fa-server"}] },
-            { id: '48', titleEn: 'فلم مترجم blu-ray Nigtht Shifter', titleAr: 'فلم مترجم ', year: '2020', lang: 'both', posterUrl: 'https://my.qfilm.tv/uploads/thumbs/05fbb26bb-1.jpg',
-              servers: [{ label: "Server1", url: "https://wwa.liiivideo.com/embed-bzg2tbj9fx7t.html", icon: "fa-server" },{label: "Server2", url: "-", icon: "fa-server"},{label: "OK.ru", url: "-", icon: "fa-server"}] },
-            { id: '49', titleEn: 'فلم مترجم Bleeding', titleAr: 'فلم مترجم ', year: '2024', lang: 'both', posterUrl: 'https://wer.ahwaktv.net/uploads/thumbs/d9560e79f-1.jpg',
-              servers: [{ label: "1Vids", url: "https://1vid.xyz/embed-9g72ysjis92o.html", icon: "fa-server" },{label: "Vidspeeds", url: "https://www.vidspeeds.com/embed-ayjfy3s94mq4.html", icon: "fa-server"},{label: "uploud", url: "https://uqload.net/embed-j8ok5jw8owje.html", icon: "fa-server"}] },
-{ id: '50', titleEn: 'فلم مترجم Stage Fright 2014', titleAr: 'فلم مترجم ', year: '2014', lang: 'both', posterUrl: 'https://yam.ahwaktv.net/uploads/thumbs/081a0a3ea-1.jpg',
-              servers: [{ label: "Vidspeeds", url: "https://www.vidspeeds.com:2096/embed-xjgg9x94t5jx.html", icon: "fa-server" },{label: "Uploud", url: "https://uqload.net/embed-y19bixshekog.html", icon: "fa-server"}] },
-{ id: '51', titleEn: 'فلم مترجم Vindicta 2023', titleAr: 'فلم مترجم ', year: '2023', lang: 'both', posterUrl: 'https://yam.ahwaktv.net/uploads/thumbs/424470276-1.jpg',
-              servers: [{ label: "Vidspeeds", url: "https://www.vidspeeds.com/embed-3urvnsftqw60.html", icon: "fa-server" },{label: "Uploud", url: "https://www.uqload.io/embed-opt8oxtursza.html", icon: "fa-server"}] },
-{ id: '52', titleEn: 'فلم مترجم The Royal Hotell', titleAr: 'فلم مترجم ', year: '2023', lang: 'both', posterUrl: 'https://wecima.ahwaktv.net/uploads/thumbs/b6c647eea-1.jpg',
-              servers: [{ label: "Vidspeeds", url: "https://www.vidspeeds.com/embed-djoedshl7ocx.html", icon: "fa-server" },{label: "Uploud", url: "https://uqload.net/embed-00y1l3ihi08s.html", icon: "fa-server"}] },
-{ id: '53', titleEn: 'فلم مترجم Bihter 2023', titleAr: 'فلم مترجم ', year: '2023', lang: 'both', posterUrl: 'https://yam.ahwaktv.net/uploads/thumbs/c0f51437b-1.jpg',
-              servers: [{ label: "Vidspeeds", url: "https://www.vidspeeds.com/embed-h3p5iw7q7oji.html", icon: "fa-server" },{label: "Uploud", url: "https://www.uqload.io/embed-kliijkn6xjuc.html", icon: "fa-server"}] },
-{ id: '56', titleEn: 'مسلسل The Madison الموسم الاول الحلقة 1 الاولي مترجمة', titleAr: 'فلم مترجم ', year: '2026', lang: 'both', posterUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9mBKRUTicAgAspAhBnolgNda0ZYfdVsNgxJtH2VPj4A&s=10',
-              servers: [{ label: "Server1", url: "https://vidara.so/e/BxRDwouHK5lhT", icon: "fa-server" },{label: "Server2", url: "https://movearnpre.com/embed/ujzwzr6ubf4l", icon: "fa-server"}] },
-{ id: '57', titleEn: 'مسلسل The Madison الموسم الاول الحلقة 2 الثاني مترجمة', titleAr: 'فلم مترجم ', year: '2026', lang: 'both', posterUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9mBKRUTicAgAspAhBnolgNda0ZYfdVsNgxJtH2VPj4A&s=10',
-              servers: [{ label: "Server1", url: "https://vidara.so/e/5SNv9yzWZfJlm", icon: "fa-server" },{label: "Server2", url: "https://movearnpre.com/embed/x4u6vlznmc3v", icon: "fa-server"}] },
-{ id: '58', titleEn: 'مسلسل The Madison الموسم الاول الحلقة 3 الثالث مترجمة', titleAr: 'فلم مترجم ', year: '2026', lang: 'both', posterUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9mBKRUTicAgAspAhBnolgNda0ZYfdVsNgxJtH2VPj4A&s=10',
-              servers: [{ label: "Server1", url: "https://vidara.so/e/H4qUsaHafj5eR", icon: "fa-server" },{label: "Server2", url: "https://movearnpre.com/embed/sphzmmuhysen", icon: "fa-server"}] },
-{ id: '59', titleEn: 'مسلسل The Madison الموسم الاول الحلقة 4 الرابع مترجمة', titleAr: 'فلم مترجم ', year: '2026', lang: 'both', posterUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9mBKRUTicAgAspAhBnolgNda0ZYfdVsNgxJtH2VPj4A&s=10',
-              servers: [{ label: "Server1", url: "https://movearnpre.com/embed/niv9ivn3b6im", icon: "fa-server" },{label: "Server2", url: "https://hgcloud.to/e/hwiig315bris", icon: "fa-server"}] },
-{ id: '60', titleEn: 'مسلسل The Madison الموسم الاول الحلقة 5 الخامس مترجمة', titleAr: 'فلم مترجم ', year: '2026', lang: 'both', posterUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9mBKRUTicAgAspAhBnolgNda0ZYfdVsNgxJtH2VPj4A&s=10',
-              servers: [{ label: "Server1", url: "https://hgcloud.to/e/xxufnn8rjd9m", icon: "fa-server" },{label: "Server2", url: "https://movearnpre.com/embed/np481ssld6xo", icon: "fa-server"}] },
-{ id: '61', titleEn: 'مسلسل The Madison الموسم الاول الحلقة 6 السادس مترجمة', titleAr: 'فلم مترجم ', year: '2026', lang: 'both', posterUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9mBKRUTicAgAspAhBnolgNda0ZYfdVsNgxJtH2VPj4A&s=10',
-              servers: [{ label: "Server1", url: "https://hgcloud.to/e/ecrlb4q3m8mw", icon: "fa-server" },{label: "Server2", url: "https://movearnpre.com/embed/gnofv1a8phrw", icon: "fa-server"}] }
+    <script>
+        (function() {
+            // ================================================================
+            //  MOVIE DATABASE WITH DESCRIPTIONS
+            // ================================================================
+            const rawMoviesData = [{
+                id: '92',
+                titleEn: 'The Paramedic',
+                titleAr: 'فلم مترجم The Paramedic',
+                year: '2020',
+                lang: 'both',
+                posterUrl: 'https://yam.ahwaktv.net/uploads/thumbs/ac35615c1-1.jpg',
+                description: 'A paramedic becomes entangled in a web of deception and danger after a routine call goes horribly wrong. As he fights to uncover the truth, he discovers that the line between savior and suspect is dangerously thin.',
+                descriptionAr: 'مسعف طبي يتورط في شبكة من الخداع والخطر بعد أن تسير مكالمة روتينية بشكل خاطئ. بينما يكافح لكشف الحقيقة، يكتشف أن الخط الفاصل بين المنقذ والمشتبه به رفيع بشكل خطير.',
+                servers: [
+                    { label: "vidspeeds", url: "https://www.vidspeeds.com:2053/embed-77xngnsusq68.html", icon: "fa-server" },
+                    { label: "vipserver", url: "https://vipserver.liiivideo.com/embed-new16p9ii031.html", icon: "fa-server" },
+                    { label: "ok.ru", url: "https://www.ok.ru/videoembed/1937921870556", icon: "fa-server" }
+                ]
+            }, {
+                id: '91',
+                titleEn: 'Eye for Eye',
+                titleAr: 'فلم مترجم Eye for Eye',
+                year: '2022',
+                lang: 'both',
+                posterUrl: 'https://yam.ahwaktv.net/uploads/thumbs/c658a4b99-1.jpg',
+                description: 'A gripping thriller about vengeance and justice. When a man loses everything in a brutal attack, he takes matters into his own hands, embarking on a relentless pursuit of those who wronged him.',
+                descriptionAr: 'فيلم إثارة م gripping عن الانتقام والعدالة. عندما يفقد رجل كل شيء في هجوم وحشي، يأخذ الأمور بيده، ويشرع في مطاردة لا هوادة فيها لأولئك الذين ظلموه.',
+                servers: [
+                    { label: "vidspeeds", url: "https://www.vidspeeds.com/embed-ga3x89rsab1y.html", icon: "fa-server" },
+                    { label: "upload", url: "https://www.uqload.co/embed-be639pu5ft17.html", icon: "fa-server" },
+                    { label: "my.mail", url: "https://my.mail.ru/video/embed/7404905084414330099", icon: "fa-server" }
+                ]
+            }, {
+                id: '90',
+                titleEn: 'Red Eye 2',
+                titleAr: 'فلم مترجم Red Eye 2',
+                year: '2017',
+                lang: 'both',
+                posterUrl: 'https://yam.ahwaktv.net/uploads/thumbs/25dc6c4d0-1.jpg',
+                description: 'The sequel to the tense thriller series continues the story of high-stakes survival. A new threat emerges in the shadows, pushing the protagonist to their limits in a race against time.',
+                descriptionAr: 'تكملة سلسلة الإثارة المكثفة تواصل قصة البقاء عالية المخاطر. يظهر تهديد جديد في الظل، مما يدفع البطل إلى حدود قدراته في سباق مع الزمن.',
+                servers: [
+                    { label: "vidspeeds", url: "https://www.vidspeeds.com:2096/embed-pfurd7eaw8wn.html", icon: "fa-server" },
+                    { label: "upload", url: "https://uqload.net/embed-foko922nqprd.html", icon: "fa-server" },
+                    { label: "vkserver", url: "https://www.ok.ru/videoembed/2606488750756", icon: "fa-server" }
+                ]
+            }, {
+                id: '89',
+                titleEn: 'Red Eye 1',
+                titleAr: 'فلم مترجم Red Eye 1',
+                year: '2005',
+                lang: 'both',
+                posterUrl: 'https://cdn11.bigcommerce.com/s-yzgoj/images/stencil/1280x1280/products/2888962/5906599/MOVIF5930__68614.1679561772.jpg?c=2',
+                description: 'A woman on a flight finds herself trapped with a charming but dangerous man who threatens to kill her father if she doesn\'t cooperate. A high-altitude psychological thriller that keeps you on the edge of your seat.',
+                descriptionAr: 'امرأة على متن طائرة تجد نفسها محاصرة مع رجل ساحر لكن خطير يهدد بقتل والدها إذا لم تتعاون. فيلم إثارة نفسي على ارتفاع عالٍ يبقيك على حافة مقعدك.',
+                servers: [
+                    { label: "vidspeeds", url: "https://www.vidspeeds.com:2096/embed-py4aodjscrzw.html", icon: "fa-server" },
+                    { label: "1vidserver", url: "https://1vid.xyz/embed-amwulu5swpjd.html", icon: "fa-server" },
+                    { label: "iserver", url: "https://vk.com/video_ext.php?oid=848028866&id=456260273", icon: "fa-server" }
+                ]
+            }, {
+                id: '88',
+                titleEn: 'Eden Lake',
+                titleAr: 'فلم مترجم Eden Lake',
+                year: '2008',
+                lang: 'both',
+                posterUrl: 'https://wecima.ahwaktv.net/uploads/thumbs/15491071c-1.jpg',
+                description: 'A young couple\'s romantic getaway to a secluded lake turns into a nightmare when they encounter a group of violent teenagers. A brutal and relentless horror-thriller that will haunt you.',
+                descriptionAr: 'رحلة رومانسية لزوجين شابين إلى بحيرة منعزلة تتحول إلى كابوس عندما يواجهون مجموعة من المراهقين العنيفين. فيلم رعب وإثارة وحشي لا يرحم سيبقى في ذاكرتك.',
+                servers: [
+                    { label: "vidspeeds", url: "https://www.vidspeeds.com:2053/embed-azpalg45cstb.html", icon: "fa-server" },
+                    { label: "upload", url: "https://uqload.net/embed-ybylcfrjb2f5.html", icon: "fa-server" },
+                    { label: "vidhideplus", url: "https://vidhideplus.com/embed/tl14rkugqe24", icon: "fa-server" }
+                ]
+            }, {
+                id: '87',
+                titleEn: 'Fragments of Love',
+                titleAr: 'فلم مترجم Fragments of Love',
+                year: '2016',
+                lang: 'both',
+                posterUrl: 'https://m.media-amazon.com/images/S/pv-target-images/fd4efb6d1105e0d734b120dbb977eaadc12771a50c1a0cf25ee3d56f7dfcfb17.png',
+                description: 'A poignant drama exploring the complexities of love, loss, and memory. When a couple\'s relationship fractures, they must piece together the fragments of their past to find a way forward.',
+                descriptionAr: 'دراما مؤثرة تستكشف تعقيدات الحب والفقدان والذاكرة. عندما تتصدع علاقة زوجين، يجب عليهما جمع شظايا ماضيهما لإيجاد طريق للأمام.',
+                servers: [
+                    { label: "vipserver", url: "https://vipserver.liiivideo.com/embed-5nzv28p048nw.html", icon: "fa-server" },
+                    { label: "vidroba", url: "https://ok.ru/videoembed/273745119994", icon: "fa-server" },
+                    { label: "ok.ru", url: "http://ok.ru/videoembed/7791067073149", icon: "fa-server" }
+                ]
+            }, {
+                id: '86',
+                titleEn: 'The Love Witch',
+                titleAr: 'فلم مترجم The Love Witch',
+                year: '2016',
+                lang: 'both',
+                posterUrl: 'https://images.mubicdn.net/images/artworks/867928/cache-867928-1759348886/images-original.png',
+                description: 'A modern-day witch uses magic to make men fall in love with her, but her spells have deadly consequences. A stylish, darkly comedic take on love, obsession, and the price of desire.',
+                descriptionAr: 'ساحرة في العصر الحديث تستخدم السحر لجعل الرجال يقعون في حبها، لكن تعاويذها لها عواقب مميتة. نظرة أنيقة وكوميدية داكنة على الحب والهوس وثمن الرغبة.',
+                servers: [
+                    { label: "vidspeeds", url: "https://www.vidspeeds.com:2053/embed-vs5yzbxcx4ta.html", icon: "fa-server" },
+                    { label: "vidroba", url: "https://www.vidroba.com:2053/embed-8neucqw1vr5e.html", icon: "fa-server" },
+                    { label: "ok.ru", url: "https://www.ok.ru/videoembed/237023202041", icon: "fa-server" }
+                ]
+            }, {
+                id: '85',
+                titleEn: 'Blair Witch',
+                titleAr: 'فلم مترجم Blair Witch',
+                year: '2016',
+                lang: 'both',
+                posterUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJivnzMZF4HWkYuMJTZ_taSX973UU1o5nim_6Px2LqzYC1-fwcd8cUc-cZ&s=10',
+                description: 'A group of college students venture into the Black Hills Forest to uncover the mysteries surrounding the legendary Blair Witch, but they soon discover the legend is all too real. Found-footage horror at its most intense.',
+                descriptionAr: 'مجموعة من طلاب الجامعة يغامرون في غابة بلاك هيلز لكشف الأسرار المحيطة بساحرة بلير الأسطورية، لكنهم سرعان ما يكتشفون أن الأسطورة حقيقية جدًا. رعب بتقنية الفيديو المسجل بأقصى درجاته.',
+                servers: [
+                    { label: "vidroba", url: "https://www.vidroba.com:2053/embed-yqzvn912w9g8.html", icon: "fa-server" },
+                    { label: "ok.ru", url: "https://www.ok.ru/videoembed/407736552134", icon: "fa-server" },
+                    { label: "vidspeeds", url: "https://www.vidspeeds.com:2053/embed-das4vdk7t6j7.html", icon: "fa-server" }
+                ]
+            }, {
+                id: '84',
+                titleEn: 'Whisper of The Witch',
+                titleAr: 'فلم مترجم Whisper of The Witch',
+                year: '2023',
+                lang: 'both',
+                posterUrl: 'https://i.ytimg.com/vi/lnSBDIJshQA/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLBhlOzuXonbmHwo3BuQvXCt_egKWg',
+                description: 'A young woman inherits an old house where a witch\'s whisper still lingers. As she uncovers dark secrets, she realizes the whisper is more than a ghost story — it\'s a warning that could save her life.',
+                descriptionAr: 'امرأة شابة ترث منزلاً قديماً حيث لا يزال همس الساحرة يتردد. بينما تكتشف أسراراً مظلمة، تدرك أن الهمس أكثر من مجرد قصة أشباح - إنه تحذير قد ينقذ حياتها.',
+                servers: [
+                    { label: "vkserver", url: "https://vk.com/video_ext.php?oid=745497736&id=456243725&hash=f1ebff2d055e085c", icon: "fa-server" },
+                    { label: "playerwish", url: "https://playerwish.com/e/pod3xhtfjaza", icon: "fa-server" },
+                    { label: "vidmoly", url: "https://vidhidehub.com/embed/9skvqmocc6xt", icon: "fa-server" }
+                ]
+            }, {
+                id: '83',
+                titleEn: 'More The Merrier +18',
+                titleAr: 'فلم مترجم More The Merrier +18',
+                year: '2021',
+                lang: 'both',
+                posterUrl: 'https://c.ifushaar.com/wp-content/uploads/2021/12/More-the-Merrier-2021.jpg',
+                description: 'A provocative comedy about a group of friends who decide to push the boundaries of their relationships. As things spiral out of control, they learn that more doesn\'t always mean merrier. For mature audiences.',
+                descriptionAr: 'كوميديا استفزازية عن مجموعة من الأصدقاء يقررون دفع حدود علاقاتهم. بينما تخرج الأمور عن السيطرة، يتعلمون أن الأكثر لا يعني دائمًا الأفضل. للجمهور الناضج.',
+                servers: [
+                    { label: "vidspeeds", url: "https://www.vidspeeds.com:2053/embed-w5h7t291mpb7.html", icon: "fa-server" },
+                    { label: "vidroba", url: "https://www.vidroba.com:2053/embed-53sr78ou24ks.html", icon: "fa-server" },
+                    { label: "vipserver", url: "https://vipserver.liiivideo.com/embed-nq5akbcig6oo.html", icon: "fa-server" }
+                ]
+            }, {
+                id: '82',
+                titleEn: 'Q 2011 +18',
+                titleAr: 'فلم مترجم Q 2011 +18',
+                year: '2011',
+                lang: 'both',
+                posterUrl: 'https://zamunda.bg/wp-content/uploads/2026/01/%D0%B6%D0%B5%D0%BB%D0%B0%D0%BD%D0%B8%D0%B5.jpg',
+                description: 'A raw and intense drama that pushes the boundaries of storytelling. The film explores themes of power, desire, and the human condition through a bold narrative that leaves no stone unturned.',
+                descriptionAr: 'دراما خام ومكثفة تدفع حدود السرد القصصي. يستكشف الفيلم موضوعات السلطة والرغبة والحالة الإنسانية من خلال سرد جريء لا يترك حجراً دون قلب.',
+                servers: [
+                    { label: "swdyu", url: "https://swdyu.com/e/pr1n5w1ccsdm", icon: "fa-server" },
+                    { label: "server2", url: "https://vipserver.liiivideo.com/embed-le3uyq5vr6l8.html", icon: "fa-server" },
+                    { label: "iserver", url: "https://vipserver.liiivideo.com/embed-le3uyq5vr6l8.html", icon: "fa-server" }
+                ]
+            }, {
+                id: '81',
+                titleEn: 'Monamour +18',
+                titleAr: 'فلم مترجم Monamour +18',
+                year: '2006',
+                lang: 'both',
+                posterUrl: 'https://i.ytimg.com/vi/Ir9U49YfMtE/mqdefault.jpg',
+                description: 'A daring exploration of passion and obsession. When a man\'s life is turned upside down by a mysterious woman, he descends into a world of pleasure and peril that challenges everything he knows.',
+                descriptionAr: 'استكشاف جريء للشغف والهوس. عندما تنقلب حياة رجل رأساً على عقب بسبب امرأة غامضة، يهبط إلى عالم من المتعة والخطر يتحدى كل ما يعرفه.',
+                servers: [
+                    { label: "vk", url: "https://vk.com/video_ext.php?oid=784675179&id=456239019&hash=218c5bd08ed109ab", icon: "fa-server" },
+                    { label: "swdyu", url: "https://swdyu.com/e/bn4xduox692n", icon: "fa-server" },
+                    { label: "iserver", url: "https://i.all-vid/embed-8z3bkg4zbgm8.html", icon: "fa-server" }
+                ]
+            }, {
+                id: '80',
+                titleEn: 'You Get Me',
+                titleAr: 'فلم مترجم You Get Me',
+                year: '2017',
+                lang: 'both',
+                posterUrl: 'https://hia.fosta-tv.net/uploads/thumbs/79f3957b6-1.jpg',
+                description: 'A high school student\'s new girlfriend seems perfect, but her obsessive behavior reveals a dark side. A tense thriller about love, jealousy, and the danger of getting what you wish for.',
+                descriptionAr: 'تبدو صديقة طالب المدرسة الثانوية الجديدة مثالية، لكن سلوكها الوسواسي يكشف جانبًا مظلمًا. فيلم إثارة مكثف عن الحب والغيرة وخطر الحصول على ما تتمنى.',
+                servers: [
+                    { label: "Vidspeeds", url: "https://www.vidspeeds.com:2053/embed-dax4cweautdn.html", icon: "fa-server" },
+                    { label: "iserver", url: "https://i.all-vid/embed-qovjlub7jvzw.html", icon: "fa-server" },
+                    { label: "Vidroba", url: "https://www.vidroba.com:2053/embed-7scb1lqmnvsc.html", icon: "fa-server" }
+                ]
+            }, {
+                id: '79',
+                titleEn: 'XX',
+                titleAr: 'فلم مترجم XX',
+                year: '2017',
+                lang: 'both',
+                posterUrl: 'https://ew.com/thmb/QVF6dLe5iX_cN8cHaRZ1QslrIi4=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/poster-fb-4671b8afa5524acfa3743868a46430a8.jpg',
+                description: 'A horror anthology featuring four unsettling stories, all directed by women. Each tale explores different aspects of fear, from the supernatural to the deeply psychological, with a unique female perspective.',
+                descriptionAr: 'أنثولوجيا رعب تضم أربع قصص مقلقة، كلها من إخراج نساء. تستكشف كل حكاية جوانب مختلفة من الخوف، من الخارق للطبيعة إلى النفسي العميق، بمنظور أنثوي فريد.',
+                servers: [
+                    { label: "Vidspeeds", url: "https://www.vidspeeds.com:2053/embed-ngj1h0jhqie1.html", icon: "fa-server" },
+                    { label: "ok.ru", url: "https://www.ok.ru/videoembed/4200393476690", icon: "fa-server" },
+                    { label: "Vidroba", url: "https://www.vidroba.com:2053/embed-p6uju8euhqte.html", icon: "fa-server" }
+                ]
+            }, {
+                id: '78',
+                titleEn: 'The Bar',
+                titleAr: 'فلم مترجم The Bar',
+                year: '2017',
+                lang: 'both',
+                posterUrl: 'https://w30.shahidwbas.tv/uploads/thumbs/15a606755-1.jpg',
+                description: 'A group of strangers get trapped in a bar during a mysterious event. As panic sets in and trust erodes, they must figure out who among them is responsible for the chaos unfolding outside.',
+                descriptionAr: 'مجموعة من الغرباء محاصرون في حانة خلال حدث غامض. مع انتشار الذعر وتآكل الثقة، يجب عليهم معرفة من بينهم المسؤول عن الفوضى التي تتكشف في الخارج.',
+                servers: [
+                    { label: "Vidspeeds", url: "https://www.vidspeeds.com:2053/embed-gvarbpm3thhm.html", icon: "fa-server" },
+                    { label: "iserver", url: "https://i.all-vid/embed-5gw94obodd9n.html", icon: "fa-server" },
+                    { label: "Vidroba", url: "https://www.vidroba.com:2053/embed-xlw448lw8agk.html", icon: "fa-server" }
+                ]
+            }, {
+                id: '77',
+                titleEn: 'Crazy Lake',
+                titleAr: 'فلم مترجم Crazy Lake',
+                year: '2016',
+                lang: 'both',
+                posterUrl: 'https://dramacafe-tv.diy/uploads/thumbs/6c72fcbdf-1.jpg',
+                description: 'A group of friends\' weekend getaway to a remote lake turns into a fight for survival when they encounter something lurking beneath the water. A tense horror-thriller with a chilling atmosphere.',
+                descriptionAr: 'رحلة نهاية الأسبوع لمجموعة من الأصدقاء إلى بحيرة نائية تتحول إلى صراع من أجل البقاء عندما يواجهون شيئًا يتربص تحت الماء. فيلم رعب وإثارة مكثف بجو مرعب.',
+                servers: [
+                    { label: "Vidspeeds", url: "https://www.vidspeeds.com:2096/embed-vvuguoqe3rem.html", icon: "fa-server" },
+                    { label: "Upload", url: "https://uqload.net/embed-vcmd306unsz4.html", icon: "fa-server" },
+                    { label: "ok.ru", url: "https://www.ok.ru/videoembed/8128189893", icon: "fa-server" }
+                ]
+            }, {
+                id: '76',
+                titleEn: 'Army of the Dead',
+                titleAr: 'فلم مترجم Army of the Dead',
+                year: '2021',
+                lang: 'both',
+                posterUrl: 'https://wecima.ahwaktv.net/uploads/thumbs/729f54b1c-1.jpg',
+                description: 'A group of mercenaries undertakes a daring heist in a zombie-infested Las Vegas. As they navigate the undead horde and a mysterious new threat, they realize the money might not be worth the price.',
+                descriptionAr: 'مجموعة من المرتزقة يقومون بعملية سطو جريئة في لاس فيغاس الموبوءة بالزومبي. بينما يتنقلون بين جحافل الموتى وتهديد غامض جديد، يدركون أن المال قد لا يستحق الثمن.',
+                servers: [
+                    { label: "Vidspeeds", url: "https://www.vidspeeds.com/embed-hw8p97jbc8bd.html", icon: "fa-server" },
+                    { label: "Upload", url: "https://uqload.net/embed-mzoz0g4ek846.html", icon: "fa-server" },
+                    { label: "ok.ru", url: "https://www.ok.ru/videoembed/8128189893301", icon: "fa-server" }
+                ]
+            }, {
+                id: '75',
+                titleEn: 'The Last House on The Left',
+                titleAr: 'فلم مترجم The Last House on The Left',
+                year: '2009',
+                lang: 'both',
+                posterUrl: 'https://m.media-amazon.com/images/S/pv-target-images/34b24c0ab93b3dc224c83e1e0482938cc69b9566c24545894bb8062fb05cda75.jpg',
+                description: 'A brutal and shocking remake of the 1972 classic. When two teenage girls are kidnapped by a group of escaped convicts, their parents take matters into their own hands with savage vengeance.',
+                descriptionAr: 'إعادة صنع وحشية وصادمة لفيلم 1972 الكلاسيكي. عندما يتم اختطاف فتاتين مراهقتين من قبل مجموعة من المحكومين الهاربين، يأخذ آباؤهم الأمور بأيديهم بانتقام وحشي.',
+                servers: [
+                    { label: "Vidspeeds", url: "https://www.vidspeeds.com:2053/embed-6twxfi2zhg7s.html", icon: "fa-server" },
+                    { label: "Vipserver", url: "https://vipserver.liiivideo.com/embed-2openohe1vzi.html", icon: "fa-server" },
+                    { label: "Vidspeeds", url: "https://uqload.net/embed-k9yai5fo784q.html", icon: "fa-server" }
+                ]
+            }, {
+                id: '74',
+                titleEn: 'Beautiful Devils',
+                titleAr: 'فلم مترجم Beautiful Devils',
+                year: '2017',
+                lang: 'both',
+                posterUrl: 'https://m.media-amazon.com/images/M/MV5BY2IxMDk4YmYtMzA4OS00YThjLTkzZmQtODA2ZGQ3NjdjOGI3XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg',
+                description: 'A story of two families entangled in a web of secrets and lies. As their lives collide, they discover that everyone has a dark side, and some secrets are better left buried.',
+                descriptionAr: 'قصة عائلتين متورطتين في شبكة من الأسرار والأكاذيب. مع تصادم حياتهما، يكتشفان أن لكل شخص جانبًا مظلمًا، وأن بعض الأسرار يفضل بقاؤها مدفونة.',
+                servers: [
+                    { label: "AflamServer", url: "https://v.aflam.news/embed-dxl0jriwyqq8.html", icon: "fa-server" },
+                    { label: "Anamove", url: "https://as.akwam.tube/embed/73886", icon: "fa-server" },
+                    { label: "Vidspeeds", url: "https://vidspeed.cc/embed-4vw7ie6g1ryh.html", icon: "fa-server" }
+                ]
+            }, {
+                id: '73',
+                titleEn: 'The Whistler',
+                titleAr: 'فلم مترجم The Whistler',
+                year: '2026',
+                lang: 'both',
+                posterUrl: 'https://yam.ahwaktv.net/uploads/thumbs/ffdcbd12c-1.jpg',
+                description: 'A mysterious whistling sound haunts a small town, and each occurrence is followed by a violent death. A journalist investigates the phenomenon, uncovering a dark secret that the town has tried to hide for decades.',
+                descriptionAr: 'صوت صفير غامض يطارد بلدة صغيرة، وكل ظهور يتبعه موت عنيف. صحفية تحقق في الظاهرة، وتكشف سرًا مظلمًا حاولت البلدة إخفاءه لعقود.',
+                servers: [
+                    { label: "Vidspeeds", url: "https://vidspeed.org/embed-zrw8520v2upl.html", icon: "fa-server" },
+                    { label: "Upload", url: "https://uqload.is/embed-usynpggq4311.html", icon: "fa-server" },
+                    { label: "Earnvids", url: "https://vidhideplus.com/embed/x0a6pernq7g5", icon: "fa-server" }
+                ]
+            }, {
+                id: '72',
+                titleEn: 'The Furies',
+                titleAr: 'فلم مترجم The Furies',
+                year: '2019',
+                lang: 'both',
+                posterUrl: 'https://wecima.ahwaktv.net/uploads/thumbs/5859E29f8-1.jpg',
+                description: 'A young woman is abducted and thrown into a deadly game where she must fight for her life against other captives. A visceral and intense survival horror film that pulls no punches.',
+                descriptionAr: 'امرأة شابة يتم اختطافها وإلقاؤها في لعبة مميتة حيث يجب عليها القتال من أجل حياتها ضد أسرى آخرين. فيلم بقاء ورعب حشوي ومكثف لا يتراجع.',
+                servers: [
+                    { label: "Vidspeeds", url: "https://www.vidspeeds.com/embed-vy218kbcy0rf.html", icon: "fa-server" },
+                    { label: "Upload", url: "https://uqload.net/embed-bw25ririp19i.html", icon: "fa-server" },
+                    { label: "Vk", url: "https://vk.com/video_ext.php?oid=848076703&id=456241231&hd=2", icon: "fa-server" }
+                ]
+            }, {
+                id: '71',
+                titleEn: 'Trick R Treat',
+                titleAr: 'فلم مترجم Trick R Treat',
+                year: '2007',
+                lang: 'both',
+                posterUrl: 'https://yam.ahwaktv.net/uploads/thumbs/5b267932c-1.jpg',
+                description: 'A Halloween anthology that weaves together four terrifying tales. From a vengeful prank to a deadly secret, the film captures the true spirit of Halloween with a mix of horror, humor, and folklore.',
+                descriptionAr: 'أنثولوجيا الهالوين التي تنسج معًا أربع حكايات مرعبة. من مزحة انتقامية إلى سر مميت، يلتقط الفيلم الروح الحقيقية للهالوين بمزيج من الرعب والفكاهة والفولكلور.',
+                servers: [
+                    { label: "Vidspeeds", url: "https://www.vidspeeds.com:2096/embed-dn155usckkmc.html", icon: "fa-server" },
+                    { label: "Upload", url: "https://uqload.net/embed-jdkgw7j8dgt4.html", icon: "fa-server" },
+                    { label: "1Vid", url: "https://www.vidspeeds.com:2096/embed-dn155usckkmc.html", icon: "fa-server" }
+                ]
+            }, {
+                id: '70',
+                titleEn: 'The Hills Have Eyes',
+                titleAr: 'فلم مترجم The Hills Have Eyes',
+                year: '2006',
+                lang: 'both',
+                posterUrl: 'https://wecima.ahwaktv.net/uploads/thumbs/6704a7fc6-1.jpg',
+                description: 'A family\'s road trip takes a dark turn when they are stranded in the desert and hunted by a clan of mutated cannibals. A brutal and relentless remake of the 1977 classic horror film.',
+                descriptionAr: 'رحلة عائلية بالسيارة تأخذ منعطفًا مظلمًا عندما يعلقون في الصحراء ويصطادهم عشيرة من أكلة لحوم البشر المتحولين. إعادة صنع وحشية ولا ترحم لفيلم الرعب الكلاسيكي لعام 1977.',
+                servers: [
+                    { label: "Vidspeeds", url: "https://www.vidspeeds.com/embed-o7px4twf8jhe.html", icon: "fa-server" },
+                    { label: "mxdrop", url: "https://mxdrop.to/e/k01llgxwfzj87d", icon: "fa-server" },
+                    { label: "1Vid", url: "https://1vid.xyz/embed-8wcgdyibwn1k.html", icon: "fa-server" }
+                ]
+            }, {
+                id: '68',
+                titleEn: 'Teen Wolf: The Movie',
+                titleAr: 'فلم مترجم Teen Wolf',
+                year: '2023',
+                lang: 'both',
+                posterUrl: 'https://w20.my-cima.net/uploads/thumbs/5fa66cc98-1.jpg',
+                description: 'The beloved series returns with a feature film. Scott McCall and his pack face a new threat that forces them to reunite and confront their past. A nostalgic and action-packed adventure for fans.',
+                descriptionAr: 'تعود السلسلة المحبوبة بفيلم روائي. سكوت ماكول وفريقه يواجهون تهديدًا جديدًا يجبرهم على reunite ومواجهة ماضيهم. مغامرة مليئة بالحنين والإثارة للجماهير.',
+                servers: [
+                    { label: "Vidspeeds", url: "https://www.vidspeeds.com:2053/embed-8j2fs02595qr.html", icon: "fa-server" },
+                    { label: "Uploud", url: "https://uqload.com/embed-s6sf83iratv8.html", icon: "fa-server" },
+                    { label: "Server3", url: "https://i.all-vid/embed-0l9m2dy3sc5f.html", icon: "fa-server" }
+                ]
+            }, {
+                id: '67',
+                titleEn: 'The Green Inferno',
+                titleAr: 'فلم مترجم The Green Inferno',
+                year: '2013',
+                lang: 'both',
+                posterUrl: 'https://w20.3oyn.com/social-thumb.php?vid=ecc1c99fe',
+                description: 'A group of student activists travel to the Amazon to stop deforestation and are captured by a cannibalistic tribe. A shocking and brutal survival horror film from director Eli Roth.',
+                descriptionAr: 'مجموعة من الناشطين الطلاب يسافرون إلى الأمازون لوقف إزالة الغابات ويتم أسرهم من قبل قبيلة أكل لحوم البشر. فيلم بقاء ورعب صادم ووحشي من المخرج إيلي روث.',
+                servers: [
+                    { label: "Vidspeeds", url: "https://www.vidspeeds.com:2053/embed-1rem8wtv8qbb.html", icon: "fa-server" },
+                    { label: "Server2", url: "https://i.all-vid/embed-mefkne76bg2y.html", icon: "fa-server" },
+                    { label: "vipserver", url: "https://vipserver.liiivideo.com/embed-3croqupics84.html", icon: "fa-server" },
+                    { label: "Vidspeeds", url: "https://www.vidspeeds.com:2053/embed-1rem8wtv8qbb.html", icon: "fa-server" }
+                ]
+            }, {
+                id: '66',
+                titleEn: 'Dangerous Animals',
+                titleAr: 'فلم مترجم Dangerous Animals',
+                year: '2025',
+                lang: 'both',
+                posterUrl: 'https://w20.my-cima.net/uploads/thumbs/2c921bfc4-1.jpg',
+                description: 'A group of wildlife enthusiasts on a safari tour find themselves hunted by a pack of animals that have been altered by a mysterious experiment. A thrilling blend of survival and eco-horror.',
+                descriptionAr: 'مجموعة من عشاق الحياة البرية في رحلة سفاري يجدون أنفسهم مطاردين من قبل مجموعة من الحيوانات التي تم تغييرها بتجربة غامضة. مزيج مثير من البقاء والإيكو-رعب.',
+                servers: [
+                    { label: "hglink", url: "https://hglink.to/e/jglhj5xik7up", icon: "fa-server" },
+                    { label: "vidmoly", url: "https://vidmoly.net/embed-vw2gwmjvffeb.html", icon: "fa-server" },
+                    { label: "Videoland", url: "https://videoland.cfd/#nq66cu", icon: "fa-server" },
+                    { label: "movearn", url: "https://movearnpre.com/embed/to1nybssqzdf", icon: "fa-server" }
+                ]
+            }, {
+                id: '65',
+                titleEn: 'Play Dead 2025',
+                titleAr: 'فلم مترجم Play Dead 2025',
+                year: '2025',
+                lang: 'both',
+                posterUrl: 'https://i.ytimg.com/vi/Ry9pq-ggBS8/maxresdefault.jpg',
+                description: 'A woman fakes her own death to escape an abusive relationship, but she soon discovers that her new life is just as dangerous. A tense thriller about survival, identity, and the price of freedom.',
+                descriptionAr: 'امرأة تزيف موتها للهروب من علاقة مسيئة، لكنها تكتشف قريبًا أن حياتها الجديدة خطيرة بنفس القدر. فيلم إثارة مكثف عن البقاء والهوية وثمن الحرية.',
+                servers: [
+                    { label: "krakenfiles", url: "https://krakenfiles.com/embed-video/vw4l5db7vk", icon: "fa-server" },
+                    { label: "Lulustream", url: "https://lulustream.com/e/3o1thim9961r", icon: "fa-server" },
+                    { label: "Mixdrop", url: "https://mixdrop.ag/e/mknrg606hl7q3q", icon: "fa-server" },
+                    { label: "Veev", url: "https://veev.to/e/ozl267ipivo5", icon: "fa-server" },
+                    { label: "Videoland", url: "https://videoland.cfd/#nq66cu", icon: "fa-server" },
+                    { label: "Ok.ru", url: "https://ok.ru/videoembed/11548646379855", icon: "fa-server" }
+                ]
+            }, {
+                id: '64',
+                titleEn: 'Deadly Games 2025',
+                titleAr: 'فلم مترجم Deadly Games 2025',
+                year: '2025',
+                lang: 'both',
+                posterUrl: 'https://m.media-amazon.com/images/M/MV5BMGViODQ5NGEtODE1ZC00NWQwLTkzY2EtZmFkMWY0ZGZmZWVjXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg',
+                description: 'A group of strangers wake up in a mysterious room and must play a series of deadly games to survive. As alliances form and betrayals unfold, they learn that the true game is about trust, not luck.',
+                descriptionAr: 'مجموعة من الغرباء يستيقظون في غرفة غامضة ويجب عليهم لعب سلسلة من الألعاب المميتة للبقاء على قيد الحياة. مع تشكل التحالفات وكشف الخيانات، يتعلمون أن اللعبة الحقيقية تدور حول الثقة، وليس الحظ.',
+                servers: [
+                    { label: "Moviearn", url: "https://movearnpre.com/v/3q8f2qdcje3z", icon: "fa-server" },
+                    { label: "vidspeeds", url: "aHR0cHM6Ly9kb3BseS5uZXQvZS91eDF3amF2N2g4MHQ", icon: "fa-server" },
+                    { label: "Ok.ru", url: "https://ok.ru/videoembed/6292583549660?autoplay=1", icon: "fa-server" }
+                ]
+            }, {
+                id: '63',
+                titleEn: 'When Evil Lurks',
+                titleAr: 'فلم مترجم When Evil Lurks',
+                year: '2023',
+                lang: 'both',
+                posterUrl: 'https://wecima.ahwaktv.net/uploads/thumbs/3b9d04ab9-1.jpg',
+                description: 'In a remote village, a father and son discover a sinister presence that threatens to consume their community. The only way to stop the evil is to confront it directly, but the cost may be too high.',
+                descriptionAr: 'في قرية نائية، يكتشف أب وابنه وجودًا شريرًا يهدد باستهلاك مجتمعهم. الطريقة الوحيدة لوقف الشر هي مواجهته مباشرة، لكن التكلفة قد تكون باهظة.',
+                servers: [
+                    { label: "Vidspeeds", url: "https://www.vidspeeds.com/embed-s9z881s8whsj.html", icon: "fa-server" },
+                    { label: "vidspeeds", url: "https://vidspeed.cc/embed-qa2a68a6v73b.html", icon: "fa-server" },
+                    { label: "Ok.ru", url: "https://ok.ru/videoembed/6292583549660?autoplay=1", icon: "fa-server" }
+                ]
+            }, {
+                id: '62',
+                titleEn: 'The Girl Next Door',
+                titleAr: 'فلم مترجم The Girl Next Door',
+                year: '2004',
+                lang: 'both',
+                posterUrl: 'https://disney.images.edge.bamgrid.com/ripcut-delivery/v2/variant/disney/02b5a2fc-873e-49df-b482-fe4050166077/compose?aspectRatio=1.78&format=webp&width=1200',
+                description: 'A high school student\'s boring suburban life is turned upside down when a beautiful former child actress moves in next door. But he soon discovers she has a dangerous secret past that threatens everything.',
+                descriptionAr: 'حياة طالب المدرسة الثانوية في الضواحي المملة تنقلب رأسًا على عقب عندما تنتقل ممثلة طفلة سابقة جميلة إلى المنزل المجاور. لكنه يكتشف قريبًا أن لديها ماضيًا سريًا خطيرًا يهدد كل شيء.',
+                servers: [
+                    { label: "Vipserver", url: "https://vipserver.liiivideo.com/embed-7zx4cqf6xp80.html", icon: "fa-server" },
+                    { label: "vidspeeds", url: "https://www.vidspeeds.com:2053/embed-szrkzqg95mgy.html", icon: "fa-server" },
+                    { label: "VkServer", url: "https://vk.com/video_ext.php?oid=763791080&id=456239695&hash=81bc894094d09b9b", icon: "fa-server" }
+                ]
+            }, {
+                id: '69',
+                titleEn: 'Sex Appeal',
+                titleAr: 'فلم مترجم Sex Appeal',
+                year: '2022',
+                lang: 'both',
+                posterUrl: 'https://cfm.yidio.com/images/movie/248653/backdrop-640x360.jpg',
+                description: 'A young woman who\'s never been interested in dating decides to study attraction as a science project. As she applies the principles of seduction, she discovers that love doesn\'t follow any formula.',
+                descriptionAr: 'امرأة شابة لم تكن مهتمة بالمواعدة تقرر دراسة الجذب كمشروع علمي. بينما تطبق مبادئ الإغواء، تكتشف أن الحب لا يتبع أي صيغة.',
+                servers: [
+                    { label: "Vidspeeds", url: "https://www.vidspeeds.com/embed-dnj5558h9m60.html", icon: "fa-server" },
+                    { label: "Uploud", url: "https://uqload.net/embed-3isnysy6yki2.html", icon: "fa-server" }
+                ]
+            }, {
+                id: '55',
+                titleEn: 'The Woman in the Yard 2025',
+                titleAr: 'فلم مترجم The Woman in the Yard',
+                year: '2025',
+                lang: 'both',
+                posterUrl: 'https://dal.ahwaktv.net/uploads/thumbs/4f3e468cb-1.jpg',
+                description: 'A family\'s new home is haunted by the ghost of a woman who died in the yard years ago. As the spirit grows more aggressive, the family must uncover the truth behind her death to save themselves.',
+                descriptionAr: 'منزل عائلة جديد مسكون بشبح امرأة ماتت في الفناء قبل سنوات. مع ازدياد عدوانية الروح، يجب على العائلة كشف الحقيقة وراء وفاتها لإنقاذ أنفسهم.',
+                servers: [
+                    { label: "Vidspeeds", url: "https://www.vidspeeds.com/embed-x9w1nwui9hnw.html", icon: "fa-server" },
+                    { label: "Uploud", url: "https://uqload.net/embed-w2zhoww0cnvh.html", icon: "fa-server" }
+                ]
+            }, {
+                id: '54',
+                titleEn: 'The Sacrifice Game 2023',
+                titleAr: 'فلم مترجم The Sacrifice Game',
+                year: '2023',
+                lang: 'both',
+                posterUrl: 'https://wecima.ahwaktv.net/uploads/thumbs/375548cc6-1.jpg',
+                description: 'A group of friends play a mysterious game that turns deadly when they realize the game\'s rules are real. They must survive the night by playing the game to its terrifying conclusion.',
+                descriptionAr: 'مجموعة من الأصدقاء يلعبون لعبة غامضة تتحول إلى مميتة عندما يدركون أن قواعد اللعبة حقيقية. يجب عليهم البقاء على قيد الحياة طوال الليل من خلال لعب اللعبة حتى نهايتها المرعبة.',
+                servers: [
+                    { label: "Ok.ru", url: "https://www.ok.ru/videoembed/7787130784437", icon: "fa-server" },
+                    { label: "Uploud", url: "https://uqload.net/embed-zdbvyaqe9gk0.html", icon: "fa-server" }
+                ]
+            }, {
+                id: '1',
+                titleEn: 'The Aftermath 2019',
+                titleAr: 'ما بعد الأحداث ٢٠١٩',
+                year: '2024',
+                lang: 'both',
+                posterUrl: 'https://observer.com/wp-content/uploads/sites/2/2019/03/aftermath-dom-ta_03670_rgb-1.jpg',
+                description: 'Set in postwar Germany, a British colonel and his wife move into a home where the previous owner\'s wife still lives. As tensions rise between them, they must navigate the ruins of war and the secrets left behind.',
+                descriptionAr: 'تدور الأحداث في ألمانيا ما بعد الحرب، حيث ينتقل عقيد بريطاني وزوجته إلى منزل لا تزال زوجة المالك السابق تعيش فيه. مع تصاعد التوتر بينهم، يجب عليهم التنقل بين أنقاض الحرب والأسرار التي تركت وراءها.',
+                servers: [
+                    { label: "VidSpeed", url: "https://www.vidspeeds.com/embed-1yjmv1iiev42.html", icon: "fa-server" },
+                    { label: "Mirror 1", url: "https://uqload.net/embed-example1.html", icon: "fa-link" },
+                    { label: "Backup", url: "https://vidspeed.org/embed-example2.html", icon: "fa-cloud" }
+                ]
+            }, {
+                id: '2',
+                titleEn: 'The Aftermath 2024',
+                titleAr: 'الرجل التالي ٢٠٢٤',
+                year: '2022',
+                lang: 'both',
+                posterUrl: 'https://upload.wikimedia.org/wikipedia/en/1/13/Aftermath2024.jpg',
+                description: 'A gripping mystery set in a small town where a series of strange events follow a tragic accident. A detective must uncover the truth before the community tears itself apart.',
+                descriptionAr: 'لغز مثير تدور أحداثه في بلدة صغيرة حيث تتبع سلسلة من الأحداث الغريبة حادثًا مأساويًا. يجب على المحقق كشف الحقيقة قبل أن تمزق المجتمع نفسه.',
+                servers: [
+                    { label: "Main", url: "https://1vid.xyz/embed-da6da2wutmc9.html", icon: "fa-server" },
+                    { label: "Mirror", url: "https://1vid.xyz/embed-da6da2wutmc9.html", icon: "fa-link" }
+                ]
+            }, {
+                id: '3',
+                titleEn: '7G 2024',
+                titleAr: 'مشاهدة فلم ٥جي',
+                year: '2023',
+                lang: 'both',
+                posterUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgJ_PpLsEjZRoNh86YY9mlAl3AjJtoN_FwLmzCAZyNKA&s=10',
+                description: 'A young woman moves to a new city for work and discovers that her apartment is haunted by the ghost of a previous tenant. As she investigates, she uncovers a dark conspiracy that goes beyond the supernatural.',
+                descriptionAr: 'امرأة شابة تنتقل إلى مدينة جديدة للعمل وتكتشف أن شقتها مسكونة بشبح مستأجر سابق. مع تحقيقاتها، تكشف مؤامرة مظلمة تتجاوز الخارق للطبيعة.',
+                servers: [
+                    { label: "VK", url: "https://vk.com/video_ext.php?oid=745497736&id=456242418&hash=48fcf213e4fa140d", icon: "fa-server" }
+                ]
+            }, {
+                id: '4',
+                titleEn: 'Terrifier 2017',
+                titleAr: 'الموت المرعب',
+                year: '2023',
+                lang: 'both',
+                posterUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlHm-l8u9zAAO6KaeKey1Ivy7L-C5H7ksmTvmYUIByjw&s=10',
+                description: 'On Halloween night, a terrifying clown named Art stalks and brutally kills his victims. A shocking and gruesome horror film that has become a cult classic for its unflinching brutality.',
+                descriptionAr: 'في ليلة الهالوين، يطارد مهرج مرعب يدعى آرت ضحاياه ويقتلهم بوحشية. فيلم رعب صادم ومقزز أصبح كلاسيكيًا cult لقسوته التي لا تتراجع.',
+                servers: [
+                    { label: "VidSpeed", url: "https://www.vidspeeds.com/embed-xezpn5cajs17.html", icon: "fa-server" }
+                ]
+            }, {
+                id: '5',
+                titleEn: 'Fear Farm 2022',
+                titleAr: 'مزرعة الرعب',
+                year: '2023',
+                lang: 'both',
+                posterUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQIWWgz8DbkZO0q0DnBNOnT8Nrfl3Iu1v8ffMw1IBK21A&s=10',
+                description: 'A group of teenagers taking a shortcut through a farm discover it\'s a trap set by a deranged family. Their night of fun turns into a battle for survival against a relentless evil.',
+                descriptionAr: 'مجموعة من المراهقين يأخذون طريقًا مختصرًا عبر مزرعة يكتشفون أنها فخ نصبه عائلة مختلة. ليلتهم المرحة تتحول إلى معركة من أجل البقاء ضد شر لا يكل.',
+                servers: [
+                    { label: "Uqload", url: "https://uqload.net/embed-yi9l18v525t2.html", icon: "fa-server" }
+                ]
+            }, {
+                id: '6',
+                titleEn: 'The Farm 2',
+                titleAr: 'المزرعة ٢',
+                year: '2023',
+                lang: 'both',
+                posterUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZmJeEAwshSOGtgXa5ffL_nylq63WNw0RpcP496IkdRQ&s=10',
+                description: 'The sequel to the terrifying farm horror. A new family moves to the farm, unaware of its bloody history. Soon they discover that the farm\'s evil has been waiting for fresh prey.',
+                descriptionAr: 'تكملة لفيلم رعب المزرعة المرعب. تنتقل عائلة جديدة إلى المزرعة غير مدركة لتاريخها الدموي. سرعان ما يكتشفون أن شر المزرعة كان ينتظر فريسة جديدة.',
+                servers: [
+                    { label: "VidSpeed", url: "https://www.vidspeeds.com:2053/embed-w5z4zj4uierg.html", icon: "fa-server" }
+                ]
+            }, {
+                id: '7',
+                titleEn: 'Wrong Turn 2',
+                titleAr: 'Wrong Turn 2',
+                year: '2007',
+                lang: 'both',
+                posterUrl: 'https://i.ytimg.com/vi/uHhO3z4Cw7A/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLCKrKhTDf-Uw4gEyNdYrQATV1TuvQ',
+                description: 'A group of survivalists participate in a reality show in the wilderness, unaware that they are being hunted by a family of cannibalistic mutants. The second installment in the brutal franchise.',
+                descriptionAr: 'مجموعة من الناجين يشاركون في برنامج واقعي في البرية، غير مدركين أنهم يُصادون من قبل عائلة من الطفرات آكلي لحوم البشر. الجزء الثاني من السلسلة الوحشية.',
+                servers: [
+                    { label: "VidSpeed", url: "https://vidspeed.org/embed-wv56vclm9ofb.html", icon: "fa-server" }
+                ]
+            }, {
+                id: '8',
+                titleEn: 'Wrong Turn 1',
+                titleAr: 'Wrong Turn 1',
+                year: '2003',
+                lang: 'both',
+                posterUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQAMKY5WhjWrB_C3x6QDricgG-DOU_3eEPP_A&s',
+                description: 'A group of friends get lost in the backwoods and are hunted by a family of deformed cannibals. The film that started the iconic horror franchise, setting a new standard for survival horror.',
+                descriptionAr: 'مجموعة من الأصدقاء يضيعون في الغابات الوعرة ويُصادون من قبل عائلة من أكلة لحوم البشر المشوهين. الفيلم الذي بدأ سلسلة الرعب الأيقونية، ووضع معيارًا جديدًا لرعب البقاء.',
+                servers: [
+                    { label: "VidSpeed", url: "https://vidspeed.org/embed-zqjlljw9twxl.html", icon: "fa-server" }
+                ]
+            }, {
+                id: '9',
+                titleEn: 'Wrong Turn 3',
+                titleAr: 'Wrong Turn 3',
+                year: '2009',
+                lang: 'both',
+                posterUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRN2hmSTr9sG-_WsN6O6uoDVGfP_2ojwowenA&s',
+                description: 'A group of prisoners and a warden end up stranded in the same forest where the cannibalistic mutants live. They must work together to survive the night against a common enemy.',
+                descriptionAr: 'مجموعة من السجناء ومدير السجن يجدون أنفسهم عالقين في نفس الغابة حيث يعيش الطفرات آكلي لحوم البشر. يجب عليهم العمل معًا للبقاء على قيد الحياة طوال الليل ضد عدو مشترك.',
+                servers: [
+                    { label: "VidSpeed", url: "https://www.vidspeeds.com:2096/embed-monjpwuamt28.html", icon: "fa-server" }
+                ]
+            }, {
+                id: '10',
+                titleEn: 'Wrong Turn 5',
+                titleAr: 'Wrong Turn 5',
+                year: '2012',
+                lang: 'both',
+                posterUrl: 'https://static0.srcdn.com/wordpress/wp-content/uploads/2020/01/Wrong-Turn-5-Bloodlines-Borislav-Iliev.jpg',
+                description: 'The fifth installment takes the carnage to a small town during a music festival. When the mutants invade, the townspeople must fight back using whatever they can find, leading to a bloody showdown.',
+                descriptionAr: 'الجزء الخامس ينقل المذبحة إلى بلدة صغيرة خلال مهرجان موسيقي. عندما يغزو الطفرات البلدة، يجب على السكان القتال باستخدام ما يجدونه، مما يؤدي إلى مواجهة دموية.',
+                servers: [
+                    { label: "VidSpeed", url: "https://www.vidspeeds.com/embed-8m4njt9wesmn.html", icon: "fa-server" }
+                ]
+            }, {
+                id: '11',
+                titleEn: 'Wrong Turn 4',
+                titleAr: 'Wrong Turn 4',
+                year: '2011',
+                lang: 'both',
+                posterUrl: 'https://static0.moviewebimages.com/wordpress/wp-content/uploads/photo/lb8mOLS8SpuquyTQdZUAGg8DBZXcFd.jpg',
+                description: 'A group of friends go snowmobiling in the mountains and find an abandoned asylum. But the asylum is not abandoned — it\'s the home of the cannibal mutants, who are ready for their next meal.',
+                descriptionAr: 'مجموعة من الأصدقاء يذهبون لركوب عربات الثلج في الجبال ويجدون مصحة مهجورة. لكن المصحة ليست مهجورة - إنها موطن الطفرات آكلي لحوم البشر، المستعدين لوجبتهم التالية.',
+                servers: [
+                    { label: "VidSpeed", url: "https://www.vidspeeds.com/embed-8nmzicw74unq.html", icon: "fa-server" }
+                ]
+            }, {
+                id: '12',
+                titleEn: 'Wrong Turn 6',
+                titleAr: 'Wrong Turn 6',
+                year: '2014',
+                lang: 'both',
+                posterUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQqMD7hsLw8uQL7xii6h-uASbVpcjLh7RaPeQ&s',
+                description: 'A young man inherits a hotel in the West Virginia wilderness and brings his friends along. They soon discover that the hotel is connected to a family of cannibals with a dark secret.',
+                descriptionAr: 'رجل شاب يرث فندقًا في برية فيرجينيا الغربية ويأخذ أصدقائه معه. سرعان ما يكتشفون أن الفندق مرتبط بعائلة من أكلة لحوم البشر بسر مظلم.',
+                servers: [
+                    { label: "VidSpeed", url: "https://www.vidspeeds.com/embed-f44xlupx7k7c.html", icon: "fa-server" }
+                ]
+            }, {
+                id: '13',
+                titleEn: 'Don\'t Breathe 1',
+                titleAr: 'Don\'t Breathe 1',
+                year: '2016',
+                lang: 'both',
+                posterUrl: 'https://vid.mycima.cc/uploads/thumbs/835d46567-1.jpg',
+                description: 'Three thieves break into the house of a blind millionaire, thinking it will be an easy score. But the blind man is far more dangerous than they imagined, turning the tables on the intruders.',
+                descriptionAr: 'ثلاثة لصوص يقتحمون منزل مليونير أعمى، معتقدين أنها ستكون عملية سهلة. لكن الرجل الأعمى أكثر خطورة مما تخيلوا، مما يقلب الطاولة على المتسللين.',
+                servers: [
+                    { label: "VidRoba", url: "https://www.vidroba.com:2053/embed-cl7yuevr3fxt.html", icon: "fa-server" }
+                ]
+            }, {
+                id: '14',
+                titleEn: 'Swallow 2019',
+                titleAr: 'Swallow 2019',
+                year: '2019',
+                lang: 'both',
+                posterUrl: 'https://wecima.ahwaktv.net/uploads/thumbs/cd86f36fc-1.jpg',
+                description: 'A pregnant woman living in a perfect suburban home begins to develop a dangerous compulsion to swallow inedible objects. A psychological thriller about control, motherhood, and hidden desires.',
+                descriptionAr: 'امرأة حامل تعيش في منزل ضاحوي مثالي تبدأ في تطوير إكراه خطير لابتلاع أشياء غير صالحة للأكل. فيلم إثارة نفسي عن السيطرة والأمومة والرغبات الخفية.',
+                servers: [
+                    { label: "VidSpeed", url: "https://www.vidspeeds.com/embed-8yw1rdmk00la.html", icon: "fa-server" }
+                ]
+            }, {
+                id: '15',
+                titleEn: 'The Church 2018',
+                titleAr: 'The Church 2018',
+                year: '2018',
+                lang: 'both',
+                posterUrl: 'https://m.media-amazon.com/images/M/MV5BZWY3ZTViMDUtNzhiYy00MGZiLWIzZDgtOWJlZGRmMTA3MmQ1XkEyXkFqcGc@._V1_.jpg',
+                description: 'A young priest is sent to a remote village to investigate a strange occurrence at an old church. What he finds is a dark secret that has been buried for centuries, and a force that will stop at nothing.',
+                descriptionAr: 'كاهن شاب يُرسل إلى قرية نائية للتحقيق في حدث غريب في كنيسة قديمة. ما يجده هو سر مظلم مدفون لقرون، وقوة لن تتوقف عند أي شيء.',
+                servers: [
+                    { label: "OK.ru", url: "https://ok.ru/videoembed/1980799388369", icon: "fa-server" }
+                ]
+            }, {
+                id: '16',
+                titleEn: 'The Cell 2016',
+                titleAr: 'The Cell 2016',
+                year: '2016',
+                lang: 'both',
+                posterUrl: 'https://wecima.ahwaktv.net/uploads/thumbs/2fe22bb8d-1.jpg',
+                description: 'A woman is kidnapped and held in a cell, where she must use her wits to survive. As she learns more about her captor and her situation, she realizes that escape is only the beginning of her nightmare.',
+                descriptionAr: 'امرأة يتم اختطافها واحتجازها في زنزانة، حيث يجب عليها استخدام ذكائها للبقاء على قيد الحياة. مع تعلمها المزيد عن خاطفها ووضعها، تدرك أن الهروب هو مجرد بداية كابوسها.',
+                servers: [
+                    { label: "VidSpeed", url: "https://www.vidspeeds.com/embed-iu544n3bv96x.html", icon: "fa-server" }
+                ]
+            }, {
+                id: '17',
+                titleEn: 'Wrong Turn 7',
+                titleAr: 'Wrong Turn 7',
+                year: '2021',
+                lang: 'both',
+                posterUrl: 'https://s1.dmcdn.net/v/YpVWu1eZMI81iEX_m/x720',
+                description: 'The latest installment in the iconic horror franchise. A group of hikers get lost in the same deadly forest, where the mutant cannibal family still roams. New threats, new victims, same savage terror.',
+                descriptionAr: 'الجزء الأحدث من سلسلة الرعب الأيقونية. مجموعة من المتنزهين يضيعون في نفس الغابة المميتة، حيث لا تزال عائلة الطفرات آكلي لحوم البشر تتجول. تهديدات جديدة، ضحايا جدد، نفس الرعب الوحشي.',
+                servers: [
+                    { label: "YourUpload", url: "https://www.yourupload.com/embed/7u1j55y84ND1", icon: "fa-server" }
+                ]
+            }, {
+                id: '18',
+                titleEn: 'Wij 2018',
+                titleAr: 'Wij 2018',
+                year: '2018',
+                lang: 'both',
+                posterUrl: 'https://horrornews.net/wp-content/uploads/2020/02/We-Wij-movie-2018-Rene-Eller-9-550x330.jpg',
+                description: 'A powerful psychological drama about the unraveling of a family under the weight of secrets and lies. As the truth emerges, each member must confront their own role in the destruction.',
+                descriptionAr: 'دراما نفسية قوية عن تفكك عائلة تحت وطأة الأسرار والأكاذيب. مع ظهور الحقيقة، يجب على كل عضو مواجهة دوره في الدمار.',
+                servers: [
+                    { label: "F75S", url: "https://f75s.com/d/c23b7zb8ihm1", icon: "fa-server" }
+                ]
+            }, {
+                id: '19',
+                titleEn: 'Tale Of Tales 2015',
+                titleAr: 'Tale Of Tales 2015',
+                year: '2015',
+                lang: 'both',
+                posterUrl: 'https://wecima.ahwaktv.net/uploads/thumbs/2254c5a17-1.jpg',
+                description: 'A dark fantasy film inspired by the fairy tales of Giambattista Basile. Three interwoven stories explore themes of power, love, and transformation in a visually stunning and macabre world.',
+                descriptionAr: 'فيلم فانتازيا مظلم مستوحى من الحكايات الخيالية لجامباتيستا بازيلي. ثلاث قصص متشابكة تستكشف موضوعات القوة والحب والتحول في عالم مذهل بصريًا ومقزز.',
+                servers: [
+                    { label: "VidSpeed", url: "https://www.vidspeeds.com/embed-f1cyojqniqke.html", icon: "fa-server" }
+                ]
+            }, {
+                id: '20',
+                titleEn: 'Dolly',
+                titleAr: 'Dolly',
+                year: '2015',
+                lang: 'both',
+                posterUrl: 'https://m.qfilm.tv/uploads/thumbs/41a8d1c28-1.jpg',
+                description: 'A horror story about a young couple who move into a new apartment and discover that the previous tenant\'s doll collection is not just a collection — it\'s a haunted legacy. Dolly is watching.',
+                descriptionAr: 'قصة رعب عن زوجين شابين ينتقلان إلى شقة جديدة ويكتشفان أن مجموعة دمى المستأجر السابق ليست مجرد مجموعة - إنها إرث مسكون. دوللي تراقب.',
+                servers: [
+                    { label: "LiiVideo", url: "https://wwa.liiivideo.com/embed-23728r5ffeys.html", icon: "fa-server" }
+                ]
+            }, {
+                id: '21',
+                titleEn: 'Matriarch 2022',
+                titleAr: 'Matriarch 2022',
+                year: '2022',
+                lang: 'both',
+                posterUrl: 'https://c.ifushaar.com/wp-content/uploads/2022/10/Matriarch-2022-640x360.jpg',
+                description: 'A woman returns to her childhood home after her estranged mother\'s death, only to discover the family matriarch\'s dark legacy still haunts the property. A chilling horror film about family trauma.',
+                descriptionAr: 'امرأة تعود إلى منزل طفولتها بعد وفاة والدتها المبتعدة، لتكتشف أن إرث الربة العائلية المظلم لا يزال يطارد العقار. فيلم رعب م chilling عن الصدمة العائلية.',
+                servers: [
+                    { label: "MP4Plus", url: "https://mp4plus.org/embed-m42acnjmauzk.html", icon: "fa-server" }
+                ]
+            }, {
+                id: '22',
+                titleEn: 'Project Power',
+                titleAr: 'Project Power',
+                year: '2022',
+                lang: 'both',
+                posterUrl: 'https://cimalina.live/wp-content/uploads/2020/07/Ashampoo_Snap_2020.07.22_14h26m25s_004_.png',
+                description: 'A mysterious pill gives users superpowers for five minutes, but it also kills some. A cop, a drug dealer, and a girl with a secret must work together to uncover the truth behind Project Power.',
+                descriptionAr: 'حبة غامضة تعطي المستخدمين قوى خارقة لمدة خمس دقائق، لكنها تقتل البعض أيضًا. شرطي وتاجر مخدرات وفتاة بسر يجب أن يعملوا معًا لكشف الحقيقة وراء مشروع باور.',
+                servers: [
+                    { label: "VidSpeed", url: "https://www.vidspeeds.com:2053/embed-ynpeomgoimd0.html", icon: "fa-server" }
+                ]
+            }, {
+                id: '23',
+                titleEn: 'The Bluff',
+                titleAr: 'The Bluff',
+                year: '2026',
+                lang: 'both',
+                posterUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTsfyDblS3C8hIFOAncOScvVvbSocwx6LBMrYlUHR-vOUrS6BgoXI6dce0-&s=10',
+                description: 'When a man\'s family is threatened, he must use his past as a master manipulator to protect them. The film follows his high-stakes game of psychological chess, where every move could be his last.',
+                descriptionAr: 'عندما تتعرض عائلة رجل للتهديد، يجب عليه استخدام ماضيه كمتلاعب ماهر لحمايتهم. يتابع الفيلم لعبة الشطرنج النفسي عالية المخاطر الخاصة به، حيث قد تكون كل حركة هي الأخيرة.',
+                servers: [
+                    { label: "FastVip", url: "https://akhbarworld.online?mycimafsd=aHR0cHM6Ly9mYXN0dmlwLnNwYWNlL2UvMThkNmh2NGdiZnd4", icon: "fa-server" }
+                ]
+            }, {
+                id: '24',
+                titleEn: 'Battleship',
+                titleAr: 'Battleship',
+                year: '2012',
+                lang: 'both',
+                posterUrl: 'https://i.ebayimg.com/images/g/X38AAMXQOT5Q9sJg/s-l1200.jpg',
+                description: 'The classic board game comes to life in this action-packed sci-fi thriller. A fleet of ships must defend Earth from an alien invasion, using strategy and courage to win a war at sea.',
+                descriptionAr: 'لعبة اللوحة الكلاسيكية تنبض بالحياة في هذا الإثارة العلمية المليئة بالإثارة. يجب على أسطول من السفن الدفاع عن الأرض من غزو فضائي، باستخدام الاستراتيجية والشجاعة للفوز بحرب في البحر.',
+                servers: [
+                    { label: "VidSpeed", url: "https://www.vidspeeds.com:2053/embed-npc2a7wsxlxe.html", icon: "fa-server" }
+                ]
+            }, {
+                id: '25',
+                titleEn: 'The Tit and The Moon',
+                titleAr: 'The Tit and The Moon',
+                year: '1994',
+                lang: 'both',
+                posterUrl: 'https://qfilm.tv/uploads/thumbs/06ac5dc0d-1.jpg',
+                description: 'A coming-of-age story about a boy who becomes obsessed with the idea of a woman\'s breast and the moon. A provocative and poetic film about desire, growing up, and the mysteries of the body and the cosmos.',
+                descriptionAr: 'قصة عن النضوج لصبي يصبح مهووسًا بفكرة صدر المرأة والقمر. فيلم استفزازي وشاعري عن الرغبة والنمو وأسرار الجسد والكون.',
+                servers: [
+                    { label: "1Vid", url: "https://1vid.xyz/embed-22j2p3yqh9jp.html", icon: "fa-server" }
+                ]
+            }, {
+                id: '26',
+                titleEn: 'Furioza 1',
+                titleAr: 'Furioza 1',
+                year: '2021',
+                lang: 'both',
+                posterUrl: 'https://tv.halabieh.com/uploads/thumbs/3ee27f2b5-1.jpg',
+                description: 'A Polish crime thriller about a woman who becomes entangled with a dangerous gang. As she tries to navigate the criminal underworld, she must protect her family and her own life.',
+                descriptionAr: 'فيلم إثارة جريمة بولندي عن امرأة تتورط مع عصابة خطيرة. بينما تحاول التنقل في العالم السفلي الإجرامي، يجب عليها حماية عائلتها وحياتها.',
+                servers: [
+                    { label: "FileMoon", url: "https://filemoon.sx/e/k6vmiyxvixrm", icon: "fa-server" }
+                ]
+            }, {
+                id: '27',
+                titleEn: 'Furioza 2',
+                titleAr: 'Furioza 2',
+                year: '2025',
+                lang: 'both',
+                posterUrl: 'https://image.tmdb.org/t/p/original/yOLnV1lM3NuMsgYwIhz454fQRgt.jpg',
+                description: 'The sequel to the gritty Polish crime thriller. The stakes are higher as the protagonist faces new enemies and old betrayals. A brutal look at the cost of loyalty in a world where trust is a weakness.',
+                descriptionAr: 'تكملة لفيلم الجريمة البولندي الخام. الرهانات أعلى مع مواجهة البطلة لأعداء جدد وخيانات قديمة. نظرة وحشية على ثمن الولاء في عالم حيث الثقة ضعف.',
+                servers: [
+                    { label: "EgyptBest", url: "https://egybestvid.com/embed-7e1at1fsj28e.html", icon: "fa-server" }
+                ]
+            }, {
+                id: '28',
+                titleEn: 'The Forever Purge',
+                titleAr: 'The Forever Purge',
+                year: '2021',
+                lang: 'both',
+                posterUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSNEH6BvUrpwWAcMDOHqTqulLxHKC6nYfAGVx1Tq10aE9qZA0x_l2MZdwei&s=10',
+                description: 'The fifth installment in the Purge franchise. A new law is passed that allows the annual purge to continue indefinitely, and one family must fight to survive in a world where lawlessness has no end.',
+                descriptionAr: 'الجزء الخامس من سلسلة Purge. يتم تمرير قانون جديد يسمح للتطهير السنوي بالاستمرار إلى أجل غير مسمى، ويجب على عائلة واحدة القتال للبقاء على قيد الحياة في عالم حيث الفوضى لا نهاية لها.',
+                servers: [
+                    { label: "Direct MP4", url: "https://krdline.shafilm.vip/ShaSorani/Movie/The.Forever.Purge.2021.1080p.Webrip.Sorani.mp4", icon: "fa-video" }
+                ]
+            }, {
+                id: '29',
+                titleEn: 'Evil Dead 2023',
+                titleAr: 'Evil Dead 2023',
+                year: '2023',
+                lang: 'both',
+                posterUrl: 'https://wecima.ahwaktv.net/uploads/thumbs/a945469f0-1.jpg',
+                description: 'The next chapter in the Evil Dead franchise. A woman discovers a book of the dead in her basement and accidentally unleashes a demonic force that threatens to consume her and everyone she loves.',
+                descriptionAr: 'الفصل التالي من سلسلة Evil Dead. امرأة تكتشف كتاب الموتى في قبوها وتطلق عن غير قصد قوة شيطانية تهدد باستهلاكها وكل من تحب.',
+                servers: [
+                    { label: "Uqload", url: "https://uqload.net/embed-uvc954a1ktz9.html", icon: "fa-server" }
+                ]
+            }, {
+                id: '30',
+                titleEn: 'Evil Dead 2013',
+                titleAr: 'Evil Dead 2013',
+                year: '2013',
+                lang: 'both',
+                posterUrl: 'https://tye.ahwaktv.net/uploads/thumbs/5b1918b02-1.jpg',
+                description: 'A brutal and intense remake of the classic horror film. Five friends go to a remote cabin and find a book of the dead, unleashing a demonic force that picks them off one by one in gruesome fashion.',
+                descriptionAr: 'إعادة صنع وحشية ومكثفة لفيلم الرعب الكلاسيكي. خمسة أصدقاء يذهبون إلى كوخ نائي ويجدون كتاب الموتى، مما يطلق قوة شيطانية تلتهمهم واحدًا تلو الآخر بطريقة مروعة.',
+                servers: [
+                    { label: "Uqload", url: "https://uqload.net/embed-th7phxs8urvh.html", icon: "fa-server" }
+                ]
+            }, {
+                id: '31',
+                titleEn: 'Evil Dead 1986',
+                titleAr: 'Evil Dead 1986',
+                year: '1986',
+                lang: 'both',
+                posterUrl: 'https://tye.ahwaktv.net/uploads/thumbs/067ebc930-1.jpg',
+                description: 'The classic sequel to the original Evil Dead. Ash Williams returns to battle the forces of darkness, this time with more action, more gore, and more one-liners. A cult classic for horror fans.',
+                descriptionAr: 'الجزء الكلاسيكي التكميلي لـ Evil Dead الأصلي. يعود آش ويليامز لمواجهة قوى الظلام، هذه المرة بمزيد من الإثارة والمزيد من الدماء والمزيد من العبارات الحادة. كلاسيكي cult لمحبي الرعب.',
+                servers: [
+                    { label: "Uqload", url: "https://uqload.net/embed-1afxc1464avr.html", icon: "fa-server" }
+                ]
+            }, {
+                id: '32',
+                titleEn: 'Evil Dead 1981',
+                titleAr: 'Evil Dead 1981',
+                year: '1981',
+                lang: 'both',
+                posterUrl: 'https://tye.ahwaktv.net/uploads/thumbs/520de226f-1.jpg',
+                description: 'The original classic that started it all. A group of friends go to a cabin in the woods and find a book of the dead, unleashing a demonic terror. The film that defined the modern horror genre.',
+                descriptionAr: 'الكلاسيكي الأصلي الذي بدأ كل شيء. مجموعة من الأصدقاء يذهبون إلى كوخ في الغابة ويجدون كتاب الموتى، مما يطلق رعبًا شيطانيًا. الفيلم الذي حدد نوع الرعب الحديث.',
+                servers: [
+                    { label: "Uqload", url: "https://uqload.net/embed-af95js8wixyz.html", icon: "fa-server" }
+                ]
+            }, {
+                id: '33',
+                titleEn: 'Maniac 2012',
+                titleAr: 'Maniac 2012',
+                year: '2012',
+                lang: 'both',
+                posterUrl: 'https://yam.ahwaktv.net/uploads/thumbs/bcdc73f20-1.jpg',
+                description: 'A horror film about a man who runs a mannequin store and has a dark obsession with women. As his obsession grows, he begins to stalk and kill women who resemble his mother, capturing them forever.',
+                descriptionAr: 'فيلم رعب عن رجل يدير متجر دمى ولديه هوس مظلم بالنساء. مع نمو هوسه، يبدأ في مطاردة وقتل النساء اللواتي يشبهن والدته، محتجزًا إياهن إلى الأبد.',
+                servers: [
+                    { label: "VidSpeed", url: "https://www.vidspeeds.com:2096/embed-crhuszg4fmzs.html", icon: "fa-server" }
+                ]
+            }, {
+                id: '34',
+                titleEn: 'I Saw The Devil',
+                titleAr: 'I Saw The Devil',
+                year: '2010',
+                lang: 'both',
+                posterUrl: 'https://wecima.ahwaktv.net/uploads/thumbs/8f641f3b9-1.jpg',
+                description: 'A Korean thriller about a secret agent who hunts the serial killer who murdered his fiancée. His quest for vengeance becomes a disturbing game of cat and mouse that pushes the boundaries of morality and horror.',
+                descriptionAr: 'فيلم إثارة كوري عن عميل سري يطارد القاتل المتسلسل الذي قتل خطيبته. يصبح سعيه للانتقام لعبة قط وفأر مزعجة تدفع حدود الأخلاق والرعب.',
+                servers: [
+                    { label: "VidSpeed", url: "https://www.vidspeeds.com/embed-zoiqylr8wg1x.html", icon: "fa-server" }
+                ]
+            }, {
+                id: '35',
+                titleEn: 'Into The Blue 2005',
+                titleAr: 'Into The Blue 2005',
+                year: '2005',
+                lang: 'both',
+                posterUrl: 'https://pic.bstarstatic.com/ugc/106fde4135d761ac359d2ae41b57125c.jpg',
+                description: 'A group of deep-sea divers find a sunken ship filled with treasure. But the treasure is not what it seems, and they soon find themselves caught between a dangerous criminal gang and the deep ocean.',
+                descriptionAr: 'مجموعة من الغواصين في أعماق البحر يجدون سفينة غارقة مليئة بالكنوز. لكن الكنز ليس ما يبدو عليه، وسرعان ما يجدون أنفسهم محاصرين بين عصابة إجرامية خطيرة والمحيط العميق.',
+                servers: [
+                    { label: "VidSpeed", url: "https://www.vidspeeds.com:2096/embed-drvc3rgtoxr9.html", icon: "fa-server" }
+                ]
+            }, {
+                id: '36',
+                titleEn: 'Cabin Fever 2002',
+                titleAr: 'Cabin Fever 2002',
+                year: '2002',
+                lang: 'both',
+                posterUrl: 'https://dal.ahwaktv.net/uploads/thumbs/af65ba1b6-1.jpg',
+                description: 'A group of college students go to a remote cabin in the woods for a vacation, but their trip turns into a nightmare when they contract a flesh-eating disease. A classic of modern horror.',
+                descriptionAr: 'مجموعة من طلاب الجامعة يذهبون إلى كوخ نائي في الغابة لقضاء إجازة، لكن رحلتهم تتحول إلى كابوس عندما يصابون بمرض آكل للحم البشر. كلاسيكي من الرعب الحديث.',
+                servers: [
+                    { label: "VidSpeed", url: "https://www.vidspeeds.com:2096/embed-osgs8kofrnpt.html", icon: "fa-server" }
+                ]
+            }, {
+                id: '37',
+                titleEn: 'Cabin Fever 2009',
+                titleAr: 'Cabin Fever 2009',
+                year: '2009',
+                lang: 'both',
+                posterUrl: 'https://wecima.ahwaktv.net/uploads/thumbs/a7d1dbfb0-1.jpg',
+                description: 'The first sequel to the cult horror classic. A new group of friends goes to a cabin in the woods, unaware that the flesh-eating virus is still active. A gory and intense horror experience.',
+                descriptionAr: 'الجزء الأول التكميلي لكلاسيكي الرعب cult. مجموعة جديدة من الأصدقاء يذهبون إلى كوخ في الغابة، غير مدركين أن الفيروس آكل اللحم لا يزال نشطًا. تجربة رعب دموية ومكثفة.',
+                servers: [
+                    { label: "VidSpeed", url: "https://www.vidspeeds.com:2096/embed-g7jrvzd1qn45.html", icon: "fa-server" }
+                ]
+            }, {
+                id: '38',
+                titleEn: 'Cabin Fever 2014',
+                titleAr: 'Cabin Fever 2014',
+                year: '2014',
+                lang: 'both',
+                posterUrl: 'https://yam.ahwaktv.net/uploads/thumbs/36f2fe49c-1.jpg',
+                description: 'The third installment in the Cabin Fever franchise. A group of tourists in South America find themselves trapped in a remote village with a strange disease. A pandemic horror film with a global perspective.',
+                descriptionAr: 'الجزء الثالث من سلسلة Cabin Fever. مجموعة من السياح في أمريكا الجنوبية يجدون أنفسهم محاصرين في قرية نائية بمرض غريب. فيلم رعب وبائي بمنظور عالمي.',
+                servers: [
+                    { label: "OK.ru", url: "https://ok.ru/videoembed/2374228511265", icon: "fa-server" },
+                    { label: "Server 2", url: "https://w.aflamy.pro/albaplayer/cabin-fever-3-patient-zero-2014?serv=0", icon: "fa-server" }
+                ]
+            }, {
+                id: '39',
+                titleEn: 'Cabin Fever 2016',
+                titleAr: 'Cabin Fever 2016',
+                year: '2016',
+                lang: 'both',
+                posterUrl: 'https://yam.ahwaktv.net/uploads/thumbs/d676d09e4-1.jpg',
+                description: 'The fourth installment in the franchise. The deadly virus has mutated and is spreading faster than ever. A group of survivors must find a way to stop the infection before it consumes the world.',
+                descriptionAr: 'الجزء الرابع من السلسلة. الفيروس المميت تحور وانتشر أسرع من أي وقت مضى. مجموعة من الناجين يجب أن يجدوا طريقة لوقف العدوى قبل أن تلتهم العالم.',
+                servers: [
+                    { label: "VidRoba", url: "https://www.vidroba.com:2053/embed-hqbft8d9mvp7.html", icon: "fa-server" }
+                ]
+            }, {
+                id: '40',
+                titleEn: 'Pandora',
+                titleAr: 'Pandora',
+                year: '2016',
+                lang: 'both',
+                posterUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSch7ao2t0EfvRU0PvdNcSeXJrhMFVVL6uq2DZWLFFcU6A5p-dFOmAhMj0&s=10',
+                description: 'A South Korean disaster film about a nuclear power plant meltdown. As the radiation spreads, the workers and the community must race against time to prevent a catastrophe that could destroy the country.',
+                descriptionAr: 'فيلم كارثة كوري جنوبي عن انهيار محطة طاقة نووية. مع انتشار الإشعاع، يجب على العمال والمجتمع السباق ضد الزمن لمنع كارثة يمكن أن تدمر البلاد.',
+                servers: [
+                    { label: "VidSpeed", url: "https://www.vidspeeds.com:2053/embed-wtf6a0syau0v.html", icon: "fa-server" }
+                ]
+            }, {
+                id: '41',
+                titleEn: 'The Human Centipede 3',
+                titleAr: 'The Human Centipede 3',
+                year: '2015',
+                lang: 'both',
+                posterUrl: 'https://m.media-amazon.com/images/I/91XWouxC3mL._AC_UF894,1000_QL80_.jpg',
+                description: 'The shocking finale to the Human Centipede trilogy. A prison warden decides to create a 500-person centipede to solve the problem of prison overcrowding. A disturbing and satirical horror film.',
+                descriptionAr: 'النهائي الصادم لثلاثية Human Centipede. قرر مدير السجن إنشاء حريش من 500 شخص لحل مشكلة اكتظاظ السجون. فيلم رعب مزعج وساخر.',
+                servers: [
+                    { label: "Fdewsdc", url: "https://fdewsdc.sbs/embed/9qck0f0g8xjb", icon: "fa-server" },
+                    { label: "uploud", url: "https://uqload.co/embed-mu0qjyfsas8v.html", icon: "fa-server" }
+                ]
+            }, {
+                id: '42',
+                titleEn: 'The Human Centipede 2',
+                titleAr: 'The Human Centipede 2',
+                year: '2011',
+                lang: 'both',
+                posterUrl: 'https://m.media-amazon.com/images/I/81BhPvzTN+L._AC_UF894,1000_QL80_.jpg',
+                description: 'The notorious sequel to the original Human Centipede. A man becomes obsessed with the first film and decides to create his own human centipede, targeting victims in London. A dark and disturbing descent.',
+                descriptionAr: 'الجزء التكميلي سيئ السمعة لـ Human Centipede الأصلي. رجل يصبح مهووسًا بالفيلم الأول ويقرر إنشاء حريش بشري خاص به، مستهدفًا الضحايا في لندن. هبوط مظلم ومزعج.',
+                servers: [
+                    { label: "OK.ru", url: "https://www.ok.ru/videoembed/88168336098", icon: "fa-server" },
+                    { label: "Server 2", url: "https://fastvid.cam/embed/3lajn4asp9pm", icon: "fa-server" }
+                ]
+            }, {
+                id: '43',
+                titleEn: 'The Human Centipede 1',
+                titleAr: 'The Human Centipede 1',
+                year: '2009',
+                lang: 'both',
+                posterUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Still8_Human_Centipede.jpg/330px-Still8_Human_Centipede.jpg',
+                description: 'The original cult classic that shocked the world. Two American tourists in Germany are kidnapped by a mad scientist who surgically connects them to create a human centipede. A film like no other.',
+                descriptionAr: 'الكلاسيكي cult الأصلي الذي صدم العالم. سائحان أمريكيان في ألمانيا يتم اختطافهم من قبل عالم مجنون يقوم بربطهم جراحيًا لإنشاء حريش بشري. فيلم لا مثيل له.',
+                servers: [
+                    { label: "OK.ru", url: "https://www.ok.ru/videoembed/426175040120", icon: "fa-server" },
+                    { label: "uploud", url: "https://uqload.co/embed-rqrdmg10anvi.html", icon: "fa-server" }
+                ]
+            }, {
+                id: '44',
+                titleEn: 'The Ward',
+                titleAr: 'The Ward',
+                year: '2010',
+                lang: 'both',
+                posterUrl: 'https://wecima.ahwaktv.net/uploads/thumbs/d43b1f99f-1.jpg',
+                description: 'A woman is committed to a psychiatric hospital and begins to experience strange phenomena. As she explores the hospital\'s dark history, she discovers that the other patients are not what they seem.',
+                descriptionAr: 'امرأة يتم إيداعها في مستشفى للأمراض النفسية وتبدأ في تجربة ظواهر غريبة. مع استكشافها للتاريخ المظلم للمستشفى، تكتشف أن المرضى الآخرين ليسوا كما يبدون.',
+                servers: [
+                    { label: "Vidspeeds", url: "https://www.vidspeeds.com:2096/embed-z3urh629dvem.html", icon: "fa-server" },
+                    { label: "uploud", url: "https://uqload.net/embed-rg5vs3js9vy2.html", icon: "fa-server" }
+                ]
+            }, {
+                id: '45',
+                titleEn: 'Tamara Drewe',
+                titleAr: 'Tamara Drewe',
+                year: '2010',
+                lang: 'both',
+                posterUrl: 'https://wecima.ahwaktv.net/uploads/thumbs/df9e41124-1.jpg',
+                description: 'A comedy-drama about a young woman who returns to her home village and becomes the center of attention, causing chaos among the local men. A witty and charming film about love and jealousy.',
+                descriptionAr: 'فيلم كوميدي درامي عن امرأة شابة تعود إلى قريتها وتصبح مركز الاهتمام، مما يسبب الفوضى بين الرجال المحليين. فيلم ذكي وساحر عن الحب والغيرة.',
+                servers: [
+                    { label: "Vidspeeds", url: "https://www.vidspeeds.com:2096/embed-a8tn3eyrf9lt.html", icon: "fa-server" },
+                    { label: "uploud", url: "https://uqload.net/embed-o9yalok0qu2d.html", icon: "fa-server" }
+                ]
+            }, {
+                id: '46',
+                titleEn: 'Heart Eyes',
+                titleAr: 'Heart Eyes',
+                year: '2025',
+                lang: 'both',
+                posterUrl: 'https://www.hawak.net/uploads/thumbs/b1ac04ec4-1.jpg',
+                description: 'A romantic thriller about a woman who discovers her new boyfriend is a serial killer. As she falls deeper in love, she must decide whether to turn him in or help him escape the law.',
+                descriptionAr: 'فيلم إثارة رومانسي عن امرأة تكتشف أن صديقها الجديد هو قاتل متسلسل. بينما تغرق في الحب أكثر، يجب عليها أن تقرر ما إذا كانت ستسلمه أو تساعده في الهروب من القانون.',
+                servers: [
+                    { label: "Server1", url: "https://movearnpre.com/embed/e7kamtqd17nt", icon: "fa-server" },
+                    { label: "Server2", url: "https://hglink.to/e/5mwwowpbgim4", icon: "fa-server" },
+                    { label: "Server3", url: "https://movearnpre.com/embed/e7kamtqd17nt", icon: "fa-server" }
+                ]
+            }, {
+                id: '47',
+                titleEn: 'Lumberjack Man 2015',
+                titleAr: 'فلم مترجم Lumberjack Man',
+                year: '2015',
+                lang: 'both',
+                posterUrl: 'https://i.ytimg.com/vi/kCJk23Jsoh4/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLBnd1NFeVX5TykdchLOEsWC8CqDvw',
+                description: 'A comedy-horror film about a group of college students who go to a remote lodge and are hunted by a lumberjack-themed killer. A satirical take on the slasher genre with plenty of laughs and gore.',
+                descriptionAr: 'فيلم رعب كوميدي عن مجموعة من طلاب الجامعة الذين يذهبون إلى نزل نائي ويتم اصطيادهم من قبل قاتل بموضوع الحطاب. نظرة ساخرة على نوع الرعب المشرح مع الكثير من الضحك والدماء.',
+                servers: [
+                    { label: "Server1", url: "https://v.aflam.news/embed-f4qq5sgix0om.html", icon: "fa-server" },
+                    { label: "Server2", url: "https://v.aflam.news/embed-f4qq5sgix0om.html", icon: "fa-server" },
+                    { label: "OK.ru", url: "http://ok.ru/videoembed/7109591894682", icon: "fa-server" }
+                ]
+            }, {
+                id: '48',
+                titleEn: 'Night Shifter',
+                titleAr: 'فلم مترجم Night Shifter',
+                year: '2020',
+                lang: 'both',
+                posterUrl: 'https://my.qfilm.tv/uploads/thumbs/05fbb26bb-1.jpg',
+                description: 'A young man works the night shift at a hotel where guests frequently check in but rarely check out. As he investigates the disappearances, he uncovers a supernatural horror that has been active for decades.',
+                descriptionAr: 'شاب يعمل في النوبة الليلية في فندق حيث يسجل الضيوف الدخول بشكل متكرر ولكن نادرًا ما يسجلون الخروج. بينما يحقق في الاختفاءات، يكشف عن رعب خارق للطبيعة نشط لعقود.',
+                servers: [
+                    { label: "Server1", url: "https://wwa.liiivideo.com/embed-bzg2tbj9fx7t.html", icon: "fa-server" },
+                    { label: "Server2", url: "-", icon: "fa-server" },
+                    { label: "OK.ru", url: "-", icon: "fa-server" }
+                ]
+            }, {
+                id: '49',
+                titleEn: 'Bleeding',
+                titleAr: 'فلم مترجم Bleeding',
+                year: '2024',
+                lang: 'both',
+                posterUrl: 'https://wer.ahwaktv.net/uploads/thumbs/d9560e79f-1.jpg',
+                description: 'A horror film about a man whose wounds will not heal, leading him to a terrifying discovery about his own existence. A psychological and physical journey into the dark heart of mortality.',
+                descriptionAr: 'فيلم رعب عن رجل لا تلتئم جروحه، مما يقوده إلى اكتشاف مرعب عن وجوده. رحلة نفسية وجسدية إلى قلب الفناء المظلم.',
+                servers: [
+                    { label: "1Vids", url: "https://1vid.xyz/embed-9g72ysjis92o.html", icon: "fa-server" },
+                    { label: "Vidspeeds", url: "https://www.vidspeeds.com/embed-ayjfy3s94mq4.html", icon: "fa-server" },
+                    { label: "uploud", url: "https://uqload.net/embed-j8ok5jw8owje.html", icon: "fa-server" }
+                ]
+            }, {
+                id: '50',
+                titleEn: 'Stage Fright 2014',
+                titleAr: 'فلم مترجم Stage Fright',
+                year: '2014',
+                lang: 'both',
+                posterUrl: 'https://yam.ahwaktv.net/uploads/thumbs/081a0a3ea-1.jpg',
+                description: 'A horror film about a group of theater students who are locked in a theater overnight and hunted by a masked killer. A tense and claustrophobic slasher film with a love for the stage.',
+                descriptionAr: 'فيلم رعب عن مجموعة من طلاب المسرح الذين يحبسون في مسرح طوال الليل ويتم اصطيادهم من قبل قاتل مقنع. فيلم مشرح مكثف ومثير مع حب للمسرح.',
+                servers: [
+                    { label: "Vidspeeds", url: "https://www.vidspeeds.com:2096/embed-xjgg9x94t5jx.html", icon: "fa-server" },
+                    { label: "Uploud", url: "https://uqload.net/embed-y19bixshekog.html", icon: "fa-server" }
+                ]
+            }, {
+                id: '51',
+                titleEn: 'Vindicta 2023',
+                titleAr: 'فلم مترجم Vindicta',
+                year: '2023',
+                lang: 'both',
+                posterUrl: 'https://yam.ahwaktv.net/uploads/thumbs/424470276-1.jpg',
+                description: 'A revenge thriller about a woman who returns to her hometown to confront the people who wronged her years ago. As her quest for justice escalates, she discovers that the truth is more complex than revenge.',
+                descriptionAr: 'فيلم إثارة انتقامي عن امرأة تعود إلى مسقط رأسها لمواجهة الأشخاص الذين ظلموها قبل سنوات. مع تصاعد سعيها للعدالة، تكتشف أن الحقيقة أكثر تعقيدًا من الانتقام.',
+                servers: [
+                    { label: "Vidspeeds", url: "https://www.vidspeeds.com/embed-3urvnsftqw60.html", icon: "fa-server" },
+                    { label: "Uploud", url: "https://www.uqload.io/embed-opt8oxtursza.html", icon: "fa-server" }
+                ]
+            }, {
+                id: '52',
+                titleEn: 'The Royal Hotel',
+                titleAr: 'فلم مترجم The Royal Hotel',
+                year: '2023',
+                lang: 'both',
+                posterUrl: 'https://wecima.ahwaktv.net/uploads/thumbs/b6c647eea-1.jpg',
+                description: 'Two Canadian backpackers take a job at a remote Australian hotel and find themselves in a terrifying situation. As the locals become increasingly hostile, they must fight to escape the Royal Hotel.',
+                descriptionAr: 'اثنان من المسافرين الكنديين يأخذون وظيفة في فندق أسترالي نائي ويجدون أنفسهم في موقف مرعب. مع ازدياد عداوة السكان المحليين، يجب عليهم القتال للهروب من فندق رويال.',
+                servers: [
+                    { label: "Vidspeeds", url: "https://www.vidspeeds.com/embed-djoedshl7ocx.html", icon: "fa-server" },
+                    { label: "Uploud", url: "https://uqload.net/embed-00y1l3ihi08s.html", icon: "fa-server" }
+                ]
+            }, {
+                id: '53',
+                titleEn: 'Bihter 2023',
+                titleAr: 'فلم مترجم Bihter',
+                year: '2023',
+                lang: 'both',
+                posterUrl: 'https://yam.ahwaktv.net/uploads/thumbs/c0f51437b-1.jpg',
+                description: 'A Turkish drama based on the classic novel. A woman trapped in a loveless marriage seeks passion and freedom, but her choices lead to a series of tragic consequences that unravel her world.',
+                descriptionAr: 'دراما تركية مبنية على الرواية الكلاسيكية. امرأة محاصرة في زواج بلا حب تبحث عن الشغف والحرية، لكن خياراتها تؤدي إلى سلسلة من العواقب المأساوية التي تفكك عالمها.',
+                servers: [
+                    { label: "Vidspeeds", url: "https://www.vidspeeds.com/embed-h3p5iw7q7oji.html", icon: "fa-server" },
+                    { label: "Uploud", url: "https://www.uqload.io/embed-kliijkn6xjuc.html", icon: "fa-server" }
+                ]
+            }, {
+                id: '56',
+                titleEn: 'The Madison S1E1',
+                titleAr: 'مسلسل The Madison الموسم الاول الحلقة 1',
+                year: '2026',
+                lang: 'both',
+                posterUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9mBKRUTicAgAspAhBnolgNda0ZYfdVsNgxJtH2VPj4A&s=10',
+                description: 'The premiere episode of the new drama series The Madison. A young family moves to a small town and discovers that the community holds dark secrets. The first chapter of a gripping mystery series.',
+                descriptionAr: 'الحلقة الأولى من مسلسل الدراما الجديد The Madison. عائلة شابة تنتقل إلى بلدة صغيرة وتكتشف أن المجتمع يحمل أسرارًا مظلمة. الفصل الأول من سلسلة غموض مثيرة.',
+                servers: [
+                    { label: "Server1", url: "https://vidara.so/e/BxRDwouHK5lhT", icon: "fa-server" },
+                    { label: "Server2", url: "https://movearnpre.com/embed/ujzwzr6ubf4l", icon: "fa-server" }
+                ]
+            }, {
+                id: '57',
+                titleEn: 'The Madison S1E2',
+                titleAr: 'مسلسل The Madison الموسم الاول الحلقة 2',
+                year: '2026',
+                lang: 'both',
+                posterUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9mBKRUTicAgAspAhBnolgNda0ZYfdVsNgxJtH2VPj4A&s=10',
+                description: 'The second episode of The Madison. As the family digs deeper into the town\'s history, they uncover a pattern of disappearances that goes back decades. The mystery deepens in this gripping episode.',
+                descriptionAr: 'الحلقة الثانية من The Madison. بينما تتعمق العائلة في تاريخ البلدة، يكتشفون نمطًا من الاختفاءات يعود لعقود. يتعمق الغموض في هذه الحلقة المثيرة.',
+                servers: [
+                    { label: "Server1", url: "https://vidara.so/e/5SNv9yzWZfJlm", icon: "fa-server" },
+                    { label: "Server2", url: "https://movearnpre.com/embed/x4u6vlznmc3v", icon: "fa-server" }
+                ]
+            }, {
+                id: '58',
+                titleEn: 'The Madison S1E3',
+                titleAr: 'مسلسل The Madison الموسم الاول الحلقة 3',
+                year: '2026',
+                lang: 'both',
+                posterUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9mBKRUTicAgAspAhBnolgNda0ZYfdVsNgxJtH2VPj4A&s=10',
+                description: 'The third episode of The Madison. A startling revelation about a former resident changes everything the family thought they knew. The tension builds as new allies and enemies emerge.',
+                descriptionAr: 'الحلقة الثالثة من The Madison. اكتشاف مذهل عن أحد السكان السابقين يغير كل ما كانت العائلة تعتقد أنها تعرفه. يتصاعد التوتر مع ظهور حلفاء وأعداء جدد.',
+                servers: [
+                    { label: "Server1", url: "https://vidara.so/e/H4qUsaHafj5eR", icon: "fa-server" },
+                    { label: "Server2", url: "https://movearnpre.com/embed/sphzmmuhysen", icon: "fa-server" }
+                ]
+            }, {
+                id: '59',
+                titleEn: 'The Madison S1E4',
+                titleAr: 'مسلسل The Madison الموسم الاول الحلقة 4',
+                year: '2026',
+                lang: 'both',
+                posterUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9mBKRUTicAgAspAhBnolgNda0ZYfdVsNgxJtH2VPj4A&s=10',
+                description: 'The fourth episode of The Madison. A key witness is found dead, and the family must race to protect themselves. The investigation takes a dangerous turn, leading to a shocking cliffhanger.',
+                descriptionAr: 'الحلقة الرابعة من The Madison. يتم العثور على شاهد رئيسي ميتًا، ويجب على العائلة السباق لحماية أنفسهم. التحقيق يأخذ منعطفًا خطيرًا، مما يؤدي إلى حافة الهاوية صادمة.',
+                servers: [
+                    { label: "Server1", url: "https://movearnpre.com/embed/niv9ivn3b6im", icon: "fa-server" },
+                    { label: "Server2", url: "https://hgcloud.to/e/hwiig315bris", icon: "fa-server" }
+                ]
+            }, {
+                id: '60',
+                titleEn: 'The Madison S1E5',
+                titleAr: 'مسلسل The Madison الموسم الاول الحلقة 5',
+                year: '2026',
+                lang: 'both',
+                posterUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9mBKRUTicAgAspAhBnolgNda0ZYfdVsNgxJtH2VPj4A&s=10',
+                description: 'The fifth episode of The Madison. The family discovers a hidden room in the house that contains evidence of the town\'s darkest secret. The truth is closer than ever, but so is the danger.',
+                descriptionAr: 'الحلقة الخامسة من The Madison. تكتشف العائلة غرفة مخفية في المنزل تحتوي على أدلة على أسرع سر مظلم في البلدة. الحقيقة أقرب من أي وقت مضى، وكذلك الخطر.',
+                servers: [
+                    { label: "Server1", url: "https://hgcloud.to/e/xxufnn8rjd9m", icon: "fa-server" },
+                    { label: "Server2", url: "https://movearnpre.com/embed/np481ssld6xo", icon: "fa-server" }
+                ]
+            }, {
+                id: '61',
+                titleEn: 'The Madison S1E6',
+                titleAr: 'مسلسل The Madison الموسم الاول الحلقة 6',
+                year: '2026',
+                lang: 'both',
+                posterUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9mBKRUTicAgAspAhBnolgNda0ZYfdVsNgxJtH2VPj4A&s=10',
+                description: 'The sixth episode of The Madison. The season finale brings everything to a head. The family must confront the mastermind behind the town\'s secrets in a tense and dramatic conclusion.',
+                descriptionAr: 'الحلقة السادسة من The Madison. ختام الموسم يجلب كل شيء إلى نقطة حاسمة. يجب على العائلة مواجهة العقل المدبر وراء أسرار البلدة في خاتمة مكثفة ودرامية.',
+                servers: [
+                    { label: "Server1", url: "https://hgcloud.to/e/ecrlb4q3m8mw", icon: "fa-server" },
+                    { label: "Server2", url: "https://movearnpre.com/embed/gnofv1a8phrw", icon: "fa-server" }
+                ]
+            }
         ];
 
-        // Helper: Generate unique slug from titleEn and id
+        // ================================================================
+        //  HELPER FUNCTIONS
+        // ================================================================
+
         function generateSlug(title, id) {
             let slug = title
                 .toString()
@@ -972,7 +2169,6 @@
             return `${slug}-${id}`;
         }
 
-        // Add slug to each movie
         const moviesData = rawMoviesData.map(movie => {
             const slug = generateSlug(movie.titleEn, movie.id);
             return { ...movie, slug };
@@ -987,11 +2183,12 @@
         let currentSearchQuery = '';
         let currentPage = 1;
         const ITEMS_PER_PAGE = 20;
-        window.moviesData = moviesData;
+        let currentView = 'home'; // 'home' or 'detail'
+        let currentMovieSlug = null;
 
         function initializeViewCounts() {
             const stored = localStorage.getItem('badini_view_counts');
-            if(stored) {
+            if (stored) {
                 viewCounts = JSON.parse(stored);
             } else {
                 moviesData.forEach((movie, idx) => {
@@ -1001,25 +2198,50 @@
                 saveViewCounts();
             }
         }
+
         function saveViewCounts() {
             localStorage.setItem('badini_view_counts', JSON.stringify(viewCounts));
         }
-        function incrementViewCount(movieId) { 
+
+        function incrementViewCount(movieId) {
             viewCounts[movieId] = (viewCounts[movieId] || 0) + Math.floor(Math.random() * 5) + 1;
             saveViewCounts();
         }
-        
+
+        function escapeHtml(str) {
+            if (!str) return '';
+            return str.replace(/[&<>]/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' } [m]));
+        }
+
+        function getDescription(movie) {
+            return currentLanguage === 'ar' ?
+                (movie.descriptionAr || movie.description || 'لا يوجد وصف متاح لهذا الفيلم.') :
+                (movie.description || 'No description available for this film.');
+        }
+
+        function getTitle(movie) {
+            return currentLanguage === 'ar' ? movie.titleAr : movie.titleEn;
+        }
+
+        // ================================================================
+        //  UPDATE ALL MOVIES H3
+        // ================================================================
+
         function updateAllMoviesH3() {
             const spanElement = document.getElementById('allMoviesList');
             if (!spanElement) return;
-            const names = moviesData.map(movie => currentLanguage === 'ar' ? movie.titleAr : movie.titleEn);
+            const names = moviesData.map(movie => getTitle(movie));
             if (names.length === 0) {
                 spanElement.textContent = currentLanguage === 'ar' ? 'لا توجد أفلام' : 'No movies';
                 return;
             }
             spanElement.innerHTML = names.join(' · ');
         }
-        
+
+        // ================================================================
+        //  FILTERING & SEARCH
+        // ================================================================
+
         function getFilteredMovies() {
             let filtered = moviesData.filter(movie => {
                 if (currentFilter === 'all') return true;
@@ -1034,56 +2256,70 @@
             return filtered;
         }
 
-        function renderMoviesAndPagination() {
+        // ================================================================
+        //  HOME VIEW (GRID)
+        // ================================================================
+
+        function renderHomeView() {
             const filtered = getFilteredMovies();
             const totalPages = Math.ceil(filtered.length / ITEMS_PER_PAGE);
             if (currentPage > totalPages && totalPages > 0) currentPage = totalPages;
             else if (totalPages === 0) currentPage = 1;
-            
+
             const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
             const paginatedMovies = filtered.slice(startIndex, startIndex + ITEMS_PER_PAGE);
-            
+
             const moviesGrid = document.getElementById('moviesGrid');
             if (paginatedMovies.length === 0) {
-                moviesGrid.innerHTML = `<div class="no-results"><i class="fas fa-film-slash"></i><h3>${currentLanguage === 'en' ? 'No movies found' : 'لا توجد أفلام'}</h3><p>${currentLanguage === 'en' ? 'Try adjusting search or filters.' : 'حاول تعديل البحث أو التصفية.'}</p></div>`;
+                moviesGrid.innerHTML =
+                    `<div class="no-results"><i class="fas fa-film-slash"></i><h3>${currentLanguage === 'en' ? 'No movies found' : 'لا توجد أفلام'}</h3><p>${currentLanguage === 'en' ? 'Try adjusting search or filters.' : 'حاول تعديل البحث أو التصفية.'}</p></div>`;
             } else {
                 moviesGrid.innerHTML = paginatedMovies.map(movie => {
-                    const displayTitle = currentLanguage === 'ar' ? movie.titleAr : movie.titleEn;
+                    const displayTitle = getTitle(movie);
                     const langClass = movie.lang === 'ar' ? 'ar' : (movie.lang === 'both' ? 'both' : 'en');
                     const views = viewCounts[movie.id] || 0;
-                    return `<div class="movie-card" onclick="playMovieBySlug('${movie.slug}')">
+                    return `<div class="movie-card" onclick="openMovieDetail('${movie.slug}')">
                                 <div class="video-thumbnail"><img src="${movie.posterUrl}" alt="${escapeHtml(displayTitle)}" onerror="this.src='https://via.placeholder.com/300x180?text=No+Poster'"><div class="play-overlay"><i class="fas fa-play-circle"></i></div></div>
                                 <div class="movie-details"><div class="movie-title"><span>${escapeHtml(displayTitle)}</span><span class="movie-year">${movie.year}</span></div>
                                 <div class="movie-meta"><span class="lang-badge ${langClass}">${movie.lang === 'en' ? 'EN' : movie.lang === 'ar' ? 'AR' : 'EN/AR'}</span>
                                 <span class="watch-counter"><i class="fas fa-eye"></i> ${views.toLocaleString()}</span><i class="fas fa-video" style="color:#4CAF50;"></i></div></div></div>`;
                 }).join('');
             }
-            
+
             const searchStats = document.getElementById('searchStats');
             if (currentSearchQuery.trim() !== '') {
-                searchStats.innerHTML = currentLanguage === 'en' ? `Found ${filtered.length} movie(s) matching "${escapeHtml(currentSearchQuery)}"` : `تم العثور على ${filtered.length} فيلماً تطابق "${escapeHtml(currentSearchQuery)}"`;
+                searchStats.innerHTML = currentLanguage === 'en' ?
+                    `Found ${filtered.length} movie(s) matching "${escapeHtml(currentSearchQuery)}"` :
+                    `تم العثور على ${filtered.length} فيلماً تطابق "${escapeHtml(currentSearchQuery)}"`;
             } else {
                 searchStats.innerHTML = '';
             }
+
             renderPaginationControls(totalPages, filtered.length);
         }
-        
+
+        // ================================================================
+        //  PAGINATION
+        // ================================================================
+
         function renderPaginationControls(totalPages, totalItems) {
             const wrapper = document.getElementById('paginationWrapper');
             if (!wrapper) return;
             if (totalPages <= 1) { wrapper.innerHTML = ''; return; }
-            
+
             const isEn = currentLanguage === 'en';
             let buttonsHtml = '';
-            buttonsHtml += `<button class="pagination-btn prev-btn ${currentPage === 1 ? 'disabled' : ''}" data-page="prev"><i class="fas fa-chevron-left"></i> ${isEn ? 'Prev' : 'السابق'}</button>`;
+            buttonsHtml +=
+                `<button class="pagination-btn prev-btn ${currentPage === 1 ? 'disabled' : ''}" data-page="prev"><i class="fas fa-chevron-left"></i> ${isEn ? 'Prev' : 'السابق'}</button>`;
             let startPage = Math.max(1, currentPage - 2);
             let endPage = Math.min(totalPages, startPage + 4);
             if (endPage - startPage < 4) startPage = Math.max(1, endPage - 4);
             for (let i = startPage; i <= endPage; i++) {
                 buttonsHtml += `<button class="pagination-btn ${i === currentPage ? 'active-page' : ''}" data-page="${i}">${i}</button>`;
             }
-            buttonsHtml += `<button class="pagination-btn next-btn ${currentPage === totalPages ? 'disabled' : ''}" data-page="next"><i class="fas fa-chevron-right"></i> ${isEn ? 'Next' : 'التالي'}</button>`;
-            const startItem = (currentPage-1)*ITEMS_PER_PAGE + 1;
+            buttonsHtml +=
+                `<button class="pagination-btn next-btn ${currentPage === totalPages ? 'disabled' : ''}" data-page="next"><i class="fas fa-chevron-right"></i> ${isEn ? 'Next' : 'التالي'}</button>`;
+            const startItem = (currentPage - 1) * ITEMS_PER_PAGE + 1;
             const endItem = Math.min(currentPage * ITEMS_PER_PAGE, totalItems);
             const infoSpan = `<span class="page-info"><i class="fas fa-film"></i> ${startItem}-${endItem} / ${totalItems}</span>`;
             wrapper.innerHTML = buttonsHtml + infoSpan;
@@ -1092,7 +2328,7 @@
                 btn.addEventListener('click', paginationClickHandler);
             });
         }
-        
+
         function paginationClickHandler(e) {
             const btn = e.currentTarget;
             if (btn.classList.contains('disabled')) return;
@@ -1105,13 +2341,104 @@
             else if (!isNaN(parseInt(pageVal))) newPage = parseInt(pageVal);
             if (newPage !== currentPage && newPage >= 1 && newPage <= totalPages) {
                 currentPage = newPage;
-                renderMoviesAndPagination();
+                renderHomeView();
             }
         }
-        
-        function resetToFirstPage() { currentPage = 1; renderMoviesAndPagination(); }
-        
-        // ---------- URL handling using slug ----------
+
+        function resetToFirstPage() { currentPage = 1;
+            renderHomeView(); }
+
+        // ================================================================
+        //  MOVIE DETAIL VIEW
+        // ================================================================
+
+        function showMovieDetail(movie) {
+            currentView = 'detail';
+            currentMovieSlug = movie.slug;
+
+            document.getElementById('homeView').style.display = 'none';
+            const detailView = document.getElementById('movieDetailView');
+            detailView.classList.add('active');
+
+            // Poster
+            document.getElementById('detailPoster').src = movie.posterUrl;
+            document.getElementById('detailPoster').alt = getTitle(movie);
+
+            // Titles
+            document.getElementById('detailTitleEn').textContent = movie.titleEn;
+            document.getElementById('detailTitleAr').textContent = movie.titleAr;
+
+            // Year & Lang
+            document.getElementById('detailYear').textContent = movie.year;
+            const langLabel = movie.lang === 'en' ? 'English' : (movie.lang === 'ar' ? 'العربية' : 'EN/AR');
+            document.getElementById('detailLang').textContent = langLabel;
+
+            // Views
+            const views = viewCounts[movie.id] || 0;
+            document.getElementById('detailViews').textContent = views.toLocaleString();
+
+            // Description
+            const descLabel = document.getElementById('descLabel');
+            descLabel.textContent = currentLanguage === 'en' ? 'Story / القصة' : 'القصة / Story';
+            document.getElementById('detailDescText').textContent = getDescription(movie);
+
+            // Server buttons
+            const serverContainer = document.getElementById('detailServerButtons');
+            serverContainer.innerHTML = '';
+            if (movie.servers && movie.servers.length > 0) {
+                movie.servers.forEach((server, idx) => {
+                    const btn = document.createElement('button');
+                    btn.className = 'detail-server-btn' + (idx === 0 ? ' active-server' : '');
+                    btn.innerHTML = `<i class="fas ${server.icon || 'fa-play-circle'}"></i> ${server.label}`;
+                    btn.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        document.querySelectorAll('.detail-server-btn').forEach(b => b.classList.remove('active-server'));
+                        this.classList.add('active-server');
+                        document.getElementById('detailEmbedIframe').src = server.url;
+                    });
+                    serverContainer.appendChild(btn);
+                });
+                // Load first server
+                document.getElementById('detailEmbedIframe').src = movie.servers[0].url;
+            } else {
+                serverContainer.innerHTML =
+                    `<span style="color:#a29cc0;">${currentLanguage === 'en' ? 'No video sources available' : 'لا توجد مصادر فيديو متاحة'}</span>`;
+                document.getElementById('detailEmbedIframe').src = '';
+            }
+
+            // Update URL
+            updateUrlForMovie(movie.slug);
+
+            // Increment view count
+            incrementViewCount(movie.id);
+
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        window.openMovieDetail = function(slug) {
+            const movie = slugToMovie.get(slug);
+            if (!movie) {
+                console.error('Movie not found for slug:', slug);
+                return;
+            }
+            showMovieDetail(movie);
+        };
+
+        function closeMovieDetail() {
+            currentView = 'home';
+            currentMovieSlug = null;
+            document.getElementById('movieDetailView').classList.remove('active');
+            document.getElementById('homeView').style.display = 'block';
+            document.getElementById('detailEmbedIframe').src = '';
+            updateUrlForMovie(null);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // ================================================================
+        //  URL HANDLING
+        // ================================================================
+
         function updateUrlForMovie(movieSlug) {
             const url = new URL(window.location);
             if (movieSlug) {
@@ -1121,80 +2448,71 @@
             }
             window.history.pushState({ movieSlug: movieSlug || null }, '', url);
         }
-        
-        // Function to play movie by slug
-        window.playMovieBySlug = function(movieSlug, addToHistory = true) {
-            const movie = slugToMovie.get(movieSlug);
-            if (!movie) {
-                console.error('Movie not found for slug:', movieSlug);
-                alert(currentLanguage === 'en' ? 'Movie not found' : 'الفيلم غير موجود');
-                return;
-            }
-            if (!movie.servers || movie.servers.length === 0) {
-                alert('No video source available.');
-                return;
-            }
-            incrementViewCount(movie.id);
-            renderMoviesAndPagination();
-            const modal = document.getElementById('videoModal');
-            const modalMovieTitle = document.getElementById('modalMovieTitle');
-            const serverButtonsPanel = document.getElementById('serverButtonsPanel');
-            const embedIframe = document.getElementById('embedIframe');
-            modal.classList.add('active');
-            modalMovieTitle.textContent = currentLanguage === 'ar' ? movie.titleAr : movie.titleEn;
-            serverButtonsPanel.innerHTML = '';
-            movie.servers.forEach((server, idx) => {
-                const btn = document.createElement('button');
-                btn.className = 'server-btn' + (idx === 0 ? ' active-server' : '');
-                btn.innerHTML = `<i class="fas ${server.icon || 'fa-play-circle'}"></i> ${server.label}`;
-                btn.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    document.querySelectorAll('.server-btn').forEach(b => b.classList.remove('active-server'));
-                    btn.classList.add('active-server');
-                    embedIframe.src = server.url;
-                });
-                serverButtonsPanel.appendChild(btn);
-            });
-            embedIframe.src = movie.servers[0].url;
-            if (addToHistory) updateUrlForMovie(movie.slug);
-        };
-        
-        // Legacy support
-        window.playMovie = function(movieId) {
-            const movie = moviesData.find(m => m.id === movieId);
-            if (movie) playMovieBySlug(movie.slug, true);
-        };
-        
-        function closeModalAndClearUrl() {
-            const modalEl = document.getElementById('videoModal');
-            const iframe = document.getElementById('embedIframe');
-            modalEl.classList.remove('active');
-            iframe.src = '';
-            if (window.location.search.includes('movie')) {
-                updateUrlForMovie(null);
-            }
-        }
-        
-        function openMovieFromUrl() {
+
+        function handleUrlChange() {
             const params = new URLSearchParams(window.location.search);
-            const slugOrId = params.get('movie');
-            if (slugOrId) {
-                let movie = slugToMovie.get(slugOrId);
-                if (!movie) {
-                    movie = moviesData.find(m => m.id === slugOrId);
-                    if (!movie) return;
+            const slug = params.get('movie');
+            if (slug && slugToMovie.has(slug)) {
+                const movie = slugToMovie.get(slug);
+                showMovieDetail(movie);
+            } else {
+                if (currentView === 'detail') {
+                    closeMovieDetail();
                 }
-                setTimeout(() => playMovieBySlug(movie.slug, false), 100);
+                renderHomeView();
             }
         }
-        
-        // ---------- SITEMAP GENERATION ----------
+
+        // ================================================================
+        //  MARQUEE
+        // ================================================================
+
+        function buildMarqueeContent() {
+            const track = document.getElementById('marqueeTrack');
+            if (!track) return;
+            let html = '';
+            moviesData.forEach(m => {
+                html += `<div class="marquee-item"><i class="fas fa-play-circle"></i><span class="film-name-en">${escapeHtml(m.titleEn)}</span><span class="separator-dot">/</span><span class="film-name-ar">${escapeHtml(m.titleAr)}</span><i class="fas fa-star"></i></div>`;
+            });
+            track.innerHTML = html + html;
+        }
+
+        // ================================================================
+        //  FOOTER TEXTS
+        // ================================================================
+
+        function updateFooterTexts() {
+            const isEn = currentLanguage === 'en';
+            const aboutTitle = document.getElementById('footerAboutTitle');
+            const contactTitle = document.getElementById('footerContactTitle');
+            const privacyTitle = document.getElementById('footerPrivacyTitle');
+            const aboutText = document.getElementById('footerAboutText');
+            const privacyText = document.getElementById('footerPrivacyText');
+            if (aboutTitle) aboutTitle.innerHTML = isEn ? 'About Us' : 'من نحن';
+            if (contactTitle) contactTitle.innerHTML = isEn ? 'Contact Us' : 'اتصل بنا';
+            if (privacyTitle) privacyTitle.innerHTML = isEn ? 'Privacy Policy' : 'سياسة الخصوصية';
+            if (aboutText) aboutText.innerHTML = isEn ?
+                'BadiniMovies offers 20 movies per page, multi-server streaming, English & Arabic films. Each movie has a unique shareable link with its name.' :
+                'باديني موفيز: 20 فلم في كل صفحة، خوادم متعددة، أفلام عربية وإنجليزية. كل فيلم له رابط فريد باسم الفيلم.';
+            if (privacyText) privacyText.innerHTML = isEn ?
+                'We use Google AdSense & cookies for better experience. Your data is secure.' :
+                'نستخدم AdSense وملفات تعريف الارتباط، بياناتك آمنة.';
+
+            // Back button text
+            const backBtnText = document.getElementById('backBtnText');
+            if (backBtnText) backBtnText.textContent = isEn ? 'Back to Library / العودة إلى المكتبة' :
+                'العودة إلى المكتبة / Back to Library';
+        }
+
+        // ================================================================
+        //  SITEMAP GENERATION
+        // ================================================================
+
         function generateAndDownloadSitemap() {
-            const baseUrl = window.location.origin + window.location.pathname.replace(/\/[^\/]*$/, '/'); // الصفحة الرئيسية بدون query
-            // تأكد من إزالة أي معاملات من baseUrl
+            const baseUrl = window.location.origin + window.location.pathname.replace(/\/[^\/]*$/, '/');
             const cleanBaseUrl = baseUrl.split('?')[0];
             const today = new Date().toISOString().split('T')[0];
-            
+
             let urls = `
   <url>
     <loc>${cleanBaseUrl}</loc>
@@ -1202,7 +2520,7 @@
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>`;
-            
+
             moviesData.forEach(movie => {
                 const movieUrl = `${cleanBaseUrl}?movie=${movie.slug}`;
                 urls += `
@@ -1213,11 +2531,11 @@
     <priority>0.8</priority>
   </url>`;
             });
-            
+
             const sitemapXml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${urls}
 </urlset>`;
-            
+
             const blob = new Blob([sitemapXml], { type: 'application/xml' });
             const link = document.createElement('a');
             link.href = URL.createObjectURL(blob);
@@ -1226,105 +2544,131 @@
             link.click();
             document.body.removeChild(link);
             URL.revokeObjectURL(link.href);
-            
-            alert(currentLanguage === 'en' ? 'sitemap.xml generated and downloaded successfully!' : 'تم إنشاء وتحميل ملف sitemap.xml بنجاح!');
+
+            alert(currentLanguage === 'en' ? 'sitemap.xml generated and downloaded successfully!' :
+                'تم إنشاء وتحميل ملف sitemap.xml بنجاح!');
         }
-        
-        // attach sitemap button event
-        const sitemapBtn = document.getElementById('generateSitemapBtn');
-        if(sitemapBtn) {
-            sitemapBtn.addEventListener('click', generateAndDownloadSitemap);
-        }
-        
-        // close modal logic
-        const modalEl = document.getElementById('videoModal');
-        const closeModalBtn = document.getElementById('closeModal');
-        if(closeModalBtn) closeModalBtn.addEventListener('click', () => closeModalAndClearUrl());
-        modalEl.addEventListener('click', (e) => { if (e.target === modalEl) closeModalAndClearUrl(); });
-        document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && modalEl.classList.contains('active')) closeModalAndClearUrl(); });
-        window.addEventListener('popstate', (event) => {
-            const slug = event.state?.movieSlug;
-            if (slug && slugToMovie.has(slug)) {
-                playMovieBySlug(slug, false);
-            } else if (modalEl.classList.contains('active')) {
-                closeModalAndClearUrl();
-            }
-        });
-        
-        // search & filter
-        const searchInput = document.getElementById('searchInput');
-        const clearSearchBtn = document.getElementById('clearSearchBtn');
-        if(searchInput) {
-            searchInput.addEventListener('input', () => { currentSearchQuery = searchInput.value; if(clearSearchBtn) clearSearchBtn.style.display = currentSearchQuery.length > 0 ? 'block' : 'none'; resetToFirstPage(); });
-            if(clearSearchBtn) clearSearchBtn.addEventListener('click', () => { searchInput.value = ''; currentSearchQuery = ''; clearSearchBtn.style.display = 'none'; resetToFirstPage(); searchInput.focus(); });
-        }
-        
-        document.querySelectorAll('.filter-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                currentFilter = btn.dataset.filter;
-                resetToFirstPage();
-            });
-        });
-        
+
+        // ================================================================
+        //  LANGUAGE TOGGLE
+        // ================================================================
+
         window.toggleLanguage = function() {
             currentLanguage = currentLanguage === 'en' ? 'ar' : 'en';
             const langDisplay = document.getElementById('langDisplay');
-            if(langDisplay) langDisplay.textContent = currentLanguage === 'en' ? 'EN | عربي' : 'عربي | EN';
+            if (langDisplay) langDisplay.textContent = currentLanguage === 'en' ? 'EN | عربي' : 'عربي | EN';
             const libraryTitle = document.getElementById('libraryTitle');
-            if(libraryTitle) libraryTitle.textContent = currentLanguage === 'en' ? 'Movie Library / مكتبة الأفلام' : 'مكتبة الأفلام / Movie Library';
+            if (libraryTitle) libraryTitle.textContent = currentLanguage === 'en' ? 'Movie Library / مكتبة الأفلام' :
+                'مكتبة الأفلام / Movie Library';
+
             updateFooterTexts();
-            renderMoviesAndPagination();
             updateAllMoviesH3();
             buildMarqueeContent();
+
+            if (currentView === 'detail' && currentMovieSlug) {
+                const movie = slugToMovie.get(currentMovieSlug);
+                if (movie) showMovieDetail(movie);
+            } else {
+                renderHomeView();
+            }
         };
-        
-        function updateFooterTexts() {
-            const isEn = currentLanguage === 'en';
-            const aboutTitle = document.getElementById('footerAboutTitle');
-            const contactTitle = document.getElementById('footerContactTitle');
-            const privacyTitle = document.getElementById('footerPrivacyTitle');
-            const aboutText = document.getElementById('footerAboutText');
-            const privacyText = document.getElementById('footerPrivacyText');
-            if(aboutTitle) aboutTitle.innerHTML = isEn ? 'About Us' : 'من نحن';
-            if(contactTitle) contactTitle.innerHTML = isEn ? 'Contact Us' : 'اتصل بنا';
-            if(privacyTitle) privacyTitle.innerHTML = isEn ? 'Privacy Policy' : 'سياسة الخصوصية';
-            if(aboutText) aboutText.innerHTML = isEn ? 'BadiniMovies offers 20 movies per page, multi-server streaming, English & Arabic films. Each movie has a unique shareable link with its name.' : 'باديني موفيز: 20 فلم في كل صفحة، خوادم متعددة، أفلام عربية وإنجليزية. كل فيلم له رابط فريد باسم الفيلم.';
-            if(privacyText) privacyText.innerHTML = isEn ? 'We use Google AdSense & cookies for better experience. Your data is secure.' : 'نستخدم AdSense وملفات تعريف الارتباط، بياناتك آمنة.';
+
+        // ================================================================
+        //  EVENT BINDINGS
+        // ================================================================
+
+        // Search
+        const searchInput = document.getElementById('searchInput');
+        const clearSearchBtn = document.getElementById('clearSearchBtn');
+        if (searchInput) {
+            searchInput.addEventListener('input', function() {
+                currentSearchQuery = this.value;
+                if (clearSearchBtn) clearSearchBtn.style.display = currentSearchQuery.length > 0 ? 'block' : 'none';
+                if (currentView === 'home') {
+                    resetToFirstPage();
+                }
+            });
+            if (clearSearchBtn) {
+                clearSearchBtn.addEventListener('click', function() {
+                    searchInput.value = '';
+                    currentSearchQuery = '';
+                    this.style.display = 'none';
+                    if (currentView === 'home') {
+                        resetToFirstPage();
+                    }
+                    searchInput.focus();
+                });
+            }
         }
-        
-        function buildMarqueeContent() {
-            const track = document.getElementById('marqueeTrack');
-            if (!track) return;
-            let html = '';
-            moviesData.forEach(m => { html += `<div class="marquee-item"><i class="fas fa-play-circle"></i><span class="film-name-en">${escapeHtml(m.titleEn)}</span><span class="separator-dot">/</span><span class="film-name-ar">${escapeHtml(m.titleAr)}</span><i class="fas fa-star"></i></div>`; });
-            track.innerHTML = html + html;
-        }
-        
-        function escapeHtml(str) { 
-            if(!str) return '';
-            return str.replace(/[&<>]/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[m])); 
-        }
-        
-        // Home logo click: clear movie param and refresh
-        const homeLogo = document.getElementById('homeLogo');
-        if(homeLogo) {
-            homeLogo.addEventListener('click', () => {
-                if(window.location.search) {
+
+        // Filter buttons
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                currentFilter = this.dataset.filter;
+                if (currentView === 'home') resetToFirstPage();
+            });
+        });
+
+        // Back to home
+        document.getElementById('backToHomeBtn').addEventListener('click', closeMovieDetail);
+
+        // Home logo
+        document.getElementById('homeLogo').addEventListener('click', function() {
+            if (currentView === 'detail') {
+                closeMovieDetail();
+            } else {
+                if (window.location.search) {
                     updateUrlForMovie(null);
                 }
-                if(modalEl.classList.contains('active')) closeModalAndClearUrl();
-            });
-        }
-        
+                renderHomeView();
+            }
+        });
+
+        // Sitemap button
+        document.getElementById('generateSitemapBtn').addEventListener('click', generateAndDownloadSitemap);
+
+        // Popstate
+        window.addEventListener('popstate', function(event) {
+            const slug = event.state?.movieSlug;
+            if (slug && slugToMovie.has(slug)) {
+                const movie = slugToMovie.get(slug);
+                showMovieDetail(movie);
+            } else if (currentView === 'detail') {
+                closeMovieDetail();
+            } else {
+                renderHomeView();
+            }
+        });
+
+        // ================================================================
+        //  INITIALIZATION
+        // ================================================================
+
         initializeViewCounts();
         buildMarqueeContent();
-        renderMoviesAndPagination();
         updateFooterTexts();
         updateAllMoviesH3();
-        openMovieFromUrl();
+
+        // Check URL on load
+        handleUrlChange();
+
+        // If no movie in URL, render home view
+        if (currentView === 'home') {
+            renderHomeView();
+        }
+
+        // Expose some functions for debugging
+        window.__badini = {
+            moviesData: moviesData,
+            slugToMovie: slugToMovie,
+            currentView: () => currentView,
+            currentMovieSlug: () => currentMovieSlug,
+        };
+
     })();
 </script>
+
 </body>
 </html>

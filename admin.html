@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BadiniMovies – Admin Panel</title>
+    <!-- Firebase SDKs -->
+    <script type="module">
+        // ========== PASTE YOUR FIREBASE CONFIG HERE ==========
+        const firebaseConfig = {
+            apiKey: "AIzaSyD6WMZGUS8s1FufWdCefsv-5mAIYhhkKgY",
+            authDomain: "moviesite-admin-c178b.firebaseapp.com",
+            projectId: "moviesite-admin-c178b",
+            storageBucket: "moviesite-admin-c178b.appspot.com",
+            messagingSenderId: "275418486999",
+            appId: "1:275418486999:web:845bd57e7a014e7393b892"
+        };
+        // =====================================================
+
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js";
+        import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-auth.js";
+        import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, updateDoc, query, orderBy } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore.js";
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        // DOM elements
+        const loginDiv = document.getElementById('loginDiv');
+        const adminDiv = document.getElementById('adminDiv');
+        const loginEmail = document.getElementById('loginEmail');
+        const loginPassword = document.getElementById('loginPassword');
+        const loginBtn = document.getElementById('loginBtn');
+        const logoutBtn = document.getElementById('logoutBtn');
+        const movieList = document.getElementById('movieList');
+        const addMovieForm = document.getElementById('addMovieForm');
+
+        // Auth state listener
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                loginDiv.style.display = 'none';
+                adminDiv.style.display = 'block';
+                loadMovies();
+            } else {
+                loginDiv.style.display = 'block';
+                adminDiv.style.display = 'none';
+            }
+        });
+
+        // Login
+        loginBtn.addEventListener('click', () => {
+            signInWithEmailAndPassword(auth, loginEmail.value, loginPassword.value)
+                .then(() => { loginEmail.value = ''; loginPassword.value = ''; })
+                .catch(err => alert("Login failed: " + err.message));
+        });
+
+        // Logout
+        logoutBtn.addEventListener('click', () => signOut(auth));
+
+        // Load all movies from Firestore
+        async function loadMovies() {
+            movieList.innerHTML = '<p>Loading movies...</p>';
+            const q = query(collection(db, "movies"), orderBy("titleEn", "asc"));
+            const snapshot = await getDocs(q);
+            if (snapshot.empty) {
+                movieList.innerHTML = '<p>No movies yet. Add your first movie below.</p>';
+                return;
+            }
+            let html = '<table style="width:100%; border-collapse:collapse;">';
+            snapshot.forEach(docSnap => {
+                const m = docSnap.data();
+                html += `<tr style="border-bottom:1px solid #ddd;">
+                            <td style="padding:8px;"><strong>${escapeHtml(m.titleEn)}</strong><br><small>${m.year} | ${m.lang}</small></td>
+                            <td style="padding:8px;">
+                                <button onclick="deleteMovie('${docSnap.id}')">Delete</button>
+                            </td>
+                         </tr>`;
+            });
+            html += '</table>';
+            movieList.innerHTML = html;
+        }
+
+        window.deleteMovie = async (id) => {
+            if (confirm("Delete this movie permanently?")) {
+                await deleteDoc(doc(db, "movies", id));
+                loadMovies();
+            }
+        };
+
+        // Add new movie
+        addMovieForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const newMovie = {
+                id: Date.now().toString(),        // simple unique ID
+                titleEn: document.getElementById('titleEn').value,
+                titleAr: document.getElementById('titleAr').value,
+                year: document.getElementById('year').value,
+                lang: document.getElementById('lang').value,
+                posterUrl: document.getElementById('posterUrl').value,
+                description: document.getElementById('description').value,
+                descriptionAr: document.getElementById('descriptionAr').value,
+                servers: [
+                    {
+                        label: "Vidspeeds",
+                        url: document.getElementById('server1').value,
+                        icon: "fa-server"
+                    },
+                    {
+                        label: "Vidroba",
+                        url: document.getElementById('server2').value,
+                        icon: "fa-server"
+                    }
+                ]
+            };
+            // Optionally add a third server if provided
+            const server3 = document.getElementById('server3').value;
+            if (server3) {
+                newMovie.servers.push({ label: "Upload", url: server3, icon: "fa-server" });
+            }
+            await addDoc(collection(db, "movies"), newMovie);
+            alert("Movie added!");
+            addMovieForm.reset();
+            loadMovies();
+        });
+
+        function escapeHtml(str) {
+            if (!str) return '';
+            return str.replace(/[&<>]/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[m]));
+        }
+    </script>
+    <style>
+        body { font-family: Arial, sans-serif; background: #0c0b14; color: #f0eef7; margin: 0; padding: 20px; }
+        .container { max-width: 800px; margin: auto; background: #1a1728; padding: 20px; border-radius: 24px; }
+        input, textarea, select, button { width: 100%; margin: 8px 0; padding: 10px; border-radius: 12px; border: none; }
+        input, textarea, select { background: #2f2b45; color: white; }
+        button { background: #e4b363; color: #12101c; font-weight: bold; cursor: pointer; }
+        button:hover { opacity: 0.9; }
+        #loginDiv, #adminDiv { display: none; }
+        table { width: 100%; background: #2f2b45; border-radius: 16px; overflow: hidden; }
+        td { padding: 10px; }
+        hr { border-color: #e4b363; margin: 20px 0; }
+        h1, h2 { color: #e4b363; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>🎬 BadiniMovies – Admin Panel</h1>
+
+    <!-- Login Section -->
+    <div id="loginDiv">
+        <h2>Login</h2>
+        <input type="email" id="loginEmail" placeholder="Email" autocomplete="off">
+        <input type="password" id="loginPassword" placeholder="Password">
+        <button id="loginBtn">Sign In</button>
+    </div>
+
+    <!-- Admin Section (visible after login) -->
+    <div id="adminDiv">
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+            <h2>📋 Manage Movies</h2>
+            <button id="logoutBtn" style="width:auto; background:#4b446b;">Logout</button>
+        </div>
+
+        <div id="movieList">Loading...</div>
+
+        <hr>
+        <h2>➕ Add New Movie</h2>
+        <form id="addMovieForm">
+            <input type="text" id="titleEn" placeholder="Title (English)" required>
+            <input type="text" id="titleAr" placeholder="Title (Arabic)" required>
+            <input type="text" id="year" placeholder="Year (e.g. 2025)" required>
+            <select id="lang" required>
+                <option value="both">Both (EN/AR)</option>
+                <option value="en">English only</option>
+                <option value="ar">Arabic only</option>
+            </select>
+            <input type="url" id="posterUrl" placeholder="Poster image URL" required>
+            <textarea id="description" rows="2" placeholder="Description (English)" required></textarea>
+            <textarea id="descriptionAr" rows="2" placeholder="Description (Arabic)" required></textarea>
+            <h3>📡 Video Servers (at least one)</h3>
+            <input type="url" id="server1" placeholder="Server 1 URL (Vidspeeds, etc.)" required>
+            <input type="url" id="server2" placeholder="Server 2 URL">
+            <input type="url" id="server3" placeholder="Server 3 URL (optional)">
+            <button type="submit">➕ Add Movie to Firestore</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>

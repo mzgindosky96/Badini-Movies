@@ -2,188 +2,551 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BadiniMovies – Admin Panel</title>
-    <!-- Firebase SDKs -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Firebase Admin Panel - BadiniMovies</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            background: #0c0b14;
+            color: #f0eef7;
+            font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+            padding: 20px;
+            margin: 0;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: #1a1728;
+            padding: 24px 28px;
+            border-radius: 32px;
+            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.5);
+            transition: all 0.2s;
+        }
+        input, textarea, select {
+            width: 100%;
+            margin: 8px 0 16px 0;
+            padding: 12px 14px;
+            border-radius: 16px;
+            border: none;
+            background: #2f2b45;
+            color: white;
+            font-size: 0.95rem;
+            outline: none;
+            transition: 0.2s;
+        }
+        input:focus, textarea:focus, select:focus {
+            background: #3d3761;
+            box-shadow: 0 0 0 2px #e4b363;
+        }
+        textarea {
+            resize: vertical;
+            font-family: inherit;
+        }
+        button, .button-like {
+            background: #e4b363;
+            padding: 10px 24px;
+            border: none;
+            border-radius: 40px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 0.9rem;
+            color: #0c0b14;
+            transition: 0.2s;
+        }
+        button:hover {
+            background: #f3ca85;
+            transform: scale(0.98);
+        }
+        .delete-btn {
+            background: #b91c1c;
+            color: white;
+            padding: 6px 16px;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: normal;
+            font-size: 0.8rem;
+        }
+        .delete-btn:hover {
+            background: #e02b2b;
+        }
+        .logout-btn {
+            float: right;
+            background: #4b446b;
+            padding: 8px 20px;
+            border-radius: 40px;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .logout-btn:hover {
+            background: #655b8c;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 28px;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+        th, td {
+            padding: 14px 12px;
+            text-align: left;
+            border-bottom: 1px solid #4b446b;
+        }
+        th {
+            background: #25213b;
+            font-weight: 600;
+        }
+        tr:hover td {
+            background: #211e32;
+        }
+        .login-box {
+            max-width: 420px;
+            margin: 10vh auto;
+            background: #1a1728;
+            padding: 2rem;
+            border-radius: 32px;
+            text-align: center;
+        }
+        .login-box input {
+            margin-bottom: 20px;
+        }
+        .error-msg {
+            color: #ff8a7a;
+            background: #3a1e1e;
+            padding: 10px;
+            border-radius: 40px;
+            margin-top: 12px;
+            font-size: 0.85rem;
+        }
+        .success-msg {
+            color: #b5e4b0;
+            background: #1f3a1c;
+            padding: 8px;
+            border-radius: 40px;
+            margin-top: 8px;
+        }
+        hr {
+            border-color: #4b446b;
+            margin: 20px 0;
+        }
+        h1, h2, h3 {
+            font-weight: 600;
+            letter-spacing: -0.3px;
+        }
+        .flex-btns {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .movie-row-actions {
+            display: flex;
+            gap: 8px;
+        }
+        .badge {
+            background: #2f2b45;
+            border-radius: 24px;
+            padding: 2px 10px;
+            font-size: 0.75rem;
+        }
+        @media (max-width: 700px) {
+            .container { padding: 18px; }
+            th, td { padding: 8px 6px; font-size: 0.85rem; }
+        }
+    </style>
+    <!-- Firebase SDKs (modular v9+) -->
     <script type="module">
-        // ========== PASTE YOUR FIREBASE CONFIG HERE ==========
+        // ======================= 🔥 SET YOUR FIREBASE CONFIGURATION HERE =======================
+        // Replace the placeholder values below with your Firebase project configuration.
+        // You can find these in your Firebase Console -> Project Settings -> General -> Your apps.
         const firebaseConfig = {
-            apiKey: "AIzaSyD6WMZGUS8s1FufWdCefsv-5mAIYhhkKgY",
-            authDomain: "moviesite-admin-c178b.firebaseapp.com",
-            projectId: "moviesite-admin-c178b",
+            apiKey: "AIzaSyD6WMZGUS8s1FufWdCefsv-5mAIYhhkKgY",            // <-- PASTE YOUR API KEY
+            authDomain: "moviesite-admin-c178b.firebaseapp.com",    // <-- example: "your-project.firebaseapp.com"
+            projectId: "moviesite-admin-c178b",      // <-- your project id
             storageBucket: "moviesite-admin-c178b.appspot.com",
             messagingSenderId: "275418486999",
             appId: "1:275418486999:web:845bd57e7a014e7393b892"
         };
-        // =====================================================
-
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js";
-        import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-auth.js";
-        import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, updateDoc, query, orderBy } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore.js";
-
+        // ========================================================================================
+        
+        // Import Firebase modules
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+        import { getFirestore, collection, addDoc, deleteDoc, doc, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+        
+        // Initialize Firebase
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
         const db = getFirestore(app);
-
-        // DOM elements
-        const loginDiv = document.getElementById('loginDiv');
-        const adminDiv = document.getElementById('adminDiv');
-        const loginEmail = document.getElementById('loginEmail');
-        const loginPassword = document.getElementById('loginPassword');
-        const loginBtn = document.getElementById('loginBtn');
+        
+        // DOM Elements
+        const loginSection = document.getElementById('loginSection');
+        const adminPanel = document.getElementById('adminPanel');
+        const loginForm = document.getElementById('loginForm');
+        const loginError = document.getElementById('loginError');
         const logoutBtn = document.getElementById('logoutBtn');
-        const movieList = document.getElementById('movieList');
         const addMovieForm = document.getElementById('addMovieForm');
-
-        // Auth state listener
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-                loginDiv.style.display = 'none';
-                adminDiv.style.display = 'block';
-                loadMovies();
-            } else {
-                loginDiv.style.display = 'block';
-                adminDiv.style.display = 'none';
-            }
-        });
-
-        // Login
-        loginBtn.addEventListener('click', () => {
-            signInWithEmailAndPassword(auth, loginEmail.value, loginPassword.value)
-                .then(() => { loginEmail.value = ''; loginPassword.value = ''; })
-                .catch(err => alert("Login failed: " + err.message));
-        });
-
-        // Logout
-        logoutBtn.addEventListener('click', () => signOut(auth));
-
-        // Load all movies from Firestore
+        const moviesTableBody = document.getElementById('moviesTableBody');
+        const loadingMoviesSpan = document.getElementById('loadingMovies');
+        
+        // Helper: render movies list from Firestore
         async function loadMovies() {
-            movieList.innerHTML = '<p>Loading movies...</p>';
-            const q = query(collection(db, "movies"), orderBy("titleEn", "asc"));
-            const snapshot = await getDocs(q);
-            if (snapshot.empty) {
-                movieList.innerHTML = '<p>No movies yet. Add your first movie below.</p>';
+            if (!moviesTableBody) return;
+            try {
+                loadingMoviesSpan.style.display = 'inline';
+                const moviesRef = collection(db, "movies");
+                const q = query(moviesRef, orderBy("title_en", "asc"));
+                const querySnapshot = await getDocs(q);
+                const moviesList = [];
+                querySnapshot.forEach((docSnap) => {
+                    moviesList.push({ id: docSnap.id, ...docSnap.data() });
+                });
+                renderMoviesTable(moviesList);
+            } catch (err) {
+                console.error("Error loading movies:", err);
+                if (moviesTableBody) {
+                    moviesTableBody.innerHTML = `<tr><td colspan="3" style="color:#ff9e8f;">⚠️ Failed to load movies: ${err.message}</td></tr>`;
+                }
+            } finally {
+                if (loadingMoviesSpan) loadingMoviesSpan.style.display = 'none';
+            }
+        }
+        
+        function renderMoviesTable(movies) {
+            if (!moviesTableBody) return;
+            if (!movies.length) {
+                moviesTableBody.innerHTML = `<tr><td colspan="3" style="text-align:center; padding:32px;">📭 No movies found. Add your first movie!</td></tr>`;
                 return;
             }
-            let html = '<table style="width:100%; border-collapse:collapse;">';
-            snapshot.forEach(docSnap => {
-                const m = docSnap.data();
-                html += `<tr style="border-bottom:1px solid #ddd;">
-                            <td style="padding:8px;"><strong>${escapeHtml(m.titleEn)}</strong><br><small>${m.year} | ${m.lang}</small></td>
-                            <td style="padding:8px;">
-                                <button onclick="deleteMovie('${docSnap.id}')">Delete</button>
-                            </td>
-                         </tr>`;
+            let html = '';
+            movies.forEach(movie => {
+                const titleEn = escapeHtml(movie.title_en || 'Untitled');
+                const year = movie.year || '—';
+                html += `
+                    <tr data-movie-id="${movie.id}">
+                        <td><strong>${titleEn}</strong><br><span class="badge">${escapeHtml(movie.lang || 'both')}</span></td>
+                        <td>${escapeHtml(year)}</td>
+                        <td class="movie-row-actions">
+                            <button class="delete-btn" data-id="${movie.id}" data-title="${titleEn}">🗑 Delete</button>
+                        </td>
+                    </tr>
+                `;
             });
-            html += '</table>';
-            movieList.innerHTML = html;
+            moviesTableBody.innerHTML = html;
+            // Attach delete event listeners to each delete button
+            document.querySelectorAll('.delete-btn[data-id]').forEach(btn => {
+                btn.addEventListener('click', async (e) => {
+                    e.preventDefault();
+                    const movieId = btn.getAttribute('data-id');
+                    const movieTitle = btn.getAttribute('data-title') || 'this movie';
+                    if (confirm(`Are you sure you want to delete "${movieTitle}"? This action is permanent.`)) {
+                        await deleteMovieById(movieId);
+                    }
+                });
+            });
         }
-
-        window.deleteMovie = async (id) => {
-            if (confirm("Delete this movie permanently?")) {
-                await deleteDoc(doc(db, "movies", id));
-                loadMovies();
+        
+        // Delete movie document from Firestore
+        async function deleteMovieById(movieId) {
+            try {
+                const movieDocRef = doc(db, "movies", movieId);
+                await deleteDoc(movieDocRef);
+                // Refresh list after deletion
+                await loadMovies();
+                showTemporaryMessage('✅ Movie deleted successfully!', 'success');
+            } catch (error) {
+                console.error("Delete error:", error);
+                showTemporaryMessage(`❌ Delete failed: ${error.message}`, 'error');
             }
-        };
-
-        // Add new movie
+        }
+        
+        // Add new movie to Firestore
+        async function addMovieToFirestore(movieData) {
+            try {
+                const moviesRef = collection(db, "movies");
+                await addDoc(moviesRef, movieData);
+                await loadMovies();      // refresh table
+                // reset form after success
+                addMovieForm.reset();
+                // but keep server1 required? fine; reset also clears servers optional
+                // reset default server label hints
+                document.getElementById('server1_label').value = 'Server 1';
+                document.getElementById('server2_label').value = '';
+                document.getElementById('server3_label').value = '';
+                showTemporaryMessage('✅ Movie added successfully!', 'success');
+            } catch (err) {
+                console.error("Add movie error:", err);
+                showTemporaryMessage(`❌ Error: ${err.message}`, 'error');
+            }
+        }
+        
+        // Helper for inline messages
+        function showTemporaryMessage(msg, type = 'success') {
+            const msgDiv = document.getElementById('formMessage');
+            if (!msgDiv) return;
+            msgDiv.textContent = msg;
+            msgDiv.className = type === 'success' ? 'success-msg' : 'error-msg';
+            msgDiv.style.display = 'block';
+            setTimeout(() => {
+                msgDiv.style.display = 'none';
+            }, 3800);
+        }
+        
+        // Build servers array from form inputs
+        function getServersFromForm() {
+            const servers = [];
+            const server1url = document.getElementById('server1_url').value.trim();
+            if (server1url) {
+                servers.push({
+                    label: document.getElementById('server1_label').value.trim() || 'Server 1',
+                    url: server1url,
+                    icon: 'fa-server'
+                });
+            }
+            const server2url = document.getElementById('server2_url').value.trim();
+            if (server2url) {
+                servers.push({
+                    label: document.getElementById('server2_label').value.trim() || 'Server 2',
+                    url: server2url,
+                    icon: 'fa-server'
+                });
+            }
+            const server3url = document.getElementById('server3_url').value.trim();
+            if (server3url) {
+                servers.push({
+                    label: document.getElementById('server3_label').value.trim() || 'Server 3',
+                    url: server3url,
+                    icon: 'fa-server'
+                });
+            }
+            return servers;
+        }
+        
+        // Validate & collect movie data from form
+        function collectMovieFormData() {
+            const title_en = document.getElementById('title_en').value.trim();
+            const title_ar = document.getElementById('title_ar').value.trim();
+            const year = document.getElementById('year').value.trim();
+            const lang = document.getElementById('lang').value;
+            const poster_url = document.getElementById('poster_url').value.trim();
+            const description_en = document.getElementById('description_en').value.trim();
+            const description_ar = document.getElementById('description_ar').value.trim();
+            const servers = getServersFromForm();
+            
+            // validation: required fields (title_en, year, poster, at least one server)
+            if (!title_en) throw new Error('English title is required');
+            if (!title_ar) throw new Error('Arabic title is required');
+            if (!year) throw new Error('Year is required');
+            if (!poster_url) throw new Error('Poster URL is required');
+            if (servers.length === 0) throw new Error('At least one server URL is required (Server 1 required)');
+            
+            return {
+                title_en,
+                title_ar,
+                year,
+                lang,
+                poster_url,
+                description_en,
+                description_ar,
+                servers: servers,
+                createdAt: new Date().toISOString()   // timestamp for sorting optionally
+            };
+        }
+        
+        // Handle add movie form submission
         addMovieForm.addEventListener('submit', async (e) => {
             e.preventDefault();
-            const newMovie = {
-                id: Date.now().toString(),        // simple unique ID
-                titleEn: document.getElementById('titleEn').value,
-                titleAr: document.getElementById('titleAr').value,
-                year: document.getElementById('year').value,
-                lang: document.getElementById('lang').value,
-                posterUrl: document.getElementById('posterUrl').value,
-                description: document.getElementById('description').value,
-                descriptionAr: document.getElementById('descriptionAr').value,
-                servers: [
-                    {
-                        label: "Vidspeeds",
-                        url: document.getElementById('server1').value,
-                        icon: "fa-server"
-                    },
-                    {
-                        label: "Vidroba",
-                        url: document.getElementById('server2').value,
-                        icon: "fa-server"
-                    }
-                ]
-            };
-            // Optionally add a third server if provided
-            const server3 = document.getElementById('server3').value;
-            if (server3) {
-                newMovie.servers.push({ label: "Upload", url: server3, icon: "fa-server" });
+            try {
+                const movieData = collectMovieFormData();
+                await addMovieToFirestore(movieData);
+                // scroll to table after add
+                document.getElementById('moviesTableSection').scrollIntoView({ behavior: 'smooth' });
+            } catch (err) {
+                showTemporaryMessage(err.message, 'error');
             }
-            await addDoc(collection(db, "movies"), newMovie);
-            alert("Movie added!");
-            addMovieForm.reset();
-            loadMovies();
         });
-
+        
+        // Authentication handlers
+        async function handleLogin(email, password) {
+            try {
+                await signInWithEmailAndPassword(auth, email, password);
+                // onAuthStateChanged will take care of UI
+                loginError.style.display = 'none';
+            } catch (error) {
+                console.error("Login error", error);
+                loginError.textContent = "❌ Login failed: " + (error.message || "Invalid email/password");
+                loginError.style.display = 'block';
+            }
+        }
+        
+        function handleLogout() {
+            signOut(auth).then(() => {
+                // UI handled by state observer
+            }).catch(err => {
+                console.warn("Logout error", err);
+            });
+        }
+        
+        logoutBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            handleLogout();
+        });
+        
+        // Auth state observer: show/hide admin panel & login
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                // Admin logged in
+                loginSection.style.display = 'none';
+                adminPanel.style.display = 'block';
+                // Load movies from Firestore
+                loadMovies().catch(e => console.warn(e));
+            } else {
+                // Not logged in
+                loginSection.style.display = 'block';
+                adminPanel.style.display = 'none';
+                // clear table optional
+                if (moviesTableBody) moviesTableBody.innerHTML = '<tr><td colspan="3">🔐 Please login to manage movies</td></tr>';
+                loginError.style.display = 'none';
+                // reset login form
+                if (loginForm) loginForm.reset();
+            }
+        });
+        
+        // Login form submission
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = document.getElementById('adminEmail').value.trim();
+            const password = document.getElementById('adminPassword').value;
+            if (!email || !password) {
+                loginError.textContent = "Please enter email and password";
+                loginError.style.display = 'block';
+                return;
+            }
+            handleLogin(email, password);
+        });
+        
+        // Helper to escape HTML
         function escapeHtml(str) {
             if (!str) return '';
-            return str.replace(/[&<>]/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[m]));
+            return str.replace(/[&<>]/g, function(m) {
+                if (m === '&') return '&amp;';
+                if (m === '<') return '&lt;';
+                if (m === '>') return '&gt;';
+                return m;
+            }).replace(/[\uD800-\uDBFF][\uDC00-\uDFFF]/g, function(c) {
+                return c;
+            });
+        }
+        
+        // Optional: prefill server1 label default value
+        window.addEventListener('DOMContentLoaded', () => {
+            const server1Label = document.getElementById('server1_label');
+            if (server1Label && !server1Label.value) server1Label.value = 'Server 1';
+        });
+        
+        // Small console hint for Firebase config
+        if (firebaseConfig.apiKey === "YOUR_API_KEY") {
+            console.warn("⚠️ Firebase configuration not set. Please replace placeholders inside the <script type='module'> block with your actual Firebase project details.");
+            const msgDiv = document.createElement('div');
+            msgDiv.style.background = '#b91c1c';
+            msgDiv.style.color = 'white';
+            msgDiv.style.padding = '10px';
+            msgDiv.style.borderRadius = '20px';
+            msgDiv.style.margin = '10px auto';
+            msgDiv.style.maxWidth = '800px';
+            msgDiv.style.textAlign = 'center';
+            msgDiv.innerText = '⚠️ Firebase config missing! Please edit the firebaseConfig object inside the HTML (search for YOUR_API_KEY) and set your Firebase project credentials.';
+            document.body.prepend(msgDiv);
         }
     </script>
-    <style>
-        body { font-family: Arial, sans-serif; background: #0c0b14; color: #f0eef7; margin: 0; padding: 20px; }
-        .container { max-width: 800px; margin: auto; background: #1a1728; padding: 20px; border-radius: 24px; }
-        input, textarea, select, button { width: 100%; margin: 8px 0; padding: 10px; border-radius: 12px; border: none; }
-        input, textarea, select { background: #2f2b45; color: white; }
-        button { background: #e4b363; color: #12101c; font-weight: bold; cursor: pointer; }
-        button:hover { opacity: 0.9; }
-        #loginDiv, #adminDiv { display: none; }
-        table { width: 100%; background: #2f2b45; border-radius: 16px; overflow: hidden; }
-        td { padding: 10px; }
-        hr { border-color: #e4b363; margin: 20px 0; }
-        h1, h2 { color: #e4b363; }
-    </style>
 </head>
 <body>
-<div class="container">
-    <h1>🎬 BadiniMovies – Admin Panel</h1>
 
-    <!-- Login Section -->
-    <div id="loginDiv">
-        <h2>Login</h2>
-        <input type="email" id="loginEmail" placeholder="Email" autocomplete="off">
-        <input type="password" id="loginPassword" placeholder="Password">
-        <button id="loginBtn">Sign In</button>
-    </div>
-
-    <!-- Admin Section (visible after login) -->
-    <div id="adminDiv">
-        <div style="display:flex; justify-content:space-between; align-items:center;">
-            <h2>📋 Manage Movies</h2>
-            <button id="logoutBtn" style="width:auto; background:#4b446b;">Logout</button>
-        </div>
-
-        <div id="movieList">Loading...</div>
-
-        <hr>
-        <h2>➕ Add New Movie</h2>
-        <form id="addMovieForm">
-            <input type="text" id="titleEn" placeholder="Title (English)" required>
-            <input type="text" id="titleAr" placeholder="Title (Arabic)" required>
-            <input type="text" id="year" placeholder="Year (e.g. 2025)" required>
-            <select id="lang" required>
-                <option value="both">Both (EN/AR)</option>
-                <option value="en">English only</option>
-                <option value="ar">Arabic only</option>
-            </select>
-            <input type="url" id="posterUrl" placeholder="Poster image URL" required>
-            <textarea id="description" rows="2" placeholder="Description (English)" required></textarea>
-            <textarea id="descriptionAr" rows="2" placeholder="Description (Arabic)" required></textarea>
-            <h3>📡 Video Servers (at least one)</h3>
-            <input type="url" id="server1" placeholder="Server 1 URL (Vidspeeds, etc.)" required>
-            <input type="url" id="server2" placeholder="Server 2 URL">
-            <input type="url" id="server3" placeholder="Server 3 URL (optional)">
-            <button type="submit">➕ Add Movie to Firestore</button>
+<!-- LOGIN SECTION (visible when not authenticated) -->
+<div id="loginSection" style="display: block;">
+    <div class="login-box">
+        <h2>🎬 Admin Access</h2>
+        <p style="opacity:0.8;">Sign in with Firebase Email/Password</p>
+        <form id="loginForm">
+            <input type="email" id="adminEmail" placeholder="Admin Email" required autocomplete="email">
+            <input type="password" id="adminPassword" placeholder="Password" required autocomplete="current-password">
+            <button type="submit" style="width:100%;">🔑 Login</button>
+            <div id="loginError" class="error-msg" style="display:none; margin-top:16px;"></div>
         </form>
+        <hr>
+        <small style="opacity:0.6;">🔥 Firebase Auth must have a user created (Email/Password).<br>After setting Firebase config, create admin user in Firebase Console.</small>
     </div>
 </div>
+
+<!-- ADMIN PANEL (visible when authenticated) -->
+<div id="adminPanel" style="display: none;">
+    <div class="container">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
+            <h1>🎬 BadiniMovies · Admin Panel </h1>
+            <button id="logoutBtn" class="logout-btn">🚪 Logout</button>
+        </div>
+        
+        <!-- Add Movie Form (exactly matching original structure but using Firebase) -->
+        <div style="margin-top: 28px;">
+            <h2>➕ Add New Movie</h2>
+            <form id="addMovieForm">
+                <input type="text" id="title_en" placeholder="Title (English) *" required>
+                <input type="text" id="title_ar" placeholder="Title (Arabic) *" required>
+                <input type="text" id="year" placeholder="Year (e.g., 2024) *" required>
+                <select id="lang" required>
+                    <option value="both">Both (English/Arabic)</option>
+                    <option value="en">English</option>
+                    <option value="ar">Arabic</option>
+                </select>
+                <input type="url" id="poster_url" placeholder="Poster URL * (direct image link)" required>
+                <textarea id="description_en" rows="2" placeholder="Description (English)"></textarea>
+                <textarea id="description_ar" rows="2" placeholder="Description (Arabic)"></textarea>
+                
+                <h3>🌐 Movie Servers (at least one required)</h3>
+                <div style="background: #231f39; padding: 12px; border-radius: 20px; margin-bottom: 12px;">
+                    <label><strong>Server 1 *</strong></label>
+                    <input type="url" id="server1_url" placeholder="Server 1 URL (embed or direct link) *" required>
+                    <input type="text" id="server1_label" placeholder="Server 1 Label (e.g. Vidspeeds)" value="Server 1">
+                    
+                    <label style="margin-top: 12px;"><strong>Server 2 (optional)</strong></label>
+                    <input type="url" id="server2_url" placeholder="Server 2 URL">
+                    <input type="text" id="server2_label" placeholder="Server 2 Label">
+                    
+                    <label style="margin-top: 12px;"><strong>Server 3 (optional)</strong></label>
+                    <input type="url" id="server3_url" placeholder="Server 3 URL">
+                    <input type="text" id="server3_label" placeholder="Server 3 Label">
+                </div>
+                <div class="flex-btns">
+                    <button type="submit">➕ Add Movie to Firebase</button>
+                </div>
+                <div id="formMessage" style="display:none; margin-top: 12px;"></div>
+            </form>
+        </div>
+        
+        <hr>
+        
+        <!-- Movies List Section -->
+        <div id="moviesTableSection">
+            <h2>📋 Existing Movies <span id="loadingMovies" style="font-size:0.8rem; background:#2f2b45; padding: 4px 12px; border-radius: 20px; display: none;">loading...</span></h2>
+            <table id="moviesTable">
+                <thead>
+                    <tr><th>Title (EN)</th><th>Year</th><th>Actions</th</tr>
+                </thead>
+                <tbody id="moviesTableBody">
+                    <tr><td colspan="3" style="text-align:center;">🔐 Authenticating & loading movies...</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <div style="margin-top: 24px; font-size: 0.75rem; text-align: center; opacity:0.5;">
+            🔥 Firebase powered · Movies stored in Firestore | Secure rules: only authenticated admins can manage
+        </div>
+    </div>
+</div>
+
+<!-- Additional info for setup (visible in browser) -->
+
 </body>
 </html>

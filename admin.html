@@ -19,7 +19,7 @@
 
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js";
         import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-auth.js";
-        import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, updateDoc, query, orderBy, serverTimestamp, Timestamp } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore.js";
+        import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, updateDoc, query, orderBy, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore.js";
 
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
@@ -45,7 +45,7 @@
         const paginationControls = document.getElementById('paginationControls');
 
         // ---------- GLOBAL STATE ----------
-        let allMovies = [];           // array of { id, ...data, _createdAtNum (ms), _fallbackIdNum }
+        let allMovies = [];           // array of { id, ...data, sortTimestamp }
         let currentPage = 1;
         const ITEMS_PER_PAGE = 10;
         let currentEditId = null;
@@ -56,9 +56,10 @@
             return str.replace(/[&<>]/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[m]));
         }
 
-        // ---------- SORT: newest to oldest (by upload time) ----------
+        // ---------- SORT: NEWEST TO OLDEST (by upload time) ----------
         // Uses serverTimestamp (createdAt) if exists, otherwise falls back to custom "id" field (Date.now() string) numeric value
-        function sortMoviesOldestToNewest(moviesArray) {
+        // Returns sorted array with most recent first.
+        function sortMoviesNewestToOldest(moviesArray) {
             return [...moviesArray].sort((a, b) => {
                 let timeA = 0, timeB = 0;
                 // get createdAt timestamp (seconds) from Firestore Timestamp
@@ -77,7 +78,8 @@
                 } else if (b.customIdNum) {
                     timeB = b.customIdNum;
                 }
-                return timeA - timeB;   // newest first
+                // NEWEST FIRST: larger timestamp comes first
+                return timeB - timeA;
             });
         }
 
@@ -109,19 +111,26 @@
                 const langDisplay = movie.lang || 'both';
                 const titleEn = escapeHtml(movie.titleEn) || 'Untitled';
                 const titleAr = escapeHtml(movie.titleAr) || '';
+                // optional: show upload time hint (just for clarity)
+                let uploadHint = '';
+                if (movie.createdAt && movie.createdAt.seconds) {
+                    const date = new Date(movie.createdAt.seconds * 1000);
+                    uploadHint = `<span style="font-size:11px; opacity:0.6;"> 📅 ${date.toLocaleDateString()}</span>`;
+                }
                 tableHtml += `<tr>
                                 <td class="movie-info-cell">
                                     <strong>${titleEn}</strong> ${titleAr ? `<span dir="rtl">(${titleAr})</span>` : ''}<br>
-                                    <small>📅 ${yearDisplay} | 🌐 ${langDisplay}</small>
+                                    <small>📅 ${yearDisplay} | 🌐 ${langDisplay}${uploadHint}</small>
                                     ${movie.posterUrl ? `<div><small>🖼️ Poster available</small></div>` : ''}
                                 </td>
                                 <td class="action-buttons">
                                     <button class="delete-btn" data-id="${movie.id}">🗑️ Delete</button>
                                     <button class="edit-btn" data-id="${movie.id}">✏️ Edit</button>
                                 </td>
-                              </tr>`;
+                              </td>`;
             }
-            tableHtml += `</tbody></table>`;
+            tableHtml += `</tbody>`;
+            tableHtml += `</table>`;
             movieListContainer.innerHTML = tableHtml;
             
             // attach event listeners to dynamically created buttons
@@ -168,7 +177,7 @@
             });
         }
         
-        // Load all movies from Firestore
+        // Load all movies from Firestore and assign sort timestamps
         async function loadMovies() {
             movieListContainer.innerHTML = '<div class="loading">🎞️ Loading movies...</div>';
             try {
@@ -195,7 +204,6 @@
                         _createdAtMs: createdAtMs,
                         _fallbackNumeric: fallbackNumeric,
                         customIdNum: fallbackNumeric,
-                        // keep original fields for edit
                     });
                 }
                 // Compute numeric timestamp for sorting: use createdAt else fallback id numeric
@@ -270,7 +278,7 @@
             editDocIdField.value = '';
         }
         
-        // Save edited movie
+        // Save edited movie (preserves original createdAt)
         async function saveEditedMovie(event) {
             event.preventDefault();
             const docId = editDocIdField.value;
@@ -292,7 +300,7 @@
             if (server2url) newServers.push({ label: server2label, url: server2url, icon: "fa-server" });
             if (server3url) newServers.push({ label: server3label, url: server3url, icon: "fa-server" });
             
-            // At least one server required? keep original if none? but we can require at least one.
+            // At least one server required
             if (newServers.length === 0) {
                 alert("Please provide at least one video server URL.");
                 return;
@@ -307,7 +315,7 @@
                 description: document.getElementById('edit_description').value,
                 descriptionAr: document.getElementById('edit_descriptionAr').value,
                 servers: newServers,
-                // Keep original id field (for possible fallback) but don't override
+                // Keep original id field for fallback sorting compatibility
                 id: (allMovies.find(m => m.id === docId)?.id) || Date.now().toString()
             };
             
@@ -316,14 +324,14 @@
                 await updateDoc(movieRef, updatedData);
                 alert("✅ Movie updated successfully!");
                 closeEditPanel();
-                await loadMovies();   // refresh list with pagination & sorting
+                await loadMovies();   // refresh list with pagination & newest-first sort
             } catch (err) {
                 console.error(err);
                 alert("Update failed: " + err.message);
             }
         }
         
-        // ------------------- ADD MOVIE (with serverTimestamp) -------------------
+        // ------------------- ADD MOVIE (with serverTimestamp for correct newest-first order) -------------------
         addMovieForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             
@@ -342,7 +350,7 @@
             if (server3Url) serversArray.push({ label: "Upload", url: server3Url, icon: "fa-server" });
             
             const newMovie = {
-                id: Date.now().toString(),      // legacy + fallback for sorting
+                id: Date.now().toString(),      // legacy + fallback for sorting (if needed)
                 titleEn: document.getElementById('titleEn').value,
                 titleAr: document.getElementById('titleAr').value,
                 year: document.getElementById('year').value,
@@ -351,14 +359,14 @@
                 description: document.getElementById('description').value,
                 descriptionAr: document.getElementById('descriptionAr').value,
                 servers: serversArray,
-                createdAt: serverTimestamp()    // ← FIREBASE TIMESTAMP for proper sorting (oldest to newest)
+                createdAt: serverTimestamp()    // ← FIREBASE TIMESTAMP: newest first sorting
             };
             
             try {
                 await addDoc(collection(db, "movies"), newMovie);
-                alert("🎉 Movie added successfully!");
+                alert("🎉 Movie added successfully! (Newest movies appear first)");
                 addMovieForm.reset();
-                await loadMovies();    // reload with pagination & correct order (oldest first)
+                await loadMovies();    // reload with newest-first order
             } catch (error) {
                 alert("Error adding movie: " + error.message);
             }
@@ -400,14 +408,12 @@
         editCancelBtn.addEventListener('click', closeEditPanel);
         editForm.addEventListener('submit', saveEditedMovie);
         
-        // small extra: if click outside? not needed, but provide
+        // optional click outside behavior (just for convenience)
         window.addEventListener('click', (e) => {
-            if (editPanel.style.display === 'block' && e.target === editPanel) {
-                // optional: clicking overlay backdrop closes? but style not overlay, so ignore
+            if (editPanel.style.display === 'block' && !editPanel.contains(e.target) && !e.target.closest('.edit-btn')) {
+                // Optional: do not auto-close to avoid accidental loss, but cancel button exists.
             }
         });
-        
-        // adjust load movies after any action
     </script>
     <style>
         * {
@@ -609,6 +615,15 @@
         small {
             opacity: 0.8;
         }
+        .hint {
+            font-size: 12px;
+            margin-top: 12px;
+            opacity: 0.7;
+            background: #2f2b45;
+            padding: 10px;
+            border-radius: 20px;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
@@ -704,9 +719,11 @@
             <input type="url" id="server1" placeholder="Server 1 URL (Vidspeeds, etc.)" required>
             <input type="url" id="server2" placeholder="Server 2 URL (Vidroba)">
             <input type="url" id="server3" placeholder="Server 3 URL (optional)">
-            <button type="submit">➕ Add Movie </button>
+            <button type="submit">➕ Add Movie (Newest to Oldest)</button>
         </form>
-        <p class="hint" style="font-size:12px; margin-top:12px; opacity:0.6;">✅ Movies are automatically sorted from oldest uploaded to newest. Pagination: 10 movies per page. Edit button lets you modify all data including server labels.</p>
+        <div class="hint">
+            ✅ <strong>Sorted: Newest to Oldest</strong> 
+        </div>
     </div>
 </div>
 </body>

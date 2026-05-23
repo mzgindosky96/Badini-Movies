@@ -3,191 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Firebase Admin Panel - BadiniMovies</title>
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-        }
-        body {
-            background: #0c0b14;
-            color: #f0eef7;
-            font-family: 'Segoe UI', Roboto, 'Inter', system-ui, sans-serif;
-            padding: 24px 20px;
-            line-height: 1.5;
-        }
-        .container {
-            max-width: 1300px;
-            margin: 0 auto;
-            background: #1a1728;
-            border-radius: 2rem;
-            padding: 1.8rem 2rem;
-            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.6);
-        }
-        /* login box */
-        .login-box {
-            max-width: 440px;
-            margin: 12vh auto;
-            background: #1a1728;
-            padding: 2rem;
-            border-radius: 2rem;
-            text-align: center;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
-        }
-        input, textarea, select {
-            width: 100%;
-            margin: 8px 0 18px 0;
-            padding: 12px 16px;
-            border-radius: 1.5rem;
-            border: none;
-            background: #2f2b45;
-            color: white;
-            font-size: 0.95rem;
-            transition: all 0.2s;
-        }
-        input:focus, textarea:focus, select:focus {
-            background: #3d3761;
-            outline: none;
-            box-shadow: 0 0 0 2px #e4b363;
-        }
-        button, .btn-like {
-            background: #e4b363;
-            border: none;
-            padding: 10px 24px;
-            border-radius: 2rem;
-            font-weight: bold;
-            font-size: 0.9rem;
-            cursor: pointer;
-            color: #0c0b14;
-            transition: 0.2s;
-        }
-        button:hover { background: #f3ca85; transform: scale(0.97); }
-        .btn-outline {
-            background: transparent;
-            border: 1px solid #e4b363;
-            color: #e4b363;
-        }
-        .btn-outline:hover { background: #e4b36320; transform: none; }
-        .delete-btn { background: #b91c1c; color: white; }
-        .delete-btn:hover { background: #e02b2b; }
-        .edit-btn { background: #2d5f7e; color: white; }
-        .edit-btn:hover { background: #3e7b9e; }
-        .logout-btn {
-            background: #4b446b;
-            padding: 8px 22px;
-            border-radius: 3rem;
-            font-weight: bold;
-            text-decoration: none;
-            color: white;
-        }
-        .movie-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 0.75rem;
-            margin-top: 1.8rem;
-        }
-        .movie-card {
-            background: #231f39;
-            border-radius: 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 1.2rem;
-            padding: 0.8rem 1.2rem;
-            transition: all 0.2s;
-            border: 1px solid #2f2b4a;
-        }
-        .movie-card:hover {
-            background: #2a2547;
-            border-color: #e4b36360;
-            transform: translateX(5px);
-        }
-        .movie-poster-sm {
-            width: 60px;
-            height: 85px;
-            object-fit: cover;
-            border-radius: 12px;
-            background: #0c0b14;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-        }
-        .movie-info {
-            flex: 2;
-        }
-        .movie-title {
-            font-weight: bold;
-            font-size: 1.1rem;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-        .badge {
-            background: #2f2b45;
-            border-radius: 30px;
-            padding: 4px 12px;
-            font-size: 0.7rem;
-            font-weight: normal;
-        }
-        .lang-badge {
-            background: #4b446b;
-            color: #e4b363;
-        }
-        .year {
-            color: #b9b3e6;
-            font-size: 0.85rem;
-        }
-        .servers-count {
-            font-size: 0.7rem;
-            color: #aaa;
-        }
-        .movie-actions {
-            display: flex;
-            gap: 12px;
-            align-items: center;
-        }
-        button.small {
-            padding: 6px 16px;
-            font-size: 0.8rem;
-        }
-        .form-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-            flex-wrap: wrap;
-        }
-        .edit-mode-badge {
-            background: #e4b36320;
-            color: #e4b363;
-            padding: 4px 14px;
-            border-radius: 50px;
-            font-size: 0.8rem;
-        }
-        hr {
-            border-color: #342e50;
-            margin: 1.5rem 0;
-        }
-        .error-msg, .success-msg {
-            padding: 12px;
-            border-radius: 3rem;
-            margin: 10px 0;
-            text-align: center;
-        }
-        .error-msg { background: #3a1e1e; color: #ffaa9e; }
-        .success-msg { background: #1f3a1c; color: #b5e4b0; }
-        .flex-between {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-        @media (max-width: 720px) {
-            .movie-card { flex-wrap: wrap; }
-            .movie-poster-sm { width: 50px; height: 70px; }
-            .container { padding: 1rem; }
-        }
-    </style>
-    <!-- Firebase SDKs -->
+    <title>BadiniMovies – Admin Panel | Edit & Table View</title>
+    <!-- Firebase SDKs (modular v10.7.0) -->
     <script type="module">
-        // ======================= 🔥 YOUR FIREBASE CONFIG (already set) =======================
+        // ========== FIREBASE CONFIGURATION ==========
         const firebaseConfig = {
             apiKey: "AIzaSyD6WMZGUS8s1FufWdCefsv-5mAIYhhkKgY",
             authDomain: "moviesite-admin-c178b.firebaseapp.com",
@@ -196,348 +15,658 @@
             messagingSenderId: "275418486999",
             appId: "1:275418486999:web:845bd57e7a014e7393b892"
         };
-        // ====================================================================================
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-        import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-        import { getFirestore, collection, addDoc, deleteDoc, doc, getDocs, updateDoc, query, orderBy } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-        
+        // ===========================================
+
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js";
+        import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-auth.js";
+        import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, updateDoc, getDoc, query, orderBy } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore.js";
+
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
         const db = getFirestore(app);
-        
+
         // DOM elements
-        const loginSection = document.getElementById('loginSection');
-        const adminPanel = document.getElementById('adminPanel');
-        const loginForm = document.getElementById('loginForm');
-        const loginError = document.getElementById('loginError');
+        const loginDiv = document.getElementById('loginDiv');
+        const adminDiv = document.getElementById('adminDiv');
+        const loginEmail = document.getElementById('loginEmail');
+        const loginPassword = document.getElementById('loginPassword');
+        const loginBtn = document.getElementById('loginBtn');
         const logoutBtn = document.getElementById('logoutBtn');
+        const movieListContainer = document.getElementById('movieList');
         const addMovieForm = document.getElementById('addMovieForm');
-        const moviesContainer = document.getElementById('moviesContainer');
-        const loadingSpan = document.getElementById('loadingMovies');
-        const formMessage = document.getElementById('formMessage');
-        const formTitle = document.getElementById('formTitle');
+        const submitBtn = document.getElementById('submitMovieBtn');
         const cancelEditBtn = document.getElementById('cancelEditBtn');
-        
-        let currentEditId = null;  // null = add mode, else movie id
-        
-        // Helper: show message
-        function showMessage(msg, isError = false) {
-            if (!formMessage) return;
-            formMessage.textContent = msg;
-            formMessage.className = isError ? 'error-msg' : 'success-msg';
-            formMessage.style.display = 'block';
-            setTimeout(() => { if (formMessage) formMessage.style.display = 'none'; }, 4000);
+
+        // Global edit state
+        let currentEditId = null;      // stores document ID of movie being edited
+
+        // ========== Helper: reset edit mode and clear form ==========
+        function resetEditMode(resetFormValues = true) {
+            currentEditId = null;
+            submitBtn.textContent = '➕ Add Movie to Firestore';
+            cancelEditBtn.style.display = 'none';
+            if (resetFormValues) {
+                addMovieForm.reset();
+                // ensure server1 remains required but empty is fine
+            }
+            // remove any manual editing highlight
         }
-        
-        // Fetch movies & render beautifully
+
+        // ========== Load movies: render as clean table with Edit + Delete ==========
         async function loadMovies() {
-            if (!moviesContainer) return;
+            if (!movieListContainer) return;
+            movieListContainer.innerHTML = '<div class="loading-spinner">🎬 Loading movies...</div>';
             try {
-                if (loadingSpan) loadingSpan.style.display = 'inline-block';
-                const moviesRef = collection(db, "movies");
-                let querySnapshot;
-                try {
-                    const q = query(moviesRef, orderBy("title_en", "asc"));
-                    querySnapshot = await getDocs(q);
-                } catch (e) {
-                    console.warn("orderBy failed, using unsorted", e);
-                    querySnapshot = await getDocs(moviesRef);
-                }
-                const movies = [];
-                querySnapshot.forEach(docSnap => movies.push({ id: docSnap.id, ...docSnap.data() }));
-                if (!querySnapshot._query?.orderBy) {
-                    movies.sort((a,b) => (a.title_en || '').localeCompare(b.title_en || ''));
-                }
-                renderMovieList(movies);
-            } catch (err) {
-                console.error(err);
-                moviesContainer.innerHTML = `<div class="error-msg">❌ Failed to load: ${err.message}. Check Firestore rules.</div>`;
-            } finally {
-                if (loadingSpan) loadingSpan.style.display = 'none';
-            }
-        }
-        
-        function renderMovieList(movies) {
-            if (!moviesContainer) return;
-            if (movies.length === 0) {
-                moviesContainer.innerHTML = `<div style="text-align:center; padding:3rem;">📭 No movies yet. Add your first movie above!</div>`;
-                return;
-            }
-            let html = '';
-            for (const movie of movies) {
-                const serverCount = movie.servers?.length || 0;
-                const posterUrl = movie.poster_url || 'https://via.placeholder.com/60x85?text=No+Poster';
-                html += `
-                    <div class="movie-card" data-id="${movie.id}">
-                        <img class="movie-poster-sm" src="${escapeHtml(posterUrl)}" alt="poster" onerror="this.src='https://via.placeholder.com/60x85?text=Error'">
-                        <div class="movie-info">
-                            <div class="movie-title">
-                                ${escapeHtml(movie.title_en || '?')}
-                                <span class="badge lang-badge">${escapeHtml(movie.lang || 'both')}</span>
-                                <span class="year">📅 ${escapeHtml(movie.year || '—')}</span>
-                            </div>
-                            <div style="font-size:0.8rem; opacity:0.8;">${escapeHtml(movie.title_ar || '')}</div>
-                            <div class="servers-count">🎬 ${serverCount} server(s) · ${movie.servers?.map(s => s.label).join(', ') || 'no servers'}</div>
+                const q = query(collection(db, "movies"), orderBy("titleEn", "asc"));
+                const snapshot = await getDocs(q);
+                
+                if (snapshot.empty) {
+                    movieListContainer.innerHTML = `
+                        <div class="empty-movies">
+                            📭 No movies yet. Use the form below to add your first film.
                         </div>
-                        <div class="movie-actions">
-                            <button class="edit-btn small" data-id="${movie.id}" data-action="edit">✏️ Edit</button>
-                            <button class="delete-btn small" data-id="${movie.id}" data-action="delete">🗑 Delete</button>
-                        </div>
+                    `;
+                    return;
+                }
+
+                // Build elegant table with proper headers
+                let tableHTML = `
+                    <div class="table-wrapper">
+                        <table class="movies-table">
+                            <thead>
+                                <tr>
+                                    <th>🎞️ Title (EN / AR)</th>
+                                    <th>📅 Year</th>
+                                    <th>🌐 Language</th>
+                                    <th>⚙️ Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                `;
+                
+                snapshot.forEach(docSnap => {
+                    const movie = docSnap.data();
+                    const docId = docSnap.id;
+                    const titleEn = escapeHtml(movie.titleEn || 'Untitled');
+                    const titleAr = escapeHtml(movie.titleAr || '');
+                    const year = escapeHtml(movie.year || '—');
+                    const lang = escapeHtml(movie.lang || 'both');
+                    
+                    // Display both English & Arabic titles elegantly
+                    let titleDisplay = `<strong>${titleEn}</strong>`;
+                    if (titleAr) titleDisplay += `<span class="ar-title"> (${titleAr})</span>`;
+                    
+                    // Language badge styling
+                    let langBadge = '';
+                    if (lang === 'both') langBadge = '<span class="badge both">EN/AR</span>';
+                    else if (lang === 'en') langBadge = '<span class="badge en">English</span>';
+                    else if (lang === 'ar') langBadge = '<span class="badge ar">Arabic</span>';
+                    else langBadge = lang;
+                    
+                    tableHTML += `
+                        <tr>
+                            <td class="movie-title-cell">${titleDisplay}</td>
+                            <td class="year-cell">${year}</td>
+                            <td class="lang-cell">${langBadge}</td>
+                            <td class="actions-cell">
+                                <button class="action-btn edit-btn" onclick="window.editMovieById('${docId}')">✏️ Edit</button>
+                                <button class="action-btn delete-btn" onclick="window.deleteMovieById('${docId}')">🗑️ Delete</button>
+                            </td>
+                        </tr>
+                    `;
+                });
+                
+                tableHTML += `
+                            </tbody>
+                        </table>
                     </div>
                 `;
+                movieListContainer.innerHTML = tableHTML;
+            } catch (error) {
+                console.error("Load error:", error);
+                movieListContainer.innerHTML = '<div class="error-msg">⚠️ Failed to load movies. Check console.</div>';
             }
-            moviesContainer.innerHTML = html;
-            
-            // Attach event listeners for edit/delete
-            document.querySelectorAll('.edit-btn[data-action="edit"]').forEach(btn => {
-                btn.addEventListener('click', (e) => {
-                    const id = btn.getAttribute('data-id');
-                    openEditMode(id);
-                });
-            });
-            document.querySelectorAll('.delete-btn[data-action="delete"]').forEach(btn => {
-                btn.addEventListener('click', async (e) => {
-                    const id = btn.getAttribute('data-id');
-                    if (confirm('Permanently delete this movie?')) {
-                        await deleteMovie(id);
+        }
+
+        // ========== DELETE movie ==========
+        window.deleteMovieById = async (id) => {
+            if (confirm("⚠️ Permanently delete this movie? This action cannot be undone.")) {
+                try {
+                    await deleteDoc(doc(db, "movies", id));
+                    // if we were editing the deleted movie, reset edit mode
+                    if (currentEditId === id) {
+                        resetEditMode(true);
                     }
-                });
-            });
-        }
-        
-        async function deleteMovie(movieId) {
-            try {
-                await deleteDoc(doc(db, "movies", movieId));
-                showMessage('✅ Movie deleted', false);
-                loadMovies();
-                if (currentEditId === movieId) resetToAddMode();
-            } catch (err) {
-                showMessage(`Delete failed: ${err.message}`, true);
+                    await loadMovies();
+                } catch (err) {
+                    alert("Delete failed: " + err.message);
+                }
             }
-        }
-        
-        // Edit mode: load movie data into form
-        async function openEditMode(movieId) {
+        };
+
+        // ========== EDIT movie: fetch data & populate form ==========
+        window.editMovieById = async (id) => {
             try {
-                const docRef = doc(db, "movies", movieId);
-                const docSnap = await getDocs(query(collection(db, "movies"))); // alternative: getDoc
-                // better: getDoc
-                const { getDoc } = await import("https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js");
-                const snapshot = await getDoc(docRef);
-                if (!snapshot.exists()) throw new Error("Movie not found");
-                const data = snapshot.data();
-                currentEditId = movieId;
-                // fill form
-                document.getElementById('title_en').value = data.title_en || '';
-                document.getElementById('title_ar').value = data.title_ar || '';
-                document.getElementById('year').value = data.year || '';
-                document.getElementById('lang').value = data.lang || 'both';
-                document.getElementById('poster_url').value = data.poster_url || '';
-                document.getElementById('description_en').value = data.description_en || '';
-                document.getElementById('description_ar').value = data.description_ar || '';
-                // fill servers (max 3)
-                const servers = data.servers || [];
-                if (servers[0]) {
-                    document.getElementById('server1_url').value = servers[0].url || '';
-                    document.getElementById('server1_name').value = servers[0].label || 'Server 1';
-                } else {
-                    document.getElementById('server1_url').value = '';
-                    document.getElementById('server1_name').value = 'Server 1';
+                const docRef = doc(db, "movies", id);
+                const docSnap = await getDoc(docRef);
+                if (!docSnap.exists()) {
+                    alert("Movie not found. It might have been deleted.");
+                    return;
                 }
-                if (servers[1]) {
-                    document.getElementById('server2_url').value = servers[1].url || '';
-                    document.getElementById('server2_name').value = servers[1].label || 'Server 2';
-                } else {
-                    document.getElementById('server2_url').value = '';
-                    document.getElementById('server2_name').value = '';
-                }
-                if (servers[2]) {
-                    document.getElementById('server3_url').value = servers[2].url || '';
-                    document.getElementById('server3_name').value = servers[2].label || 'Server 3';
-                } else {
-                    document.getElementById('server3_url').value = '';
-                    document.getElementById('server3_name').value = '';
-                }
-                // change UI to edit mode
-                formTitle.textContent = '✏️ Edit Movie';
-                const submitBtn = addMovieForm.querySelector('button[type="submit"]');
-                submitBtn.textContent = '💾 Update Movie';
-                cancelEditBtn.style.display = 'inline-block';
-                window.scrollTo({ top: 0, behavior: 'smooth' });
+                const movie = docSnap.data();
+                
+                // Populate all form fields
+                document.getElementById('titleEn').value = movie.titleEn || '';
+                document.getElementById('titleAr').value = movie.titleAr || '';
+                document.getElementById('year').value = movie.year || '';
+                document.getElementById('lang').value = movie.lang || 'both';
+                document.getElementById('posterUrl').value = movie.posterUrl || '';
+                document.getElementById('description').value = movie.description || '';
+                document.getElementById('descriptionAr').value = movie.descriptionAr || '';
+                
+                // Handle servers array (max 3 servers based on structure)
+                const servers = movie.servers || [];
+                document.getElementById('server1').value = servers[0]?.url || '';
+                document.getElementById('server2').value = servers[1]?.url || '';
+                document.getElementById('server3').value = servers[2]?.url || '';
+                
+                // Switch to edit mode
+                currentEditId = id;
+                submitBtn.textContent = '✏️ Update Movie';
+                cancelEditBtn.style.display = 'inline-flex';
+                
+                // Scroll smoothly to form for better UX
+                document.getElementById('adminFormSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
             } catch (err) {
-                showMessage(`Cannot load movie: ${err.message}`, true);
+                console.error("Edit error:", err);
+                alert("Failed to load movie data for editing: " + err.message);
             }
-        }
-        
-        function resetToAddMode() {
-            currentEditId = null;
-            addMovieForm.reset();
-            document.getElementById('server1_label').value = 'Server 1';
-            document.getElementById('server2_label').value = '';
-            document.getElementById('server3_label').value = '';
-            formTitle.textContent = '➕ Add New Movie';
-            const submitBtn = addMovieForm.querySelector('button[type="submit"]');
-            submitBtn.textContent = '➕ Add Movie to Firebase';
-            cancelEditBtn.style.display = 'none';
-        }
-        
-        // Collect servers from form
-        function getServersFromForm() {
+        };
+
+        // ========== Helper: Build servers array from form (same logic as original) ==========
+        function buildServersArray() {
+            const server1Url = document.getElementById('server1').value.trim();
+            const server2Url = document.getElementById('server2').value.trim();
+            const server3Url = document.getElementById('server3').value.trim();
             const servers = [];
-            const s1url = document.getElementById('server1_url').value.trim();
-            if (s1url) servers.push({ label: document.getElementById('server1_label').value.trim() || 'Server 1', url: s1url, icon: 'fa-server' });
-            const s2url = document.getElementById('server2_url').value.trim();
-            if (s2url) servers.push({ label: document.getElementById('server2_label').value.trim() || 'Server 2', url: s2url, icon: 'fa-server' });
-            const s3url = document.getElementById('server3_url').value.trim();
-            if (s3url) servers.push({ label: document.getElementById('server3_label').value.trim() || 'Server 3', url: s3url, icon: 'fa-server' });
+            
+            if (server1Url) {
+                servers.push({ label: "Vidspeeds", url: server1Url, icon: "fa-server" });
+            }
+            if (server2Url) {
+                servers.push({ label: "Vidroba", url: server2Url, icon: "fa-server" });
+            }
+            if (server3Url) {
+                servers.push({ label: "Upload", url: server3Url, icon: "fa-server" });
+            }
             return servers;
         }
-        
-        async function handleAddOrUpdate(e) {
+
+        // ========== Handle Form Submit (ADD or UPDATE) ==========
+        addMovieForm.addEventListener('submit', async (e) => {
             e.preventDefault();
-            const title_en = document.getElementById('title_en').value.trim();
-            const title_ar = document.getElementById('title_ar').value.trim();
+            
+            // Gather values
+            const titleEn = document.getElementById('titleEn').value.trim();
+            const titleAr = document.getElementById('titleAr').value.trim();
             const year = document.getElementById('year').value.trim();
             const lang = document.getElementById('lang').value;
-            const poster_url = document.getElementById('poster_url').value.trim();
-            const description_en = document.getElementById('description_en').value.trim();
-            const description_ar = document.getElementById('description_ar').value.trim();
-            const servers = getServersFromForm();
+            const posterUrl = document.getElementById('posterUrl').value.trim();
+            const description = document.getElementById('description').value.trim();
+            const descriptionAr = document.getElementById('descriptionAr').value.trim();
+            const serversArray = buildServersArray();
             
-            if (!title_en || !title_ar || !year || !poster_url) {
-                showMessage('Please fill all required fields (title, year, poster).', true);
+            // Validation: at least one server URL required (same as original)
+            if (serversArray.length === 0) {
+                alert("Please provide at least one video server URL (Server 1 is required).");
                 return;
             }
-            if (servers.length === 0) {
-                showMessage('At least one server URL is required.', true);
+            if (!titleEn || !year || !posterUrl) {
+                alert("Title (English), Year and Poster URL are required.");
                 return;
             }
-            const movieData = {
-                title_en, title_ar, year, lang, poster_url, description_en, description_ar, servers,
-                updatedAt: new Date().toISOString()
-            };
             
             try {
-                if (currentEditId) {
-                    // update existing
-                    const docRef = doc(db, "movies", currentEditId);
-                    await updateDoc(docRef, movieData);
-                    showMessage('✅ Movie updated successfully!', false);
-                    resetToAddMode();
+                if (currentEditId !== null) {
+                    // UPDATE existing movie
+                    const movieRef = doc(db, "movies", currentEditId);
+                    const updatedData = {
+                        titleEn,
+                        titleAr,
+                        year,
+                        lang,
+                        posterUrl,
+                        description,
+                        descriptionAr,
+                        servers: serversArray
+                        // Note: we do NOT override the original "id" field (if present) but we keep consistency
+                    };
+                    await updateDoc(movieRef, updatedData);
+                    alert("✅ Movie updated successfully!");
+                    resetEditMode(true);
+                    await loadMovies();
                 } else {
-                    // add new
-                    await addDoc(collection(db, "movies"), { ...movieData, createdAt: new Date().toISOString() });
-                    showMessage('✅ Movie added successfully!', false);
+                    // ADD new movie
+                    const newMovie = {
+                        id: Date.now().toString(),      // simple unique ID for compatibility
+                        titleEn,
+                        titleAr,
+                        year,
+                        lang,
+                        posterUrl,
+                        description,
+                        descriptionAr,
+                        servers: serversArray
+                    };
+                    await addDoc(collection(db, "movies"), newMovie);
+                    alert("🎉 New movie added to the collection!");
                     addMovieForm.reset();
-                    document.getElementById('server1_label').value = 'Server 1';
-                    document.getElementById('server2_label').value = '';
-                    document.getElementById('server3_label').value = '';
+                    await loadMovies();
                 }
-                await loadMovies();
-                if (!currentEditId) addMovieForm.reset();
             } catch (err) {
-                showMessage(`Operation failed: ${err.message}`, true);
+                console.error("Submit error:", err);
+                alert("Operation failed: " + err.message);
             }
+        });
+
+        // Cancel edit button logic
+        cancelEditBtn.addEventListener('click', () => {
+            resetEditMode(true);
+            alert("Edit cancelled. Form cleared.");
+        });
+
+        // ========== Escape HTML to prevent injection ==========
+        function escapeHtml(str) {
+            if (!str) return '';
+            return str.replace(/[&<>]/g, function(m) {
+                if (m === '&') return '&amp;';
+                if (m === '<') return '&lt;';
+                if (m === '>') return '&gt;';
+                return m;
+            }).replace(/[\uD800-\uDBFF][\uDC00-\uDFFF]/g, function(c) {
+                return c;
+            });
         }
-        
-        // auth logic
-        async function handleLogin(email, password) {
-            try {
-                await signInWithEmailAndPassword(auth, email, password);
-                loginError.style.display = 'none';
-            } catch (err) {
-                loginError.textContent = '❌ ' + err.message;
-                loginError.style.display = 'block';
-            }
-        }
-        
+
+        // ========== Firebase Authentication ==========
         onAuthStateChanged(auth, (user) => {
             if (user) {
-                loginSection.style.display = 'none';
-                adminPanel.style.display = 'block';
+                loginDiv.style.display = 'none';
+                adminDiv.style.display = 'block';
                 loadMovies();
-                resetToAddMode();
             } else {
-                loginSection.style.display = 'block';
-                adminPanel.style.display = 'none';
-                if (moviesContainer) moviesContainer.innerHTML = '';
-                resetToAddMode();
+                loginDiv.style.display = 'block';
+                adminDiv.style.display = 'none';
+                resetEditMode(true);
             }
         });
-        
-        loginForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const email = document.getElementById('adminEmail').value.trim();
-            const pwd = document.getElementById('adminPassword').value;
-            handleLogin(email, pwd);
+
+        loginBtn.addEventListener('click', () => {
+            const email = loginEmail.value.trim();
+            const password = loginPassword.value;
+            if (!email || !password) {
+                alert("Please enter email and password");
+                return;
+            }
+            signInWithEmailAndPassword(auth, email, password)
+                .then(() => {
+                    loginEmail.value = '';
+                    loginPassword.value = '';
+                })
+                .catch(err => alert("Login failed: " + err.message));
         });
-        logoutBtn.addEventListener('click', () => signOut(auth));
-        addMovieForm.addEventListener('submit', handleAddOrUpdate);
-        cancelEditBtn.addEventListener('click', resetToAddMode);
-        
-        function escapeHtml(str) { if (!str) return ''; return str.replace(/[&<>]/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[m])); }
-        
-        // initial reset
-        resetToAddMode();
+
+        logoutBtn.addEventListener('click', () => {
+            signOut(auth).catch(err => alert("Logout error: " + err.message));
+        });
     </script>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(145deg, #0b0a12 0%, #12101c 100%);
+            color: #f0eef7;
+            margin: 0;
+            padding: 24px 20px;
+        }
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            background: rgba(26, 23, 40, 0.85);
+            backdrop-filter: blur(2px);
+            padding: 28px 32px;
+            border-radius: 2rem;
+            box-shadow: 0 25px 45px -12px rgba(0,0,0,0.5);
+            border: 1px solid rgba(228, 179, 99, 0.2);
+        }
+        h1 {
+            font-size: 2.1rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #e4b363, #ffd966);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-top: 0;
+            margin-bottom: 0.25rem;
+            letter-spacing: -0.3px;
+        }
+        h1 small {
+            font-size: 0.9rem;
+            color: #b9b3d6;
+            background: none;
+            -webkit-background-clip: unset;
+            background-clip: unset;
+            color: #b9b3d6;
+        }
+        h2 {
+            color: #e4b363;
+            font-weight: 600;
+            border-left: 4px solid #e4b363;
+            padding-left: 14px;
+            margin: 24px 0 18px 0;
+        }
+        /* login & admin panels */
+        #loginDiv, #adminDiv {
+            transition: 0.2s;
+        }
+        input, textarea, select, button {
+            font-family: inherit;
+            border-radius: 20px;
+            border: none;
+            outline: none;
+            transition: 0.2s;
+        }
+        input, textarea, select {
+            background: #2f2b45;
+            color: white;
+            padding: 12px 16px;
+            margin: 8px 0;
+            width: 100%;
+            font-size: 0.95rem;
+            border: 1px solid #4a4368;
+        }
+        input:focus, textarea:focus, select:focus {
+            border-color: #e4b363;
+            box-shadow: 0 0 0 2px rgba(228, 179, 99, 0.3);
+            background: #3d3660;
+        }
+        button {
+            background: #e4b363;
+            color: #12101c;
+            font-weight: bold;
+            padding: 12px 18px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            transition: all 0.2s ease;
+            border: none;
+        }
+        button:hover {
+            background: #f5ca7a;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        }
+        .logout-btn {
+            background: #4b446b;
+            color: #f0eef7;
+            width: auto;
+            padding: 8px 20px;
+        }
+        .logout-btn:hover {
+            background: #6b628f;
+        }
+        /* movie table styling */
+        .table-wrapper {
+            overflow-x: auto;
+            border-radius: 24px;
+            background: #1e1b2c;
+            margin: 20px 0 10px;
+            box-shadow: 0 6px 14px rgba(0,0,0,0.3);
+        }
+        .movies-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+            min-width: 520px;
+        }
+        .movies-table thead tr {
+            background: #28243f;
+            border-bottom: 2px solid #e4b363;
+        }
+        .movies-table th {
+            text-align: left;
+            padding: 16px 12px;
+            font-weight: 600;
+            color: #ffeaC8;
+            letter-spacing: 0.3px;
+        }
+        .movies-table td {
+            padding: 14px 12px;
+            border-bottom: 1px solid #373253;
+            vertical-align: middle;
+        }
+        .movie-title-cell strong {
+            color: #ffe2b5;
+        }
+        .ar-title {
+            font-size: 0.85rem;
+            color: #bfb6e6;
+            margin-left: 6px;
+        }
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 40px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            background: #2f2b45;
+        }
+        .badge.both { background: #9b7bcb; color: white; }
+        .badge.en { background: #4285f4; color: white; }
+        .badge.ar { background: #34a853; color: white; }
+        .actions-cell {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .action-btn {
+            padding: 6px 14px;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: 0.15s;
+            background: #3b3557;
+            color: #f0eef7;
+        }
+        .edit-btn {
+            background: #2c6e9e;
+        }
+        .edit-btn:hover {
+            background: #3f8bc2;
+            transform: scale(0.97);
+        }
+        .delete-btn {
+            background: #a03e3e;
+        }
+        .delete-btn:hover {
+            background: #c75151;
+        }
+        .empty-movies, .loading-spinner, .error-msg {
+            background: #221f36;
+            border-radius: 28px;
+            padding: 28px;
+            text-align: center;
+            color: #cbc3f0;
+            margin: 18px 0;
+        }
+        hr {
+            border: none;
+            height: 1px;
+            background: linear-gradient(90deg, #e4b363, transparent);
+            margin: 28px 0;
+        }
+        /* Form area */
+        #addMovieForm {
+            background: #1a1728;
+            border-radius: 28px;
+            padding: 20px 24px;
+            margin-top: 15px;
+            box-shadow: inset 0 0 0 1px rgba(228, 179, 99, 0.2), 0 10px 20px rgba(0,0,0,0.2);
+        }
+        .form-row {
+            display: flex;
+            gap: 18px;
+            flex-wrap: wrap;
+        }
+        .form-row > div {
+            flex: 1;
+            min-width: 180px;
+        }
+        button[type="submit"] {
+            width: auto;
+            min-width: 200px;
+            font-size: 1rem;
+            margin-top: 16px;
+            margin-right: 14px;
+        }
+        #cancelEditBtn {
+            background: #6c5f8f;
+            color: white;
+            display: none;
+            width: auto;
+            margin-top: 16px;
+        }
+        #cancelEditBtn:hover {
+            background: #8d7cb3;
+        }
+        .flex-btns {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            align-items: center;
+        }
+        label {
+            font-weight: 500;
+            font-size: 0.85rem;
+            display: block;
+            margin-top: 8px;
+            color: #d9d2f0;
+        }
+        .server-hint {
+            font-size: 0.7rem;
+            color: #aa9fd1;
+            margin-top: -6px;
+            margin-bottom: 6px;
+        }
+        @media (max-width: 700px) {
+            .container { padding: 18px; }
+            .actions-cell { flex-direction: column; align-items: flex-start; }
+            .action-btn { width: auto; }
+        }
+        footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 0.7rem;
+            color: #6a6285;
+        }
+    </style>
 </head>
 <body>
-<div id="loginSection" style="display:block;">
-    <div class="login-box">
-        <h2>🎬 Admin Login</h2>
-        <p>Firebase Email/Password</p>
-        <form id="loginForm">
-            <input type="email" id="adminEmail" placeholder="Admin Email" required>
-            <input type="password" id="adminPassword" placeholder="Password" required>
-            <button type="submit" style="width:100%;">🔑 Login</button>
-            <div id="loginError" class="error-msg" style="display:none; margin-top:1rem;"></div>
-        </form>
+<div class="container">
+    <div style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap;">
+        <h1>🎬 BadiniMovies <small>Admin Studio</small></h1>
+    </div>
+
+    <!-- Login Panel -->
+    <div id="loginDiv">
+        <h2>🔐 Admin Access</h2>
+        <input type="email" id="loginEmail" placeholder="Email address" autocomplete="off">
+        <input type="password" id="loginPassword" placeholder="Password">
+        <button id="loginBtn">🚀 Sign In</button>
+        <p style="font-size:0.75rem; margin-top:12px;">Secure Firebase authentication</p>
+    </div>
+
+    <!-- Admin Dashboard (visible after login) -->
+    <div id="adminDiv">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
+            <h2>📋 Movie Library</h2>
+            <button id="logoutBtn" class="logout-btn">↪️ Logout</button>
+        </div>
+
+        <!-- MOVIE TABLE (enhanced with Edit + Delete buttons) -->
+        <div id="movieList">Loading cinematic database...</div>
+
         <hr>
-        <small>Make sure you created an admin user in Firebase Auth.</small>
+
+        <!-- ADD / EDIT FORM SECTION -->
+        <div id="adminFormSection">
+            <h2>✏️ Add or Edit Movie</h2>
+            <form id="addMovieForm">
+                <div class="form-row">
+                    <div>
+                        <label>📖 Title (English)*</label>
+                        <input type="text" id="titleEn" placeholder="e.g., The Batman" required>
+                    </div>
+                    <div>
+                        <label>📖 Title (Arabic)</label>
+                        <input type="text" id="titleAr" placeholder="العنوان بالعربية">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div>
+                        <label>📅 Year*</label>
+                        <input type="text" id="year" placeholder="2024" required>
+                    </div>
+                    <div>
+                        <label>🌐 Language</label>
+                        <select id="lang" required>
+                            <option value="both">Both (English / Arabic)</option>
+                            <option value="en">English only</option>
+                            <option value="ar">Arabic only</option>
+                        </select>
+                    </div>
+                </div>
+                <div>
+                    <label>🖼️ Poster URL*</label>
+                    <input type="url" id="posterUrl" placeholder="https://image.tmdb.org/poster.jpg" required>
+                </div>
+                <div>
+                    <label>📝 Description (English)</label>
+                    <textarea id="description" rows="2" placeholder="English synopsis ..."></textarea>
+                </div>
+                <div>
+                    <label>📝 Description (Arabic)</label>
+                    <textarea id="descriptionAr" rows="2" placeholder="الوصف بالعربية ..."></textarea>
+                </div>
+                
+                <label style="margin-top: 12px;">🎥 Video Servers (first is required)</label>
+                <div class="server-hint">Server 1 = Vidspeeds, Server 2 = Vidroba, Server 3 = Upload (optional)</div>
+                <input type="url" id="server1" placeholder="Server 1 URL (Vidspeeds) *" required>
+                <input type="url" id="server2" placeholder="Server 2 URL (Vidroba) - optional">
+                <input type="url" id="server3" placeholder="Server 3 URL (Upload) - optional">
+                
+                <div class="flex-btns">
+                    <button type="submit" id="submitMovieBtn">➕ Add Movie to Firestore</button>
+                    <button type="button" id="cancelEditBtn">❌ Cancel Edit</button>
+                </div>
+            </form>
+            <p style="font-size:0.7rem; margin-top:12px;">💡 Tip: Click <strong>Edit</strong> on any movie row → prefill form → update → done.</p>
+        </div>
+        <footer>BadiniMovies secure panel | real-time Firestore</footer>
     </div>
 </div>
 
-<div id="adminPanel" style="display:none;">
-    <div class="container">
-        <div class="flex-between">
-            <h1>🎬 BadiniMovies · Admin Panel </h1>
-            <button id="logoutBtn" class="logout-btn">🚪 Logout</button>
-        </div>
-        <div style="margin-top: 2rem;">
-            <div class="form-header">
-                <h2 id="formTitle">➕ Add New Movie</h2>
-                <button type="button" id="cancelEditBtn" style="display:none;" class="btn-outline">✖ Cancel Edit</button>
-            </div>
-            <form id="addMovieForm">
-                <input type="text" id="title_en" placeholder="Title (English) *" required>
-                <input type="text" id="title_ar" placeholder="Title (Arabic) *" required>
-                <input type="text" id="year" placeholder="Year *" required>
-                <select id="lang"><option value="both">Both</option><option value="en">English</option><option value="ar">Arabic</option></select>
-                <input type="url" id="poster_url" placeholder="Poster URL *" required>
-                <textarea id="description_en" rows="2" placeholder="Description (English)"></textarea>
-                <textarea id="description_ar" rows="2" placeholder="Description (Arabic)"></textarea>
-                <h3>🌐 Servers (at least one)</h3>
-                <div style="background:#231f39; padding:1rem; border-radius:1.5rem;">
-                    <input type="url" id="server1_url" placeholder="Server 1 URL *" required>
-                    <input type="text" id="server1_label" placeholder="Label" value="Server 1">
-                    <input type="url" id="server2_url" placeholder="Server 2 URL">
-                    <input type="text" id="server2_label" placeholder="Label">
-                    <input type="url" id="server3_url" placeholder="Server 3 URL">
-                    <input type="text" id="server3_label" placeholder="Label">
-                </div>
-                <button type="submit">➕ Add Movie to Firebase</button>
-                <div id="formMessage" style="display:none; margin-top: 1rem;"></div>
-            </form>
-        </div>
-        <hr>
-        <div class="flex-between">
-            <h2>📋 Movie Collection <span id="loadingMovies" style="font-size:0.8rem; display:none;">🔄 loading...</span></h2>
-        </div>
-        <div id="moviesContainer" class="movie-grid">
-            <div style="text-align:center;">Loading movies...</div>
-        </div>
-        <div style="margin-top: 2rem; font-size:0.7rem; text-align:center; opacity:0.6;">✅ Edit any movie — click ✏️ Edit, modify, then Update</div>
-    </div>
-</div>
+<!-- additional small note to ensure global functions are recognized by inline onclick -->
+<script type="text/javascript">
+    // This ensures that on window load the Firebase module has already registered functions.
+    // The inline onclick uses window.editMovieById / deleteMovieById which are attached in module.
+    // If needed, just guarantee that the module's functions become global.
+    // Already declared in module as window.editMovieById etc. Works flawlessly.
+    console.log("Admin UI ready — Edit buttons and enhanced table active");
+</script>
 </body>
 </html>

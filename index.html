@@ -42,7 +42,7 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
-        window.__db = db; // expose for debugging
+        window.__db = db;
 
         // We'll store the movies globally when loaded
         window.moviesData = [];
@@ -59,11 +59,12 @@
             return `${slug}-${id}`;
         }
 
-        // Load movies from Firestore
+        // Load movies from Firestore with newest first (by year descending)
         async function loadMoviesFromFirestore() {
             try {
                 const moviesCollection = collection(db, "movies");
-                const q = query(moviesCollection, orderBy("titleEn", "asc"));
+                // 🔥 FIX 1: Order by year descending (newest movies first)
+                const q = query(moviesCollection, orderBy("year", "desc"));
                 const snapshot = await getDocs(q);
                 const movies = [];
                 snapshot.forEach(doc => {
@@ -75,6 +76,15 @@
                     movies.push(movie);
                     window.slugToMovie.set(movie.slug, movie);
                 });
+                
+                // Secondary sort: if two movies have same year, sort alphabetically by English title
+                movies.sort((a, b) => {
+                    if (a.year === b.year) {
+                        return (a.titleEn || '').localeCompare(b.titleEn || '');
+                    }
+                    return b.year - a.year;
+                });
+                
                 window.moviesData = movies;
                 // Notify the rest of the app that movies are ready
                 window.dispatchEvent(new CustomEvent('moviesLoaded'));
@@ -310,21 +320,12 @@
 </footer>
 
 <script type="module">
-    // Wait for Firebase movies to load, then run the app
-    window.addEventListener('moviesLoaded', () => {
-        initializeAppAfterMovies();
-    });
-
-    // If movies already loaded before this script runs? (safe check)
-    if (window.moviesData && window.moviesData.length > 0) {
-        initializeAppAfterMovies();
-    }
+    window.addEventListener('moviesLoaded', () => initializeAppAfterMovies());
+    if (window.moviesData && window.moviesData.length > 0) initializeAppAfterMovies();
 
     function initializeAppAfterMovies() {
-        // All the original JavaScript logic, but using window.moviesData
         const moviesData = window.moviesData;
         const slugToMovie = window.slugToMovie;
-
         let viewCounts = {};
         let currentLanguage = 'en';
         let currentFilter = 'all';
@@ -334,22 +335,13 @@
         let currentView = 'home';
         let currentMovieSlug = null;
 
-        function generateSlug(title, id) {
-            let slug = title.toString().toLowerCase()
-                .replace(/[^a-z0-9\s-]/g, '')
-                .trim()
-                .replace(/\s+/g, '-')
-                .replace(/-+/g, '-');
-            if (!slug) slug = 'movie';
-            return `${slug}-${id}`;
-        }
-
         function initializeViewCounts() {
             const stored = localStorage.getItem('badini_view_counts');
             if (stored) {
                 viewCounts = JSON.parse(stored);
             } else {
                 moviesData.forEach((movie, idx) => {
+                    // Base views between 5000-20000 for realism
                     const baseViews = Math.floor(Math.random() * 15000) + 5000;
                     viewCounts[movie.id] = baseViews + (idx < 10 ? Math.floor(Math.random() * 20000) : 0);
                 });
@@ -358,7 +350,14 @@
         }
 
         function saveViewCounts() { localStorage.setItem('badini_view_counts', JSON.stringify(viewCounts)); }
-        function incrementViewCount(movieId) { viewCounts[movieId] = (viewCounts[movieId] || 0) + Math.floor(Math.random() * 5) + 1; saveViewCounts(); }
+        
+        // 🔥 FIX 2: Viewer counter increments by EXACTLY 1 (no random) each time movie detail is opened
+        function incrementViewCount(movieId) {
+            if (!viewCounts[movieId]) viewCounts[movieId] = 0;
+            viewCounts[movieId] += 1;
+            saveViewCounts();
+        }
+        
         function escapeHtml(str) { if (!str) return ''; return str.replace(/[&<>]/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[m])); }
         function getDescription(movie) { return currentLanguage === 'ar' ? (movie.descriptionAr || movie.description || 'لا يوجد وصف متاح لهذا الفيلم.') : (movie.description || 'No description available for this film.'); }
         function getTitle(movie) { return currentLanguage === 'ar' ? movie.titleAr : movie.titleEn; }
@@ -382,6 +381,7 @@
                 const q = currentSearchQuery.trim().toLowerCase();
                 filtered = filtered.filter(m => m.titleEn.toLowerCase().includes(q) || m.titleAr.toLowerCase().includes(q));
             }
+            // Already sorted globally by newest first, no need to sort again
             return filtered;
         }
 
@@ -448,6 +448,7 @@
             else if (!isNaN(parseInt(pageVal))) newPage = parseInt(pageVal);
             if (newPage !== currentPage && newPage >= 1 && newPage <= totalPages) { currentPage = newPage; renderHomeView(); }
         }
+        
         function resetToFirstPage() { currentPage = 1; renderHomeView(); }
 
         function showMovieDetail(movie) {
@@ -489,7 +490,10 @@
                 document.getElementById('detailEmbedIframe').src = '';
             }
             updateUrlForMovie(movie.slug);
+            // 🔥 VIEW COUNTER FIX: increment exactly by 1 each time detail is opened
             incrementViewCount(movie.id);
+            // Immediately update displayed count after increment
+            document.getElementById('detailViews').textContent = (viewCounts[movie.id] || 0).toLocaleString();
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
@@ -506,6 +510,7 @@
             document.getElementById('detailEmbedIframe').src = '';
             updateUrlForMovie(null);
             window.scrollTo({ top: 0, behavior: 'smooth' });
+            renderHomeView(); // refresh grid with updated view counts
         }
 
         function updateUrlForMovie(movieSlug) {
@@ -620,7 +625,6 @@
             else renderHomeView();
         });
 
-        // Start the app
         initializeViewCounts();
         buildMarqueeContent();
         updateFooterTexts();

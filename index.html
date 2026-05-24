@@ -28,7 +28,7 @@
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js";
         import { getFirestore, collection, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore.js";
 
-        // ========== PASTE YOUR FIREBASE CONFIG HERE ==========
+        // ========== FIREBASE CONFIG ==========
         const firebaseConfig = {
             apiKey: "AIzaSyD6WMZGUS8s1FufWdCefsv-5mAIYhhkKgY",
             authDomain: "moviesite-admin-c178b.firebaseapp.com",
@@ -37,18 +37,15 @@
             messagingSenderId: "275418486999",
             appId: "1:275418486999:web:845bd57e7a014e7393b892"
         };
-        // =====================================================
+        // =====================================
 
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
-
         window.__db = db;
 
-        // We'll store the movies globally when loaded
         window.moviesData = [];
         window.slugToMovie = new Map();
 
-        // Helper: generate slug (same as before)
         function generateSlug(title, id) {
             let slug = title.toString().toLowerCase()
                 .replace(/[^a-z0-9\s-]/g, '')
@@ -59,17 +56,15 @@
             return `${slug}-${id}`;
         }
 
-        // Load movies from Firestore with newest first (by year descending)
+        // Load movies from Firestore and sort: newest year first (descending), then alphabetically by English title
         async function loadMoviesFromFirestore() {
             try {
                 const moviesCollection = collection(db, "movies");
-                // 🔥 FIX 1: Order by year descending (newest movies first)
                 const q = query(moviesCollection, orderBy("year", "desc"));
                 const snapshot = await getDocs(q);
                 const movies = [];
                 snapshot.forEach(doc => {
                     const movie = doc.data();
-                    // ensure each movie has a slug
                     if (!movie.slug) {
                         movie.slug = generateSlug(movie.titleEn, movie.id);
                     }
@@ -77,7 +72,7 @@
                     window.slugToMovie.set(movie.slug, movie);
                 });
                 
-                // Secondary sort: if two movies have same year, sort alphabetically by English title
+                // Secondary sort: if same year, sort alphabetically by English title
                 movies.sort((a, b) => {
                     if (a.year === b.year) {
                         return (a.titleEn || '').localeCompare(b.titleEn || '');
@@ -86,7 +81,6 @@
                 });
                 
                 window.moviesData = movies;
-                // Notify the rest of the app that movies are ready
                 window.dispatchEvent(new CustomEvent('moviesLoaded'));
             } catch (error) {
                 console.error("Error loading movies:", error);
@@ -95,12 +89,11 @@
             }
         }
 
-        // Start loading
         loadMoviesFromFirestore();
     </script>
 
     <style>
-        /* ========== YOUR ORIGINAL STYLES (unchanged) ========== */
+        /* ========== STYLES (unchanged, fully functional) ========== */
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Roboto, system-ui, sans-serif; }
         body { background: #0c0b14; color: #f0eef7; line-height: 1.5; margin: 0; }
         .container { max-width: 1400px; margin: 0 auto; padding: 2rem 1.5rem; position: relative; z-index: 1; }
@@ -293,7 +286,7 @@
             <div class="footer-card">
                 <div class="footer-icon"><i class="fas fa-info-circle"></i></div>
                 <h3 id="footerAboutTitle">من نحن</h3>
-                <p id="footerAboutText">باديني موفيز هي منصة مجانية لمشاهدة الأفلام بجودة عالية وخوادم متعددة. كل صفحة تعرض 20 فيلماً لتصفح سلس.</p>
+                <p id="footerAboutText">باديني موفيز: أحدث الأفلام أولاً + مشاهدات عشوائية واقعية. كل فيلم له رابط فريد.</p>
             </div>
             <div class="footer-card">
                 <div class="footer-icon"><i class="fas fa-envelope"></i></div>
@@ -311,11 +304,11 @@
             <div class="footer-card">
                 <div class="footer-icon"><i class="fas fa-shield-alt"></i></div>
                 <h3 id="footerPrivacyTitle">سياسة الخصوصية</h3>
-                <p id="footerPrivacyText">نستخدم Google AdSense لتحسين تجربتك. بياناتك آمنة.</p>
+                <p id="footerPrivacyText">نستخدم AdSense لتحسين تجربتك. بياناتك آمنة.</p>
                 <button id="generateSitemapBtn" class="sitemap-btn"><i class="fas fa-sitemap"></i> تنزيل sitemap.xml</button>
             </div>
         </div>
-        <div class="footer-bottom"><p>&copy; 2026 BadiniMovies. 20 Movies per page | جميع الحقوق محفوظة</p></div>
+        <div class="footer-bottom"><p>&copy; 2026 BadiniMovies | 20 films per page | مرتبة من الأحدث للأقدم</p></div>
     </div>
 </footer>
 
@@ -335,29 +328,58 @@
         let currentView = 'home';
         let currentMovieSlug = null;
 
-        function initializeViewCounts() {
+        // ========== RANDOM VIEWS LOGIC ==========
+        function getRandomInitialViews() {
+            return Math.floor(Math.random() * 350000) + 200; // Range: 200 - 350,200
+        }
+
+        function syncAllMoviesWithRandomViews() {
+            let changed = false;
+            moviesData.forEach(movie => {
+                if (viewCounts[movie.id] === undefined || viewCounts[movie.id] === null) {
+                    viewCounts[movie.id] = getRandomInitialViews();
+                    changed = true;
+                }
+            });
+            if (changed) saveViewCounts();
+        }
+
+        function incrementViewCountRandomly(movieId) {
+            if (!viewCounts[movieId]) viewCounts[movieId] = getRandomInitialViews();
+            const randomIncrease = Math.floor(Math.random() * 9) + 1; // 1 to 9
+            viewCounts[movieId] += randomIncrease;
+            saveViewCounts();
+            return viewCounts[movieId];
+        }
+        
+        function saveViewCounts() { localStorage.setItem('badini_view_counts', JSON.stringify(viewCounts)); }
+        
+        function initializeRandomViewCounts() {
             const stored = localStorage.getItem('badini_view_counts');
             if (stored) {
                 viewCounts = JSON.parse(stored);
+                syncAllMoviesWithRandomViews();
             } else {
-                moviesData.forEach((movie, idx) => {
-                    // Base views between 5000-20000 for realism
-                    const baseViews = Math.floor(Math.random() * 15000) + 5000;
-                    viewCounts[movie.id] = baseViews + (idx < 10 ? Math.floor(Math.random() * 20000) : 0);
+                viewCounts = {};
+                moviesData.forEach(movie => {
+                    viewCounts[movie.id] = getRandomInitialViews();
                 });
                 saveViewCounts();
             }
         }
-
-        function saveViewCounts() { localStorage.setItem('badini_view_counts', JSON.stringify(viewCounts)); }
         
-        // 🔥 FIX 2: Viewer counter increments by EXACTLY 1 (no random) each time movie detail is opened
-        function incrementViewCount(movieId) {
-            if (!viewCounts[movieId]) viewCounts[movieId] = 0;
-            viewCounts[movieId] += 1;
-            saveViewCounts();
+        // ========== SORTING: NEWEST TO OLDEST ==========
+        // This function ensures any movie list is sorted by year descending, then title
+        function sortMoviesByNewest(moviesArray) {
+            return [...moviesArray].sort((a, b) => {
+                if (a.year === b.year) {
+                    return (a.titleEn || '').localeCompare(b.titleEn || '');
+                }
+                return b.year - a.year;
+            });
         }
-        
+
+        // Helper functions
         function escapeHtml(str) { if (!str) return ''; return str.replace(/[&<>]/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[m])); }
         function getDescription(movie) { return currentLanguage === 'ar' ? (movie.descriptionAr || movie.description || 'لا يوجد وصف متاح لهذا الفيلم.') : (movie.description || 'No description available for this film.'); }
         function getTitle(movie) { return currentLanguage === 'ar' ? movie.titleAr : movie.titleEn; }
@@ -365,7 +387,8 @@
         function updateAllMoviesH3() {
             const spanElement = document.getElementById('allMoviesList');
             if (!spanElement) return;
-            const names = moviesData.map(movie => getTitle(movie));
+            const sortedMovies = sortMoviesByNewest(moviesData);
+            const names = sortedMovies.map(movie => getTitle(movie));
             if (names.length === 0) { spanElement.textContent = currentLanguage === 'ar' ? 'لا توجد أفلام' : 'No movies'; return; }
             spanElement.innerHTML = names.join(' · ');
         }
@@ -381,8 +404,8 @@
                 const q = currentSearchQuery.trim().toLowerCase();
                 filtered = filtered.filter(m => m.titleEn.toLowerCase().includes(q) || m.titleAr.toLowerCase().includes(q));
             }
-            // Already sorted globally by newest first, no need to sort again
-            return filtered;
+            // CRITICAL: sort from newest to oldest (highest year first)
+            return sortMoviesByNewest(filtered);
         }
 
         function renderHomeView() {
@@ -464,8 +487,11 @@
             document.getElementById('detailYear').textContent = movie.year;
             const langLabel = movie.lang === 'en' ? 'English' : (movie.lang === 'ar' ? 'العربية' : 'EN/AR');
             document.getElementById('detailLang').textContent = langLabel;
-            const views = viewCounts[movie.id] || 0;
-            document.getElementById('detailViews').textContent = views.toLocaleString();
+            
+            // Random view increment (1-9)
+            const newViewCount = incrementViewCountRandomly(movie.id);
+            document.getElementById('detailViews').textContent = newViewCount.toLocaleString();
+            
             const descLabel = document.getElementById('descLabel');
             descLabel.textContent = currentLanguage === 'en' ? 'Story / القصة' : 'القصة / Story';
             document.getElementById('detailDescText').textContent = getDescription(movie);
@@ -490,10 +516,6 @@
                 document.getElementById('detailEmbedIframe').src = '';
             }
             updateUrlForMovie(movie.slug);
-            // 🔥 VIEW COUNTER FIX: increment exactly by 1 each time detail is opened
-            incrementViewCount(movie.id);
-            // Immediately update displayed count after increment
-            document.getElementById('detailViews').textContent = (viewCounts[movie.id] || 0).toLocaleString();
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
@@ -510,7 +532,7 @@
             document.getElementById('detailEmbedIframe').src = '';
             updateUrlForMovie(null);
             window.scrollTo({ top: 0, behavior: 'smooth' });
-            renderHomeView(); // refresh grid with updated view counts
+            renderHomeView();
         }
 
         function updateUrlForMovie(movieSlug) {
@@ -530,8 +552,9 @@
         function buildMarqueeContent() {
             const track = document.getElementById('marqueeTrack');
             if (!track) return;
+            const sortedForMarquee = sortMoviesByNewest(moviesData);
             let html = '';
-            moviesData.forEach(m => { html += `<div class="marquee-item"><i class="fas fa-play-circle"></i><span class="film-name-en">${escapeHtml(m.titleEn)}</span><span class="separator-dot">/</span><span class="film-name-ar">${escapeHtml(m.titleAr)}</span><i class="fas fa-star"></i></div>`; });
+            sortedForMarquee.forEach(m => { html += `<div class="marquee-item"><i class="fas fa-play-circle"></i><span class="film-name-en">${escapeHtml(m.titleEn)}</span><span class="separator-dot">/</span><span class="film-name-ar">${escapeHtml(m.titleAr)}</span><i class="fas fa-star"></i></div>`; });
             track.innerHTML = html + html;
         }
 
@@ -545,8 +568,8 @@
             if (aboutTitle) aboutTitle.innerHTML = isEn ? 'About Us' : 'من نحن';
             if (contactTitle) contactTitle.innerHTML = isEn ? 'Contact Us' : 'اتصل بنا';
             if (privacyTitle) privacyTitle.innerHTML = isEn ? 'Privacy Policy' : 'سياسة الخصوصية';
-            if (aboutText) aboutText.innerHTML = isEn ? 'BadiniMovies offers 20 movies per page, multi-server streaming, English & Arabic films. Each movie has a unique shareable link with its name.' : 'باديني موفيز: 20 فلم في كل صفحة، خوادم متعددة، أفلام عربية وإنجليزية. كل فيلم له رابط فريد باسم الفيلم.';
-            if (privacyText) privacyText.innerHTML = isEn ? 'We use Google AdSense & cookies for better experience. Your data is secure.' : 'نستخدم AdSense وملفات تعريف الارتباط، بياناتك آمنة.';
+            if (aboutText) aboutText.innerHTML = isEn ? 'Newest films first! Random realistic views (1-9 increase per watch).' : 'أحدث الأفلام أولاً! مشاهدات عشوائية واقعية (زيادة 1-9 لكل مشاهدة).';
+            if (privacyText) privacyText.innerHTML = isEn ? 'We use Google AdSense. Your data is secure.' : 'نستخدم AdSense، بياناتك آمنة.';
             const backBtnText = document.getElementById('backBtnText');
             if (backBtnText) backBtnText.textContent = isEn ? 'Back to Library / العودة إلى المكتبة' : 'العودة إلى المكتبة / Back to Library';
         }
@@ -584,10 +607,10 @@
             link.click();
             document.body.removeChild(link);
             URL.revokeObjectURL(link.href);
-            alert(currentLanguage === 'en' ? 'sitemap.xml generated and downloaded successfully!' : 'تم إنشاء وتحميل ملف sitemap.xml بنجاح!');
+            alert(currentLanguage === 'en' ? 'sitemap.xml generated!' : 'تم إنشاء sitemap.xml!');
         }
 
-        // Event bindings
+        // Event listeners
         const searchInput = document.getElementById('searchInput');
         const clearSearchBtn = document.getElementById('clearSearchBtn');
         if (searchInput) {
@@ -625,7 +648,8 @@
             else renderHomeView();
         });
 
-        initializeViewCounts();
+        // Final initialization
+        initializeRandomViewCounts();
         buildMarqueeContent();
         updateFooterTexts();
         updateAllMoviesH3();
